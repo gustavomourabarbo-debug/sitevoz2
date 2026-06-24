@@ -204,7 +204,7 @@ export async function getPosts(limit = 12) {
     try {
       const localNews = require('../public/data/news.json');
       // Format localNews to look like WordPress API posts for maximum safety
-      return localNews.slice(0, limit).map((news: any) => ({
+      const formatted = localNews.slice(0, limit).map((news: any) => ({
         id: news.id,
         slug: news.slug,
         title: { rendered: news.title },
@@ -217,6 +217,7 @@ export async function getPosts(limit = 12) {
           'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
         }
       }));
+      return enrichPostsWithImages(formatted);
     } catch (localErr) {
       console.error('Error loading fallback local news:', localErr);
       return [];
@@ -241,7 +242,7 @@ export async function getInterviewPosts(limit = 5) {
     try {
       const localNews = require('../public/data/news.json');
       const interviews = localNews.filter((news: any) => news.categorySlug === 'entrevista' || news.category === 'Agenda Voz');
-      return interviews.slice(0, limit).map((news: any) => ({
+      const formatted = interviews.slice(0, limit).map((news: any) => ({
         id: news.id,
         slug: news.slug,
         title: { rendered: news.title },
@@ -254,6 +255,7 @@ export async function getInterviewPosts(limit = 5) {
           'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
         }
       }));
+      return enrichPostsWithImages(formatted);
     } catch (localErr) {
       return [];
     }
@@ -280,7 +282,7 @@ export async function getPostBySlug(slug: string) {
       const localNews = require('../public/data/news.json');
       const news = localNews.find((n: any) => n.slug === slug);
       if (!news) return null;
-      return {
+      const formatted = {
         id: news.id,
         slug: news.slug,
         title: { rendered: news.title },
@@ -293,6 +295,7 @@ export async function getPostBySlug(slug: string) {
           'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
         }
       };
+      return enrichPostsWithImages(formatted);
     } catch (localErr) {
       return null;
     }
@@ -313,29 +316,53 @@ export async function getPostsByCategory(categoryId: number, limit = 4) {
 }
 
 export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1) {
-  const categoryMap: Record<string, number[]> = {
-    'politica': [97],
-    'esportes': [574, 1557],
-    'saude': [208],
-    'economia': [91],
-    'tecnologia': [671],
-    'turismo': [92],
-    'distrito-federal': [2095],
-    'internacional': [318, 111],
-    'entrevista': [59],
-  };
+  try {
+    const categoryMap: Record<string, number[]> = {
+      'politica': [97],
+      'esportes': [574, 1557],
+      'saude': [208],
+      'economia': [91],
+      'tecnologia': [671],
+      'turismo': [92],
+      'distrito-federal': [2095],
+      'internacional': [318, 111],
+      'entrevista': [59],
+    };
 
-  const ids = categoryMap[slug];
-  if (!ids) return [];
+    const ids = categoryMap[slug];
+    if (!ids) return [];
 
-  const res = await fetch(
-    `${WP_API}/posts?categories=${ids.join(',')}&per_page=${limit}&page=${page}&orderby=date&order=desc&_embed=true`,
-    { 
-      headers: fetchHeaders,
-      next: { revalidate: 60 } 
+    const res = await fetch(
+      `${WP_API}/posts?categories=${ids.join(',')}&per_page=${limit}&page=${page}&orderby=date&order=desc&_embed=true`,
+      { 
+        headers: fetchHeaders,
+        next: { revalidate: 60 } 
+      }
+    );
+    if (!res.ok) throw new Error(`Status: ${res.status}`);
+    const data = await res.json();
+    return enrichPostsWithImages(data);
+  } catch (err) {
+    console.warn(`Falling back to local news for category slug ${slug}:`, err);
+    try {
+      const localNews = require('../public/data/news.json');
+      const filtered = localNews.filter((news: any) => news.categorySlug === slug);
+      const formatted = filtered.slice((page - 1) * limit, page * limit).map((news: any) => ({
+        id: news.id,
+        slug: news.slug,
+        title: { rendered: news.title },
+        content: { rendered: news.content },
+        excerpt: { rendered: news.excerpt },
+        date: news.published_at,
+        _embedded: {
+          'wp:featuredmedia': [{ source_url: news.featured_image }],
+          'author': [{ name: news.author }],
+          'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
+        }
+      }));
+      return enrichPostsWithImages(formatted);
+    } catch (localErr) {
+      return [];
     }
-  );
-  if (!res.ok) return [];
-  const data = await res.json();
-  return enrichPostsWithImages(data);
+  }
 }
