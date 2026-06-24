@@ -5,7 +5,7 @@ import { Play, Clock, User } from 'lucide-react';
 import { getInterviewPosts } from '@/lib/wordpress';
 
 export default async function EntrevistasPage() {
-  const interviews = await getInterviewPosts(20);
+  const interviews = await getInterviewPosts(100);
 
   return (
     <div className="min-h-screen bg-gray-50">

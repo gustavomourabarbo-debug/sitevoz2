@@ -73,7 +73,7 @@ export async function generateStaticParams() {
 export default async function CategoriaPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const category = categoryData[slug] || { name: slug, description: '', color: 'from-green-600 to-green-700' };
-  const posts = await getPostsByCategorySlug(slug, 20);
+  const posts = await getPostsByCategorySlug(slug, 100);
 
   return (
     <div className="min-h-screen bg-gray-50">

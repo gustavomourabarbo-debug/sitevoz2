@@ -8,8 +8,8 @@ import CategoriesSection from '@/components/home/CategorySection'; // <-- IMPORT
 import { getPosts, getInterviewPosts } from "../lib/wordpress";
 
 export default async function Home() {
-  const posts = await getPosts(30);
-  const interviews = await getInterviewPosts(5);
+  const posts = await getPosts(100);
+  const interviews = await getInterviewPosts(40);
 
   return (
     <div className="min-h-screen bg-gray-50">
