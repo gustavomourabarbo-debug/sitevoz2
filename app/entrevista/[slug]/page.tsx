@@ -6,7 +6,7 @@ import { getPostBySlug, getInterviewPosts } from '@/lib/wordpress';
 
 export async function generateStaticParams() {
   try {
-    const posts = await getInterviewPosts(20);
+    const posts = await getInterviewPosts(200);
     return posts.map((post: any) => ({
       slug: post.slug,
     }));
