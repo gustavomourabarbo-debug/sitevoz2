@@ -35,6 +35,7 @@ export default function AdComponent({ token, width, height }: AdComponentProps) 
         try {
           new sdk("${token}")
             .setSize("${width}", "${height}")
+            .disableStyle()
             .start();
         } catch (e) {
           console.error("Erro ao carregar o anúncio:", e);
@@ -50,7 +51,7 @@ export default function AdComponent({ token, width, height }: AdComponentProps) 
     <div 
       ref={containerRef} 
       className="mx-auto flex justify-center items-center overflow-hidden bg-gray-100/50 rounded-lg" 
-      style={{ minWidth: `${width}px`, minHeight: `${height}px` }} 
+      style={{ maxWidth: `${width}px`, width: '100%', minHeight: `${height}px` }} 
     />
   );
 }
