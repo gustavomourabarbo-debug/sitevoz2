@@ -6,6 +6,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import Footer from '@/components/layout/Footer';
 import CategoriesSection from '@/components/home/CategorySection'; // <-- IMPORT ADICIONADO
 import { getPosts, getInterviewPosts } from "../lib/wordpress";
+import AdComponent from '@/components/common/AdComponent';
 
 export default async function Home() {
   const posts = await getPosts(100);
@@ -18,20 +19,9 @@ export default async function Home() {
       <main className="pt-20">
 
         {/* 🔥 BANNER ADICIONADO */}
-  <div className="w-full text-center my-5 px-4">
-  <a
-    href="https://agenciabrasilia.df.gov.br/w/gdf-que-fez-acoes-do-governo-contribuem-para-melhorar-a-vida-da-populacao-em-diversas-areas"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block w-full"
-  >
-    <img
-      src="https://www.vozdebrasilia.com.br/wp-content/uploads/2026/03/728x90-1.gif"
-      alt="Banner publicitário"
-      className="w-full max-w-[1200px] h-[140px] mx-auto object-cover"
-    />
-  </a>
- </div>
+        <div className="w-full text-center my-5 px-4">
+          <AdComponent token="cad1456400464e69a8a7ada3d2ccab43" width="728" height="90" />
+        </div>
 
         <HeroCarousel posts={posts.slice(0, 5)} />
 

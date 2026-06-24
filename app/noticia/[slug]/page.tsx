@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { Clock, Facebook, Twitter, Mail } from 'lucide-react';
 import { getPostBySlug, getPosts } from '@/lib/wordpress';
+import AdComponent from '@/components/common/AdComponent';
 
 export async function generateStaticParams() {
   try {
@@ -177,9 +178,9 @@ export default async function NoticiaPage({
             {/* SIDEBAR */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
-                <div className="bg-green-600 rounded-xl p-8 text-white text-center">
-                  <div className="text-sm font-semibold mb-1">PUBLICIDADE</div>
-                  <div className="text-xs opacity-75">300x250</div>
+                <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100 flex flex-col items-center">
+                  <span className="text-[10px] text-gray-400 font-semibold mb-2 tracking-wider">PUBLICIDADE</span>
+                  <AdComponent token="02cda84a0e4149c2855e170b9c26dedd" width="300" height="250" />
                 </div>
 
                 <div className="bg-white rounded-xl shadow-md p-6">

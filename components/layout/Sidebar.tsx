@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { TrendingUp, Play, DollarSign, Cloud } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import AdComponent from '../common/AdComponent';
  
 export default function Sidebar() {
   const [mostRead, setMostRead] = useState<any[]>([]);
@@ -54,81 +55,17 @@ export default function Sidebar() {
           />
         </a>
       </div>
- 
-      {/* Mais Lidas */}
-      <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-        <div className="flex items-center gap-2 mb-4">
-          <TrendingUp className="w-5 h-5 text-red-600" />
-          <h3 className="font-bold text-gray-900">Mais Lidas</h3>
-        </div>
-        <div className="space-y-4">
-          {mostRead.length === 0 ? (
-            <p className="text-sm text-gray-400">Carregando...</p>
-          ) : (
-            mostRead.map((post: any, index: number) => {
-              const titulo = post.title?.rendered?.replace(/<[^>]+>/g, '') || '';
-              return (
-                <Link
-                  key={post.id}
-                  href={`/noticia/${post.slug}`}
-                  className="group flex gap-3 pb-4 border-b border-gray-100 last:border-0 last:pb-0"
-                >
-                  <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center text-white font-bold">
-                    {index + 1}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-green-600 transition-colors mb-1">
-                      {titulo}
-                    </h4>
-                  </div>
-                </Link>
-              );
-            })
-          )}
-        </div>
+
+      {/* Anúncio 300x250 */}
+      <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100 flex flex-col items-center">
+        <span className="text-[10px] text-gray-400 font-semibold mb-2 tracking-wider">PUBLICIDADE</span>
+        <AdComponent token="02cda84a0e4149c2855e170b9c26dedd" width="300" height="250" />
       </div>
- 
-      {/* Vídeos Recentes */}
-      <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-        <div className="flex items-center gap-2 mb-4">
-          <Play className="w-5 h-5 text-green-600" />
-          <h3 className="font-bold text-gray-900">Vídeos Recentes</h3>
-        </div>
-        <div className="space-y-4">
-          {recentVideos.length === 0 ? (
-            <p className="text-sm text-gray-400">Carregando...</p>
-          ) : (
-            recentVideos.map((video: any) => {
-              const titulo = video.title?.rendered?.replace(/<[^>]+>/g, '') || '';
-              const imagem =
-                video._embedded?.['wp:featuredmedia']?.[0]?.source_url ||
-                'https://images.pexels.com/photos/4173239/pexels-photo-4173239.jpeg';
-              return (
-                <Link
-                  key={video.id}
-                  href={`/entrevista/${video.slug}`}
-                  className="group block"
-                >
-                  <div className="relative overflow-hidden rounded-lg mb-2">
-                    <div
-                      className="w-full h-32 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundImage: `url(${imagem})` }}
-                    >
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                          <Play className="w-6 h-6 text-green-600 fill-green-600 ml-1" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-green-600 transition-colors">
-                    {titulo}
-                  </h4>
-                </Link>
-              );
-            })
-          )}
-        </div>
+
+      {/* Anúncio 300x600 */}
+      <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100 flex flex-col items-center">
+        <span className="text-[10px] text-gray-400 font-semibold mb-2 tracking-wider">PUBLICIDADE</span>
+        <AdComponent token="528c9f9e89c0496a8d9da2ba4bfb1124" width="300" height="600" />
       </div>
  
       {/* Clima & Economia */}
