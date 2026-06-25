@@ -9,17 +9,17 @@ interface LatestNewsProps {
   posts?: any[];
 }
 
-export default function LatestNews({ posts }: LatestNewsProps = {}) {
+export default function LatestNews({ posts = [] }: LatestNewsProps) {
   const [offset, setOffset] = useState(0);
-  const [latestNews, setLatestNews] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [latestNews, setLatestNews] = useState<any[]>(posts);
+  const [isLoading, setIsLoading] = useState(!posts || posts.length === 0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (posts && posts.length > 0) {
       setLatestNews(posts);
       setIsLoading(false);
-    } else {
+    } else if (latestNews.length === 0) {
       async function fetchNews() {
         try {
           const data = await getLatestNews(10);

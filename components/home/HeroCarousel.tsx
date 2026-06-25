@@ -9,17 +9,17 @@ interface HeroCarouselProps {
   posts?: any[];
 }
 
-export default function HeroCarousel({ posts }: HeroCarouselProps = {}) {
+export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [heroNews, setHeroNews] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [heroNews, setHeroNews] = useState<any[]>(posts);
+  const [isLoading, setIsLoading] = useState(!posts || posts.length === 0);
 
   useEffect(() => {
     if (posts && posts.length > 0) {
       setHeroNews(posts);
       setIsLoading(false);
-    } else {
+    } else if (heroNews.length === 0) {
       async function fetchNews() {
         try {
           const data = await getHeroNews(5);
