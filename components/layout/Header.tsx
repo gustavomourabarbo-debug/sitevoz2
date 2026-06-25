@@ -64,7 +64,7 @@ export default function Header() {
           <div className="flex items-center justify-between gap-8">
             <Link href="/" className="flex items-center group">
               <img
-                src="/logo.png"
+                src="/logo.png?v=3"
                 alt="TV Voz de Brasília"
                 className="h-16 w-auto object-contain"
               />

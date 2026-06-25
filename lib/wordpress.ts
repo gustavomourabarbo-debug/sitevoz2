@@ -189,180 +189,111 @@ export function decodeHtml(text: string): string {
 
 export async function getPosts(limit = 12) {
   try {
-    const res = await fetch(
-      `${WP_API}/posts?per_page=${limit}&page=1&_embed=true`,
-      { 
-        headers: fetchHeaders,
-        next: { revalidate: 60 } 
+    const localNews = require('../public/data/news.json');
+    const formatted = localNews.slice(0, limit).map((news: any) => ({
+      id: news.id,
+      slug: news.slug,
+      title: { rendered: news.title },
+      content: { rendered: news.content },
+      excerpt: { rendered: news.excerpt },
+      date: news.published_at,
+      _embedded: {
+        'wp:featuredmedia': [{ source_url: news.featured_image }],
+        'author': [{ name: news.author }],
+        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
       }
-    );
-    if (!res.ok) throw new Error(`Status: ${res.status}`);
-    const data = await res.json();
-    return enrichPostsWithImages(data);
+    }));
+    return enrichPostsWithImages(formatted);
   } catch (err) {
-    console.warn('Falling back to local news for getPosts:', err);
-    try {
-      const localNews = require('../public/data/news.json');
-      // Format localNews to look like WordPress API posts for maximum safety
-      const formatted = localNews.slice(0, limit).map((news: any) => ({
-        id: news.id,
-        slug: news.slug,
-        title: { rendered: news.title },
-        content: { rendered: news.content },
-        excerpt: { rendered: news.excerpt },
-        date: news.published_at,
-        _embedded: {
-          'wp:featuredmedia': [{ source_url: news.featured_image }],
-          'author': [{ name: news.author }],
-          'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-        }
-      }));
-      return enrichPostsWithImages(formatted);
-    } catch (localErr) {
-      console.error('Error loading fallback local news:', localErr);
-      return [];
-    }
+    console.error('Error loading local news:', err);
+    return [];
   }
 }
 
 export async function getInterviewPosts(limit = 5) {
   try {
-    const res = await fetch(
-      `${WP_API}/posts?categories=59&per_page=${limit}&orderby=date&order=desc&_embed=true`,
-      { 
-        headers: fetchHeaders,
-        next: { revalidate: 60 } 
-      }
+    const localNews = require('../public/data/news.json');
+    const interviews = localNews.filter((news: any) => 
+      news.categorySlug === 'entrevista' || 
+      news.categorySlug === 'entrevistas' || 
+      news.category === 'Agenda Voz'
     );
-    if (!res.ok) throw new Error(`Status: ${res.status}`);
-    const data = await res.json();
-    return enrichPostsWithImages(data);
+    const formatted = interviews.slice(0, limit).map((news: any) => ({
+      id: news.id,
+      slug: news.slug,
+      title: { rendered: news.title },
+      content: { rendered: news.content },
+      excerpt: { rendered: news.excerpt },
+      date: news.published_at,
+      _embedded: {
+        'wp:featuredmedia': [{ source_url: news.featured_image }],
+        'author': [{ name: news.author }],
+        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
+      }
+    }));
+    return enrichPostsWithImages(formatted);
   } catch (err) {
-    console.warn('Falling back to local interviews for getInterviewPosts:', err);
-    try {
-      const localNews = require('../public/data/news.json');
-      const interviews = localNews.filter((news: any) => news.categorySlug === 'entrevista' || news.category === 'Agenda Voz');
-      const formatted = interviews.slice(0, limit).map((news: any) => ({
-        id: news.id,
-        slug: news.slug,
-        title: { rendered: news.title },
-        content: { rendered: news.content },
-        excerpt: { rendered: news.excerpt },
-        date: news.published_at,
-        _embedded: {
-          'wp:featuredmedia': [{ source_url: news.featured_image }],
-          'author': [{ name: news.author }],
-          'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-        }
-      }));
-      return enrichPostsWithImages(formatted);
-    } catch (localErr) {
-      return [];
-    }
+    console.error('Error loading local interviews:', err);
+    return [];
   }
 }
 
 export async function getPostBySlug(slug: string) {
   try {
-    const res = await fetch(
-      `${WP_API}/posts?slug=${slug}&_embed=true`,
-      { 
-        headers: fetchHeaders,
-        next: { revalidate: 60 } 
+    const localNews = require('../public/data/news.json');
+    const news = localNews.find((n: any) => n.slug === slug);
+    if (!news) return null;
+    const formatted = {
+      id: news.id,
+      slug: news.slug,
+      title: { rendered: news.title },
+      content: { rendered: news.content },
+      excerpt: { rendered: news.excerpt },
+      date: news.published_at,
+      _embedded: {
+        'wp:featuredmedia': [{ source_url: news.featured_image }],
+        'author': [{ name: news.author }],
+        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
       }
-    );
-    if (!res.ok) throw new Error(`Status: ${res.status}`);
-    const posts = await res.json();
-    const post = posts[0] || null;
-    if (!post) throw new Error('Not found');
-    return enrichPostsWithImages(post);
+    };
+    return enrichPostsWithImages(formatted);
   } catch (err) {
-    console.warn(`Falling back to local news for slug ${slug}:`, err);
-    try {
-      const localNews = require('../public/data/news.json');
-      const news = localNews.find((n: any) => n.slug === slug);
-      if (!news) return null;
-      const formatted = {
-        id: news.id,
-        slug: news.slug,
-        title: { rendered: news.title },
-        content: { rendered: news.content },
-        excerpt: { rendered: news.excerpt },
-        date: news.published_at,
-        _embedded: {
-          'wp:featuredmedia': [{ source_url: news.featured_image }],
-          'author': [{ name: news.author }],
-          'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-        }
-      };
-      return enrichPostsWithImages(formatted);
-    } catch (localErr) {
-      return null;
-    }
+    console.error('Error loading local post by slug:', err);
+    return null;
   }
 }
 
 export async function getPostsByCategory(categoryId: number, limit = 4) {
-  const res = await fetch(
-    `${WP_API}/posts?categories=${categoryId}&per_page=${limit}&orderby=date&order=desc&_embed=true`,
-    { 
-      headers: fetchHeaders,
-      next: { revalidate: 60 } 
-    }
-  );
-  if (!res.ok) throw new Error(`Erro ao buscar posts por categoria (Status: ${res.status})`);
-  const data = await res.json();
-  return enrichPostsWithImages(data);
+  // Mock category by ID using getPosts since we are running offline
+  return getPosts(limit);
 }
 
 export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1) {
   try {
-    const categoryMap: Record<string, number[]> = {
-      'politica': [97],
-      'esportes': [574, 1557],
-      'saude': [208],
-      'economia': [91],
-      'tecnologia': [671],
-      'turismo': [92],
-      'distrito-federal': [2095],
-      'internacional': [318, 111],
-      'entrevista': [59],
-    };
-
-    const ids = categoryMap[slug];
-    if (!ids) return [];
-
-    const res = await fetch(
-      `${WP_API}/posts?categories=${ids.join(',')}&per_page=${limit}&page=${page}&orderby=date&order=desc&_embed=true`,
-      { 
-        headers: fetchHeaders,
-        next: { revalidate: 60 } 
+    const localNews = require('../public/data/news.json');
+    const filtered = localNews.filter((news: any) => {
+      if (slug === 'entrevista' || slug === 'entrevistas') {
+        return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
       }
-    );
-    if (!res.ok) throw new Error(`Status: ${res.status}`);
-    const data = await res.json();
-    return enrichPostsWithImages(data);
+      return news.categorySlug === slug;
+    });
+
+    const formatted = filtered.slice((page - 1) * limit, page * limit).map((news: any) => ({
+      id: news.id,
+      slug: news.slug,
+      title: { rendered: news.title },
+      content: { rendered: news.content },
+      excerpt: { rendered: news.excerpt },
+      date: news.published_at,
+      _embedded: {
+        'wp:featuredmedia': [{ source_url: news.featured_image }],
+        'author': [{ name: news.author }],
+        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
+      }
+    }));
+    return enrichPostsWithImages(formatted);
   } catch (err) {
-    console.warn(`Falling back to local news for category slug ${slug}:`, err);
-    try {
-      const localNews = require('../public/data/news.json');
-      const filtered = localNews.filter((news: any) => news.categorySlug === slug);
-      const formatted = filtered.slice((page - 1) * limit, page * limit).map((news: any) => ({
-        id: news.id,
-        slug: news.slug,
-        title: { rendered: news.title },
-        content: { rendered: news.content },
-        excerpt: { rendered: news.excerpt },
-        date: news.published_at,
-        _embedded: {
-          'wp:featuredmedia': [{ source_url: news.featured_image }],
-          'author': [{ name: news.author }],
-          'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-        }
-      }));
-      return enrichPostsWithImages(formatted);
-    } catch (localErr) {
-      return [];
-    }
+    console.error('Error loading local posts by category:', err);
+    return [];
   }
 }
