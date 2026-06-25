@@ -23,38 +23,6 @@ export default function Sidebar() {
  
   return (
     <div className="space-y-6">
- 
-      {/* Banner topo - GDF */}
-      <div className="w-full">
-        <a
-          href="https://agenciabrasilia.df.gov.br/w/gdf-que-fez-acoes-do-governo-contribuem-para-melhorar-a-vida-da-populacao-em-diversas-areas"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full"
-        >
-          <img
-            src="https://www.vozdebrasilia.com.br/wp-content/uploads/2026/04/Gif-.gif"
-            alt="Banner GDF"
-            className="w-full h-auto rounded-xl"
-          />
-        </a>
-      </div>
- 
-      {/* Banner Azulão Transportes */}
-      <div className="w-full">
-        <a
-          href="https://www.instagram.com/azulao_transportes/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full"
-        >
-          <img
-            src="https://www.vozdebrasilia.com.br/wp-content/uploads/2026/04/d4092420-4f6d-4f19-a97f-ff91615e4cdd-1.png"
-            alt="Azulão Transportes"
-            className="w-full h-auto rounded-xl"
-          />
-        </a>
-      </div>
 
       {/* Anúncio 300x250 */}
       <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100 flex flex-col items-center">

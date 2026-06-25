@@ -87,30 +87,6 @@ const fallbackNews = rawFallbackNews.map(item => ({
 }));
 
 export async function getAllNews(): Promise<EnrichedNews[]> {
-  try {
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      const { data, error } = await supabase
-        .from('news')
-        .select('*')
-        .eq('status', 'published')
-        .order('published_at', { ascending: false });
-        
-      if (!error && data && data.length > 0) {
-        return data.map((item: any) => {
-          const catSlug = getCategorySlug(item.category);
-          return {
-            ...item,
-            categorySlug: catSlug,
-            categoryColor: getCategoryColor(item.category),
-            featured_image: getFallbackImage(item.id, catSlug, item.title)
-          };
-        });
-      }
-    }
-  } catch (err) {
-    console.warn('Supabase not available, using local news data.', err);
-  }
-  
   return fallbackNews;
 }
 
