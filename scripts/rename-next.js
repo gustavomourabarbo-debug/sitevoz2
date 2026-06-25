@@ -27,6 +27,11 @@ function replaceInDir(dir, findStr, replaceStr) {
 
 // Main execution
 function main() {
+  if (process.env.VERCEL === '1' || process.env.NETLIFY === 'true' || process.env.NOW_BUILDER === '1') {
+    console.log('Skipping rename-next.js post-build processing because we are building on Vercel/Netlify.');
+    return;
+  }
+
   console.log('Starting post-build processing to fix cPanel assets folder issue...');
   
   // 1. Replace all "/_next" with "/assets" in HTML, JS, CSS files inside the out folder

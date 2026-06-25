@@ -123,8 +123,9 @@ function enrichPostsWithImages(posts: any) {
     const titleUpper = (post.title?.rendered || '').toUpperCase();
     let fallbackImage = '';
     
-    const catSlug = detectCategorySlug(post);
-    const categoryName = getCategoryNameFromSlug(catSlug);
+    const term = post._embedded?.['wp:term']?.[0]?.[0];
+    const catSlug = term?.slug || detectCategorySlug(post);
+    const categoryName = term?.name || getCategoryNameFromSlug(catSlug);
     const categoryColor = getCategoryColor(categoryName);
     
     // Exact mapping for the top 5 articles with our custom generated high-quality local images
