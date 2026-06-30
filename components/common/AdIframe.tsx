@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const defaultAds: Record<string, { token: string; width: string; height: string }> = {
   '728-90': {
@@ -21,6 +21,7 @@ const defaultAds: Record<string, { token: string; width: string; height: string 
 };
 
 export default function AdIframe({ adId }: { adId: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [token, setToken] = useState<string | null>(null);
   const [config, setConfig] = useState<any>(null);
 
@@ -34,13 +35,9 @@ export default function AdIframe({ adId }: { adId: string }) {
   }, [adId]);
 
   useEffect(() => {
-    if (!token || !config) return;
+    if (!token || !config || !containerRef.current) return;
 
-    // Programmatically inject and execute ad script
-    const container = document.getElementById('ad-script-container');
-    if (!container) return;
-    
-    // Clear previous children
+    const container = containerRef.current;
     container.innerHTML = '';
 
     const sdkScript = document.createElement('script');
@@ -69,7 +66,7 @@ export default function AdIframe({ adId }: { adId: string }) {
 
   return (
     <div 
-      id="ad-script-container"
+      ref={containerRef}
       style={{
         margin: 0,
         padding: 0,
