@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/rename-next.js",
+    "build": "next build && node scripts/rename-next.js && python scripts/zip_build.py",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
