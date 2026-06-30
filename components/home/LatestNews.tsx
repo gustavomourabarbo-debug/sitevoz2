@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Clock, TrendingUp } from 'lucide-react';
 import { getLatestNews, EnrichedNews } from '@/lib/news-service';
+import { supabase } from '@/lib/supabase';
 
 interface LatestNewsProps {
   posts?: any[];
@@ -16,11 +17,56 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (posts && posts.length > 0) {
-      setLatestNews(posts);
-      setIsLoading(false);
-    } else if (latestNews.length === 0) {
-      async function fetchNews() {
+    let active = true;
+    async function loadNews() {
+      // Set static posts first
+      if (posts && posts.length > 0) {
+        setLatestNews(posts);
+        setIsLoading(false);
+      }
+
+      // Try to fetch live news from Supabase
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from('news')
+            .select('*')
+            .order('published_at', { ascending: false });
+
+          if (!error && data && data.length > 0 && active) {
+            const formatted = data.map((item: any) => ({
+              id: item.id,
+              slug: item.slug,
+              title: { rendered: item.title },
+              content: { rendered: item.content },
+              excerpt: { rendered: item.excerpt },
+              date: item.published_at || item.created_at,
+              category: item.category,
+              categorySlug: item.categorySlug,
+              categoryColor: item.categoryColor,
+              featured_image: item.featured_image
+            }));
+
+            // Merge live posts with fallback posts
+            const merged = [...formatted];
+            const slugs = new Set(merged.map(p => p.slug));
+            posts.forEach(p => {
+              if (!slugs.has(p.slug)) {
+                merged.push(p);
+              }
+            });
+
+            setLatestNews(merged);
+            setIsLoading(false);
+            return;
+          }
+        } catch (e) {
+          console.warn("Supabase load error, using fallbacks:", e);
+        }
+      }
+
+      // Fallback if Supabase not configured or returns empty
+      if ((!posts || posts.length === 0) && active) {
         try {
           const data = await getLatestNews(10);
           setLatestNews(data);
@@ -30,8 +76,10 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
           setIsLoading(false);
         }
       }
-      fetchNews();
     }
+
+    loadNews();
+    return () => { active = false; };
   }, [posts]);
 
   useEffect(() => {

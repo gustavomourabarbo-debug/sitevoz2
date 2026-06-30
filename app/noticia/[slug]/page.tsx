@@ -233,6 +233,11 @@ export default async function NoticiaPage({
             </div>
           </div>
         </div>
+
+        {/* 🔥 BANNER RODAPÉ */}
+        <div className="w-full text-center my-8 px-4">
+          <AdComponent token="cad1456400464e69a8a7ada3d2ccab43" width="728" height="90" />
+        </div>
       </main>
 
       <Footer />

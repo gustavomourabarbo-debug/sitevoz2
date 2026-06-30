@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { getHeroNews, EnrichedNews } from '@/lib/news-service';
+import { supabase } from '@/lib/supabase';
 
 interface HeroCarouselProps {
   posts?: any[];
@@ -16,11 +17,57 @@ export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
   const [isLoading, setIsLoading] = useState(!posts || posts.length === 0);
 
   useEffect(() => {
-    if (posts && posts.length > 0) {
-      setHeroNews(posts);
-      setIsLoading(false);
-    } else if (heroNews.length === 0) {
-      async function fetchNews() {
+    let active = true;
+    async function loadNews() {
+      // Set static posts first
+      if (posts && posts.length > 0) {
+        setHeroNews(posts);
+        setIsLoading(false);
+      }
+
+      // Try to fetch live news from Supabase
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from('news')
+            .select('*')
+            .order('published_at', { ascending: false })
+            .limit(5);
+
+          if (!error && data && data.length > 0 && active) {
+            const formatted = data.map((item: any) => ({
+              id: item.id,
+              slug: item.slug,
+              title: { rendered: item.title },
+              content: { rendered: item.content },
+              excerpt: { rendered: item.excerpt },
+              date: item.published_at || item.created_at,
+              category: item.category,
+              categorySlug: item.categorySlug,
+              categoryColor: item.categoryColor,
+              featured_image: item.featured_image
+            }));
+
+            // Merge live posts with fallback posts
+            const merged = [...formatted];
+            const slugs = new Set(merged.map(p => p.slug));
+            posts.forEach(p => {
+              if (!slugs.has(p.slug)) {
+                merged.push(p);
+              }
+            });
+
+            setHeroNews(merged.slice(0, 5));
+            setIsLoading(false);
+            return;
+          }
+        } catch (e) {
+          console.warn("Supabase load error, using fallbacks:", e);
+        }
+      }
+
+      // Fallback if Supabase not configured or returns empty
+      if ((!posts || posts.length === 0) && active) {
         try {
           const data = await getHeroNews(5);
           setHeroNews(data);
@@ -30,8 +77,10 @@ export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
           setIsLoading(false);
         }
       }
-      fetchNews();
     }
+
+    loadNews();
+    return () => { active = false; };
   }, [posts]);
 
   useEffect(() => {

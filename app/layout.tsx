@@ -66,6 +66,8 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
+import GoogleAnalytics from '@/components/common/GoogleAnalytics';
+
 export default function RootLayout({
   children,
 }: {
@@ -79,6 +81,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.pexels.com" />
       </head>
       <body className={inter.className}>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>

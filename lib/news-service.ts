@@ -87,6 +87,38 @@ const fallbackNews = rawFallbackNews.map(item => ({
 }));
 
 export async function getAllNews(): Promise<EnrichedNews[]> {
+  try {
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .order('published_at', { ascending: false });
+        
+      if (!error && data && data.length > 0) {
+        const liveNews = data.map((item: any) => {
+          const catSlug = getCategorySlug(item.category);
+          return {
+            ...item,
+            categorySlug: catSlug,
+            categoryColor: getCategoryColor(item.category),
+            featured_image: item.featured_image || getFallbackImage(item.id, catSlug, item.title)
+          };
+        });
+        
+        // Merge: liveNews first, then fallbackNews (removing duplicates by slug)
+        const all = [...liveNews];
+        const slugs = new Set(all.map(item => item.slug));
+        for (const item of fallbackNews) {
+          if (!slugs.has(item.slug)) {
+            all.push(item);
+          }
+        }
+        return all;
+      }
+    }
+  } catch (err) {
+    console.warn('Supabase not available in getAllNews, returning fallback:', err);
+  }
   return fallbackNews;
 }
 
