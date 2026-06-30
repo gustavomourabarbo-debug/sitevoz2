@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ad 300x600</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.snsrsv.com/sdk.js"></script>
+    <script>
+      try {
+        var adId = "300-600";
+        var defaultToken = "528c9f9e89c0496a8d9da2ba4bfb1124";
+        var width = "300";
+        var height = "600";
+
+        var savedToken = localStorage.getItem("ad_token_" + adId) || defaultToken;
+
+        var interval = setInterval(function() {
+          if (typeof sdk !== 'undefined') {
+            clearInterval(interval);
+            new sdk(savedToken)
+              .setSize(width, height)
+              .start();
+          }
+        }, 50);
+      } catch (e) {
+        console.error("Ad load error:", e);
+      }
+    </script>
+  </body>
+</html>

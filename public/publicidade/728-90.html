@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ad 728x90</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdn.snsrsv.com/sdk.js"></script>
+    <script>
+      try {
+        var adId = "728-90";
+        var defaultToken = "cad1456400464e69a8a7ada3d2ccab43";
+        var width = "728";
+        var height = "90";
+
+        var savedToken = localStorage.getItem("ad_token_" + adId) || defaultToken;
+
+        var interval = setInterval(function() {
+          if (typeof sdk !== 'undefined') {
+            clearInterval(interval);
+            new sdk(savedToken)
+              .setSize(width, height)
+              .start();
+          }
+        }, 50);
+      } catch (e) {
+        console.error("Ad load error:", e);
+      }
+    </script>
+  </body>
+</html>
