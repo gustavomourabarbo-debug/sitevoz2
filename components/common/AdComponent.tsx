@@ -15,7 +15,7 @@ export default function AdComponent({ token, width, height }: AdComponentProps) 
       style={{ maxWidth: `${width}px`, width: '100%', height: `${height}px` }}
     >
       <iframe
-        src={`/ads/${adFile}?token=${token}`}
+        src={`/publicidade/${adFile}?token=${token}`}
         width={width}
         height={height}
         title={`Ad-${token}`}
