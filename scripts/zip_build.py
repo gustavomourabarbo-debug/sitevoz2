@@ -35,4 +35,7 @@ def zip_out_directory():
         print(f"Error zipping files: {e}")
 
 if __name__ == '__main__':
-    zip_out_directory()
+    if os.environ.get('VERCEL') == '1' or os.environ.get('NETLIFY') == 'true' or os.environ.get('NOW_BUILDER') == '1':
+        print("Skipping zip_build.py because we are building on Vercel/Netlify.")
+    else:
+        zip_out_directory()
