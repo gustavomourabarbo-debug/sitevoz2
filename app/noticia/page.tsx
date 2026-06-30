@@ -10,14 +10,26 @@ import { supabase } from '@/lib/supabase';
 import AdComponent from '@/components/common/AdComponent';
 
 export default function DynamicNoticiaPage() {
-  const searchParams = useSearchParams();
-  const slug = searchParams.get('slug');
-  
+  const [slug, setSlug] = useState<string | null>(null);
   const [post, setPost] = useState<any>(null);
   const [related, setRelated] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const match = path.match(/\/noticia\/([^/]+)/);
+      if (match && match[1] && match[1] !== 'page' && match[1] !== 'index.html') {
+        setSlug(match[1]);
+      } else {
+        const urlParams = new URLSearchParams(window.location.search);
+        setSlug(urlParams.get('slug'));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (slug === null) return;
     if (!slug) {
       setIsLoading(false);
       return;
