@@ -33,39 +33,54 @@ export default function AdIframe({ adId }: { adId: string }) {
     }
   }, [adId]);
 
+  useEffect(() => {
+    if (!token || !config) return;
+
+    // Programmatically inject and execute ad script
+    const container = document.getElementById('ad-script-container');
+    if (!container) return;
+    
+    // Clear previous children
+    container.innerHTML = '';
+
+    const sdkScript = document.createElement('script');
+    sdkScript.src = 'https://cdn.snsrsv.com/sdk.js';
+    sdkScript.async = true;
+
+    sdkScript.onload = () => {
+      try {
+        const interval = setInterval(() => {
+          if (typeof (window as any).sdk !== 'undefined') {
+            clearInterval(interval);
+            new (window as any).sdk(token)
+              .setSize(config.width, config.height)
+              .start();
+          }
+        }, 50);
+      } catch (e) {
+        console.error("Ad load error:", e);
+      }
+    };
+
+    container.appendChild(sdkScript);
+  }, [token, config]);
+
   if (!config || !token) return null;
 
   return (
-    <div style={{
-      margin: 0,
-      padding: 0,
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'transparent'
-    }}>
-      <script src="https://cdn.snsrsv.com/sdk.js" defer></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            try {
-              var interval = setInterval(function() {
-                if (typeof sdk !== 'undefined') {
-                  clearInterval(interval);
-                  new sdk("${token}")
-                    .setSize("${config.width}", "${config.height}")
-                    .start();
-                }
-              }, 100);
-            } catch (e) {
-              console.error("Ad load error:", e);
-            }
-          `
-        }}
-      />
-    </div>
+    <div 
+      id="ad-script-container"
+      style={{
+        margin: 0,
+        padding: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+      }}
+    />
   );
 }
