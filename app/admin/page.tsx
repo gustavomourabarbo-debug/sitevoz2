@@ -25,6 +25,9 @@ export default function AdminPanel() {
 
   // Settings
   const [gaId, setGaId] = useState('');
+  const [adTokenHorizontal, setAdTokenHorizontal] = useState('cad1456400464e69a8a7ada3d2ccab43');
+  const [adToken300x250, setAdToken300x250] = useState('02cda84a0e4149c2855e170b9c26dedd');
+  const [adToken300x600, setAdToken300x600] = useState('528c9f9e89c0496a8d9da2ba4bfb1124');
   const [activeTab, setActiveTab] = useState<'posts' | 'settings'>('posts');
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -68,6 +71,11 @@ export default function AdminPanel() {
       // Load GA ID from local storage or settings
       const savedGa = localStorage.getItem('google_analytics_id') || '';
       setGaId(savedGa);
+
+      // Load Ad Tokens
+      setAdTokenHorizontal(localStorage.getItem('ad_token_728-90') || 'cad1456400464e69a8a7ada3d2ccab43');
+      setAdToken300x250(localStorage.getItem('ad_token_300-250') || '02cda84a0e4149c2855e170b9c26dedd');
+      setAdToken300x600(localStorage.getItem('ad_token_300-600') || '528c9f9e89c0496a8d9da2ba4bfb1124');
     }
 
     loadData();
@@ -211,7 +219,10 @@ export default function AdminPanel() {
   const handleSaveSettings = (e: React.FormEvent) => {
     e.preventDefault();
     localStorage.setItem('google_analytics_id', gaId);
-    setSaveMessage('Configurações salvas com sucesso! (Recarregue as páginas para aplicar)');
+    localStorage.setItem('ad_token_728-90', adTokenHorizontal);
+    localStorage.setItem('ad_token_300-250', adToken300x250);
+    localStorage.setItem('ad_token_300-600', adToken300x600);
+    setSaveMessage('Configurações salvas com sucesso! (Os anúncios foram atualizados)');
     setTimeout(() => setSaveMessage(''), 3000);
   };
 
@@ -515,17 +526,57 @@ export default function AdminPanel() {
                 </div>
               )}
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Google Analytics Measurement ID (ID de Medição)</label>
-                  <input
-                    type="text"
-                    value={gaId}
-                    onChange={e => setGaId(e.target.value)}
-                    placeholder="G-XXXXXXXXXX"
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                  <p className="text-xs text-gray-400 mt-1">Exemplo: G-1234567890</p>
+              <div className="space-y-6">
+                <div className="border-b pb-4">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Configurações Gerais</h3>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Google Analytics Measurement ID (ID de Medição)</label>
+                    <input
+                      type="text"
+                      value={gaId}
+                      onChange={e => setGaId(e.target.value)}
+                      placeholder="G-XXXXXXXXXX"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                    <p className="text-xs text-gray-400 mt-1">Exemplo: G-1234567890</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Tokens de Anúncios (Senso/Outros)</h3>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Banner Horizontal Rodapé (728x90) Token</label>
+                    <input
+                      type="text"
+                      value={adTokenHorizontal}
+                      onChange={e => setAdTokenHorizontal(e.target.value)}
+                      placeholder="Insira o Token do Banner Horizontal"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Retângulo Lateral Médio (300x250) Token</label>
+                    <input
+                      type="text"
+                      value={adToken300x250}
+                      onChange={e => setAdToken300x250(e.target.value)}
+                      placeholder="Insira o Token de 300x250"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Vertical Lateral Grande (300x600) Token</label>
+                    <input
+                      type="text"
+                      value={adToken300x600}
+                      onChange={e => setAdToken300x600(e.target.value)}
+                      placeholder="Insira o Token de 300x600"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
                 </div>
               </div>
 
