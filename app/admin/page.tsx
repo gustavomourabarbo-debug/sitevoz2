@@ -141,8 +141,8 @@ export default function AdminPanel() {
       content,
       excerpt,
       category,
-      categorySlug,
-      categoryColor: categoryColors[category] || 'bg-blue-600',
+      categoryslug: categorySlug,
+      categorycolor: categoryColors[category] || 'bg-blue-600',
       featured_image: imageUrl,
       author,
       updated_at: new Date().toISOString()
@@ -466,7 +466,7 @@ export default function AdminPanel() {
                               </td>
                               <td className="py-3 pr-4 font-bold text-gray-900 max-w-xs truncate">{post.title}</td>
                               <td className="py-3">
-                                <span className={`px-2.5 py-1 text-xs font-semibold rounded-full text-white ${post.categoryColor || 'bg-blue-600'}`}>
+                                <span className={`px-2.5 py-1 text-xs font-semibold rounded-full text-white ${post.categorycolor || 'bg-blue-600'}`}>
                                   {post.category}
                                 </span>
                               </td>
