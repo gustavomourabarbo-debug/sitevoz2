@@ -7,7 +7,7 @@ interface AdComponentProps {
 }
 
 export default function AdComponent({ token, width, height }: AdComponentProps) {
-  const adFile = width === "728" ? "ad-728-90.html" : width === "300" && height === "600" ? "ad-300-600.html" : "ad-300-250.html";
+  const adFile = width === "728" ? "728-90" : width === "300" && height === "600" ? "300-600" : "300-250";
 
   return (
     <div 
@@ -15,7 +15,7 @@ export default function AdComponent({ token, width, height }: AdComponentProps) 
       style={{ maxWidth: `${width}px`, width: '100%', height: `${height}px` }}
     >
       <iframe
-        src={`/publicidade/${adFile}?token=${token}`}
+        src={`/publicidade/${adFile}`}
         width={width}
         height={height}
         title={`Ad-${token}`}
