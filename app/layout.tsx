@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 };
 
-import GoogleAnalytics from '@/components/common/GoogleAnalytics';
+import Script from 'next/script';
 
 export default function RootLayout({
   children,
@@ -81,7 +81,18 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.pexels.com" />
       </head>
       <body className={inter.className}>
-        <GoogleAnalytics />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YH9F8VLNCQ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YH9F8VLNCQ');
+          `}
+        </Script>
         {children}
       </body>
     </html>

@@ -21,17 +21,17 @@
     <script src="https://cdn.snsrsv.com/sdk.js"></script>
     <script>
       try {
-        var adId = "300-250";
         var defaultToken = "02cda84a0e4149c2855e170b9c26dedd";
         var width = "300";
         var height = "250";
 
-        var savedToken = localStorage.getItem("ad_token_" + adId) || defaultToken;
+        var urlParams = new URLSearchParams(window.location.search);
+        var activeToken = urlParams.get('token') || defaultToken;
 
         var interval = setInterval(function() {
           if (typeof sdk !== 'undefined') {
             clearInterval(interval);
-            new sdk(savedToken)
+            new sdk(activeToken)
               .setSize(width, height)
               .start();
           }
