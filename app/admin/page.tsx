@@ -13,6 +13,8 @@ export default function AdminPanel() {
   const [posts, setPosts] = useState<any[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentPost, setCurrentPost] = useState<any>(null);
+  const [filterCategory, setFilterCategory] = useState('Todos');
+
 
   // Form Fields
   const [title, setTitle] = useState('');
@@ -140,7 +142,9 @@ export default function AdminPanel() {
       'Esportes': 'bg-orange-600',
       'Economia': 'bg-yellow-600',
       'Meio Ambiente': 'bg-green-700',
-      'Internacional': 'bg-indigo-600'
+      'Internacional': 'bg-indigo-600',
+      'Entrevista': 'bg-red-600',
+      'Agenda Voz': 'bg-red-600'
     };
 
     const postData = {
@@ -274,6 +278,10 @@ export default function AdminPanel() {
     );
   }
 
+  const filteredPosts = filterCategory === 'Todos'
+    ? posts
+    : posts.filter(post => post.category === filterCategory);
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* HEADER */}
@@ -381,6 +389,8 @@ export default function AdminPanel() {
                         <option value="Economia">Economia</option>
                         <option value="Meio Ambiente">Meio Ambiente</option>
                         <option value="Internacional">Internacional</option>
+                        <option value="Entrevista">Entrevista</option>
+                        <option value="Agenda Voz">Agenda Voz</option>
                       </select>
                     </div>
 
@@ -430,15 +440,38 @@ export default function AdminPanel() {
               ) : (
                 /* POSTS LIST */
                 <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
-                  <div className="flex justify-between items-center border-b pb-4">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center border-b pb-4 gap-4">
                     <h2 className="text-xl font-bold text-gray-900">Notícias Publicadas no Supabase</h2>
-                    <button
-                      onClick={() => openForm()}
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors text-sm shadow-sm"
-                    >
-                      <Plus className="w-4 h-4" />
-                      Nova Notícia
-                    </button>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm text-gray-500 font-semibold">Filtrar Categoria:</span>
+                        <select
+                          value={filterCategory}
+                          onChange={e => setFilterCategory(e.target.value)}
+                          className="px-3 py-1.5 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 font-semibold"
+                        >
+                          <option value="Todos">Todos</option>
+                          <option value="Política">Política</option>
+                          <option value="Distrito Federal">Distrito Federal</option>
+                          <option value="Turismo">Turismo</option>
+                          <option value="Saúde">Saúde</option>
+                          <option value="Tecnologia">Tecnologia</option>
+                          <option value="Esportes">Esportes</option>
+                          <option value="Economia">Economia</option>
+                          <option value="Meio Ambiente">Meio Ambiente</option>
+                          <option value="Internacional">Internacional</option>
+                          <option value="Entrevista">Entrevista</option>
+                          <option value="Agenda Voz">Agenda Voz</option>
+                        </select>
+                      </div>
+                      <button
+                        onClick={() => openForm()}
+                        className="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors text-sm shadow-sm whitespace-nowrap"
+                      >
+                        <Plus className="w-4 h-4" />
+                        Nova Notícia
+                      </button>
+                    </div>
                   </div>
 
                   <div className="overflow-x-auto">
@@ -453,14 +486,14 @@ export default function AdminPanel() {
                         </tr>
                       </thead>
                       <tbody>
-                        {posts.length === 0 ? (
+                        {filteredPosts.length === 0 ? (
                           <tr>
-                            <td colSpan={5} className="py-8 text-center text-gray-500">
-                              Nenhuma notícia cadastrada no Supabase ainda. Clique em "Nova Notícia" para postar!
+                            <td colSpan={5} className="py-8 text-center text-gray-500 font-medium">
+                              Nenhuma notícia encontrada nesta categoria.
                             </td>
                           </tr>
                         ) : (
-                          posts.map((post) => (
+                          filteredPosts.map((post) => (
                             <tr key={post.id} className="border-b hover:bg-gray-50 transition-colors">
                               <td className="py-3">
                                 {post.featured_image ? (

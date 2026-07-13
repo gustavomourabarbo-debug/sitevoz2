@@ -5,6 +5,10 @@
     {
       "source": "/noticia/:slug",
       "destination": "/noticia?slug=:slug"
+    },
+    {
+      "source": "/entrevista/:slug",
+      "destination": "/entrevista?slug=:slug"
     }
   ]
 }
