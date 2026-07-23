@@ -1,4 +1,5 @@
 const WP_API = "https://www.vozdebrasilia.com.br/wp-json/wp/v2";
+const LOVABLE_FEED = "https://voz-central-ai.lovable.app/api/public/voznews-feed";
 
 const fetchHeaders = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -59,7 +60,6 @@ const categoryPlaceholders: Record<string, string[]> = {
   ]
 };
 
-// Helper to determine the category slug from post details
 function detectCategorySlug(post: any): string {
   if (!post) return 'general';
   
@@ -113,7 +113,6 @@ function getCategoryColor(categoryName: string): string {
   return mapping[categoryName] || 'bg-blue-600';
 }
 
-// Intercepts WordPress API responses and replaces broken featured image paths with local/placeholder images
 function enrichPostsWithImages(posts: any) {
   if (!posts) return posts;
   
@@ -128,7 +127,6 @@ function enrichPostsWithImages(posts: any) {
     const categoryName = term?.name || getCategoryNameFromSlug(catSlug);
     const categoryColor = getCategoryColor(categoryName);
     
-    // Exact mapping for the top 5 articles with our custom generated high-quality local images
     if (titleUpper.includes("TV VOZ INTERNATIONAL")) {
       fallbackImage = "/news-images/itamaraty.png";
     } else if (titleUpper.includes("FESTIVAL VOZ DE BRASÍLIA")) {
@@ -145,7 +143,7 @@ function enrichPostsWithImages(posts: any) {
       fallbackImage = placeholders[imageIndex];
     }
     
-    post.featured_image = fallbackImage;
+    post.featured_image = post.featured_image || fallbackImage;
     post.categorySlug = catSlug;
     post.category = categoryName;
     post.categoryColor = categoryColor;
@@ -160,7 +158,7 @@ function enrichPostsWithImages(posts: any) {
       post._embedded['wp:featuredmedia'][0] = {};
     }
     
-    post._embedded['wp:featuredmedia'][0].source_url = fallbackImage;
+    post._embedded['wp:featuredmedia'][0].source_url = post.featured_image;
   };
 
   if (Array.isArray(posts)) {
@@ -188,113 +186,102 @@ export function decodeHtml(text: string): string {
     .trim();
 }
 
-export async function getPosts(limit = 12) {
-  try {
-    const localNews = require('../public/data/news.json');
-    const formatted = localNews.slice(0, limit).map((news: any) => ({
-      id: news.id,
-      slug: news.slug,
-      title: { rendered: news.title },
-      content: { rendered: news.content },
-      excerpt: { rendered: news.excerpt },
-      date: news.published_at,
-      _embedded: {
-        'wp:featuredmedia': [{ source_url: news.featured_image }],
-        'author': [{ name: news.author }],
-        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-      }
-    }));
-    return enrichPostsWithImages(formatted);
-  } catch (err) {
-    console.error('Error loading local news:', err);
-    return [];
-  }
+function normalizeLovablePost(item: any) {
+  return {
+    id: item.id,
+    slug: item.slug,
+    title: { rendered: item.title?.rendered || item.title || '' },
+    content: { rendered: item.content?.rendered || item.content || '' },
+    excerpt: { rendered: item.excerpt?.rendered || item.excerpt || '' },
+    date: item.date || item.published_at || item.created_at,
+    featured_image: item.featured_image,
+    categorySlug: item.categorySlug,
+    category: item.category,
+    categoryColor: item.categoryColor,
+    _embedded: {
+      'wp:featuredmedia': [{ source_url: item.featured_image }],
+      'author': [{ name: item.author || 'Redação Voz de Brasília' }],
+      'wp:term': [[{ name: item.category, slug: item.categorySlug }]]
+    }
+  };
 }
 
-export async function getInterviewPosts(limit = 5) {
+async function fetchLiveNews(limit = 12): Promise<any[] | null> {
   try {
-    const localNews = require('../public/data/news.json');
-    const interviews = localNews.filter((news: any) => 
-      news.categorySlug === 'entrevista' || 
-      news.categorySlug === 'entrevistas' || 
-      news.category === 'Agenda Voz'
-    );
-    const formatted = interviews.slice(0, limit).map((news: any) => ({
-      id: news.id,
-      slug: news.slug,
-      title: { rendered: news.title },
-      content: { rendered: news.content },
-      excerpt: { rendered: news.excerpt },
-      date: news.published_at,
-      _embedded: {
-        'wp:featuredmedia': [{ source_url: news.featured_image }],
-        'author': [{ name: news.author }],
-        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-      }
-    }));
-    return enrichPostsWithImages(formatted);
+    const res = await fetch(${LOVABLE_FEED}?limit=${limit}, {
+      method: 'GET',
+      headers: fetchHeaders,
+      next: { revalidate: 60 }
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const items = Array.isArray(data) ? data : data.items;
+    if (!Array.isArray(items)) return null;
+    return items.map(normalizeLovablePost);
   } catch (err) {
-    console.error('Error loading local interviews:', err);
-    return [];
-  }
-}
-
-export async function getPostBySlug(slug: string) {
-  try {
-    const localNews = require('../public/data/news.json');
-    const news = localNews.find((n: any) => n.slug === slug);
-    if (!news) return null;
-    const formatted = {
-      id: news.id,
-      slug: news.slug,
-      title: { rendered: news.title },
-      content: { rendered: news.content },
-      excerpt: { rendered: news.excerpt },
-      date: news.published_at,
-      _embedded: {
-        'wp:featuredmedia': [{ source_url: news.featured_image }],
-        'author': [{ name: news.author }],
-        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-      }
-    };
-    return enrichPostsWithImages(formatted);
-  } catch (err) {
-    console.error('Error loading local post by slug:', err);
+    console.error('Error fetching live news:', err);
     return null;
   }
 }
 
+function loadStaticNews(): any[] {
+  try {
+    const localNews = require('../public/data/news.json');
+    return localNews || [];
+  } catch (err) {
+    console.error('Error loading static news:', err);
+    return [];
+  }
+}
+
+export async function getPosts(limit = 12) {
+  const live = await fetchLiveNews(limit);
+  if (live && live.length > 0) {
+    return enrichPostsWithImages(live.slice(0, limit));
+  }
+  const staticNews = loadStaticNews();
+  const formatted = staticNews.slice(0, limit).map((news: any) => ({
+    id: news.id,
+    slug: news.slug,
+    title: { rendered: news.title },
+    content: { rendered: news.content },
+    excerpt: { rendered: news.excerpt },
+    date: news.published_at,
+    _embedded: {
+      'wp:featuredmedia': [{ source_url: news.featured_image }],
+      'author': [{ name: news.author }],
+      'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
+    }
+  }));
+  return enrichPostsWithImages(formatted);
+}
+
+export async function getInterviewPosts(limit = 5) {
+  const all = await getPosts(100);
+  const interviews = all.filter((news: any) => 
+    news.categorySlug === 'entrevista' || 
+    news.categorySlug === 'entrevistas' || 
+    news.category === 'Agenda Voz'
+  );
+  return interviews.slice(0, limit);
+}
+
+export async function getPostBySlug(slug: string) {
+  const all = await getPosts(100);
+  return all.find((n: any) => n.slug === slug) || null;
+}
+
 export async function getPostsByCategory(categoryId: number, limit = 4) {
-  // Mock category by ID using getPosts since we are running offline
   return getPosts(limit);
 }
 
 export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1) {
-  try {
-    const localNews = require('../public/data/news.json');
-    const filtered = localNews.filter((news: any) => {
-      if (slug === 'entrevista' || slug === 'entrevistas') {
-        return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
-      }
-      return news.categorySlug === slug;
-    });
-
-    const formatted = filtered.slice((page - 1) * limit, page * limit).map((news: any) => ({
-      id: news.id,
-      slug: news.slug,
-      title: { rendered: news.title },
-      content: { rendered: news.content },
-      excerpt: { rendered: news.excerpt },
-      date: news.published_at,
-      _embedded: {
-        'wp:featuredmedia': [{ source_url: news.featured_image }],
-        'author': [{ name: news.author }],
-        'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-      }
-    }));
-    return enrichPostsWithImages(formatted);
-  } catch (err) {
-    console.error('Error loading local posts by category:', err);
-    return [];
-  }
+  const all = await getPosts(100);
+  const filtered = all.filter((news: any) => {
+    if (slug === 'entrevista' || slug === 'entrevistas') {
+      return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
+    }
+    return news.categorySlug === slug;
+  });
+  return filtered.slice((page - 1) * limit, page * limit);
 }
