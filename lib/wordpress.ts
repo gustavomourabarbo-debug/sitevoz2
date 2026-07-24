@@ -208,7 +208,7 @@ function normalizeLovablePost(item: any) {
 
 async function fetchLiveNews(limit = 12): Promise<any[] | null> {
   try {
-    const res = await fetch(${LOVABLE_FEED}?limit=${limit}, {
+    const res = await fetch(${LOVABLE_FEED}?limit=˜${limit}˜, {
       method: 'GET',
       headers: fetchHeaders,
       next: { revalidate: 60 }
