@@ -208,11 +208,11 @@ function normalizeLovablePost(item: any) {
 
 async function fetchLiveNews(limit = 12): Promise<any[] | null> {
   try {
-    const res = await fetch(${LOVABLE_FEED}?limit=˜${limit}˜, {
+   const res = await fetch(${LOVABLE_FEED}?limit=${limit}, {
       method: 'GET',
       headers: fetchHeaders,
       next: { revalidate: 60 }
-    });
+    } as any);
     if (!res.ok) return null;
     const data = await res.json();
     const items = Array.isArray(data) ? data : data.items;
