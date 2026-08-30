@@ -13,6 +13,7 @@ import MaceioShowcase from '@/components/home/MaceioShowcase';
 import ViralStrip from '@/components/home/ViralStrip';
 import InstagramVideoBanner from '@/components/common/InstagramVideoBanner';
 import SponsorBanner from '@/components/common/SponsorBanner';
+import TopStoryBanner from '@/components/common/TopStoryBanner';
 
 export const revalidate = 60;
 
@@ -82,6 +83,17 @@ export default async function Home() {
 
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="petrobras" />
+
+          <div className="max-w-[1400px] mx-auto px-4">
+            <TopStoryBanner
+              href="/noticia/analise-de-paulo-fayad-augusto-cury-e-o-nome-fora-do-ringue-que-pode-crescer-ass"
+              kicker="ANÁLISE DE PAULO FAYAD"
+              title="Augusto Cury é o nome fora do ringue que pode surpreender em 2026"
+              excerpt="Com apenas 35 segundos de TV, Augusto Cury (Avante) estreou sem atacar ninguém — e pode ser justamente isso que o fará crescer. Paulo Fayad analisa por que a candidatura do escritor é o maior ponto fora da curva da eleição."
+              image="https://s2-g1.glbimg.com/4osiPZSqBjvajoKfPeoB7JFXcjs=/1315x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/g/KqdAvmQ1AwgklqqQ0Kug/cury-avante.jpg"
+            />
+          </div>
+
           <SponsorBanner sponsor="snaider" />
         </div>
 
