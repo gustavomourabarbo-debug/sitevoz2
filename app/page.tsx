@@ -18,8 +18,28 @@ import TopStoryBanner from '@/components/common/TopStoryBanner';
 export const revalidate = 60;
 
 export default async function Home() {
-  const posts = await getPosts(150);
+  const feedPosts = await getPosts(150);
   const interviews = await getInterviewPosts(40);
+
+  const roneyPost = {
+    id: 'roney-nemer-2026-09-01',
+    slug: 'roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
+    title: { rendered: 'Rôney Nemer volta à disputa distrital com experiência e propostas para Brasília' },
+    excerpt: { rendered: 'Candidato a deputado distrital pelo PP, número 11111, Rôney Nemer retorna à disputa eleitoral no Distrito Federal.' },
+    date: '2026-09-01T20:54:00-03:00',
+    published_at: '2026-09-01T20:54:00-03:00',
+    created_at: '2026-09-01T20:54:00-03:00',
+    category: 'Política',
+    categorySlug: 'politica',
+    categoryColor: 'bg-red-600',
+    featured_image: 'https://www.tribunapr.com.br/hermes-media/eleicoes/2026/candidatos/df/70002538503.jpg',
+    href: '/noticia/roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
+  };
+
+  const posts = [
+    roneyPost,
+    ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug),
+  ];
 
   const norm = (p: any) =>
     `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`
@@ -32,7 +52,7 @@ export default async function Home() {
 
   const isPolitica = (p: any) =>
     p?.categorySlug === 'politica' ||
-    /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(
+    /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(
       norm(p),
     );
 
@@ -44,7 +64,7 @@ export default async function Home() {
     !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
   // Personagens obrigatorios: garantem uma manchete de cada no topo da capa.
-  const obrigatorios = ['celina', 'paula belmonte', 'hermeto', 'julio cesar', 'lula', 'flavio bolsonaro', 'leila'];
+  const obrigatorios = ['roney nemer', 'celina', 'paula belmonte', 'hermeto', 'julio cesar', 'lula', 'flavio bolsonaro', 'leila'];
 
   const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
 
@@ -57,8 +77,7 @@ export default async function Home() {
     if (!destaques.includes(p)) destaques.push(p);
   });
 
-  // Oito slides: os sete personagens obrigatorios mais uma manchete relevante.
-  // Hermeto usa a materia da inauguracao do comite quando ela estiver no feed.
+  // Oito slides: personagens obrigatorios e manchetes politicas relevantes.
   const heroPosts = destaques.slice(0, 8);
 
   const categories: { title: string; category: string }[] = [
