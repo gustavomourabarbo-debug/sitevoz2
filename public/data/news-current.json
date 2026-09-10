@@ -1,5 +1,29 @@
 [
   {
+    "id":"20260909-2011",
+    "title":"Celina Leão lidera cenários de primeiro e segundo turnos no DF",
+    "slug":"celina-leao-lidera-cenarios-primeiro-segundo-turnos-df",
+    "content":"<p>Pesquisa Real Time Big Data divulgada em 9 de setembro aponta a governadora do Distrito Federal, Celina Leão, na liderança dos cenários testados para o Governo do DF. O levantamento ouviu 1.600 eleitores entre 4 e 8 de setembro e informou margem de erro de dois pontos percentuais.</p><p>Fonte: CNN Brasil, 9 de setembro de 2026.</p>",
+    "excerpt":"Levantamento Real Time Big Data coloca Celina na liderança dos cenários testados para o Governo do DF.",
+    "category":"Política","categorySlug":"politica","categoryColor":"bg-red-600","featured_image":"/news-images/senado.png","author":"Voz de Brasília","status":"published","views":0,"published_at":"2026-09-09T07:07:00-03:00","source_url":"https://www.cnnbrasil.com.br/eleicoes/real-time-celina-leao-lidera-cenarios-de-1o-e-2o-turnos-ao-governo-do-df/"
+  },
+  {
+    "id":"20260909-2012",
+    "title":"Michelle Bolsonaro aparece com 26% na disputa ao Senado no DF",
+    "slug":"michelle-bolsonaro-26-disputa-senado-df",
+    "content":"<p>Pesquisa Real Time Big Data divulgada em 9 de setembro mostra Michelle Bolsonaro com 26% das intenções de voto em uma das vagas ao Senado pelo Distrito Federal. O levantamento também mostra disputa aberta pelas demais posições.</p><p>Fonte: CNN Brasil, 9 de setembro de 2026.</p>",
+    "excerpt":"Pesquisa Real Time Big Data registra Michelle com 26% na corrida ao Senado pelo Distrito Federal.",
+    "category":"Política","categorySlug":"politica","categoryColor":"bg-red-600","featured_image":"/news-images/gavel.png","author":"Voz de Brasília","status":"published","views":0,"published_at":"2026-09-09T07:10:00-03:00","source_url":"https://www.cnnbrasil.com.br/tudo-sobre/michelle-bolsonaro/"
+  },
+  {
+    "id":"20260902-2013",
+    "title":"Leila do Vôlei relata MP que altera taxa das compras internacionais",
+    "slug":"leila-volei-relata-mp-taxa-compras-internacionais",
+    "content":"<p>A senadora Leila Barros, conhecida como Leila do Vôlei, foi relatora da medida provisória que alterou a tributação das compras internacionais de até US$ 50. Um acordo foi fechado para destravar a votação e prever avaliações periódicas dos impactos da medida.</p><p>Fonte: CNN Brasil, 1º de setembro de 2026.</p>",
+    "excerpt":"Senadora do DF relatou a medida provisória e participou de acordo para viabilizar a votação do texto.",
+    "category":"Política","categorySlug":"politica","categoryColor":"bg-red-600","featured_image":"/news-images/senado.png","author":"Voz de Brasília","status":"published","views":0,"published_at":"2026-09-02T09:00:00-03:00","source_url":"https://www.cnnbrasil.com.br/politica/relatora-chega-a-acordo-para-destravar-mp-da-taxa-das-blusinhas/"
+  },
+  {
     "id":"20260909-2001",
     "title":"Fachin suspende decisões de Mendonça e Dino sobre diretor da PF",
     "slug":"fachin-suspende-decisoes-mendonca-dino-diretor-pf",
