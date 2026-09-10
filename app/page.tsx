@@ -104,13 +104,13 @@ export default async function Home() {
           <SponsorBanner sponsor="petrobras" />
 
           <div className="max-w-[1400px] mx-auto px-4">
-            <TopStoryBanner
-              href="/noticia/analise-de-paulo-fayad-augusto-cury-e-o-nome-fora-do-ringue-que-pode-crescer-ass"
-              kicker="ANÁLISE DE PAULO FAYAD"
-              title="Augusto Cury é o nome fora do ringue que pode surpreender em 2026"
-              excerpt="Com apenas 35 segundos de TV, Augusto Cury (Avante) estreou sem atacar ninguém — e pode ser justamente isso que o fará crescer. Paulo Fayad analisa por que a candidatura do escritor é o maior ponto fora da curva da eleição."
-              image="https://s2-g1.glbimg.com/4osiPZSqBjvajoKfPeoB7JFXcjs=/1315x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/g/KqdAvmQ1AwgklqqQ0Kug/cury-avante.jpg"
-            />
+       <TopStoryBanner
+  href="/noticia/flavio-dino-suspende-decisoes-e-determina-novas-providencias"
+  kicker="POLÍTICA"
+  title="Flávio Dino suspende decisões e determina novas providências"
+  excerpt="A Voz de Brasília acompanha os desdobramentos e atualizará esta reportagem."
+  image="/news-images/senado.png"
+/>
           </div>
 
           <SponsorBanner sponsor="snaider" />
