@@ -26,169 +26,78 @@ export default async function Home() {
     slug: 'roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
     title: { rendered: 'Rôney Nemer volta à disputa distrital com experiência e propostas para Brasília' },
     excerpt: { rendered: 'Candidato a deputado distrital pelo PP, número 11111, Rôney Nemer retorna à disputa eleitoral no Distrito Federal.' },
-    date: '2026-09-01T20:54:00-03:00',
-    published_at: '2026-09-01T20:54:00-03:00',
-    created_at: '2026-09-01T20:54:00-03:00',
-    category: 'Política',
-    categorySlug: 'politica',
-    categoryColor: 'bg-red-600',
+    date: '2026-09-01T20:54:00-03:00', published_at: '2026-09-01T20:54:00-03:00', created_at: '2026-09-01T20:54:00-03:00',
+    category: 'Política', categorySlug: 'politica', categoryColor: 'bg-red-600',
     featured_image: 'https://www.tribunapr.com.br/hermes-media/eleicoes/2026/candidatos/df/70002538503.jpg',
     href: '/noticia/roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
   };
 
-  const posts = [
-    roneyPost,
-    ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug),
-  ];
-
-  const norm = (p: any) =>
-    `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
-
-  const isMaceio = (p: any) =>
-    /maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p));
-
-  const isPolitica = (p: any) =>
-    p?.categorySlug === 'politica' ||
-    /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(
-      norm(p),
-    );
-
+  const posts = [roneyPost, ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug)];
+  const norm = (p: any) => `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const isMaceio = (p: any) => /maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p));
+  const isPolitica = (p: any) => p?.categorySlug === 'politica' || /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(norm(p));
   const politicaPosts = posts.filter(isPolitica);
   const maceioPosts = posts.filter(isMaceio);
+  const fotoRuim = (p: any) => !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  // Fotos ruins/recortadas nao entram no destaque principal
-  const fotoRuim = (p: any) =>
-    !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
-
-  // Personagens obrigatorios: garantem uma manchete de cada no topo da capa.
- const obrigatorios = ['celina', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'dra. jane', 'doutora jane'];
-
-  const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
-
+  const obrigatorios = ['celina', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'jane'];
+  const base = posts.filter((p: any) => !fotoRuim(p));
   const destaques: any[] = [];
   obrigatorios.forEach((nome) => {
     const achado = base.find((p: any) => norm(p).includes(nome) && !destaques.includes(p));
     if (achado) destaques.push(achado);
   });
-  base.forEach((p: any) => {
-    if (!destaques.includes(p)) destaques.push(p);
-  });
-
-  // Oito slides: personagens obrigatorios e manchetes politicas relevantes.
-  const heroPosts = destaques.slice(0, 8);
+  base.forEach((p: any) => { if (!destaques.includes(p)) destaques.push(p); });
+  const heroPosts = destaques.slice(0, 7);
 
   const categories: { title: string; category: string }[] = [
-    { title: 'Política', category: 'politica' },
-    { title: 'Distrito Federal', category: 'distrito-federal' },
-    { title: 'Economia', category: 'economia' },
-    { title: 'Turismo', category: 'turismo' },
-    { title: 'Gastronomia', category: 'gastronomia' },
-    { title: 'Saúde', category: 'saude' },
-    { title: 'Tecnologia', category: 'tecnologia' },
-    { title: 'Esportes', category: 'esportes' },
-    { title: 'Internacional', category: 'internacional' },
-    { title: 'Cultura', category: 'cultura' },
+    { title: 'Política', category: 'politica' }, { title: 'Distrito Federal', category: 'distrito-federal' },
+    { title: 'Economia', category: 'economia' }, { title: 'Turismo', category: 'turismo' },
+    { title: 'Gastronomia', category: 'gastronomia' }, { title: 'Saúde', category: 'saude' },
+    { title: 'Tecnologia', category: 'tecnologia' }, { title: 'Esportes', category: 'esportes' },
+    { title: 'Internacional', category: 'internacional' }, { title: 'Cultura', category: 'cultura' },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
       <main className="pt-16">
         <TrendingBar posts={posts} />
-
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="petrobras" />
-
           <div className="max-w-[1400px] mx-auto px-4">
-       <TopStoryBanner
-  href="/noticia/flavio-dino-suspende-decisoes-e-determina-novas-providencias"
-  kicker="POLÍTICA"
-  title="Flávio Dino suspende decisões e determina novas providências"
-  excerpt="A Voz de Brasília acompanha os desdobramentos e atualizará esta reportagem."
-  image="/news-images/senado.png"
-/>
+            <TopStoryBanner
+              href="/noticia/fachin-suspende-decisoes-mendonca-dino-diretor-pf"
+              kicker="POLÍTICA"
+              title="Fachin suspende decisões de Mendonça e Dino sobre diretor da PF"
+              excerpt="Presidente do STF suspende decisões conflitantes sobre Andrei Rodrigues e convoca plenário extraordinário."
+              image="/news-images/senado.png"
+            />
           </div>
-
           <SponsorBanner sponsor="snaider" />
         </div>
-
-        <div className="mt-4">
-          <HeroCarousel posts={heroPosts} />
-        </div>
-
+        <div className="mt-4"><HeroCarousel posts={heroPosts} /></div>
         <InstagramVideoBanner />
-
-        <div className="bg-white pt-8">
-          <div className="max-w-[1400px] mx-auto px-4">
-            <LatestNews posts={politicaPosts.length ? politicaPosts : posts} />
-          </div>
-        </div>
-
-        <div className="mt-4">
-          <PremiumBanner variant={0} />
-        </div>
-
-        <div className="mt-6">
-          <SponsorBanner sponsor="visao" />
-        </div>
-
+        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={politicaPosts.length ? politicaPosts : posts} /></div></div>
+        <div className="mt-4"><PremiumBanner variant={0} /></div>
+        <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
-
         <MosaicHighlights posts={posts} />
-
-        <div className="mt-6 mb-2">
-          <PremiumBanner variant={3} />
-        </div>
-
-        <div className="mt-4 mb-2">
-          <SponsorBanner sponsor="lunardi" />
-        </div>
-
-        {/* Grid principal: categorias densas + sidebar */}
+        <div className="mt-6 mb-2"><PremiumBanner variant={3} /></div>
+        <div className="mt-4 mb-2"><SponsorBanner sponsor="lunardi" /></div>
         <div className="max-w-[1400px] mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-10">
-              {categories.map((c) => (
-                <CategoriesSection key={c.category} title={c.title} category={c.category} />
-              ))}
-            </div>
-            <aside className="lg:col-span-1">
-              <div className="lg:sticky lg:top-24">
-                <Sidebar />
-              </div>
-            </aside>
+            <div className="lg:col-span-2 space-y-10">{categories.map((c) => (<CategoriesSection key={c.category} title={c.title} category={c.category} />))}</div>
+            <aside className="lg:col-span-1"><div className="lg:sticky lg:top-24"><Sidebar /></div></aside>
           </div>
         </div>
-
-        <div className="mb-2">
-          <PremiumBanner variant={1} />
-        </div>
-
-        <div className="mt-4 mb-2">
-          <SponsorBanner sponsor="coreto" />
-        </div>
-
+        <div className="mb-2"><PremiumBanner variant={1} /></div>
+        <div className="mt-4 mb-2"><SponsorBanner sponsor="coreto" /></div>
         {maceioPosts.length > 0 && <MaceioShowcase />}
-
-        <div className="bg-gray-50 py-8">
-          <div className="max-w-[1400px] mx-auto px-4">
-            <InterviewsSection posts={interviews} />
-          </div>
-        </div>
-
-        <div className="mt-4 mb-2">
-          <SponsorBanner sponsor="kumon" />
-        </div>
-
-        <div className="mt-2 mb-10">
-          <PremiumBanner variant={2} />
-        </div>
+        <div className="bg-gray-50 py-8"><div className="max-w-[1400px] mx-auto px-4"><InterviewsSection posts={interviews} /></div></div>
+        <div className="mt-4 mb-2"><SponsorBanner sponsor="kumon" /></div>
+        <div className="mt-2 mb-10"><PremiumBanner variant={2} /></div>
       </main>
-
       <Footer />
     </div>
   );
