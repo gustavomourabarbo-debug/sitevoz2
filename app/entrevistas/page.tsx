@@ -1,162 +1,130 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Play, Clock, User } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { Play, ExternalLink } from 'lucide-react';
+
+const interviews = [
+  {
+    name: 'Leila do Vôlei',
+    eyebrow: 'ESPORTE, PODER E BRASÍLIA',
+    headline: 'LEILA DO VÔLEI SEM RODEIOS',
+    sub: 'Paulo Fayad conversa com Leila Barros sobre trajetória, Brasília e vida pública.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Leila%20do%20V%C3%B4lei%20Paulo%20Fayad',
+  },
+  {
+    name: 'Júlio César Ribeiro',
+    eyebrow: 'CONGRESSO EM FOCO',
+    headline: 'JÚLIO CÉSAR: PERGUNTAS DIRETAS',
+    sub: 'Uma conversa sobre mandato, prioridades e os temas que movimentam o Distrito Federal.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Julio%20Cesar%20Paulo%20Fayad',
+  },
+  {
+    name: 'Rôney Nemer',
+    eyebrow: 'BRASÍLIA EM DEBATE',
+    headline: 'RÔNEY NEMER FALA SEM FILTRO',
+    sub: 'Paulo Fayad entrevista Rôney Nemer sobre experiência pública, Brasília e os desafios do DF.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Roney%20Nemer%20Paulo%20Fayad',
+  },
+  {
+    name: 'Erika Kokay',
+    eyebrow: 'POLÍTICA SEM ATALHOS',
+    headline: 'ERIKA KOKAY NO CENTRO DO DEBATE',
+    sub: 'A deputada federal conversa com Paulo Fayad sobre Congresso, Brasília e suas principais pautas.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Erika%20Kokay%20Paulo%20Fayad',
+  },
+  {
+    name: 'Izalci Lucas',
+    eyebrow: 'SENADO E DISTRITO FEDERAL',
+    headline: 'IZALCI LUCAS: CARA A CARA',
+    sub: 'Paulo Fayad conduz uma entrevista direta sobre política nacional e os rumos de Brasília.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Izalci%20Lucas%20Paulo%20Fayad',
+  },
+  {
+    name: 'Chico Vigilante',
+    eyebrow: 'CRÍTICAS, PROPOSTAS E DF',
+    headline: 'CHICO VIGILANTE ABRE O JOGO',
+    sub: 'Uma conversa franca com Paulo Fayad sobre gestão pública, trabalhadores e os desafios do DF.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Chico%20Vigilante%20Paulo%20Fayad',
+  },
+  {
+    name: 'Dra. Jane',
+    eyebrow: 'SEGURANÇA, POLÍTICA E BRASÍLIA',
+    headline: 'DRA. JANE: SEM MEIAS PALAVRAS',
+    sub: 'Paulo Fayad conversa com a parlamentar sobre segurança pública, mandato e Distrito Federal.',
+    youtube: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Dra%20Jane%20Paulo%20Fayad',
+  },
+];
 
 export default function EntrevistasPage() {
-  const [interviews, setInterviews] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadInterviews() {
-      // 1. Load static fallback data first
-      let staticInterviews: any[] = [];
-      try {
-        const localNews = require('@/public/data/news.json');
-        staticInterviews = localNews.filter((news: any) => 
-          news.categorySlug === 'entrevista' || 
-          news.categorySlug === 'entrevistas' || 
-          news.category === 'Agenda Voz'
-        ).map((news: any) => ({
-          id: news.id,
-          slug: news.slug,
-          title: news.title,
-          content: news.content,
-          excerpt: news.excerpt,
-          date: new Date(news.published_at || news.created_at).toLocaleDateString('pt-BR'),
-          featured_image: news.featured_image || 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-          author: news.author || 'TV Voz de Brasília'
-        }));
-        setInterviews(staticInterviews);
-      } catch (err) {
-        console.error('Error loading static interviews:', err);
-      }
-
-      // 2. Fetch live interviews from Supabase
-      if (supabase) {
-        try {
-          const { data, error } = await supabase
-            .from('news')
-            .select('*')
-            .or('categoryslug.eq.entrevista,categoryslug.eq.entrevistas,category.eq.Agenda Voz,category.eq.Entrevista')
-            .order('published_at', { ascending: false });
-
-          if (!error && data && data.length > 0) {
-            const formatted = data.map((item: any) => ({
-              id: item.id,
-              slug: item.slug,
-              title: item.title,
-              content: item.content,
-              excerpt: item.excerpt,
-              date: new Date(item.published_at || item.created_at).toLocaleDateString('pt-BR'),
-              featured_image: item.featured_image || 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-              author: item.author || 'TV Voz de Brasília'
-            }));
-
-            // Merge dynamic and static, removing duplicates by slug
-            const merged = [...formatted];
-            const slugs = new Set(merged.map(p => p.slug));
-            staticInterviews.forEach(p => {
-              if (!slugs.has(p.slug)) {
-                merged.push(p);
-              }
-            });
-
-            setInterviews(merged);
-          }
-        } catch (e) {
-          console.warn('Error loading live interviews from Supabase:', e);
-        }
-      }
-      setIsLoading(false);
-    }
-
-    loadInterviews();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-zinc-950 text-white">
       <Header />
 
-      <main className="pt-24 pb-12">
-        <div className="max-w-[1400px] mx-auto px-4">
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center shadow-lg">
-                <Play className="w-8 h-8 text-white fill-white" />
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold text-gray-900">Entrevistas</h1>
-                <p className="text-gray-600 mt-1">Conversas aprofundadas com especialistas e autoridades</p>
-              </div>
+      <main className="pb-16">
+        <section className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-b border-white/10">
+          <div className="max-w-[1400px] mx-auto px-4 py-12 md:py-16">
+            <div className="inline-flex items-center gap-2 bg-red-600 px-3 py-1 rounded-full text-xs font-black tracking-widest uppercase">
+              <Play className="w-3.5 h-3.5 fill-white" />
+              TV Voz de Brasília
             </div>
+            <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight max-w-5xl">
+              ENTREVISTAS QUE COLOCAM BRASÍLIA NO CENTRO DO DEBATE
+            </h1>
+            <p className="mt-4 text-zinc-300 text-lg max-w-3xl">
+              Paulo Fayad frente a frente com lideranças políticas do Distrito Federal e do Congresso Nacional.
+            </p>
+          </div>
+        </section>
+
+        <section className="max-w-[1400px] mx-auto px-4 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {interviews.map((item, index) => (
+              <article
+                key={item.name}
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl"
+              >
+                <div className="relative min-h-[310px] p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-800 via-zinc-950 to-black">
+                  <div className="absolute inset-0 opacity-20 text-[120px] md:text-[150px] font-black leading-none flex items-center justify-center select-none">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
+                  <div className="relative z-10">
+                    <span className="inline-block bg-red-600 text-white text-[11px] font-black tracking-widest px-3 py-1 uppercase rounded">
+                      {item.eyebrow}
+                    </span>
+                  </div>
+                  <div className="relative z-10">
+                    <p className="text-zinc-400 text-sm font-bold uppercase tracking-wider">Entrevista • Paulo Fayad</p>
+                    <h2 className="mt-2 text-3xl md:text-4xl font-black leading-[0.95] uppercase">
+                      {item.headline}
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <p className="text-zinc-300 leading-relaxed min-h-[72px]">{item.sub}</p>
+                  <a
+                    href={item.youtube}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 transition px-5 py-3 font-black"
+                  >
+                    <Play className="w-5 h-5 fill-white" />
+                    Assistir no YouTube
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
           </div>
 
-          {isLoading && interviews.length === 0 ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {interviews.map((interview: any) => {
-                const titulo = interview.title || '';
-                const imagem = interview.featured_image;
-                const autor = interview.author;
-                const data = interview.date;
-
-                return (
-                  <Link
-                    key={interview.id}
-                    href={`/entrevista/${interview.slug}`}
-                    className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col justify-between"
-                  >
-                    <div className="relative overflow-hidden">
-                      <div
-                        className="w-full h-48 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                        style={{ backgroundImage: `url(${imagem})` }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                            <Play className="w-8 h-8 text-white fill-white ml-1" />
-                          </div>
-                        </div>
-
-                        <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1">
-                          <Play className="w-3 h-3 fill-white" />
-                          AO VIVO
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4 flex-1 flex flex-col justify-between">
-                      <h3 className="font-bold text-gray-900 text-sm mb-3 line-clamp-2 group-hover:text-green-600 transition-colors leading-tight">
-                        {titulo}
-                      </h3>
-
-                      <div className="space-y-2">
-                        <div className="flex items-start gap-2">
-                          <User className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
-                          <p className="text-sm font-semibold text-gray-700 truncate">{autor}</p>
-                        </div>
-
-                        <div className="flex items-center gap-2 text-gray-500 text-xs">
-                          <Clock className="w-3 h-3" />
-                          <span>{data}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </div>
+          <div className="mt-10 rounded-2xl border border-white/10 bg-zinc-900 p-6 md:p-8">
+            <h3 className="text-2xl font-black">ACERVO TV VOZ DE BRASÍLIA</h3>
+            <p className="mt-2 text-zinc-300">
+              Os botões abrem a busca correspondente dentro do canal oficial da TV Voz de Brasília no YouTube, facilitando o acesso às entrevistas do acervo.
+            </p>
+          </div>
+        </section>
       </main>
 
       <Footer />
