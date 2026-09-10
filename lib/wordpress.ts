@@ -1,282 +1,62 @@
-const WP_API = "https://www.vozdebrasilia.com.br/wp-json/wp/v2";
-const LOVABLE_FEED = "https://voz-central-ai.lovable.app/api/public/voznews-feed";
+import currentNews from '../public/data/news-current.json';
+import archiveNews from '../public/data/news.json';
 
-const fetchHeaders = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-  'Accept': 'application/json'
+const categoryPlaceholders: Record<string, string> = {
+  politica: '/news-images/senado.png',
+  'distrito-federal': 'https://images.unsplash.com/photo-1600320844655-46b5d92823b2?w=800&auto=format&fit=crop&q=80',
+  turismo: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop&q=80',
+  saude: 'https://images.unsplash.com/photo-1584515901387-a7a1a6337627?w=800&auto=format&fit=crop&q=80',
+  tecnologia: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80',
+  esportes: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
+  economia: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&auto=format&fit=crop&q=80',
+  internacional: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80',
+  cultura: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&auto=format&fit=crop&q=80',
 };
-
-// High-quality category-specific Unsplash images to bypass broken WordPress uploads paths
-const categoryPlaceholders: Record<string, string[]> = {
-  'politica': [
-    'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1620216525890-ffb8cf0f2bfb?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80'
-  ],
-  'distrito-federal': [
-    'https://images.unsplash.com/photo-1600320844655-46b5d92823b2?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1597843797221-77df98f8280f?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1620216525890-ffb8cf0f2bfb?w=800&auto=format&fit=crop&q=80'
-  ],
-  'turismo': [
-    'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&auto=format&fit=crop&q=80'
-  ],
-  'saude': [
-    'https://images.unsplash.com/photo-1584515901387-a7a1a6337627?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&auto=format&fit=crop&q=80'
-  ],
-  'tecnologia': [
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80'
-  ],
-  'esportes': [
-    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&auto=format&fit=crop&q=80'
-  ],
-  'economia': [
-    'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80'
-  ],
-  'meio-ambiente': [
-    'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format&fit=crop&q=80'
-  ],
-  'internacional': [
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80'
-  ],
-  'general': [
-    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1495020689067-958852a6565d?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1503694978374-8a2fa686963a?w=800&auto=format&fit=crop&q=80'
-  ]
-};
-
-function detectCategorySlug(post: any): string {
-  if (!post) return 'general';
-  
-  if (post._embedded && post._embedded['wp:term']) {
-    const terms = post._embedded['wp:term'].flat();
-    for (const term of terms) {
-      if (term.taxonomy === 'category') {
-        const nameLower = term.name.toLowerCase();
-        if (nameLower.includes('polít') || nameLower.includes('polit')) return 'politica';
-        if (nameLower.includes('distr') || nameLower.includes('df') || nameLower.includes('brasíl') || nameLower.includes('brasil')) return 'distrito-federal';
-        if (nameLower.includes('turis')) return 'turismo';
-        if (nameLower.includes('saúd') || nameLower.includes('saud')) return 'saude';
-        if (nameLower.includes('tecno')) return 'tecnologia';
-        if (nameLower.includes('espor')) return 'esportes';
-        if (nameLower.includes('econ') || nameLower.includes('negóc') || nameLower.includes('negoc')) return 'economia';
-        if (nameLower.includes('ambie') || nameLower.includes('susten') || nameLower.includes('clima')) return 'meio-ambiente';
-        if (nameLower.includes('inter') || nameLower.includes('mundo')) return 'internacional';
-      }
-    }
-  }
-  return 'general';
-}
-
-function getCategoryNameFromSlug(slug: string): string {
-  const mapping: Record<string, string> = {
-    'politica': 'Política',
-    'distrito-federal': 'Distrito Federal',
-    'turismo': 'Turismo',
-    'saude': 'Saúde',
-    'tecnologia': 'Tecnologia',
-    'esportes': 'Esportes',
-    'economia': 'Economia',
-    'meio-ambiente': 'Meio Ambiente',
-    'internacional': 'Internacional'
-  };
-  return mapping[slug] || 'Notícias';
-}
-
-function getCategoryColor(categoryName: string): string {
-  const mapping: Record<string, string> = {
-    'Política': 'bg-red-600',
-    'Distrito Federal': 'bg-blue-600',
-    'Turismo': 'bg-green-600',
-    'Saúde': 'bg-purple-600',
-    'Tecnologia': 'bg-blue-500',
-    'Esportes': 'bg-orange-600',
-    'Economia': 'bg-yellow-600',
-    'Meio Ambiente': 'bg-green-700',
-    'Internacional': 'bg-indigo-600'
-  };
-  return mapping[categoryName] || 'bg-blue-600';
-}
-
-function enrichPostsWithImages(posts: any) {
-  if (!posts) return posts;
-  
-  const processPost = (post: any) => {
-    if (!post) return;
-    
-    const titleUpper = (post.title?.rendered || '').toUpperCase();
-    let fallbackImage = '';
-    
-    const term = post._embedded?.['wp:term']?.[0]?.[0];
-    const catSlug = term?.slug || detectCategorySlug(post);
-    const categoryName = term?.name || getCategoryNameFromSlug(catSlug);
-    const categoryColor = getCategoryColor(categoryName);
-    
-    if (titleUpper.includes("TV VOZ INTERNATIONAL")) {
-      fallbackImage = "/news-images/itamaraty.png";
-    } else if (titleUpper.includes("FESTIVAL VOZ DE BRASÍLIA")) {
-      fallbackImage = "/news-images/festival.png";
-    } else if (titleUpper.includes("JAQUES WAGNER")) {
-      fallbackImage = "/news-images/senado.png";
-    } else if (titleUpper.includes("BOLSONARO")) {
-      fallbackImage = "/news-images/gavel.png";
-    } else if (titleUpper.includes("VORCARO")) {
-      fallbackImage = "/news-images/police.png";
-    } else {
-      const placeholders = categoryPlaceholders[catSlug] || categoryPlaceholders['general'];
-      const imageIndex = (post.id || 0) % placeholders.length;
-      fallbackImage = placeholders[imageIndex];
-    }
-    
-    post.featured_image = post.featured_image || fallbackImage;
-    post.categorySlug = catSlug;
-    post.category = categoryName;
-    post.categoryColor = categoryColor;
-    
-    if (!post._embedded) {
-      post._embedded = {};
-    }
-    if (!post._embedded['wp:featuredmedia']) {
-      post._embedded['wp:featuredmedia'] = [{}];
-    }
-    if (!post._embedded['wp:featuredmedia'][0]) {
-      post._embedded['wp:featuredmedia'][0] = {};
-    }
-    
-    post._embedded['wp:featuredmedia'][0].source_url = post.featured_image;
-  };
-
-  if (Array.isArray(posts)) {
-    posts.forEach(processPost);
-  } else {
-    processPost(posts);
-  }
-  
-  return posts;
-}
 
 export function decodeHtml(text: string): string {
   if (!text) return '';
-  return text
-    .replace(/&hellip;/g, '…')
-    .replace(/&#8230;/g, '…')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/<[^>]+>/g, '')
-    .trim();
+  return text.replace(/&hellip;/g, '…').replace(/&#8230;/g, '…').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/<[^>]+>/g, '').trim();
 }
 
-function normalizeLovablePost(item: any) {
+function normalize(item: any) {
+  const categorySlug = item.categorySlug || 'distrito-federal';
+  const image = item.featured_image || categoryPlaceholders[categorySlug] || '/news-images/senado.png';
   return {
-    id: item.id,
-    slug: item.slug,
+    ...item,
     title: { rendered: item.title?.rendered || item.title || '' },
     content: { rendered: item.content?.rendered || item.content || '' },
     excerpt: { rendered: item.excerpt?.rendered || item.excerpt || '' },
     date: item.date || item.published_at || item.created_at,
-    featured_image: item.featured_image,
-    categorySlug: item.categorySlug,
-    category: item.category,
-    categoryColor: item.categoryColor,
+    featured_image: image,
+    categorySlug,
+    category: item.category || 'Notícias',
+    categoryColor: item.categoryColor || 'bg-blue-600',
     _embedded: {
-      'wp:featuredmedia': [{ source_url: item.featured_image }],
-      'author': [{ name: item.author || 'Redação Voz de Brasília' }],
-      'wp:term': [[{ name: item.category, slug: item.categorySlug }]]
-    }
+      'wp:featuredmedia': [{ source_url: image }],
+      author: [{ name: item.author || 'Redação Voz de Brasília' }],
+      'wp:term': [[{ name: item.category || 'Notícias', slug: categorySlug }]],
+    },
   };
 }
 
-async function fetchLiveNews(limit = 12): Promise<any[] | null> {
-  try {
-   const res = await fetch(`${LOVABLE_FEED}?limit=${limit}`, {
-      method: 'GET',
-      headers: fetchHeaders,
-      cache: 'no-store'
-    } as any);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const items = Array.isArray(data) ? data : data.items;
-    if (!Array.isArray(items)) return null;
-    return items.map(normalizeLovablePost);
-  } catch (err) {
-    console.error('Error fetching live news:', err);
-    return null;
-  }
-}
-
-function loadStaticNews(): any[] {
-  try {
-    const localNews = require('../public/data/news.json');
-    return localNews || [];
-  } catch (err) {
-    console.error('Error loading static news:', err);
-    return [];
-  }
+function allNews(): any[] {
+  const current = currentNews as any[];
+  const archive = archiveNews as any[];
+  const currentSlugs = new Set(current.map((n) => n.slug));
+  return [...current, ...archive.filter((n) => !currentSlugs.has(n.slug) && n.id !== '900001')];
 }
 
 export async function getPosts(limit = 12) {
-  const live = await fetchLiveNews(limit);
-  if (live && live.length > 0) {
-    return enrichPostsWithImages(live.slice(0, limit));
-  }
-  const staticNews = loadStaticNews();
-  const formatted = staticNews.slice(0, limit).map((news: any) => ({
-    id: news.id,
-    slug: news.slug,
-    title: { rendered: news.title },
-    content: { rendered: news.content },
-    excerpt: { rendered: news.excerpt },
-    date: news.published_at,
-    _embedded: {
-      'wp:featuredmedia': [{ source_url: news.featured_image }],
-      'author': [{ name: news.author }],
-      'wp:term': [[{ name: news.category, slug: news.categorySlug }]]
-    }
-  }));
-  return enrichPostsWithImages(formatted);
+  return allNews().slice(0, limit).map(normalize);
 }
 
 export async function getInterviewPosts(limit = 5) {
-  const all = await getPosts(100);
-  const interviews = all.filter((news: any) => 
-    news.categorySlug === 'entrevista' || 
-    news.categorySlug === 'entrevistas' || 
-    news.category === 'Agenda Voz'
-  );
-  return interviews.slice(0, limit);
+  return allNews().filter((n: any) => n.categorySlug === 'entrevista' || n.categorySlug === 'entrevistas' || n.category === 'Agenda Voz').slice(0, limit).map(normalize);
 }
 
 export async function getPostBySlug(slug: string) {
-  // Busca um lote amplo e sem cache para que cards recém-publicados abram
-  // imediatamente com o texto completo entregue pelo feed editorial.
-  const all = await fetchLiveNews(200);
-  if (all && all.length > 0) {
-    const post = all.find((item: any) => item.slug === slug);
-    return post ? enrichPostsWithImages(post) : null;
-  }
-  const staticNews = loadStaticNews();
-  const fallback = staticNews.find((item: any) => item.slug === slug);
-  return fallback ? enrichPostsWithImages(normalizeLovablePost(fallback)) : null;
+  const post = allNews().find((n: any) => n.slug === slug);
+  return post ? normalize(post) : null;
 }
 
 export async function getPostsByCategory(categoryId: number, limit = 4) {
@@ -284,13 +64,9 @@ export async function getPostsByCategory(categoryId: number, limit = 4) {
 }
 
 export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1) {
-  const all = await getPosts(100);
-  const filtered = all.filter((news: any) => {
-    if (slug === 'entrevista' || slug === 'entrevistas') {
-      return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
-    }
-    return news.categorySlug === slug;
+  const filtered = allNews().filter((n: any) => {
+    if (slug === 'entrevista' || slug === 'entrevistas') return n.categorySlug === 'entrevista' || n.categorySlug === 'entrevistas' || n.category === 'Agenda Voz';
+    return n.categorySlug === slug;
   });
-  return filtered.slice((page - 1) * limit, page * limit);
+  return filtered.slice((page - 1) * limit, page * limit).map(normalize);
 }
-// rebuild: 1785031220 restore-working-home-with-current-feed
