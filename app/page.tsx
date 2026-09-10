@@ -15,7 +15,7 @@ import InstagramVideoBanner from '@/components/common/InstagramVideoBanner';
 import SponsorBanner from '@/components/common/SponsorBanner';
 import TopStoryBanner from '@/components/common/TopStoryBanner';
 
-export const revalidate = 60;
+export const revalidate = 61;
 
 export default async function Home() {
   const feedPosts = await getPosts(150);
