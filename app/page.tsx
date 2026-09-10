@@ -35,20 +35,32 @@ export default async function Home() {
   const posts = [roneyPost, ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug)];
   const norm = (p: any) => `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const isMaceio = (p: any) => /maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p));
-  const isPolitica = (p: any) => p?.categorySlug === 'politica' || /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(norm(p));
+  const isPolitica = (p: any) => p?.categorySlug === 'politica' || /politica|lula|celina|michelle bolsonaro|leila|hermeto|paula belmonte|julio cesar|flavio bolsonaro|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(norm(p));
   const politicaPosts = posts.filter(isPolitica);
   const maceioPosts = posts.filter(isMaceio);
   const fotoRuim = (p: any) => !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  const obrigatorios = ['celina', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'jane'];
+  // Curadoria jornalística: personagens pedidos pela redação + manchetes gerais recentes.
+  const termosEditoriais = ['celina', 'michelle bolsonaro', 'leila', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'jane'];
   const base = posts.filter((p: any) => !fotoRuim(p));
   const destaques: any[] = [];
-  obrigatorios.forEach((nome) => {
-    const achado = base.find((p: any) => norm(p).includes(nome) && !destaques.includes(p));
+
+  termosEditoriais.forEach((termo) => {
+    const achado = base.find((p: any) => norm(p).includes(termo) && !destaques.includes(p));
     if (achado) destaques.push(achado);
   });
-  base.forEach((p: any) => { if (!destaques.includes(p)) destaques.push(p); });
-  const heroPosts = destaques.slice(0, 7);
+
+  const recentes = [...base].sort((a: any, b: any) => {
+    const da = new Date(a?.published_at || a?.created_at || a?.date || 0).getTime();
+    const db = new Date(b?.published_at || b?.created_at || b?.date || 0).getTime();
+    return db - da;
+  });
+
+  recentes.forEach((p: any) => {
+    if (!destaques.includes(p)) destaques.push(p);
+  });
+
+  const heroPosts = destaques.slice(0, 12);
 
   const categories: { title: string; category: string }[] = [
     { title: 'Política', category: 'politica' }, { title: 'Distrito Federal', category: 'distrito-federal' },
@@ -78,7 +90,7 @@ export default async function Home() {
         </div>
         <div className="mt-4"><HeroCarousel posts={heroPosts} /></div>
         <InstagramVideoBanner />
-        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={politicaPosts.length ? politicaPosts : posts} /></div></div>
+        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={posts} /></div></div>
         <div className="mt-4"><PremiumBanner variant={0} /></div>
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
