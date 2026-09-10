@@ -64,7 +64,7 @@ export default async function Home() {
     !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
   // Personagens obrigatorios: garantem uma manchete de cada no topo da capa.
- coconst obrigatorios = ['celina', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'dra. jane', 'doutora jane'];
+ const obrigatorios = ['celina', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'dra. jane', 'doutora jane'];
 
   const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
 
