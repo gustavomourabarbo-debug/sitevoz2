@@ -52,19 +52,27 @@ export default async function Home() {
 
   const isPolitica = (p: any) =>
     p?.categorySlug === 'politica' ||
-    /politica|lula|celina|hermeto|paula belmonte|julio cesar|flavio bolsonaro|leila|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(
+    /politica|lula|celina|michelle bolsonaro|julio cesar|flavio bolsonaro|leila|roney nemer|augusto cury|bolsonaro|caiado|zema|congresso|presidencia|eleicoes 2026|planalto|buriti/.test(
       norm(p),
     );
 
   const politicaPosts = posts.filter(isPolitica);
   const maceioPosts = posts.filter(isMaceio);
 
-  // Fotos ruins/recortadas nao entram no destaque principal
   const fotoRuim = (p: any) =>
     !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  // Personagens obrigatorios: garantem uma manchete de cada no topo da capa.
-  const obrigatorios = ['roney nemer', 'celina', 'paula belmonte', 'hermeto', 'julio cesar', 'lula', 'flavio bolsonaro', 'leila'];
+  // Ordem editorial da capa: uma matéria de cada personagem estratégico.
+  // Augusto Cury fica em superdestaque próprio logo acima deste carrossel.
+  const obrigatorios = [
+    'julio cesar',
+    'roney nemer',
+    'celina',
+    'leila',
+    'michelle bolsonaro',
+    'lula',
+    'flavio bolsonaro',
+  ];
 
   const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
 
@@ -77,7 +85,6 @@ export default async function Home() {
     if (!destaques.includes(p)) destaques.push(p);
   });
 
-  // Oito slides: personagens obrigatorios e manchetes politicas relevantes.
   const heroPosts = destaques.slice(0, 8);
 
   const categories: { title: string; category: string }[] = [
@@ -105,10 +112,10 @@ export default async function Home() {
 
           <div className="max-w-[1400px] mx-auto px-4">
             <TopStoryBanner
-              href="/noticia/analise-de-paulo-fayad-augusto-cury-e-o-nome-fora-do-ringue-que-pode-crescer-ass"
-              kicker="ANÁLISE DE PAULO FAYAD"
-              title="Augusto Cury é o nome fora do ringue que pode surpreender em 2026"
-              excerpt="Com apenas 35 segundos de TV, Augusto Cury (Avante) estreou sem atacar ninguém — e pode ser justamente isso que o fará crescer. Paulo Fayad analisa por que a candidatura do escritor é o maior ponto fora da curva da eleição."
+              href="/noticia/analise-profunda-paulo-fayad-augusto-cury-sera-o-proximo-presidente-do-brasil-e"
+              kicker="ANÁLISE DE PAULO FAYAD • VOZ DE BRASÍLIA VIU ANTES"
+              title="Augusto Cury cresce — e a aposta registrada pela Voz de Brasília ganha força"
+              excerpt="A Voz de Brasília acompanha Cury desde quando aparecia com apenas 2% nas pesquisas. Em 31 de agosto, Paulo Fayad registrou de forma explícita sua aposta: Cury pode romper a polarização e vencer a eleição no primeiro turno. Agora, com levantamentos colocando o candidato entre 8% e 11%, revisitamos a tese e acompanhamos os próximos movimentos da curva."
               image="https://s2-g1.glbimg.com/4osiPZSqBjvajoKfPeoB7JFXcjs=/1315x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/g/KqdAvmQ1AwgklqqQ0Kug/cury-avante.jpg"
             />
           </div>
@@ -148,7 +155,6 @@ export default async function Home() {
           <SponsorBanner sponsor="lunardi" />
         </div>
 
-        {/* Grid principal: categorias densas + sidebar */}
         <div className="max-w-[1400px] mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-10">
