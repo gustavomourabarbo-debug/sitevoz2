@@ -9,232 +9,63 @@ const fetchHeaders = {
 };
 
 const categoryPlaceholders: Record<string, string[]> = {
-  politica: [
-    'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1620216525890-ffb8cf0f2bfb?w=800&auto=format&fit=crop&q=80',
-  ],
-  'distrito-federal': [
-    'https://images.unsplash.com/photo-1600320844655-46b5d92823b2?w=800&auto=format&fit=crop&q=80',
-  ],
-  turismo: [
-    'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop&q=80'
-  ],
-  gastronomia: [
-    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80'
-  ],
-  saude: [
-    'https://images.unsplash.com/photo-1584515901387-a7a1a6337627?w=800&auto=format&fit=crop&q=80'
-  ],
-  tecnologia: [
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80'
-  ],
-  esportes: [
-    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80'
-  ],
-  economia: [
-    'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&auto=format&fit=crop&q=80'
-  ],
-  'meio-ambiente': [
-    'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&auto=format&fit=crop&q=80'
-  ],
-  internacional: [
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80'
-  ],
-  cultura: [
-    'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&auto=format&fit=crop&q=80'
-  ],
-  general: [
-    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'
-  ],
+  politica: ['https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&auto=format&fit=crop&q=80'],
+  'distrito-federal': ['https://images.unsplash.com/photo-1600320844655-46b5d92823b2?w=800&auto=format&fit=crop&q=80'],
+  turismo: ['https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format&fit=crop&q=80'],
+  gastronomia: ['https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=80'],
+  saude: ['https://images.unsplash.com/photo-1584515901387-a7a1a6337627?w=800&auto=format&fit=crop&q=80'],
+  tecnologia: ['https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80'],
+  esportes: ['https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80'],
+  economia: ['https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&auto=format&fit=crop&q=80'],
+  'meio-ambiente': ['https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&auto=format&fit=crop&q=80'],
+  internacional: ['https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80'],
+  cultura: ['https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&auto=format&fit=crop&q=80'],
+  general: ['https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'],
 };
 
 const categoryNames: Record<string, string> = {
-  politica: 'Política',
-  'distrito-federal': 'Distrito Federal',
-  turismo: 'Turismo',
-  gastronomia: 'Gastronomia',
-  saude: 'Saúde',
-  tecnologia: 'Tecnologia',
-  esportes: 'Esportes',
-  economia: 'Economia',
-  'meio-ambiente': 'Meio Ambiente',
-  internacional: 'Internacional',
-  cultura: 'Cultura',
+  politica: 'Política', 'distrito-federal': 'Distrito Federal', turismo: 'Turismo', gastronomia: 'Gastronomia',
+  saude: 'Saúde', tecnologia: 'Tecnologia', esportes: 'Esportes', economia: 'Economia',
+  'meio-ambiente': 'Meio Ambiente', internacional: 'Internacional', cultura: 'Cultura',
 };
 
 const categoryColors: Record<string, string> = {
-  politica: 'bg-red-600',
-  'distrito-federal': 'bg-blue-600',
-  turismo: 'bg-green-600',
-  gastronomia: 'bg-orange-500',
-  saude: 'bg-purple-600',
-  tecnologia: 'bg-blue-500',
-  esportes: 'bg-orange-600',
-  economia: 'bg-yellow-600',
-  'meio-ambiente': 'bg-green-700',
-  internacional: 'bg-indigo-600',
-  cultura: 'bg-pink-600',
+  politica: 'bg-red-600', 'distrito-federal': 'bg-blue-600', turismo: 'bg-green-600', gastronomia: 'bg-orange-500',
+  saude: 'bg-purple-600', tecnologia: 'bg-blue-500', esportes: 'bg-orange-600', economia: 'bg-yellow-600',
+  'meio-ambiente': 'bg-green-700', internacional: 'bg-indigo-600', cultura: 'bg-pink-600',
 };
 
-/*
- * CORREÇÕES MANUAIS DE IMAGENS
- *
- * Michelle Bolsonaro:
- * imagem oficial da campanha.
- *
- * Lula x Flávio:
- * imagem da matéria do SBT News.
- *
- * Defesa Civil / misantropia:
- * imagem correspondente ao alerta falso.
- */
 function getImageOverride(item: any): string {
-  const rawTitle =
-    item?.title?.rendered ||
-    item?.title ||
-    item?.titulo ||
-    '';
-
+  const rawTitle = item?.title?.rendered || item?.title || item?.titulo || '';
   const slug = String(item?.slug || '');
-
   const text = `${rawTitle} ${slug}`.toLowerCase();
-
-  // Michelle Bolsonaro
-  if (
-    text.includes('michelle bolsonaro') &&
-    (
-      text.includes('senado') ||
-      text.includes('reta decisiva') ||
-      text.includes('liderança') ||
-      text.includes('lideranca')
-    )
-  ) {
-    return 'https://michellebolsonaro222.com.br/wp-content/uploads/2026/08/MICHELLE-ISOLATED-634x1024.webp';
-  }
-
-  // Datafolha - Lula x Flávio Bolsonaro
-  if (
-    text.includes('datafolha') &&
-    text.includes('lula') &&
-    (
-      text.includes('flávio') ||
-      text.includes('flavio')
-    )
-  ) {
-    return 'https://sbt-news-assets-prod.s3.sa-east-1.amazonaws.com/lula_flavio_1_444b28cbc9.jpg';
-  }
-
-  // Alerta falso da Defesa Civil / misantropia
-  if (
-    text.includes('misantropia') &&
-    text.includes('defesa civil')
-  ) {
-    return 'https://classic.exame.com/wp-content/uploads/2026/06/alerta-extremo-misantropia-defesa-civil.png?ims=750x%2Ffilters%3Aquality%2885%29%3Aformat%28webp%29';
-  }
-
+  if (text.includes('michelle bolsonaro') && (text.includes('senado') || text.includes('reta decisiva') || text.includes('liderança') || text.includes('lideranca'))) return 'https://michellebolsonaro222.com.br/wp-content/uploads/2026/08/MICHELLE-ISOLATED-634x1024.webp';
+  if (text.includes('datafolha') && text.includes('lula') && (text.includes('flávio') || text.includes('flavio'))) return 'https://sbt-news-assets-prod.s3.sa-east-1.amazonaws.com/lula_flavio_1_444b28cbc9.jpg';
+  if (text.includes('misantropia') && text.includes('defesa civil')) return 'https://classic.exame.com/wp-content/uploads/2026/06/alerta-extremo-misantropia-defesa-civil.png?ims=750x%2Ffilters%3Aquality%2885%29%3Aformat%28webp%29';
   return '';
 }
 
 export function decodeHtml(text: string): string {
   if (!text) return '';
-
-  return text
-    .replace(/&hellip;/g, '…')
-    .replace(/&#8230;/g, '…')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/<[^>]+>/g, '')
-    .trim();
+  return text.replace(/&hellip;/g, '…').replace(/&#8230;/g, '…').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/<[^>]+>/g, '').trim();
 }
 
 function normalizeLovablePost(item: any) {
-  const categorySlug =
-    item.categorySlug ||
-    item.category_slug ||
-    'distrito-federal';
-
-  const category =
-    item.category ||
-    categoryNames[categorySlug] ||
-    'Notícias';
-
-  const featured =
-    getImageOverride(item) ||
-    item.featured_image ||
-    item.imagem_url ||
-    categoryPlaceholders[categorySlug]?.[0] ||
-    categoryPlaceholders.general[0];
-
+  const categorySlug = item.categorySlug || item.category_slug || 'distrito-federal';
+  const category = item.category || categoryNames[categorySlug] || 'Notícias';
+  const featured = getImageOverride(item) || item.featured_image || item.imagem_url || categoryPlaceholders[categorySlug]?.[0] || categoryPlaceholders.general[0];
   return {
-    ...item,
-
-    id: item.id,
-
-    slug: item.slug,
-
-    title: {
-      rendered:
-        item.title?.rendered ||
-        item.title ||
-        item.titulo ||
-        ''
-    },
-
-    content: {
-      rendered:
-        item.content?.rendered ||
-        item.content ||
-        item.texto ||
-        ''
-    },
-
-    excerpt: {
-      rendered:
-        item.excerpt?.rendered ||
-        item.excerpt ||
-        item.resumo ||
-        ''
-    },
-
-    date:
-      item.date ||
-      item.published_at ||
-      item.enviado_em ||
-      item.created_at,
-
-    featured_image: featured,
-
-    categorySlug,
-
-    category,
-
-    categoryColor:
-      item.categoryColor ||
-      categoryColors[categorySlug] ||
-      'bg-blue-600',
-
+    ...item, id: item.id, slug: item.slug,
+    title: { rendered: item.title?.rendered || item.title || item.titulo || '' },
+    content: { rendered: item.content?.rendered || item.content || item.texto || '' },
+    excerpt: { rendered: item.excerpt?.rendered || item.excerpt || item.resumo || '' },
+    date: item.date || item.published_at || item.enviado_em || item.created_at,
+    featured_image: featured, categorySlug, category,
+    categoryColor: item.categoryColor || categoryColors[categorySlug] || 'bg-blue-600',
     _embedded: item._embedded || {
-      'wp:featuredmedia': [
-        {
-          source_url: featured
-        }
-      ],
-
-      author: [
-        {
-          name: item.author || 'Paulo Fayad'
-        }
-      ],
-
-      'wp:term': [
-        [
-          {
-            name: category,
-            slug: categorySlug
-          }
-        ]
-      ],
+      'wp:featuredmedia': [{ source_url: featured }],
+      author: [{ name: item.author || 'Paulo Fayad' }],
+      'wp:term': [[{ name: category, slug: categorySlug }]],
     },
   };
 }
@@ -242,100 +73,36 @@ function normalizeLovablePost(item: any) {
 function enrichPostsWithImages(posts: any) {
   const enrich = (post: any) => {
     if (!post) return post;
-
     const p = normalizeLovablePost(post);
-
-    if (!p._embedded) {
-      p._embedded = {};
-    }
-
-    if (!p._embedded['wp:featuredmedia']) {
-      p._embedded['wp:featuredmedia'] = [{}];
-    }
-
-    if (!p._embedded['wp:featuredmedia'][0]) {
-      p._embedded['wp:featuredmedia'][0] = {};
-    }
-
-    /*
-     * Garante que a imagem corrigida também seja usada
-     * pelos componentes que leem wp:featuredmedia.
-     */
-    p._embedded['wp:featuredmedia'][0].source_url =
-      p.featured_image;
-
+    if (!p._embedded) p._embedded = {};
+    if (!p._embedded['wp:featuredmedia']) p._embedded['wp:featuredmedia'] = [{}];
+    if (!p._embedded['wp:featuredmedia'][0]) p._embedded['wp:featuredmedia'][0] = {};
+    p._embedded['wp:featuredmedia'][0].source_url = p.featured_image;
     return p;
   };
-
-  return Array.isArray(posts)
-    ? posts.map(enrich)
-    : enrich(posts);
+  return Array.isArray(posts) ? posts.map(enrich) : enrich(posts);
 }
 
-async function fetchLiveNews(
-  limit = 12
-): Promise<any[] | null> {
+async function fetchLiveNews(limit = 12): Promise<any[] | null> {
   try {
-    const res = await fetch(
-      `${LOVABLE_FEED}?limit=${limit}`,
-      {
-        method: 'GET',
-        headers: fetchHeaders,
-        cache: 'no-store'
-      } as any
-    );
-
-    if (!res.ok) {
-      return null;
-    }
-
+    const res = await fetch(`${LOVABLE_FEED}?limit=${limit}`, { method: 'GET', headers: fetchHeaders, cache: 'no-store' } as any);
+    if (!res.ok) return null;
     const data = await res.json();
-
-    const items = Array.isArray(data)
-      ? data
-      : data.items;
-
-    if (!Array.isArray(items)) {
-      return null;
-    }
-
+    const items = Array.isArray(data) ? data : data.items;
+    if (!Array.isArray(items)) return null;
     return items.map(normalizeLovablePost);
-
-  } catch (err) {
-    console.error(
-      'Error fetching live news:',
-      err
-    );
-
-    return null;
-  }
+  } catch (err) { console.error('Error fetching live news:', err); return null; }
 }
 
 function loadStaticNews(): any[] {
   try {
-    const localNews =
-      require('../public/data/news.json');
-
-    return Array.isArray(localNews)
-      ? localNews.map(normalizeLovablePost)
-      : [];
-
-  } catch (err) {
-    console.error(
-      'Error loading static news:',
-      err
-    );
-
-    return [];
-  }
+    const localNews = require('../public/data/news.json');
+    return Array.isArray(localNews) ? localNews.map(normalizeLovablePost) : [];
+  } catch (err) { console.error('Error loading static news:', err); return []; }
 }
 
 function byDateDesc(items: any[]) {
-  return [...items].sort((a, b) => {
-    const da = new Date(a?.published_at || a?.created_at || a?.date || 0).getTime();
-    const db = new Date(b?.published_at || b?.created_at || b?.date || 0).getTime();
-    return db - da;
-  });
+  return [...items].sort((a, b) => new Date(b?.published_at || b?.created_at || b?.date || 0).getTime() - new Date(a?.published_at || a?.created_at || a?.date || 0).getTime());
 }
 
 function mergeManual(items: any[]) {
@@ -344,92 +111,35 @@ function mergeManual(items: any[]) {
   return byDateDesc([...manual, ...items.filter((p: any) => !slugs.has(p.slug))]);
 }
 
-  const slugs = new Set(
-    manual.map((p: any) => p.slug)
-  );
-
-  return [
-    ...manual,
-    ...items.filter(
-      (p: any) => !slugs.has(p.slug)
-    )
-  ];
+export async function getPosts(limit = 12) {
+  const live = await fetchLiveNews(Math.max(limit, 150));
+  const source = live && live.length > 0 ? live : loadStaticNews();
+  return enrichPostsWithImages(mergeManual(source).slice(0, limit));
 }
 
-export async function getPosts(
-  limit = 12
-) {
-  const live =
-    await fetchLiveNews(
-      Math.max(limit, 150)
-    );
-
-  const source =
-    live && live.length > 0
-      ? live
-      : loadStaticNews();
-
-  return enrichPostsWithImages(
-    mergeManual(source).slice(0, limit)
-  );
-}
-
-export async function getInterviewPosts(
-  limit = 5
-) {
-  const all =
-    await getPosts(150);
-
-  const interviews =
-    all.filter((news: any) =>
-      news.categorySlug === 'entrevista' ||
-      news.categorySlug === 'entrevistas' ||
-      news.category === 'Agenda Voz'
-    );
-
-  return interviews.slice(0, limit);
+export async function getInterviewPosts(limit = 5) {
+  const all = await getPosts(150);
+  return all.filter((news: any) => news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz').slice(0, limit);
 }
 
 export async function getPostBySlug(slug: string) {
   const manual = [...manualDaily1209, ...manualPolitica1109].find((item: any) => item.slug === slug);
   if (manual) return enrichPostsWithImages(manual);
-
+  const all = await fetchLiveNews(150);
   if (all && all.length > 0) {
-    const post =
-      all.find(
-        (item: any) =>
-          item.slug === slug
-      );
-
-    if (post) {
-      return enrichPostsWithImages(post);
-    }
+    const post = all.find((item: any) => item.slug === slug);
+    if (post) return enrichPostsWithImages(post);
   }
-
-  const fallback =
-    loadStaticNews().find(
-      (item: any) =>
-        item.slug === slug
-    );
-
-  return fallback
-    ? enrichPostsWithImages(fallback)
-    : null;
+  const fallback = loadStaticNews().find((item: any) => item.slug === slug);
+  return fallback ? enrichPostsWithImages(fallback) : null;
 }
 
-export async function getPostsByCategory(
-  categoryId: number,
-  limit = 4
-) {
-  return getPosts(limit);
-}
+export async function getPostsByCategory(categoryId: number, limit = 4) { return getPosts(limit); }
 
 export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1) {
   const all = await getPosts(150);
   const filtered = all.filter((news: any) => {
-    if (slug === 'entrevista' || slug === 'entrevistas') {
-      return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
-    }
+    if (slug === 'entrevista' || slug === 'entrevistas') return news.categorySlug === 'entrevista' || news.categorySlug === 'entrevistas' || news.category === 'Agenda Voz';
     return news.categorySlug === slug;
   });
   return filtered.slice((page - 1) * limit, page * limit).map(normalizeLovablePost);
