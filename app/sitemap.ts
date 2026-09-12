@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/lib/wordpress';
 
-export const dynamic = 'force-static';
+export const revalidate = 1800; // mapa do site regenerado a cada 30 min
 
 const BASE = 'https://www.vozdebrasilia.com.br';
 

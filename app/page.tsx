@@ -24,25 +24,59 @@ export default async function Home() {
   const roneyPost = {
     id: 'roney-nemer-2026-09-01',
     slug: 'roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
-    title: { rendered: 'Rôney Nemer volta à disputa distrital com experiência e propostas para Brasília' },
-    excerpt: { rendered: 'Candidato a deputado distrital pelo PP, número 11111, Rôney Nemer retorna à disputa eleitoral no Distrito Federal.' },
-    date: '2026-09-01T20:54:00-03:00', published_at: '2026-09-01T20:54:00-03:00', created_at: '2026-09-01T20:54:00-03:00',
-    category: 'Política', categorySlug: 'politica', categoryColor: 'bg-red-600',
-    featured_image: 'https://www.tribunapr.com.br/hermes-media/eleicoes/2026/candidatos/df/70002538503.jpg',
+    title: { rendered: 'Rôney Nemer: experiência e diálogo pelo Distrito Federal' },
+    excerpt: { rendered: 'Candidato a deputado distrital pelo PP, número 11111, Rôney Nemer retorna à disputa eleitoral com uma trajetória construída na administração pública, no Legislativo e nas comunidades de Brasília.' },
+    date: '2026-09-02T07:45:00-03:00',
+    published_at: '2026-09-02T07:45:00-03:00',
+    created_at: '2026-09-02T07:45:00-03:00',
+    category: 'Política',
+    categorySlug: 'politica',
+    categoryColor: 'bg-red-600',
+    featured_image: 'https://dados.agenciasertao.com/json/v1/eleicoes/2026/fotos/70002538503.jpg',
     href: '/noticia/roney-nemer-volta-disputa-distrital-experiencia-propostas-brasilia',
   };
 
-  const posts = [roneyPost, ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug)];
-  const norm = (p: any) => `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const isMaceio = (p: any) => /maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p));
-  const isPolitica = (p: any) => p?.categorySlug === 'politica' || /politica|lula|celina|michelle bolsonaro|leila|hermeto|paula belmonte|julio cesar|flavio bolsonaro|roney nemer|tarcisio|bolsonaro|caiado|zema|ciro gomes|ratinho|congresso|presidenciav|eleicoes 2026|planalto|buriti/.test(norm(p));
+  const posts = [
+    roneyPost,
+    ...feedPosts.filter((p: any) => p?.slug !== roneyPost.slug),
+  ];
+
+  const norm = (p: any) =>
+    `${p?.title?.rendered ?? ''} ${p?.excerpt?.rendered ?? ''} ${p?.category ?? ''} ${p?.categorySlug ?? ''}`
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+
+  const isMaceio = (p: any) =>
+    /maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p));
+
+  const isPolitica = (p: any) =>
+    p?.categorySlug === 'politica' ||
+    /politica|lula|celina|michelle bolsonaro|julio cesar|flavio bolsonaro|leila|roney nemer|augusto cury|bolsonaro|caiado|zema|congresso|presidencia|eleicoes 2026|planalto|buriti/.test(
+      norm(p),
+    );
+
   const politicaPosts = posts.filter(isPolitica);
   const maceioPosts = posts.filter(isMaceio);
   const fotoRuim = (p: any) => !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  // Curadoria jornalística: personagens pedidos pela redação + manchetes gerais recentes.
-  const termosEditoriais = ['celina', 'michelle bolsonaro', 'leila', 'lula', 'flavio bolsonaro', 'augusto cury', 'julio cesar', 'roney nemer', 'jane'];
-  const base = posts.filter((p: any) => !fotoRuim(p));
+  const fotoRuim = (p: any) =>
+    !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
+
+  // Ordem editorial da capa: uma matéria de cada personagem estratégico.
+  // Augusto Cury fica em superdestaque próprio logo acima deste carrossel.
+  const obrigatorios = [
+    'julio cesar',
+    'roney nemer',
+    'celina',
+    'leila',
+    'michelle bolsonaro',
+    'lula',
+    'flavio bolsonaro',
+  ];
+
+  const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
+
   const destaques: any[] = [];
 
   termosEditoriais.forEach((termo) => {
@@ -60,7 +94,7 @@ export default async function Home() {
     if (!destaques.includes(p)) destaques.push(p);
   });
 
-  const heroPosts = destaques.slice(0, 12);
+  const heroPosts = destaques.slice(0, 8);
 
   const categories: { title: string; category: string }[] = [
     { title: 'Política', category: 'politica' }, { title: 'Distrito Federal', category: 'distrito-federal' },
@@ -79,11 +113,11 @@ export default async function Home() {
           <SponsorBanner sponsor="petrobras" />
           <div className="max-w-[1400px] mx-auto px-4">
             <TopStoryBanner
-              href="/noticia/fachin-suspende-decisoes-mendonca-dino-diretor-pf"
-              kicker="POLÍTICA"
-              title="Fachin suspende decisões de Mendonça e Dino sobre diretor da PF"
-              excerpt="Presidente do STF suspende decisões conflitantes sobre Andrei Rodrigues e convoca plenário extraordinário."
-              image="/news-images/senado.png"
+              href="/noticia/analise-profunda-paulo-fayad-augusto-cury-sera-o-proximo-presidente-do-brasil-e"
+              kicker="ANÁLISE DE PAULO FAYAD • VOZ DE BRASÍLIA VIU ANTES"
+              title="Augusto Cury cresce — e a aposta registrada pela Voz de Brasília ganha força"
+              excerpt="A Voz de Brasília acompanha Cury desde quando aparecia com apenas 2% nas pesquisas. Em 31 de agosto, Paulo Fayad registrou de forma explícita sua aposta: Cury pode romper a polarização e vencer a eleição no primeiro turno. Agora, com levantamentos colocando o candidato entre 8% e 11%, revisitamos a tese e acompanhamos os próximos movimentos da curva."
+              image="https://s2-g1.glbimg.com/4osiPZSqBjvajoKfPeoB7JFXcjs=/1315x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/g/KqdAvmQ1AwgklqqQ0Kug/cury-avante.jpg"
             />
           </div>
           <SponsorBanner sponsor="snaider" />
@@ -95,8 +129,15 @@ export default async function Home() {
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
         <MosaicHighlights posts={posts} />
-        <div className="mt-6 mb-2"><PremiumBanner variant={3} /></div>
-        <div className="mt-4 mb-2"><SponsorBanner sponsor="lunardi" /></div>
+
+        <div className="mt-6 mb-2">
+          <PremiumBanner variant={3} />
+        </div>
+
+        <div className="mt-4 mb-2">
+          <SponsorBanner sponsor="lunardi" />
+        </div>
+
         <div className="max-w-[1400px] mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-10">{categories.map((c) => (<CategoriesSection key={c.category} title={c.title} category={c.category} />))}</div>
