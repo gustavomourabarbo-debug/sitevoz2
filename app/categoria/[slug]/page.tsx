@@ -99,7 +99,7 @@ export default async function CategoriaPage({ params }: { params: { slug: string
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.map((post: any) => {
                 const titulo = post.title?.rendered?.replace(/<[^>]+>/g, '') || '';
-                const resumo = post.excerpt?.rendered?.replace(/<[^>]+>/g, '').trim() || '';
+                const resumo = String(post.excerpt?.rendered || post.excerpt || '').replace(/<[^>]+>/g, '').trim();
                 const imagem = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
                 const data = new Date(post.date).toLocaleDateString('pt-BR', {
                   day: 'numeric', month: 'short', year: 'numeric'
