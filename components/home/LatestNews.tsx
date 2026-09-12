@@ -3,52 +3,54 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Clock, TrendingUp } from 'lucide-react';
-import { getLatestNews, EnrichedNews } from '@/lib/news-service';
+import { getLatestNews } from '@/lib/news-service';
 import { supabase } from '@/lib/supabase';
 
 interface LatestNewsProps {
   posts?: any[];
 }
 
+const timestamp = (p: any) => {
+  const value = p?.published_at || p?.created_at || p?.date || 0;
+  const time = new Date(value).getTime();
+  return Number.isFinite(time) ? time : 0;
+};
 
-// Intercala as materias para nunca exibir duas fotos iguais lado a lado.
-function espacarPorImagem(lista: any[]): any[] {
-  const grupos = new Map<string, any[]>();
-  lista.forEach((p) => {
-    const k = String(p?.featured_image || p?.imagem_url || Math.random());
-    if (!grupos.has(k)) grupos.set(k, []);
-    grupos.get(k)!.push(p);
-  });
-  const filas = [...grupos.values()].sort((a, b) => b.length - a.length);
-  const out: any[] = [];
-  while (filas.some((f) => f.length)) {
-    for (const f of filas) if (f.length) out.push(f.shift());
-  }
-  return out;
+function ordenarRecentes(lista: any[]): any[] {
+  const vistos = new Set<string>();
+
+  return [...lista]
+    .filter((p) => {
+      const chave = String(p?.slug || p?.id || '');
+      if (!chave || vistos.has(chave)) return false;
+      vistos.add(chave);
+      return true;
+    })
+    .sort((a, b) => timestamp(b) - timestamp(a))
+    .slice(0, 30);
 }
 
 export default function LatestNews({ posts = [] }: LatestNewsProps) {
   const [offset, setOffset] = useState(0);
-  const [latestNews, setLatestNews] = useState<any[]>(posts);
+  const [latestNews, setLatestNews] = useState<any[]>(ordenarRecentes(posts));
   const [isLoading, setIsLoading] = useState(!posts || posts.length === 0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let active = true;
+
     async function loadNews() {
-      // Set static posts first
       if (posts && posts.length > 0) {
-        setLatestNews(posts);
+        setLatestNews(ordenarRecentes(posts));
         setIsLoading(false);
       }
 
-      // Try to fetch live news from Supabase
       if (supabase) {
         try {
           const { data, error } = await supabase
             .from('news')
             .select('*')
-            .order('published_at', { ascending: false });
+            .order('published_at', { ascending: false, nullsFirst: false });
 
           if (!error && data && data.length > 0 && active) {
             const formatted = data.map((item: any) => ({
@@ -58,35 +60,27 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
               content: { rendered: item.content },
               excerpt: { rendered: item.excerpt },
               date: item.published_at || item.created_at,
+              published_at: item.published_at,
+              created_at: item.created_at,
               category: item.category,
               categorySlug: item.categorySlug,
               categoryColor: item.categoryColor,
-              featured_image: item.featured_image
+              featured_image: item.featured_image,
             }));
 
-            // Merge live posts with fallback posts
-            const merged = [...formatted];
-            const slugs = new Set(merged.map(p => p.slug));
-            posts.forEach(p => {
-              if (!slugs.has(p.slug)) {
-                merged.push(p);
-              }
-            });
-
-            setLatestNews(merged);
+            setLatestNews(ordenarRecentes([...formatted, ...posts]));
             setIsLoading(false);
             return;
           }
         } catch (e) {
-          console.warn("Supabase load error, using fallbacks:", e);
+          console.warn('Supabase load error, using fallbacks:', e);
         }
       }
 
-      // Fallback if Supabase not configured or returns empty
       if ((!posts || posts.length === 0) && active) {
         try {
-          const data = await getLatestNews(10);
-          setLatestNews(data);
+          const data = await getLatestNews(30);
+          setLatestNews(ordenarRecentes(data));
         } catch (err) {
           console.error('Error fetching latest news:', err);
         } finally {
@@ -96,7 +90,9 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
     }
 
     loadNews();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [posts]);
 
   useEffect(() => {
@@ -144,24 +140,30 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
             width: `${latestNews.length * 2 * 280}px`,
           }}
         >
-          {(() => { const ordenadas = espacarPorImagem(latestNews); return [...ordenadas, ...ordenadas]; })().map((news, index) => (
+          {[...latestNews, ...latestNews].map((news, index) => (
             <Link
               key={`${news.id}-${index}`}
               href={`/noticia/${news.slug}`}
               className="group flex-shrink-0 w-[260px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-40 overflow-hidden bg-gray-100">
                 <div
                   className="w-full h-full bg-cover bg-[position:50%_22%] transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${news.featured_image})` }}
+                  style={{
+                    backgroundImage: news.featured_image
+                      ? `url(${news.featured_image})`
+                      : 'linear-gradient(135deg, #f3f4f6, #e5e7eb)',
+                  }}
                 />
-                <span className={`absolute top-2 left-2 ${news.categoryColor} text-white px-3 py-1 rounded-full text-xs font-semibold`}>
-                  {news.category}
+                <span className={`absolute top-2 left-2 ${news.categoryColor || 'bg-red-600'} text-white px-3 py-1 rounded-full text-xs font-semibold`}>
+                  {news.category || 'Notícias'}
                 </span>
               </div>
               <div className="p-4">
                 <h3 className="font-bold text-gray-900 text-sm mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
-                  {typeof news.title === 'object' && news.title !== null ? (news.title.rendered || '').replace(/<[^>]+>/g, '') : news.title}
+                  {typeof news.title === 'object' && news.title !== null
+                    ? (news.title.rendered || '').replace(/<[^>]+>/g, '')
+                    : news.title}
                 </h3>
                 <div className="flex items-center gap-2 text-gray-500 text-xs">
                   <Clock className="w-3 h-3" />
@@ -177,4 +179,3 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
     </div>
   );
 }
-
