@@ -60,9 +60,7 @@ export default async function Home() {
   const maceioPosts = posts.filter(isMaceio);
   const fotoRuim = (p: any) => !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  const fotoRuim = (p: any) =>
-    !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
-
+  
   // Ordem editorial da capa: uma matéria de cada personagem estratégico.
   // Augusto Cury fica em superdestaque próprio logo acima deste carrossel.
   const obrigatorios = [
@@ -79,7 +77,7 @@ export default async function Home() {
 
   const destaques: any[] = [];
 
-  termosEditoriais.forEach((termo) => {
+  obrigatorios.forEach((termo) => {
     const achado = base.find((p: any) => norm(p).includes(termo) && !destaques.includes(p));
     if (achado) destaques.push(achado);
   });
