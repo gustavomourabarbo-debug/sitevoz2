@@ -22,8 +22,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: 'Notícia não encontrada — TV Voz de Brasília' };
-  const titulo = (post.title?.rendered || '').replace(/<[^>]+>/g, '');
-  const bruto = (post.excerpt?.rendered || post.content?.rendered || '').replace(/<[^>]+>/g, '').trim();
+  const titulo = String(post.title?.rendered || post.title || '').replace(/<[^>]+>/g, '');
+  const bruto = String(post.excerpt?.rendered || post.excerpt || post.content?.rendered || post.content || '').replace(/<[^>]+>/g, '').trim();
   const descricao = bruto.slice(0, 155);
   const imagem = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/og-image.jpg';
   const url = `https://www.vozdebrasilia.com.br/noticia/${params.slug}`;
@@ -73,7 +73,7 @@ export default async function NoticiaPage({
     );
   }
 
-  const titulo = post.title?.rendered?.replace(/<[^>]+>/g, '') || '';
+const titulo = String(post.title?.rendered || post.title || '').replace(/<[^>]+>/g, '');
   const conteudo = post.content?.rendered || '';
   const imagem =
     post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
