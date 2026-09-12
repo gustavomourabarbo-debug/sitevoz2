@@ -173,5 +173,5 @@ export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1)
     }
     return news.categorySlug === slug;
   });
-  return filtered.slice((page - 1) * limit, page * limit).map(normalizePost);
+  return filtered.slice((page - 1) * limit, page * limit).map(normalizeLovablePost);
 }
