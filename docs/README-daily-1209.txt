@@ -1,0 +1,1 @@
+Lote editorial de 12/09/2026 preparado automaticamente: 15 matérias, sendo 5 de Brasília/DF, 5 do Brasil e 5 do mundo, todas assinadas por Paulo Fayad e com análise autoral identificada.
