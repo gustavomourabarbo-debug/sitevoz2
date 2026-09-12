@@ -19,6 +19,7 @@ export default function Header() {
 
   const mainMenuItems = [
     { label: 'Início', href: '/' },
+    { label: 'Entrevistas', href: '/entrevistas' },
     { label: 'Vídeos Virais', href: '/videos' },
     { label: 'Política', href: '/categoria/politica' },
     { label: 'Distrito Federal', href: '/categoria/distrito-federal' },
@@ -64,42 +65,22 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             <Link href="/" className="flex items-center group">
-              <img
-                src="/logo.png?v=3"
-                alt="TV Voz de Brasília"
-                className="h-16 w-auto object-contain"
-              />
+              <img src="/logo.png?v=3" alt="TV Voz de Brasília" className="h-16 w-auto object-contain" />
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar notícias..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600 transition-colors">
-                  <Search className="w-5 h-5" />
-                </button>
+                <input type="text" placeholder="Buscar notícias..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600 transition-colors"><Search className="w-5 h-5" /></button>
               </div>
             </div>
 
-            <Link
-              href="/entrevistas"
-              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg"
-            >
+            <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
               <span className="font-semibold">Últimas Entrevistas</span>
             </Link>
 
-            <button
-              className="lg:hidden text-gray-700"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <button className="lg:hidden text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
           </div>
         </div>
 
@@ -107,13 +88,7 @@ export default function Header() {
           <div className="max-w-[1400px] mx-auto px-4">
             <div className="flex items-center gap-6 overflow-x-auto">
               {mainMenuItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="py-3 text-sm font-medium text-gray-700 hover:text-green-600 whitespace-nowrap border-b-2 border-transparent hover:border-green-600 transition-all"
-                >
-                  {item.label}
-                </Link>
+                <Link key={item.href} href={item.href} className="py-3 text-sm font-medium text-gray-700 hover:text-green-600 whitespace-nowrap border-b-2 border-transparent hover:border-green-600 transition-all">{item.label}</Link>
               ))}
             </div>
           </div>
@@ -122,29 +97,12 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-gray-200 bg-white">
             <div className="max-w-[1400px] mx-auto px-4 py-4">
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Buscar notícias..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-                />
-              </div>
+              <div className="mb-4"><input type="text" placeholder="Buscar notícias..." className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" /></div>
               <div className="space-y-2">
                 {mainMenuItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block py-2 text-gray-700 hover:text-green-600 font-medium"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  <Link key={item.href} href={item.href} className="block py-2 text-gray-700 hover:text-green-600 font-medium" onClick={() => setIsMobileMenuOpen(false)}>{item.label}</Link>
                 ))}
-                <Link
-                  href="/entrevistas"
-                  className="flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg justify-center mt-4"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
+                <Link href="/entrevistas" className="flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-lg justify-center mt-4" onClick={() => setIsMobileMenuOpen(false)}>
                   <Play className="w-4 h-4 fill-white" />
                   <span className="font-semibold">Últimas Entrevistas</span>
                 </Link>
@@ -153,7 +111,6 @@ export default function Header() {
           </div>
         )}
       </header>
-
       <div className="h-36"></div>
     </>
   );

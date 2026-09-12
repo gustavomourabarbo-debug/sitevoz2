@@ -1,5 +1,22 @@
 [
-  {
+ {
+  "id": "900001",
+  "title": "Flávio Dino suspende decisões e determina novas providências",
+  "slug": "flavio-dino-suspende-decisoes-e-determina-novas-providencias",
+  "content": "<p>O ministro Flávio Dino determinou a suspensão de decisões e novas providências no caso. A Voz de Brasília acompanha os desdobramentos e atualizará esta reportagem.</p>",
+  "excerpt": "Flávio Dino determina suspensão e novas providências. A Voz de Brasília acompanha os desdobramentos.",
+  "category": "Política",
+  "categorySlug": "politica",
+  "categoryColor": "bg-red-600",
+  "featured_image": "/news-images/senado.png",
+  "author": "Voz de Brasília",
+  "tags": [],
+  "status": "published",
+  "views": 0,
+  "published_at": "2026-09-09T21:30:00",
+  "created_at": "2026-09-09T21:30:00",
+  "updated_at": "2026-09-09T21:30:00"
+}, {
     "id": "48800",
     "title": "TV VOZ INTERNATIONAL OPENS NEW DIPLOMATIC NEWS SECTION IN BRASÍLIA",
     "slug": "tv-voz-international-opens-new-diplomatic-news-section-in-brasilia",

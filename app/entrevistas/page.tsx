@@ -1,162 +1,128 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Play, Clock, User } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { Play, ExternalLink } from 'lucide-react';
+
+const interviews = [
+  {
+    name: 'Leila do Vôlei',
+    eyebrow: 'ESPORTE, PODER E BRASÍLIA',
+    headline: 'LEILA DO VÔLEI SEM RODEIOS',
+    sub: 'Paulo Fayad conversa com Leila Barros sobre trajetória, Brasília e vida pública.',
+    image: 'https://legis.senado.leg.br/senadores/fotos-oficiais/5979',
+    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Leila%20do%20V%C3%B4lei%20Paulo%20Fayad',
+  },
+  {
+    name: 'Júlio César Ribeiro',
+    eyebrow: 'CONGRESSO EM FOCO',
+    headline: 'JÚLIO CÉSAR: PERGUNTAS DIRETAS',
+    sub: 'Uma conversa sobre mandato, prioridades e os temas que movimentam o Distrito Federal.',
+    image: 'https://www.camara.leg.br/internet/deputado/bandep/204372.jpg',
+    url: 'https://www.vozdebrasilia.com.br/entrevista-com-o-deputado-julio-cesar-jornalista-paulo-fayad/',
+  },
+  {
+    name: 'Rôney Nemer',
+    eyebrow: 'BRASÍLIA EM DEBATE',
+    headline: 'RÔNEY NEMER FALA SEM FILTRO',
+    sub: 'Paulo Fayad entrevista Rôney Nemer sobre experiência pública, Brasília e os desafios do DF.',
+    image: 'https://dados.agenciasertao.com/json/v1/eleicoes/2026/fotos/70002538503.jpg',
+    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Roney%20Nemer%20Paulo%20Fayad',
+  },
+  {
+    name: 'Erika Kokay',
+    eyebrow: 'POLÍTICA SEM ATALHOS',
+    headline: 'ERIKA KOKAY NO CENTRO DO DEBATE',
+    sub: 'A deputada federal conversa com Paulo Fayad sobre Congresso, Brasília e suas principais pautas.',
+    image: 'https://www.camara.leg.br/internet/deputado/bandep/160575.jpg',
+    url: 'https://www.vozdebrasilia.com.br/entrevista-com-a-deputada-federal-erika-kokay-apresentador-paulo-fayad/',
+  },
+  {
+    name: 'Izalci Lucas',
+    eyebrow: 'SENADO E DISTRITO FEDERAL',
+    headline: 'IZALCI LUCAS: CARA A CARA',
+    sub: 'Paulo Fayad conduz uma entrevista direta sobre política nacional e os rumos de Brasília.',
+    image: 'https://legis.senado.leg.br/senadores/fotos-oficiais/4770',
+    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Izalci%20Lucas%20Paulo%20Fayad',
+  },
+  {
+    name: 'Chico Vigilante',
+    eyebrow: 'CRÍTICAS, PROPOSTAS E DF',
+    headline: 'CHICO VIGILANTE ABRE O JOGO',
+    sub: 'Uma conversa franca com Paulo Fayad sobre gestão pública, trabalhadores e os desafios do DF.',
+    image: 'https://www.cl.df.gov.br/documents/10162/33185635/Chico%2BVigilante%2B-%2B2023-2026.jpg/b2187cf2-5479-e17f-861d-8212b201ac73?imageThumbnail=3&t=1740158439023',
+    url: 'https://www.vozdebrasilia.com.br/entrevista-com-deputado-distrital-chico-vigilante-apresentador-paulo-fayad/',
+  },
+  {
+    name: 'Dra. Jane',
+    eyebrow: 'SEGURANÇA, POLÍTICA E BRASÍLIA',
+    headline: 'DRA. JANE: SEM MEIAS PALAVRAS',
+    sub: 'Paulo Fayad conversa com a parlamentar sobre segurança pública, mandato e Distrito Federal.',
+    image: 'https://www.cl.df.gov.br/documents/10162/35054112/251107AP03A%280339%29.jpg/8770a532-8ee4-9628-2449-e3321d621290?version=1.0&t=1762532064071&download=true',
+    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Dra%20Jane%20Paulo%20Fayad',
+  },
+];
 
 export default function EntrevistasPage() {
-  const [interviews, setInterviews] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadInterviews() {
-      // 1. Load static fallback data first
-      let staticInterviews: any[] = [];
-      try {
-        const localNews = require('@/public/data/news.json');
-        staticInterviews = localNews.filter((news: any) => 
-          news.categorySlug === 'entrevista' || 
-          news.categorySlug === 'entrevistas' || 
-          news.category === 'Agenda Voz'
-        ).map((news: any) => ({
-          id: news.id,
-          slug: news.slug,
-          title: news.title,
-          content: news.content,
-          excerpt: news.excerpt,
-          date: new Date(news.published_at || news.created_at).toLocaleDateString('pt-BR'),
-          featured_image: news.featured_image || 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-          author: news.author || 'TV Voz de Brasília'
-        }));
-        setInterviews(staticInterviews);
-      } catch (err) {
-        console.error('Error loading static interviews:', err);
-      }
-
-      // 2. Fetch live interviews from Supabase
-      if (supabase) {
-        try {
-          const { data, error } = await supabase
-            .from('news')
-            .select('*')
-            .or('categoryslug.eq.entrevista,categoryslug.eq.entrevistas,category.eq.Agenda Voz,category.eq.Entrevista')
-            .order('published_at', { ascending: false });
-
-          if (!error && data && data.length > 0) {
-            const formatted = data.map((item: any) => ({
-              id: item.id,
-              slug: item.slug,
-              title: item.title,
-              content: item.content,
-              excerpt: item.excerpt,
-              date: new Date(item.published_at || item.created_at).toLocaleDateString('pt-BR'),
-              featured_image: item.featured_image || 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-              author: item.author || 'TV Voz de Brasília'
-            }));
-
-            // Merge dynamic and static, removing duplicates by slug
-            const merged = [...formatted];
-            const slugs = new Set(merged.map(p => p.slug));
-            staticInterviews.forEach(p => {
-              if (!slugs.has(p.slug)) {
-                merged.push(p);
-              }
-            });
-
-            setInterviews(merged);
-          }
-        } catch (e) {
-          console.warn('Error loading live interviews from Supabase:', e);
-        }
-      }
-      setIsLoading(false);
-    }
-
-    loadInterviews();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-zinc-950 text-white">
       <Header />
 
-      <main className="pt-24 pb-12">
-        <div className="max-w-[1400px] mx-auto px-4">
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center shadow-lg">
-                <Play className="w-8 h-8 text-white fill-white" />
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold text-gray-900">Entrevistas</h1>
-                <p className="text-gray-600 mt-1">Conversas aprofundadas com especialistas e autoridades</p>
-              </div>
+      <main className="pb-16">
+        <section className="bg-gradient-to-b from-zinc-900 to-zinc-950 border-b border-white/10">
+          <div className="max-w-[1400px] mx-auto px-4 py-12 md:py-16">
+            <div className="inline-flex items-center gap-2 bg-red-600 px-3 py-1 rounded-full text-xs font-black tracking-widest uppercase">
+              <Play className="w-3.5 h-3.5 fill-white" />
+              TV Voz de Brasília
             </div>
+            <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight max-w-5xl">
+              ENTREVISTAS DE PAULO FAYAD
+            </h1>
+            <p className="mt-4 text-zinc-300 text-lg max-w-3xl">
+              Entrevistas especiais da TV Voz de Brasília com lideranças do Distrito Federal e do Congresso Nacional.
+            </p>
           </div>
+        </section>
 
-          {isLoading && interviews.length === 0 ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {interviews.map((interview: any) => {
-                const titulo = interview.title || '';
-                const imagem = interview.featured_image;
-                const autor = interview.author;
-                const data = interview.date;
+        <section className="max-w-[1400px] mx-auto px-4 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {interviews.map((item) => (
+              <article key={item.name} className="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
+                <div className="relative h-[360px] overflow-hidden bg-black">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-block bg-red-600 text-white text-[11px] font-black tracking-widest px-3 py-1 uppercase rounded">
+                      {item.eyebrow}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <p className="text-white/80 text-sm font-bold uppercase tracking-wider">Entrevista • Paulo Fayad</p>
+                    <h2 className="mt-2 text-3xl font-black leading-[0.95] uppercase drop-shadow-lg">{item.headline}</h2>
+                  </div>
+                </div>
 
-                return (
-                  <Link
-                    key={interview.id}
-                    href={`/entrevista/${interview.slug}`}
-                    className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col justify-between"
+                <div className="p-6">
+                  <p className="text-zinc-300 leading-relaxed min-h-[72px]">{item.sub}</p>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 transition px-5 py-3 font-black"
                   >
-                    <div className="relative overflow-hidden">
-                      <div
-                        className="w-full h-48 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                        style={{ backgroundImage: `url(${imagem})` }}
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                            <Play className="w-8 h-8 text-white fill-white ml-1" />
-                          </div>
-                        </div>
-
-                        <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1">
-                          <Play className="w-3 h-3 fill-white" />
-                          AO VIVO
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4 flex-1 flex flex-col justify-between">
-                      <h3 className="font-bold text-gray-900 text-sm mb-3 line-clamp-2 group-hover:text-green-600 transition-colors leading-tight">
-                        {titulo}
-                      </h3>
-
-                      <div className="space-y-2">
-                        <div className="flex items-start gap-2">
-                          <User className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
-                          <p className="text-sm font-semibold text-gray-700 truncate">{autor}</p>
-                        </div>
-
-                        <div className="flex items-center gap-2 text-gray-500 text-xs">
-                          <Clock className="w-3 h-3" />
-                          <span>{data}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </div>
+                    <Play className="w-5 h-5 fill-white" />
+                    Assistir entrevista
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
 
       <Footer />

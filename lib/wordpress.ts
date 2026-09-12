@@ -57,18 +57,7 @@ const categoryColors: Record<string, string> = {
 
 export function decodeHtml(text: string): string {
   if (!text) return '';
-  return text
-    .replace(/&hellip;/g, '…')
-    .replace(/&#8230;/g, '…')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/<[^>]+>/g, '')
-    .trim();
+  return text.replace(/&hellip;/g, '…').replace(/&#8230;/g, '…').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/<[^>]+>/g, '').trim();
 }
 
 function normalizeLovablePost(item: any) {
@@ -184,5 +173,5 @@ export async function getPostsByCategorySlug(slug: string, limit = 20, page = 1)
     }
     return news.categorySlug === slug;
   });
-  return filtered.slice((page - 1) * limit, page * limit);
+  return filtered.slice((page - 1) * limit, page * limit).map(normalize);
 }
