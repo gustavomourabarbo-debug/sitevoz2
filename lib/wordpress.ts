@@ -23,6 +23,32 @@ const categoryPlaceholders: Record<string, string[]> = {
   general: ['https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop&q=80'],
 };
 
+const dailyImageOverrides: Record<string, string> = {
+  'df-hospital-base-66-anos-estrutura-alta-complexidade': 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=85',
+  'df-epig-fim-faixa-reversa-novo-acesso-sudoeste': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&auto=format&fit=crop&q=85',
+  'df-vacinacao-48-pontos-20-regioes': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=85',
+  'df-acolhimento-populacao-rua-plano-piloto-fim-semana': 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&auto=format&fit=crop&q=85',
+  'df-brb-fux-uniao-bc-emprestimo-6-bilhoes': 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&auto=format&fit=crop&q=85',
+  'brasil-inflacao-agosto-deflacao-032': 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&auto=format&fit=crop&q=85',
+  'brasil-tse-rejeita-registro-pablo-marcal': 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1200&auto=format&fit=crop&q=85',
+  'brasil-taxa-blusinhas-isencao-50-dolares': 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&auto=format&fit=crop&q=85',
+  'brasil-mendonca-sigilo-39-processos-stf': 'https://images.unsplash.com/photo-1589578527966-fdac0f44566c?w=1200&auto=format&fit=crop&q=85',
+  'brasil-sarampo-amazonas-tres-casos': 'https://images.unsplash.com/photo-1584362917165-526a968579e8?w=1200&auto=format&fit=crop&q=85',
+  'mundo-bukavu-incendio-criancas-unicef': 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1200&auto=format&fit=crop&q=85',
+  'mundo-cisjordania-830-mil-criancas-volta-aulas': 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&auto=format&fit=crop&q=85',
+  'mundo-guterres-modi-brics-conflitos-ia': 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=1200&auto=format&fit=crop&q=85',
+  'mundo-onu-propaganda-terrorista-digital': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&auto=format&fit=crop&q=85',
+  'mundo-clima-171-milhoes-estudantes-unicef': 'https://images.unsplash.com/photo-1569511166187-97eb6e387e19?w=1200&auto=format&fit=crop&q=85',
+};
+
+const deijaneteSlugs = new Set([
+  'mundo-bukavu-incendio-criancas-unicef',
+  'mundo-cisjordania-830-mil-criancas-volta-aulas',
+  'mundo-guterres-modi-brics-conflitos-ia',
+  'mundo-onu-propaganda-terrorista-digital',
+  'mundo-clima-171-milhoes-estudantes-unicef',
+]);
+
 const categoryNames: Record<string, string> = {
   politica: 'Política', 'distrito-federal': 'Distrito Federal', turismo: 'Turismo', gastronomia: 'Gastronomia',
   saude: 'Saúde', tecnologia: 'Tecnologia', esportes: 'Esportes', economia: 'Economia',
@@ -39,10 +65,23 @@ function getImageOverride(item: any): string {
   const rawTitle = item?.title?.rendered || item?.title || item?.titulo || '';
   const slug = String(item?.slug || '');
   const text = `${rawTitle} ${slug}`.toLowerCase();
+  if (dailyImageOverrides[slug]) return dailyImageOverrides[slug];
   if (text.includes('michelle bolsonaro') && (text.includes('senado') || text.includes('reta decisiva') || text.includes('liderança') || text.includes('lideranca'))) return 'https://michellebolsonaro222.com.br/wp-content/uploads/2026/08/MICHELLE-ISOLATED-634x1024.webp';
   if (text.includes('datafolha') && text.includes('lula') && (text.includes('flávio') || text.includes('flavio'))) return 'https://sbt-news-assets-prod.s3.sa-east-1.amazonaws.com/lula_flavio_1_444b28cbc9.jpg';
   if (text.includes('misantropia') && text.includes('defesa civil')) return 'https://classic.exame.com/wp-content/uploads/2026/06/alerta-extremo-misantropia-defesa-civil.png?ims=750x%2Ffilters%3Aquality%2885%29%3Aformat%28webp%29';
   return '';
+}
+
+function formatEditorialContent(content: string, slug: string): string {
+  if (!content) return '';
+  let result = content.replace(
+    /<p><strong>Fonte principal:<\/strong>(.*?)<\/p>/g,
+    '<p style="font-size:12px;line-height:1.45;color:#6b7280;margin-top:24px;margin-bottom:0"><strong style="font-weight:600">Fonte:</strong>$1</p>'
+  );
+  if (deijaneteSlugs.has(slug)) {
+    result = result.replace(/ANÁLISE DE PAULO FAYAD/g, 'ANÁLISE DE DEIJANETE FAYAD');
+  }
+  return result;
 }
 
 export function decodeHtml(text: string): string {
@@ -51,21 +90,27 @@ export function decodeHtml(text: string): string {
 }
 
 function normalizeLovablePost(item: any) {
+  const slug = String(item.slug || '');
   const categorySlug = item.categorySlug || item.category_slug || 'distrito-federal';
   const category = item.category || categoryNames[categorySlug] || 'Notícias';
   const featured = getImageOverride(item) || item.featured_image || item.imagem_url || categoryPlaceholders[categorySlug]?.[0] || categoryPlaceholders.general[0];
+  const author = deijaneteSlugs.has(slug) ? 'Deijanete Fayad' : (item.author || 'Paulo Fayad');
+  const content = formatEditorialContent(item.content?.rendered || item.content || item.texto || '', slug);
+  const embedded = item._embedded || {};
+
   return {
-    ...item, id: item.id, slug: item.slug,
+    ...item, id: item.id, slug,
     title: { rendered: item.title?.rendered || item.title || item.titulo || '' },
-    content: { rendered: item.content?.rendered || item.content || item.texto || '' },
+    content: { rendered: content },
     excerpt: { rendered: item.excerpt?.rendered || item.excerpt || item.resumo || '' },
     date: item.date || item.published_at || item.enviado_em || item.created_at,
-    featured_image: featured, categorySlug, category,
+    featured_image: featured, categorySlug, category, author,
     categoryColor: item.categoryColor || categoryColors[categorySlug] || 'bg-blue-600',
-    _embedded: item._embedded || {
-      'wp:featuredmedia': [{ source_url: featured }],
-      author: [{ name: item.author || 'Paulo Fayad' }],
-      'wp:term': [[{ name: category, slug: categorySlug }]],
+    _embedded: {
+      ...embedded,
+      'wp:featuredmedia': [{ ...(embedded['wp:featuredmedia']?.[0] || {}), source_url: featured }],
+      author: [{ ...(embedded.author?.[0] || {}), name: author }],
+      'wp:term': embedded['wp:term'] || [[{ name: category, slug: categorySlug }]],
     },
   };
 }
