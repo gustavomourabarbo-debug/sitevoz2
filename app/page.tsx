@@ -60,9 +60,6 @@ export default async function Home() {
   const maceioPosts = posts.filter(isMaceio);
   const fotoRuim = (p: any) => !p?.featured_image || /\.(gif)$/i.test(String(p.featured_image));
 
-  
-  // Ordem editorial da capa: uma matéria de cada personagem estratégico.
-  // Augusto Cury fica em superdestaque próprio logo acima deste carrossel.
   const obrigatorios = [
     'julio cesar',
     'roney nemer',
@@ -74,7 +71,6 @@ export default async function Home() {
   ];
 
   const base = (politicaPosts.length >= 3 ? politicaPosts : posts).filter((p: any) => !fotoRuim(p));
-
   const destaques: any[] = [];
 
   obrigatorios.forEach((termo) => {
@@ -111,11 +107,11 @@ export default async function Home() {
           <SponsorBanner sponsor="petrobras" />
           <div className="max-w-[1400px] mx-auto px-4">
             <TopStoryBanner
-              href="/noticia/analise-profunda-paulo-fayad-augusto-cury-sera-o-proximo-presidente-do-brasil-e"
-              kicker="ANÁLISE DE PAULO FAYAD • VOZ DE BRASÍLIA VIU ANTES"
-              title="Augusto Cury cresce — e a aposta registrada pela Voz de Brasília ganha força"
-              excerpt="A Voz de Brasília acompanha Cury desde quando aparecia com apenas 2% nas pesquisas. Em 31 de agosto, Paulo Fayad registrou de forma explícita sua aposta: Cury pode romper a polarização e vencer a eleição no primeiro turno. Agora, com levantamentos colocando o candidato entre 8% e 11%, revisitamos a tese e acompanhamos os próximos movimentos da curva."
-              image="https://s2-g1.glbimg.com/4osiPZSqBjvajoKfPeoB7JFXcjs=/1315x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/g/KqdAvmQ1AwgklqqQ0Kug/cury-avante.jpg"
+              href="https://portal.stf.jus.br/processos/detalhe.asp?incidente=7681133"
+              kicker="STF • JULGAMENTO DE HOJE"
+              title="STF julga hoje processo marcado para 15 de setembro"
+              excerpt="O Supremo Tribunal Federal incluiu o processo no calendário de julgamento desta terça-feira, 15 de setembro. O caso chega ao Plenário após decisões e movimentações recentes e concentra as atenções do cenário jurídico e político em Brasília."
+              image="/news-images/gavel.png"
             />
           </div>
           <SponsorBanner sponsor="snaider" />
@@ -127,15 +123,8 @@ export default async function Home() {
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
         <MosaicHighlights posts={posts} />
-
-        <div className="mt-6 mb-2">
-          <PremiumBanner variant={3} />
-        </div>
-
-        <div className="mt-4 mb-2">
-          <SponsorBanner sponsor="lunardi" />
-        </div>
-
+        <div className="mt-6 mb-2"><PremiumBanner variant={3} /></div>
+        <div className="mt-4 mb-2"><SponsorBanner sponsor="lunardi" /></div>
         <div className="max-w-[1400px] mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-10">{categories.map((c) => (<CategoriesSection key={c.category} title={c.title} category={c.category} />))}</div>
