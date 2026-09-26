@@ -68,6 +68,7 @@ export const metadata: Metadata = {
 };
 
 import Script from 'next/script';
+import TerracapBanner from '@/components/common/TerracapBanner';
 
 export default function RootLayout({
   children,
@@ -123,6 +124,7 @@ export default function RootLayout({
             gtag('config', 'G-YH9F8VLNCQ');
           `}
         </Script>
+        <TerracapBanner />
         {children}
       </body>
     </html>
