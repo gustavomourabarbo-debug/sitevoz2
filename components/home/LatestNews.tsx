@@ -143,7 +143,7 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
           {[...latestNews, ...latestNews].map((news, index) => (
             <Link
               key={`${news.id}-${index}`}
-              href={`/noticia/${news.slug}`}
+              href={news.href || `/noticia/${news.slug}`}
               className="group flex-shrink-0 w-[260px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
               <div className="relative h-40 overflow-hidden bg-gray-100">
