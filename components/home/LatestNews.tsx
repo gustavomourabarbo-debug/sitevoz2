@@ -10,6 +10,33 @@ interface LatestNewsProps {
   posts?: any[];
 }
 
+const categoryFallback: Record<string, string> = {
+  politica: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=900&auto=format&fit=crop&q=82',
+  'distrito-federal': 'https://images.unsplash.com/photo-1600320844655-46b5d92823b2?w=900&auto=format&fit=crop&q=82',
+  turismo: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=900&auto=format&fit=crop&q=82',
+  gastronomia: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&auto=format&fit=crop&q=82',
+  saude: 'https://images.unsplash.com/photo-1584515901387-a7a1a6337627?w=900&auto=format&fit=crop&q=82',
+  tecnologia: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&auto=format&fit=crop&q=82',
+  esportes: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&auto=format&fit=crop&q=82',
+  economia: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=900&auto=format&fit=crop&q=82',
+  internacional: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&auto=format&fit=crop&q=82',
+  cultura: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&auto=format&fit=crop&q=82',
+  noticias: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=82',
+};
+
+function imageFor(news: any) {
+  const direct = news?.featured_image || news?._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  if (direct) return direct;
+
+  const raw = String(news?.categorySlug || news?.category || 'noticias')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+
+  return categoryFallback[raw] || categoryFallback.noticias;
+}
+
 const timestamp = (p: any) => {
   const value = p?.published_at || p?.created_at || p?.date || 0;
   const time = new Date(value).getTime();
@@ -150,9 +177,7 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
                 <div
                   className="w-full h-full bg-cover bg-[position:50%_22%] transition-transform duration-300 group-hover:scale-110"
                   style={{
-                    backgroundImage: news.featured_image
-                      ? `url(${news.featured_image})`
-                      : 'linear-gradient(135deg, #f3f4f6, #e5e7eb)',
+                    backgroundImage: `url(${imageFor(news)})`,
                   }}
                 />
                 <span className={`absolute top-2 left-2 ${news.categoryColor || 'bg-red-600'} text-white px-3 py-1 rounded-full text-xs font-semibold`}>
