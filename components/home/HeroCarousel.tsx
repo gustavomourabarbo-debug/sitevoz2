@@ -8,7 +8,7 @@ import { supabase } from '@/lib/supabase';
 
 interface HeroCarouselProps { posts?: any[]; }
 
-const FALLBACK_IMAGE = 'https://www.camara.leg.br/internet/deputado/bandep/204374.jpg';
+const FALLBACK_IMAGE = '/og-image.jpg';
 
 export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -50,7 +50,8 @@ export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
   if (isLoading) return <div className="h-[500px] md:h-[600px] bg-gray-100 flex items-center justify-center"><div className="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin" /></div>;
   if (!heroNews.length) return null;
   const currentNews=heroNews[currentSlide];
-  const imageSrc=!imageFailed && currentNews?.featured_image ? currentNews.featured_image : FALLBACK_IMAGE;
+  const rawImage=!imageFailed && currentNews?.featured_image ? currentNews.featured_image : FALLBACK_IMAGE;
+  const imageSrc=rawImage?.startsWith('http') ? `/api/image?url=${encodeURIComponent(rawImage)}` : rawImage;
   const title=typeof currentNews.title==='object' ? currentNews.title?.rendered||'' : currentNews.title||'';
   const excerpt=typeof currentNews.excerpt==='object' ? currentNews.excerpt?.rendered||'' : currentNews.excerpt||'';
 
