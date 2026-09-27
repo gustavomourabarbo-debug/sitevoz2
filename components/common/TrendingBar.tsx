@@ -23,7 +23,7 @@ export default function TrendingBar({ posts = [] as any[] }) {
             {loop.map((p: any, idx: number) => (
               <Link
                 key={idx}
-                href={`/noticia/${p.slug}`}
+                href={p.href || `/noticia/${p.slug}`}
                 className="text-sm font-medium hover:text-yellow-200 transition-colors"
               >
                 <span className="opacity-70 mr-2">•</span>
