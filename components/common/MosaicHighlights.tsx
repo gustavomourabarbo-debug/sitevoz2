@@ -33,7 +33,7 @@ export default function MosaicHighlights({ posts = [] as any[] }) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           <Link
-            href={`/noticia/${big.slug}`}
+            href={big.href || `/noticia/${big.slug}`}
             className="group md:row-span-2 md:col-span-2 rounded-2xl overflow-hidden bg-gray-900 shadow-lg flex flex-col"
           >
             <div className="relative h-[220px] md:h-[380px] overflow-hidden bg-gray-900">
@@ -59,7 +59,7 @@ export default function MosaicHighlights({ posts = [] as any[] }) {
           {smalls.map((p: any, i: number) => (
             <Link
               key={i}
-              href={`/noticia/${p.slug}`}
+              href={p.href || `/noticia/${p.slug}`}
               className="group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-100"
             >
               <div className="relative h-40 overflow-hidden">
