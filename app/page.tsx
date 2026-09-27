@@ -20,16 +20,45 @@ export const revalidate = 61;
 
 export default async function Home() {
   const feedPosts = await getPosts(150); const interviews = await getInterviewPosts(40);
-  const today='2026-09-18T07:00:00-03:00';
-  const pesquisaPost={id:'datafolha-1809',slug:'datafolha-lula-flavio-1809',title:{rendered:'Datafolha: Lula tem 39% e Flávio Bolsonaro 36% no primeiro turno'},excerpt:{rendered:'Pesquisa divulgada nesta quinta-feira mostra os dois principais candidatos em empate técnico; no segundo turno, Lula aparece com 46% e Flávio com 44%.'},date:today,published_at:today,created_at:today,category:'Eleições 2026',categorySlug:'politica',categoryColor:'bg-red-700',featured_image:'https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg',href:'https://www1.folha.uol.com.br/poder/2026/09/datafolha-lula-e-flavio-bolsonaro-vao-intensificar-campanha-por-voto-util-para-tentar-vencer-no-1o-turno.shtml'};
-  const tsePost={id:'tse-1809',slug:'tse-registros-candidatura-1809',title:{rendered:'Justiça Eleitoral rejeita cerca de 1,2 mil registros de candidatura'},excerpt:{rendered:'TSE informa que 99% dos 20,9 mil pedidos apresentados para as eleições de outubro já foram analisados.'},date:today,published_at:today,created_at:today,category:'Eleições 2026',categorySlug:'politica',categoryColor:'bg-blue-700',featured_image:'https://agenciabrasil.ebc.com.br/sites/default/files/styles/1170x700/public/thumbnails/image/urna_eletronica_0.jpg',href:'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/justica-eleitoral-rejeita-cerca-de-12-mil-registros-de-candidatura'};
-  const selicPost={id:'selic-1809',slug:'selic-1375-1809',title:{rendered:'Selic cai para 13,75% ao ano após quinta redução consecutiva'},excerpt:{rendered:'Copom reduziu a taxa básica em 0,25 ponto percentual e reforçou cautela diante das incertezas no cenário externo.'},date:today,published_at:today,created_at:today,category:'Economia',categorySlug:'economia',categoryColor:'bg-green-700',featured_image:'https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/banco_central_3.jpg',href:'https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/bc-reduz-juros-basicos-para-1375-ao-ano'};
-  const cldfPost={id:'cldf-1809',slug:'cldf-novas-regioes-1809',title:{rendered:'CLDF aprova criação das regiões administrativas de 26 de Setembro e Ponte Alta'},excerpt:{rendered:'Deputados distritais aprovaram a criação das novas regiões administrativas e defenderam mais autonomia e investimentos locais.'},date:today,published_at:today,created_at:today,category:'Distrito Federal',categorySlug:'distrito-federal',categoryColor:'bg-green-700',featured_image:'https://www.cl.df.gov.br/documents/5744638/0/CLDF.jpg',href:'https://www.cl.df.gov.br/-/cldf-aprova-criacao-das-regioes-administrativas-de-26-de-setembro-e-ponte-alta'};
-  const paulaPost={id:'paula-1809',slug:'paula-belmonte-entrevista-tv-voz-2309',title:{rendered:'TV Voz de Brasília entrevista Paula Belmonte na quarta-feira, às 10h'},excerpt:{rendered:'Deputada participa de entrevista online e ao vivo em 23 de setembro. Foi à Voz de Brasília que ela revelou pela primeira vez sua candidatura ao Buriti.'},date:today,published_at:today,created_at:today,category:'Entrevista',categorySlug:'politica',categoryColor:'bg-green-700',featured_image:'https://www.cl.df.gov.br/documents/5744638/0/Paula+Belmonte.jpg',href:'https://www.vozdebrasilia.com.br/noticia/cafe-com-politica-paula-belmonte-participa-de-entrevista-ao-vivo-nesta-sexta-21',ctaLabel:'▶ Ver entrevista'};
-  const curyPost={id:'cury-1809',slug:'augusto-cury-programa-1809',title:{rendered:'Augusto Cury propõe mandato de oito anos no STF e semipresidencialismo'},excerpt:{rendered:'Programa de governo reúne 18 projetos e prevê mudanças institucionais, além da criação de uma diplomacia econômica.'},date:today,published_at:today,created_at:today,category:'Política',categorySlug:'politica',categoryColor:'bg-blue-700',featured_image:'https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/augusto_cury.jpg',href:'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/augusto-cury-propoe-mandato-de-oito-anos-no-stf-e-semipresidencialismo'};
-  const chuvaPost={id:'chuvas-1809',slug:'chuvas-sul-sudeste-1809',title:{rendered:'Inmet prevê retorno de chuvas ao Sul e Sudeste neste fim de semana'},excerpt:{rendered:'Mudança no padrão atmosférico favorece transporte de ar quente e úmido e aumenta as instabilidades a partir desta sexta-feira.'},date:today,published_at:today,created_at:today,category:'Brasil',categorySlug:'brasil',categoryColor:'bg-blue-700',featured_image:'https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/chuva_0.jpg',href:'https://agenciabrasil.ebc.com.br/geral/noticia/2026-09/inmet-preve-final-de-semana-de-chuvas-nas-regioes-sul-e-sudeste'};
-  const curated=[tsePost,selicPost,cldfPost,paulaPost,curyPost,chuvaPost];
-  const posts=[...curated,...feedPosts.filter((p:any)=>!['datafolha','tse','selic','cldf','paula-belmonte','augusto-cury'].some(n=>String(p?.slug||'').includes(n)))];
+  const curated = [
+    {
+      id: 'df-eleicoes-2609', slug: 'candidatos-governo-df-2609',
+      title: { rendered: 'Eleições 2026: veja os dez candidatos ao governo do DF' },
+      excerpt: { rendered: 'Agência Brasil apresenta os candidatos ao GDF. O Distrito Federal tem 2,25 milhões de eleitores aptos a votar.' },
+      date: '2026-09-26T08:15:00-03:00', published_at: '2026-09-26T08:15:00-03:00', created_at: '2026-09-26T08:15:00-03:00',
+      category: 'Distrito Federal', categorySlug: 'distrito-federal', categoryColor: 'bg-green-700',
+      featured_image: 'https://imagens.ebc.com.br/YtGwk6g4UzeH5Y4_0zzlhiMwqcs%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/24/candidatos_df.jpg?itok=H2MZ30-I',
+      href: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/eleicoes-2026-saiba-quem-sao-os-candidatos-ao-governo-do-df'
+    },
+    {
+      id: 'tse-local-2609', slug: 'tse-consulta-local-votacao-2609',
+      title: { rendered: 'Local de votação pode ter mudado; TSE orienta eleitor a consultar antes' },
+      excerpt: { rendered: 'A Justiça Eleitoral recomenda conferir zona e seção no e-Título ou no site do TSE antes do primeiro turno.' },
+      date: '2026-09-26T18:56:00-03:00', published_at: '2026-09-26T18:56:00-03:00', created_at: '2026-09-26T18:56:00-03:00',
+      category: 'Eleições 2026', categorySlug: 'politica', categoryColor: 'bg-blue-700',
+      featured_image: 'https://imagens.ebc.com.br/U_PXy6jnuNqefHh0JD_zxjCkvbw%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2024/09/03/0d7a0238.jpg?itok=PRL1g000',
+      href: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/eleitor-deve-se-antecipar-na-consulta-local-de-votacao-alerta-tse'
+    },
+    {
+      id: 'go-eleicoes-2609', slug: 'candidatos-governo-goias-2609',
+      title: { rendered: 'Goiás tem seis candidatos ao governo nas eleições de 2026' },
+      excerpt: { rendered: 'Mais de 5 milhões de eleitores estão aptos a votar no estado; confira os nomes na disputa.' },
+      date: '2026-09-26T08:30:00-03:00', published_at: '2026-09-26T08:30:00-03:00', created_at: '2026-09-26T08:30:00-03:00',
+      category: 'Política', categorySlug: 'politica', categoryColor: 'bg-green-700',
+      featured_image: 'https://imagens.ebc.com.br/7NvTHj9vzyl0Hp4wgfkuTtILGqY%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/09/24/candidatos_go.jpg?itok=jAUkvUUF',
+      href: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/conheca-os-candidatos-ao-governo-de-goias-nas-eleicoes-deste-ano'
+    },
+    {
+      id: 'agenda-presidencia-2609', slug: 'agenda-presidenciaveis-fim-semana-2609',
+      title: { rendered: 'Presidenciáveis têm caminhadas e encontros neste fim de semana' },
+      excerpt: { rendered: 'A agenda de 26 e 27 de setembro reúne atos de campanha em diferentes cidades do país.' },
+      date: '2026-09-26T09:45:00-03:00', published_at: '2026-09-26T09:45:00-03:00', created_at: '2026-09-26T09:45:00-03:00',
+      category: 'Brasil', categorySlug: 'politica', categoryColor: 'bg-blue-700',
+      featured_image: 'https://imagens.ebc.com.br/Qjn25j4kWuBB0OOSqVFyv-s7K54%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/08/18/banner_agenda_-_1170x700.png?itok=KJR_nOUL',
+      href: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-09/confira-agenda-dos-presidenciaveis-neste-fim-de-semana-26-e-27'
+    }
+  ];
+  const posts = [...curated, ...feedPosts.filter((p: any) => String(p?.published_at || p?.date || '').slice(0, 10) === '2026-09-26')];
   const norm=(p:any)=>`${p?.title?.rendered??''} ${p?.excerpt?.rendered??''} ${p?.category??''} ${p?.categorySlug??''}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const heroPosts:any[]=curated;
   const isMaceio=(p:any)=>/maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p)); const maceioPosts=posts.filter(isMaceio);
