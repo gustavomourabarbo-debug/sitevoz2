@@ -124,7 +124,6 @@ export default function RootLayout({
             gtag('config', 'G-YH9F8VLNCQ');
           `}
         </Script>
-        <TerracapBanner />
         {children}
         <TerracapBanner />
       </body>
