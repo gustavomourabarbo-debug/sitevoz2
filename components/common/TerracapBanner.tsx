@@ -5,7 +5,7 @@ export default function TerracapBanner() {
       <div className="max-w-[1400px] mx-auto px-2">
         <div className="text-[9px] uppercase tracking-[0.18em] text-gray-400 font-semibold mb-1">Publicidade</div>
         <a href={href} target="_blank" rel="noopener noreferrer sponsored" aria-label="Terracap - Edital 13/2026">
-          <img src="/anuncios/terracap-edital-13-2026.jpg" alt="Terracap - Edital 13/2026" width="1200" height="148" className="block w-full max-w-[1200px] h-auto mx-auto object-contain" />
+          <img src="/anuncios/terracap-edital-13-2026.jpg?v=20260927-original-2" alt="Terracap - Edital 13/2026" width="1200" height="148" className="block w-full max-w-[1200px] h-auto mx-auto object-contain" />
         </a>
       </div>
     </div>
