@@ -22,9 +22,9 @@ export async function GET(req: NextRequest) {
       headers: {
         'User-Agent': 'Mozilla/5.0',
         'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-        'Referer': 'https://agenciabrasil.ebc.com.br/',
+        'Referer': `${target.origin}/`,
       },
-      cache: 'force-cache',
+      cache: 'no-store',
     });
 
     if (!upstream.ok) {
