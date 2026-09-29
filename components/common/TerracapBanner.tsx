@@ -17,7 +17,7 @@ export default function TerracapBanner() {
           <img
             src="/anuncios/terracap-edital-13-2026.jpg?v=20260927-original-3"
             alt="Terracap - Edital 13/2026"
-            className="block w-full max-w-[1400px] h-auto mx-auto"
+            width="728" height="90" className="block w-full max-w-[728px] h-auto mx-auto"
           />
         </a>
       </div>
