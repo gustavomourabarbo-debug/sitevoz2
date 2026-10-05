@@ -130,7 +130,7 @@ function enrichPostsWithImages(posts: any) {
 
 async function fetchLiveNews(limit = 12): Promise<any[] | null> {
   try {
-    const res = await fetch(`${LOVABLE_FEED}?limit=${limit}`, { method: 'GET', headers: fetchHeaders, cache: 'no-store' } as any);
+    const res = await fetch(`${LOVABLE_FEED}?limit=${limit}`, { method: 'GET', headers: fetchHeaders, next: { revalidate: 120 } } as any);
     if (!res.ok) return null;
     const data = await res.json();
     const items = Array.isArray(data) ? data : data.items;
