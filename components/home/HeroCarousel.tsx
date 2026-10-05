@@ -51,7 +51,7 @@ export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
   if (!heroNews.length) return null;
   const currentNews=heroNews[currentSlide];
   const rawImage=!imageFailed && currentNews?.featured_image ? currentNews.featured_image : FALLBACK_IMAGE;
-  const imageSrc=rawImage?.startsWith('http') ? `/api/image?url=${encodeURIComponent(rawImage)}` : rawImage;
+  const imageSrc=rawImage;
   const title=typeof currentNews.title==='object' ? currentNews.title?.rendered||'' : currentNews.title||'';
   const excerpt=typeof currentNews.excerpt==='object' ? currentNews.excerpt?.rendered||'' : currentNews.excerpt||'';
 
@@ -59,7 +59,7 @@ export default function HeroCarousel({ posts = [] }: HeroCarouselProps) {
     <div className="max-w-[1400px] mx-auto px-4 py-8">
       <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white" onMouseEnter={()=>setIsPaused(true)} onMouseLeave={()=>setIsPaused(false)}>
         <div className="relative h-[300px] md:h-[460px] overflow-hidden bg-gray-100">
-          <img src={imageSrc} alt={title.replace(/<[^>]+>/g,'')} onError={()=>setImageFailed(true)} className={`absolute inset-0 w-full h-full ${currentNews?.heroFill ? "object-cover" : "object-contain"} bg-gray-950`} />
+          <img src={imageSrc} alt={title.replace(/<[^>]+>/g,'')} onError={()=>setImageFailed(true)} loading={currentSlide===0?'eager':'lazy'} fetchPriority={currentSlide===0?'high':'auto'} decoding="async" referrerPolicy="no-referrer" className={`absolute inset-0 w-full h-full ${currentNews?.heroFill ? "object-cover" : "object-contain"} bg-gray-950`} />
           <span className={`absolute top-4 left-4 ${currentNews.categoryColor||'bg-green-700'} text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg`}>{currentNews.category||'Notícias'}</span>
           {heroNews.length>1 && <>
             <button onClick={()=>setCurrentSlide(p=>(p-1+heroNews.length)%heroNews.length)} aria-label="Slide anterior" className="absolute z-10 top-1/2 -translate-y-1/2 left-4 bg-black/45 text-white p-3 rounded-full"><ChevronLeft className="w-6 h-6"/></button>
