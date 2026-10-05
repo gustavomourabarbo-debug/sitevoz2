@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     }
 
     const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent',
       {
         method: 'POST',
         headers: {
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       data: inline.data,
       mimeType: inline.mimeType || inline.mime_type || 'image/png',
-      model: 'gemini-2.5-flash-image',
+      model: 'gemini-3.1-flash-image',
     });
   } catch (error) {
     console.error('gemini image route failed', error);
