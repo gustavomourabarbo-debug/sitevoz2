@@ -38,14 +38,14 @@ const senateStateMedia = {"AC":["https://www12.senado.leg.br/noticias/materias/2
 
 const senateComposition = {"PL":28,"PT":9,"MDB":8,"UNIÃO":6,"PP":6,"PSD":5,"REPUBLICANOS":5,"PSB":4,"NOVO":3,"PSDB":2,"PODE":2,"REDE":1,"PDT":1,"SEM PARTIDO":1} as const;
 
-const chamberSeats = {"PL":121,"PT":70,"UNIÃO":46,"PSD":44,"PP":41,"REPUBLICANOS":40,"MDB":36,"PODE":27,"PSB":15,"PSOL":14,"PCDOB":11,"PSDB":11,"NOVO":10,"PV":7,"PDT":6,"AVANTE":5,"PRD":5,"SOLIDARIEDADE":2,"REDE":1,"MISSÃO":1};
-const stateSeats = {"PL":212,"PT":140,"MDB":112,"PSD":103,"PP":81,"REPUBLICANOS":78,"UNIÃO":73,"PODE":47,"PSB":42,"PSDB":26,"PSOL":26,"PDT":24,"PV":19,"AVANTE":18,"NOVO":15,"PRD":13,"PCDOB":9,"AGIR":7,"SOLIDARIEDADE":4,"REDE":3,"MOBILIZA":3,"CIDADANIA":1,"DEMOCRATA":1,"DC":1,"MISSÃO":1};
-const chamberVotes = {"PL":25810594,"PT":14766516,"PSD":9366830,"REPUBLICANOS":7897994,"MDB":7871625,"UNIÃO":7842417,"PP":7606554,"PODE":5885405,"PSOL":5294449,"PSB":4993699,"NOVO":2914103,"PSDB":2835498,"PDT":1864351,"AVANTE":1802254,"PV":1323310,"PCDOB":1303825,"MISSÃO":1223268,"PRD":1185329,"SOLIDARIEDADE":928852,"CIDADANIA":290668,"REDE":263327};
+const chamberSeats = {"PL":118,"PT":70,"UNIÃO":44,"PSD":42,"PP":41,"REPUBLICANOS":41,"MDB":36,"PODE":25,"PSB":15,"PSOL":14,"PCDOB":11,"PSDB":11,"NOVO":10,"PV":7,"PDT":6,"AVANTE":5,"PRD":5,"SOLIDARIEDADE":2,"REDE":1,"MISSÃO":1};
+const stateSeats = {"PL":212,"PT":141,"MDB":112,"PSD":103,"PP":81,"REPUBLICANOS":78,"UNIÃO":73,"PODE":47,"PSB":42,"PSDB":26,"PSOL":26,"PDT":24,"PV":19,"AVANTE":17,"NOVO":15,"PRD":13,"PCDOB":9,"AGIR":7,"SOLIDARIEDADE":4,"REDE":3,"MOBILIZA":3,"CIDADANIA":1,"DEMOCRATA":1,"DC":1,"MISSÃO":1};
+const chamberVotes = {"PL":25522991,"PT":14714709,"PSD":9290859,"MDB":7874420,"REPUBLICANOS":7842238,"UNIÃO":7737305,"PP":7587453,"PODE":5737207,"PSOL":5294044,"PSB":5006022,"NOVO":2905651,"PSDB":2839853,"PDT":1856310,"AVANTE":1801930,"PV":1324685,"PCDOB":1306312,"MISSÃO":1219306,"PRD":1158548,"SOLIDARIEDADE":921333,"CIDADANIA":291324,"REDE":263428,"DC":113362,"UP":45431,"MOBILIZA":34272,"DEMOCRATA":27195,"PSTU":18696,"AGIR":7155,"PCO":3041};
 
 const blocs = [
-  { title: 'Senado — votos agregados', total: 206758037, left: 66745547, center: 23448369, right: 116549457 },
-  { title: 'Deputado Federal — votos agregados', total: 113520964, left: 29873568, center: 20010956, right: 63633399 },
-  { title: 'Deputado Estadual/Distrital — votos agregados', total: 112582504, left: 30451469, center: 25916791, right: 56212561 },
+  { title: 'Senado — votos agregados', total: 207038240, left: 66891431, center: 23483656, right: 116648474 },
+  { title: 'Deputado Federal — votos agregados', total: 112745080, left: 29829637, center: 19929969, right: 62982433 },
+  { title: 'Deputado Estadual/Distrital — votos agregados', total: 112739225, left: 30514334, center: 25962504, right: 56260704 },
 ];
 
 const nf = new Intl.NumberFormat('pt-BR');
@@ -78,18 +78,19 @@ function Bars({data}:{data:Record<string,number>}) {
 }
 
 
-function PiePanel({title,right,center,left,total,foot}:{title:string;right:number;center:number;left:number;total:number;foot:string}) {
+function PiePanel({title,right,center,left,total,foot,other=0}:{title:string;right:number;center:number;left:number;total:number;foot:string;other?:number}) {
   const rp=right*100/total, cp=center*100/total, lp=left*100/total;
-  const a=rp, b=rp+cp;
+  const a=rp, b=rp+cp, c=b+lp;
   return <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
     <div className="text-lg font-black text-gray-900">{title}</div>
     <div className="mt-5 flex flex-col sm:flex-row items-center gap-6">
       <div className="w-48 h-48 rounded-full shadow-inner border-8 border-white"
-        style={{background:`conic-gradient(#1d4ed8 0 ${a}%, #c3921f ${a}% ${b}%, #be123c ${b}% 100%)`}} />
+        style={{background:`conic-gradient(#1d4ed8 0 ${a}%, #c3921f ${a}% ${b}%, #be123c ${b}% ${c}%, #64748b ${c}% 100%)`}} />
       <div className="space-y-3 min-w-[190px]">
         <div><span className="inline-block w-3 h-3 rounded-full bg-blue-700 mr-2"/><strong>Direita:</strong> {nf.format(right)} <span className="text-gray-500">({pct(right,total)})</span></div>
         <div><span className="inline-block w-3 h-3 rounded-full bg-amber-600 mr-2"/><strong>Centro:</strong> {nf.format(center)} <span className="text-gray-500">({pct(center,total)})</span></div>
         <div><span className="inline-block w-3 h-3 rounded-full bg-rose-700 mr-2"/><strong>Esquerda:</strong> {nf.format(left)} <span className="text-gray-500">({pct(left,total)})</span></div>
+        {other>0 && <div><span className="inline-block w-3 h-3 rounded-full bg-slate-500 mr-2"/><strong>Sem classificação:</strong> {nf.format(other)} <span className="text-gray-500">({pct(other,total)})</span></div>}
       </div>
     </div>
     <p className="mt-4 text-sm text-gray-600">{foot}</p>
@@ -242,16 +243,16 @@ export default function ElectionResultsPage() {
           <p className="mt-4 text-lg text-gray-600">A comparação abaixo junta cadeiras já distribuídas na Câmara, Assembleias/Câmara Distrital e uma projeção editorial do Senado de 81 cadeiras caso as duas primeiras posições de cada estado se confirmem.</p>
         </div>
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <PiePanel title="Câmara dos Deputados" right={302} center={87} left={124} total={513} foot="A direita passa de 58% das cadeiras nesta classificação editorial."/>
+          <PiePanel title="Câmara — 505 cadeiras atribuídas" right={296} center={85} left={124} total={505} foot="Na consulta desta manhã, MG e SP ainda não apareciam com totalização formal encerrada no arquivo do TSE; 8 cadeiras permaneciam fora deste recorte."/>
           <PiePanel title="Assembleias e Câmara Distrital" right={549} center={247} left={263} total={1059} foot="Nos Legislativos estaduais, a vantagem existe, mas é menos concentrada."/>
-          <PiePanel title="Senado projetado — 81 cadeiras" right={52} center={13} left={15} total={80} foot="Nesta classificação editorial, 52 cadeiras estão em partidos de direita, 13 no centro e 15 na esquerda; Romário aparece sem partido na projeção oficial. Mudanças partidárias e resultados de governos estaduais ainda podem alterar o quadro."/>
+          <PiePanel title="Senado projetado — 81 cadeiras" right={52} center={13} left={15} other={1} total={81} foot="Nesta classificação editorial, 52 cadeiras estão em partidos de direita, 13 no centro, 15 na esquerda e uma sem partido. Trocas partidárias, suplentes e o segundo turno estadual ainda podem alterar o quadro."/>
         </div>
       </section>
 
       <section className="max-w-[1400px] mx-auto px-4 py-12">
         <h2 className="text-3xl md:text-4xl font-black text-gray-900">Como o voto virou cadeira no Congresso</h2>
         <div className="mt-7 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"><h3 className="text-xl font-black mb-5">Câmara dos Deputados — 513 cadeiras</h3><Bars data={chamberSeats}/></div>
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"><h3 className="text-xl font-black mb-5">Câmara — 505 cadeiras atribuídas na consulta</h3><Bars data={chamberSeats}/></div>
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"><h3 className="text-xl font-black mb-5">Assembleias + Câmara Distrital — 1.059 cadeiras</h3><Bars data={stateSeats}/></div>
         </div>
       </section>
@@ -387,8 +388,8 @@ export default function ElectionResultsPage() {
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-amber-400 text-sm font-black uppercase tracking-[.18em]">Análise</div><h2 className="mt-2 text-3xl md:text-5xl font-black">Paulo Fayad: “O centro do poder político se deslocou”</h2>
           <div className="mt-6 space-y-5 text-lg leading-relaxed text-gray-200">
-            <p><strong className="text-amber-400">A Câmara saiu da eleição claramente deslocada para a direita.</strong> Pela classificação editorial adotada neste painel, partidos à direita somam 63,63 milhões de votos para deputado federal, contra 29,87 milhões da esquerda e 20,01 milhões do centro. Em cadeiras, a fotografia é de 302 vagas à direita, 124 à esquerda e 87 ao centro.</p>
-            <p><strong className="text-amber-400">O Senado é a peça que pode produzir a maior mudança institucional.</strong> Se as duas primeiras posições atuais se confirmarem e forem somadas às 27 cadeiras não renovadas nesta eleição, a projeção editorial chega a 53 senadores de partidos classificados à direita, 15 à esquerda e 13 ao centro. É uma composição capaz de mudar a relação com o STF, com o governo e com as indicações para cargos de Estado.</p>
+            <p><strong className="text-amber-400">A Câmara mostra forte vantagem dos partidos classificados à direita.</strong> Na consulta desta manhã, esses partidos somavam 62,98 milhões de votos para deputado federal, contra 29,83 milhões da esquerda e 19,93 milhões do centro. Das 505 cadeiras já atribuídas no recorte do TSE, 296 estavam à direita, 124 à esquerda e 85 ao centro; MG e SP ainda não apareciam formalmente encerrados no arquivo consultado.</p>
+            <p><strong className="text-amber-400">O Senado é a peça que pode produzir a maior mudança institucional.</strong> Se as duas primeiras posições atuais se confirmarem e forem somadas às 27 cadeiras não renovadas nesta eleição, a projeção editorial chega a 52 senadores em partidos classificados à direita, 15 à esquerda e 13 ao centro, além de uma cadeira sem partido. É uma composição capaz de mudar a relação com o STF, com o governo e com as indicações para cargos de Estado.</p>
             <p><strong className="text-amber-400">O centro continua decisivo.</strong> MDB, PSD e outros partidos de centro preservam capacidade de articulação. Em votações de maioria absoluta e quórum qualificado, esse campo pode definir o resultado.</p>
             <p><strong className="text-amber-400">Voto popular não é sinônimo automático de cadeira.</strong> Federações, quocientes e regras proporcionais mudam a tradução de votos em mandatos. Por isso é preciso olhar simultaneamente para votos, bancadas e capacidade de formar maioria.</p>
           </div>
