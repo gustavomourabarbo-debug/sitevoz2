@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
         'Referer': `${target.origin}/`,
       },
-      cache: 'no-store',
+      cache: 'force-cache',
     });
 
     if (!upstream.ok) {
