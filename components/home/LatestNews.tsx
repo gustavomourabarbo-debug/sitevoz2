@@ -70,6 +70,7 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
       if (posts && posts.length > 0) {
         setLatestNews(ordenarRecentes(posts));
         setIsLoading(false);
+        return;
       }
 
       if (supabase) {
