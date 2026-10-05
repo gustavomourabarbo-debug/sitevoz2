@@ -29,7 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const estaticas: MetadataRoute.Sitemap = [
-    { url: `${BASE}/`, lastModified: now, changeFrequency: 'hourly', priority: 1 },\n    { url: `${BASE}/eleicoes/resultado-eleicoes-2026`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
+    { url: `${BASE}/`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
+    { url: `${BASE}/eleicoes/resultado-eleicoes-2026`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
     { url: `${BASE}/videos`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${BASE}/entrevistas`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
   ];
