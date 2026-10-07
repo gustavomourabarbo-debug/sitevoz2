@@ -24,16 +24,25 @@ const norm=(s:string)=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').t
 function statusKind(r:Row){
   const s=norm(r.situacao26+' '+r.eleito26);
   if(s.includes('nao se aplica')) return 'neutral';
-  if(s.includes('reeleito') || (s.includes('eleito') && !s.includes('nao eleito'))) return 'won';
+  if((s.includes('eleito') || s.includes('reeleito')) && !s.includes('nao eleito')) return 'won';
   if(s.includes('nao eleito') || s.includes('candidato')) return 'lost';
   return 'other';
+}
+
+function movedOffice(r:Row){
+  const c=norm(r.candidato26);
+  if(!c.startsWith('sim')) return false;
+  if(r.cargo==='Deputado Federal') return !c.includes('camara federal');
+  if(r.cargo==='Deputado Distrital') return !c.includes('camara legislativa');
+  if(r.cargo==='Senador') return !c.includes('senado');
+  return false;
 }
 
 export default function ElectionTable(){
   const [rows,setRows]=useState<Row[]>([]);
   const [q,setQ]=useState('');
   const [tab,setTab]=useState<'camara'|'senado'|'brasilia'>('camara');
-  const [status,setStatus]=useState<'todos'|'eleitos'|'nao-eleitos'>('todos');
+  const [status,setStatus]=useState<'todos'|'eleitos'|'nao-eleitos'|'mudou'>('todos');
 
   useEffect(()=>{
     fetch('/documentos/planilha-eleitos-2022-comparacao-2026.csv')
@@ -58,101 +67,127 @@ export default function ElectionTable(){
       r.uf==='DF' || r.uf==='Distrito Federal';
 
     const term=norm(q.trim());
-    const hay=norm([r.nome,r.nome26,r.partido22,r.partido26,r.uf,r.situacao26].join(' '));
+    const hay=norm([r.nome,r.nome26,r.partido22,r.partido26,r.uf,r.situacao26,r.candidato26].join(' '));
     const kind=statusKind(r);
-    const statusOk=status==='todos' || (status==='eleitos' ? kind==='won' : kind==='lost');
+    const statusOk =
+      status==='todos' ||
+      (status==='eleitos' && kind==='won') ||
+      (status==='nao-eleitos' && kind==='lost') ||
+      (status==='mudou' && movedOffice(r));
     return section && statusOk && (!term || hay.includes(term));
   }),[rows,q,tab,status]);
 
+  const stats=useMemo(()=>{
+    const total=filtered.length;
+    const won=filtered.filter(r=>statusKind(r)==='won').length;
+    const lost=filtered.filter(r=>statusKind(r)==='lost').length;
+    const moved=filtered.filter(movedOffice).length;
+    return {total,won,lost,moved};
+  },[filtered]);
+
   return <div className="mt-7">
-    <div className="grid grid-cols-3 gap-2 rounded-xl bg-slate-100 p-1.5 border border-slate-200">
+    <div className="grid grid-cols-3 gap-2 rounded-2xl bg-slate-100 p-2 border border-slate-200 shadow-sm">
       {([
         ['camara','Câmara Federal'],
         ['senado','Senado'],
         ['brasilia','Brasília / DF']
       ] as const).map(([k,l])=>
-        <button key={k} onClick={()=>{setTab(k);setStatus('todos')}} className={`rounded-lg px-2 py-2.5 text-xs md:text-sm font-black transition ${tab===k?'bg-emerald-700 text-white shadow':'bg-white text-slate-700 hover:bg-emerald-50'}`}>
+        <button key={k} onClick={()=>{setTab(k);setStatus('todos')}} className={`rounded-xl px-3 py-3 text-xs md:text-sm font-black transition ${tab===k?'bg-emerald-700 text-white shadow-md':'bg-white text-slate-700 hover:bg-emerald-50'}`}>
           {l}
         </button>
       )}
     </div>
 
-    <div className="mt-4 rounded-xl border border-slate-200 bg-white p-3 md:p-4 shadow-sm sticky top-16 z-20">
-      <div className="flex flex-col lg:flex-row gap-3 lg:items-end">
+    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex flex-col xl:flex-row gap-4 xl:items-end">
         <div className="flex-1">
-          <label className="block text-xs font-black uppercase tracking-wide text-slate-600 mb-1.5">Pesquisar nome, partido ou UF</label>
-          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Ex.: Aécio Neves, PL, DF..." className="w-full rounded-lg border-2 border-emerald-700 bg-white px-4 py-2.5 text-base outline-none focus:ring-4 focus:ring-emerald-100"/>
+          <label className="block text-xs font-black uppercase tracking-wider text-slate-600 mb-2">Pesquisar candidato, partido ou UF</label>
+          <div className="relative">
+            <span className="absolute left-4 top-3 text-lg">🔎</span>
+            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Digite o nome: Benedita da Silva, Aécio Neves..." className="w-full rounded-xl border-2 border-emerald-700 bg-white pl-11 pr-4 py-2.5 text-base font-semibold outline-none focus:ring-4 focus:ring-emerald-100"/>
+          </div>
         </div>
         <div>
-          <label className="block text-xs font-black uppercase tracking-wide text-slate-600 mb-1.5">Situação em 2026</label>
-          <div className="flex gap-1 rounded-lg bg-slate-100 p-1">
+          <label className="block text-xs font-black uppercase tracking-wider text-slate-600 mb-2">Filtrar 2026</label>
+          <div className="flex flex-wrap gap-1 rounded-xl bg-slate-100 p-1">
             {([
               ['todos','Todos'],
               ['eleitos','Eleitos'],
-              ['nao-eleitos','Não eleitos']
+              ['nao-eleitos','Não eleitos'],
+              ['mudou','Mudou de cargo']
             ] as const).map(([k,l])=>
-              <button key={k} onClick={()=>setStatus(k)} className={`rounded-md px-3 py-2 text-xs font-bold ${status===k?'bg-slate-900 text-white':'bg-white text-slate-700'}`}>{l}</button>
+              <button key={k} onClick={()=>setStatus(k)} className={`rounded-lg px-3 py-2 text-xs font-black transition ${status===k?'bg-slate-900 text-white shadow':'bg-white text-slate-700 hover:bg-slate-50'}`}>{l}</button>
             )}
           </div>
         </div>
       </div>
-      <div className="mt-2 text-xs font-semibold text-slate-500">{filtered.length.toLocaleString('pt-BR')} registro(s)</div>
+
+      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div className="rounded-xl bg-slate-50 border border-slate-200 px-3 py-2"><div className="text-[10px] uppercase font-black text-slate-500">Registros</div><div className="text-xl font-black text-slate-900">{stats.total}</div></div>
+        <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2"><div className="text-[10px] uppercase font-black text-emerald-700">Eleitos</div><div className="text-xl font-black text-emerald-900">{stats.won}</div></div>
+        <div className="rounded-xl bg-amber-50 border border-amber-200 px-3 py-2"><div className="text-[10px] uppercase font-black text-amber-700">Não eleitos</div><div className="text-xl font-black text-amber-900">{stats.lost}</div></div>
+        <div className="rounded-xl bg-blue-50 border border-blue-200 px-3 py-2"><div className="text-[10px] uppercase font-black text-blue-700">Mudaram de cargo</div><div className="text-xl font-black text-blue-900">{stats.moved}</div></div>
+      </div>
     </div>
 
-    <div className="mt-4 overflow-x-auto rounded-xl border border-slate-300 shadow-sm bg-white">
-      <table className="w-full min-w-[940px] table-fixed text-[12px] md:text-[13px]">
-        <colgroup>
-          <col className="w-[24%]"/>
-          <col className="w-[5%]"/>
-          <col className="w-[8%]"/>
-          <col className="w-[11%]"/>
-          <col className="w-[13%]"/>
-          <col className="w-[8%]"/>
-          <col className="w-[11%]"/>
-          <col className="w-[20%]"/>
-        </colgroup>
-        <thead className="sticky top-[158px] z-10">
-          <tr className="bg-emerald-800 text-white">
-            <th className="px-3 py-3 text-left font-black">Nome</th>
-            <th className="px-2 py-3 text-center font-black">UF</th>
-            <th className="px-2 py-3 text-center font-black">Partido<br/>2022</th>
-            <th className="px-3 py-3 text-right font-black">Votos<br/>2022</th>
-            <th className="px-3 py-3 text-center font-black">Candidatura<br/>2026</th>
-            <th className="px-2 py-3 text-center font-black">Partido<br/>2026</th>
-            <th className="px-3 py-3 text-right font-black">Votos<br/>2026</th>
-            <th className="px-3 py-3 text-left font-black bg-emerald-950">Situação 2026</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map((r,i)=>{
-            const kind=statusKind(r);
-            const band = kind==='won' ? 'border-l-4 border-l-emerald-500' : kind==='lost' ? 'border-l-4 border-l-amber-500' : 'border-l-4 border-l-slate-300';
-            const badge = kind==='won' ? 'bg-emerald-100 text-emerald-900 border-emerald-200' : kind==='lost' ? 'bg-amber-100 text-amber-900 border-amber-200' : 'bg-slate-100 text-slate-700 border-slate-200';
-            return <tr key={r.nome+r.uf+i} className={`${i%2?'bg-slate-50':'bg-white'} hover:bg-emerald-50/60 ${band}`}>
-              <td className="px-3 py-2.5 font-black text-slate-900 leading-tight">
-                <a className="hover:text-emerald-800 hover:underline" href={`/eleicoes/candidato/${candidateSlug(r)}`}>{r.nome}</a>
-                {tab==='brasilia' && <div className="mt-1 text-[10px] uppercase font-bold text-slate-400">{r.cargo}</div>}
-              </td>
-              <td className="px-2 py-2.5 text-center font-bold text-slate-600">{r.uf==='Distrito Federal'?'DF':r.uf}</td>
-              <td className="px-2 py-2.5 text-center"><span className="inline-flex min-w-[42px] justify-center rounded-md bg-slate-200 px-2 py-1 font-black text-slate-800">{r.partido22||'—'}</span></td>
-              <td className="px-3 py-2.5 text-right font-semibold tabular-nums">{fmt(r.votos22)}</td>
-              <td className="px-3 py-2.5 text-center font-semibold text-slate-700">{r.candidato26||'—'}</td>
-              <td className="px-2 py-2.5 text-center"><span className="inline-flex min-w-[42px] justify-center rounded-md bg-blue-50 px-2 py-1 font-black text-blue-900">{r.partido26||'—'}</span></td>
-              <td className="px-3 py-2.5 text-right font-black tabular-nums">{fmt(r.votos26)}</td>
-              <td className="px-3 py-2.5">
-                <span className={`inline-block rounded-md border px-2 py-1 font-bold leading-tight ${badge}`}>{r.situacao26||r.eleito26||'—'}</span>
-              </td>
-            </tr>;
-          })}
-          {!filtered.length && <tr><td colSpan={8} className="px-4 py-12 text-center text-slate-500 font-semibold">Nenhum registro encontrado.</td></tr>}
-        </tbody>
-      </table>
+    <div className="mt-4 rounded-2xl border border-slate-300 shadow-lg bg-white overflow-hidden">
+      <div className="max-h-[72vh] overflow-auto">
+        <table className="w-full min-w-[980px] table-fixed text-[12px] md:text-[13px]">
+          <colgroup>
+            <col className="w-[23%]"/>
+            <col className="w-[5%]"/>
+            <col className="w-[7%]"/>
+            <col className="w-[10%]"/>
+            <col className="w-[15%]"/>
+            <col className="w-[7%]"/>
+            <col className="w-[10%]"/>
+            <col className="w-[23%]"/>
+          </colgroup>
+          <thead className="sticky top-0 z-30">
+            <tr className="bg-emerald-800 text-white shadow">
+              <th className="px-3 py-3 text-left font-black border-r border-emerald-700">Nome</th>
+              <th className="px-2 py-3 text-center font-black border-r border-emerald-700">UF</th>
+              <th className="px-2 py-3 text-center font-black border-r border-emerald-700">Partido<br/>2022</th>
+              <th className="px-3 py-3 text-right font-black border-r border-emerald-700">Votos<br/>2022</th>
+              <th className="px-3 py-3 text-center font-black border-r border-emerald-700">Candidatura<br/>2026</th>
+              <th className="px-2 py-3 text-center font-black border-r border-emerald-700">Partido<br/>2026</th>
+              <th className="px-3 py-3 text-right font-black border-r border-emerald-700">Votos<br/>2026</th>
+              <th className="px-3 py-3 text-left font-black bg-emerald-950">Situação em 2026</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((r,i)=>{
+              const kind=statusKind(r);
+              const moved=movedOffice(r);
+              const band = moved ? 'border-l-[6px] border-l-blue-500' : kind==='won' ? 'border-l-[6px] border-l-emerald-500' : kind==='lost' ? 'border-l-[6px] border-l-amber-500' : 'border-l-[6px] border-l-slate-300';
+              const badge = kind==='won' ? 'bg-emerald-100 text-emerald-900 border-emerald-200' : kind==='lost' ? 'bg-amber-100 text-amber-900 border-amber-200' : 'bg-slate-100 text-slate-700 border-slate-200';
+              return <tr key={r.nome+r.uf+i} className={`${i%2?'bg-slate-50':'bg-white'} hover:bg-emerald-50/70 ${band} border-b border-slate-100`}>
+                <td className="px-3 py-2 font-black text-slate-900 leading-tight">
+                  <a className="hover:text-emerald-800 hover:underline" href={`/eleicoes/candidato/${candidateSlug(r)}`}>{r.nome}</a>
+                  {tab==='brasilia' && <div className="mt-1 text-[10px] uppercase font-black text-slate-400">{r.cargo}</div>}
+                </td>
+                <td className="px-2 py-2 text-center font-black text-slate-600">{r.uf==='Distrito Federal'?'DF':r.uf}</td>
+                <td className="px-2 py-2 text-center"><span className="inline-flex min-w-[38px] justify-center rounded-md bg-slate-200 px-1.5 py-1 text-[11px] font-black text-slate-800">{r.partido22||'—'}</span></td>
+                <td className="px-3 py-2 text-right font-semibold tabular-nums whitespace-nowrap">{fmt(r.votos22)}</td>
+                <td className="px-3 py-2 text-center font-black text-slate-700 leading-tight">{r.candidato26||'—'}</td>
+                <td className="px-2 py-2 text-center"><span className="inline-flex min-w-[38px] justify-center rounded-md bg-blue-50 px-1.5 py-1 text-[11px] font-black text-blue-900">{r.partido26||'—'}</span></td>
+                <td className="px-3 py-2 text-right font-black tabular-nums whitespace-nowrap">{fmt(r.votos26)}</td>
+                <td className="px-3 py-2">
+                  <span className={`inline-block rounded-md border px-2 py-1 text-[11px] font-black leading-tight ${badge}`}>{r.situacao26||r.eleito26||'—'}</span>
+                </td>
+              </tr>;
+            })}
+            {!filtered.length && <tr><td colSpan={8} className="px-4 py-14 text-center text-slate-500 font-bold">Nenhum registro encontrado.</td></tr>}
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold text-slate-600">
-      <span><b className="text-emerald-700">Faixa verde:</b> eleito/reeleito em 2026</span>
-      <span><b className="text-amber-700">Faixa amarela:</b> candidato não eleito</span>
-      <span><b className="text-slate-600">Faixa cinza:</b> não se aplica/não localizado</span>
+    <div className="mt-4 rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-bold text-slate-600">
+      <span><b className="text-emerald-700">Verde:</b> eleito/reeleito</span>
+      <span><b className="text-amber-700">Amarelo:</b> candidato não eleito</span>
+      <span><b className="text-blue-700">Azul:</b> mudou de cargo em 2026</span>
+      <span><b className="text-slate-600">Cinza:</b> não localizado/não se aplica</span>
     </div>
   </div>;
 }
