@@ -1,5 +1,4 @@
 import Header from '@/components/layout/Header';
-import HeroCarousel from '@/components/home/HeroCarousel';
 import LatestNews from '@/components/home/LatestNews';
 import InterviewsSection from '@/components/home/InterviewsSection';
 import Sidebar from '@/components/layout/Sidebar';
@@ -51,10 +50,21 @@ export default async function Home() {
   ];
   const posts = [...curated, ...feedPosts];
   const norm=(p:any)=>`${p?.title?.rendered??''} ${p?.excerpt?.rendered??''} ${p?.category??''} ${p?.categorySlug??''}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const heroPosts:any[]=feedPosts.slice(0,5);
   const isMaceio=(p:any)=>/maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p)); const maceioPosts=posts.filter(isMaceio);
   const categories=[{title:'Política',category:'politica'},{title:'Distrito Federal',category:'distrito-federal'},{title:'Economia',category:'economia'},{title:'Turismo',category:'turismo'},{title:'Gastronomia',category:'gastronomia'},{title:'Saúde',category:'saude'},{title:'Tecnologia',category:'tecnologia'},{title:'Esportes',category:'esportes'},{title:'Internacional',category:'internacional'},{title:'Cultura',category:'cultura'}];
-  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><div className="pt-4 space-y-4"><SponsorBanner sponsor="snaider"/></div><div className="mt-4"><HeroCarousel posts={heroPosts}/></div><InstagramVideoBanner/>
+  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><div className="pt-4 space-y-4"><SponsorBanner sponsor="snaider"/></div><section className="mt-4 bg-white">
+  <div className="max-w-[1400px] mx-auto px-4 py-4">
+    <div className="overflow-hidden rounded-2xl bg-slate-950 shadow-xl">
+      <img
+        src="https://cdn.creativeclaw.co/u/d4de7256/images/1346947e-0c18-47cc-9838-3e5ae9204989.jpg"
+        alt="Anuário Brasileiro com duas pessoas segurando o livro"
+        className="mx-auto block max-h-[720px] w-full object-contain"
+        loading="eager"
+        fetchPriority="high"
+      />
+    </div>
+  </div>
+</section><InstagramVideoBanner/>
 <section className="bg-slate-950 py-5 md:py-7">
   <div className="max-w-[1400px] mx-auto px-4">
     <a href="/eleicoes/comparativo-2022-2026" className="group block overflow-hidden rounded-2xl border border-emerald-500/50 bg-gradient-to-r from-emerald-900 via-emerald-700 to-green-600 p-5 md:p-7 shadow-xl hover:shadow-2xl">
