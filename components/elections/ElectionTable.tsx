@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';\nimport { candidateSlug } from '@/lib/election-data';
 
 type Row = {
   cargo:string; nome:string; uf:string; partido22:string; votos22:string;
@@ -41,7 +41,7 @@ export default function ElectionTable(){
       <table className="min-w-[1150px] w-full text-sm bg-white">
         <thead className="bg-green-800 text-white"><tr>{['Nome','UF','Cargo','Partido 2022','Votos 2022','Candidatura 2026','Partido 2026','Votos 2026','Resultado 2026'].map(h=><th key={h} className="px-4 py-4 text-left font-black">{h}</th>)}</tr></thead>
         <tbody>{filtered.map((r,i)=><tr key={r.nome+r.uf+i} className={i%2?'bg-gray-50':'bg-white'}>
-          <td className="px-4 py-3 font-black text-gray-900">{r.nome}</td><td className="px-4 py-3">{r.uf}</td><td className="px-4 py-3">{r.cargo}</td><td className="px-4 py-3">{r.partido22}</td><td className="px-4 py-3 font-semibold">{fmt(r.votos22)}</td><td className="px-4 py-3">{r.candidato26}</td><td className="px-4 py-3">{r.partido26||'—'}</td><td className="px-4 py-3 font-semibold">{fmt(r.votos26)}</td><td className="px-4 py-3"><span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${/reeleito|eleito/i.test(r.situacao26)&&!/não eleito/i.test(r.situacao26)?'bg-green-100 text-green-800':'bg-amber-100 text-amber-900'}`}>{r.situacao26||r.eleito26||'—'}</span></td>
+          <td className="px-4 py-3 font-black"><a className="text-green-800 hover:underline" href={`/eleicoes/candidato/${candidateSlug(r)}`}>{r.nome}</a></td><td className="px-4 py-3">{r.uf}</td><td className="px-4 py-3">{r.cargo}</td><td className="px-4 py-3">{r.partido22}</td><td className="px-4 py-3 font-semibold">{fmt(r.votos22)}</td><td className="px-4 py-3">{r.candidato26}</td><td className="px-4 py-3">{r.partido26||'—'}</td><td className="px-4 py-3 font-semibold">{fmt(r.votos26)}</td><td className="px-4 py-3"><span className={`inline-block rounded-full px-3 py-1 text-xs font-bold ${/reeleito|eleito/i.test(r.situacao26)&&!/não eleito/i.test(r.situacao26)?'bg-green-100 text-green-800':'bg-amber-100 text-amber-900'}`}>{r.situacao26||r.eleito26||'—'}</span></td>
         </tr>)}</tbody>
       </table>
     </div>
