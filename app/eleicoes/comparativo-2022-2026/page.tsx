@@ -22,10 +22,10 @@ export default function ComparativoEleicoes() {
 
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href="/documentos/planilha-eleitos-2022-comparacao-2026.xlsx"
+                href="/api/planilha-eleitos-2022-2026"
                 className="inline-flex items-center rounded-xl bg-green-700 px-6 py-3 font-bold text-white hover:bg-green-800"
               >
-                Baixar planilha completa (.xlsx)
+                Baixar planilha completa (CSV/Excel)
               </a>
               <a
                 href="/eleicoes/resultado-eleicoes-2026"
