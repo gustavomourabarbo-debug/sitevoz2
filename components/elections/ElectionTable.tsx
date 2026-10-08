@@ -70,7 +70,7 @@ export default function ElectionTable(){
     const searching=Boolean(q.trim());
     const section = searching || (tab==='camara' ? r.cargo==='Deputado Federal' :
       tab==='senado' ? r.cargo==='Senador' :
-      r.uf==='DF' || r.uf==='Distrito Federal');
+      r.cargo==='Deputado Distrital');
 
     const term=norm(q.trim());
     const hay=norm([r.nome,r.nome26,r.partido22,r.partido26,r.uf,r.situacao26,r.candidato26].join(' '));
@@ -97,7 +97,7 @@ export default function ElectionTable(){
       {([
         ['camara','Câmara Federal'],
         ['senado','Senado'],
-        ['brasilia','Brasília / DF']
+        ['brasilia','Câmara Legislativa do DF']
       ] as const).map(([k,l])=>
         <button key={k} onClick={()=>{setTab(k);setQ('');setStatus('todos');setUfFilter('todas')}} className={`rounded-xl px-3 py-3 text-xs md:text-sm font-black transition ${tab===k?'bg-emerald-700 text-white shadow-md':'bg-white text-slate-700 hover:bg-emerald-50'}`}>
           {l}
@@ -130,7 +130,7 @@ export default function ElectionTable(){
         </div>
       </div>
 
-      <p className="mt-3 text-xs font-semibold text-slate-600">{q ? 'Busca em todas as categorias (Câmara, Senado e Distrito Federal).' : 'Selecione uma aba ou digite um nome para pesquisar na base inteira.'}</p>
+      <p className="mt-3 text-xs font-semibold text-slate-600">{q ? 'Busca em todas as categorias (Câmara Federal, Senado e Câmara Legislativa do DF).' : 'Selecione Câmara Federal, Senado ou Câmara Legislativa do DF. A busca encontra nomes em todas as abas.'}</p>
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label className="text-xs font-bold text-slate-700">UF<br/><select aria-label="Filtrar por UF" value={ufFilter} onChange={e=>setUfFilter(e.target.value)} className="mt-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"><option value="todas">Todas as UFs</option>{Array.from(new Set(rows.map(r=>r.uf))).filter(Boolean).sort().map(uf=><option key={uf} value={uf}>{uf}</option>)}</select></label>
         <label className="text-xs font-bold text-slate-700">Ordenar por<br/><select aria-label="Ordenar registros" value={sort} onChange={e=>setSort(e.target.value as 'nome'|'votos22'|'votos26')} className="mt-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"><option value="nome">Nome (A–Z)</option><option value="votos22">Mais votos em 2022</option><option value="votos26">Mais votos em 2026</option></select></label>
