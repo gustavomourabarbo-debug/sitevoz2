@@ -56,7 +56,7 @@ export default async function Home() {
   <div className="max-w-[1400px] mx-auto px-4 py-4">
     <div className="overflow-hidden rounded-2xl bg-slate-950 shadow-xl">
       <img
-        src="https://cdn.creativeclaw.co/u/d4de7256/images/1346947e-0c18-47cc-9838-3e5ae9204989.jpg"
+        src="https://cdn.creativeclaw.co/u/d4de7256/images/b00ab739-9a74-4feb-87f8-859e585a4a0e.png"
         alt="Anuário Brasileiro com duas pessoas segurando o livro"
         className="mx-auto block max-h-[720px] w-full object-contain"
         loading="eager"
