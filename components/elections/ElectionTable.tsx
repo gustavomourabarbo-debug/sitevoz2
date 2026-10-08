@@ -82,7 +82,7 @@ export default function ElectionTable(){
       (status==='mudou' && movedOffice(r));
     const ufOk=ufFilter==='todas'||r.uf===ufFilter;
     return section && statusOk && ufOk && (!term || hay.includes(term));
-  }).sort((a,b)=>sort==='nome' ? a.nome.localeCompare(b.nome,'pt-BR') : (Number(b[sort])||0)-(Number(a[sort])||0))),[rows,q,tab,status,ufFilter,sort]);
+  }).sort((a,b)=>sort==='nome' ? a.nome.localeCompare(b.nome,'pt-BR') : (Number(b[sort])||0)-(Number(a[sort])||0)),[rows,q,tab,status,ufFilter,sort]);
 
   const stats=useMemo(()=>{
     const total=filtered.length;
