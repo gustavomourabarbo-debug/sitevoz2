@@ -8,6 +8,69 @@ type Row = {
   candidato26:string; votos26:string; eleito26:string; partido26:string; nome26:string; situacao26:string;
 };
 
+// Fonte: Agência Senado, relação dos 54 eleitos em 04/10/2026.
+const SENADORES_ELEITOS_2026 = [
+  {nome:"Marcio Bittar",uf:"AC",partido:"PL"},
+  {nome:"Mara Rocha",uf:"AC",partido:"Republicanos"},
+  {nome:"Arthur Lira",uf:"AL",partido:"PP"},
+  {nome:"Marina JHC",uf:"AL",partido:"PSDB"},
+  {nome:"Rayssa Furlan",uf:"AP",partido:"Podemos"},
+  {nome:"Lucas Barreto",uf:"AP",partido:"PSD"},
+  {nome:"Eduardo Braga",uf:"AM",partido:"MDB"},
+  {nome:"Plínio Valério",uf:"AM",partido:"PSDB"},
+  {nome:"Rui Costa",uf:"BA",partido:"PT"},
+  {nome:"Jaques Wagner",uf:"BA",partido:"PT"},
+  {nome:"Cid Gomes",uf:"CE",partido:"PSB"},
+  {nome:"Luizianne Lins",uf:"CE",partido:"Rede"},
+  {nome:"Michelle Bolsonaro",uf:"DF",partido:"PL"},
+  {nome:"Bia Kicis",uf:"DF",partido:"PL"},
+  {nome:"Renato Casagrande",uf:"ES",partido:"PSB"},
+  {nome:"Evair de Melo",uf:"ES",partido:"Republicanos"},
+  {nome:"Gustavo Gayer",uf:"GO",partido:"PL"},
+  {nome:"Gracinha Caiado",uf:"GO",partido:"União"},
+  {nome:"André Fufuca",uf:"MA",partido:"PP"},
+  {nome:"Lahesio Bonfim",uf:"MA",partido:"Novo"},
+  {nome:"Mauro Mendes",uf:"MT",partido:"União"},
+  {nome:"Zé Medeiros",uf:"MT",partido:"PL"},
+  {nome:"Reinaldo Azambuja",uf:"MS",partido:"PL"},
+  {nome:"Capitão Contar",uf:"MS",partido:"PL"},
+  {nome:"Domingos Sávio",uf:"MG",partido:"PL"},
+  {nome:"Marília Campos",uf:"MG",partido:"PT"},
+  {nome:"Helder Barbalho",uf:"PA",partido:"MDB"},
+  {nome:"Chicão",uf:"PA",partido:"União"},
+  {nome:"João Azevêdo",uf:"PB",partido:"PSB"},
+  {nome:"Veneziano Vital do Rêgo",uf:"PB",partido:"MDB"},
+  {nome:"Filipe Barros",uf:"PR",partido:"PL"},
+  {nome:"Deltan Dallagnol",uf:"PR",partido:"Novo"},
+  {nome:"Humberto Costa",uf:"PE",partido:"PT"},
+  {nome:"Marília Arraes",uf:"PE",partido:"PDT"},
+  {nome:"Marcelo Castro",uf:"PI",partido:"MDB"},
+  {nome:"Júlio César",uf:"PI",partido:"PSD"},
+  {nome:"Carlos Portinho",uf:"RJ",partido:"PL"},
+  {nome:"Carlos Jordy",uf:"RJ",partido:"PL"},
+  {nome:"Styvenson Valentim",uf:"RN",partido:"Podemos"},
+  {nome:"Samanda de Lula",uf:"RN",partido:"PT"},
+  {nome:"Ubiratan Sanderson",uf:"RS",partido:"PL"},
+  {nome:"Marcel Van Hattem",uf:"RS",partido:"Novo"},
+  {nome:"Fernando Máximo",uf:"RO",partido:"PL"},
+  {nome:"Bruno Scheid",uf:"RO",partido:"PL"},
+  {nome:"Nicoletti",uf:"RR",partido:"PL"},
+  {nome:"Teresa Surita",uf:"RR",partido:"MDB"},
+  {nome:"Carol de Toni",uf:"SC",partido:"PL"},
+  {nome:"Carlos Bolsonaro",uf:"SC",partido:"PL"},
+  {nome:"Guilherme Derrite",uf:"SP",partido:"PP"},
+  {nome:"André do Prado",uf:"SP",partido:"PL"},
+  {nome:"Rogério Carvalho",uf:"SE",partido:"PT"},
+  {nome:"Alessandro Vieira",uf:"SE",partido:"MDB"},
+  {nome:"Eduardo Gomes",uf:"TO",partido:"PL"},
+  {nome:"Alexandre Guimarães",uf:"TO",partido:"MDB"}
+];
+const SENADO_2026:Row[] = SENADORES_ELEITOS_2026.map(p=>({
+  cargo:'Senador eleito em 2026', nome:p.nome, uf:p.uf, partido22:'', votos22:'',
+  candidato26:'Sim — Senado', votos26:'', eleito26:'Sim', partido26:p.partido,
+  nome26:p.nome, situacao26:'Eleito em 2026 · mandato 2027–2035'
+}));
+
 function parseLine(line:string){
   const out:string[]=[]; let cur=''; let quoted=false;
   for(let i=0;i<line.length;i++){
@@ -66,14 +129,14 @@ export default function ElectionTable(){
       .finally(()=>setLoading(false));
   },[]);
 
-  const filtered=useMemo(()=>rows.filter(r=>{
+  const filtered=useMemo(()=>([...rows,...SENADO_2026]).filter(r=>{
     const searching=Boolean(q.trim());
     const section = searching || (tab==='camara' ? r.cargo==='Deputado Federal' :
-      tab==='senado' ? r.cargo==='Senador' :
+      tab==='senado' ? r.cargo.startsWith('Senador') :
       r.cargo==='Deputado Distrital');
 
     const term=norm(q.trim());
-    const hay=norm([r.nome,r.nome26,r.partido22,r.partido26,r.uf,r.situacao26,r.candidato26].join(' '));
+    const hay=norm([r.nome,r.nome26,r.partido22,r.partido26,r.uf,r.situacao26,r.candidato26,r.cargo].join(' '));
     const kind=statusKind(r);
     const statusOk =
       status==='todos' ||
@@ -96,7 +159,7 @@ export default function ElectionTable(){
     <div className="grid grid-cols-3 gap-2 rounded-2xl bg-slate-100 p-2 border border-slate-200 shadow-sm">
       {([
         ['camara','Câmara Federal'],
-        ['senado','Senado'],
+        ['senado','Senado · 81 cadeiras'],
         ['brasilia','Câmara Legislativa do DF']
       ] as const).map(([k,l])=>
         <button key={k} onClick={()=>{setTab(k);setQ('');setStatus('todos');setUfFilter('todas')}} className={`rounded-xl px-3 py-3 text-xs md:text-sm font-black transition ${tab===k?'bg-emerald-700 text-white shadow-md':'bg-white text-slate-700 hover:bg-emerald-50'}`}>
@@ -105,6 +168,7 @@ export default function ElectionTable(){
       )}
     </div>
 
+    {tab==='senado' && !q && <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-3 text-sm font-semibold text-blue-950">Senado: 81 cadeiras — 27 mandatos eleitos em 2022 (até 2031) + 54 eleitos em 2026 (mandato 2027–2035). Os 54 nomes de 2026 têm fonte Agência Senado; a votação individual de 2026 não está informada nesta base.</div>}
     <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col xl:flex-row gap-4 xl:items-end">
         <div className="flex-1">
@@ -179,7 +243,7 @@ export default function ElectionTable(){
               return <tr key={r.nome+r.uf+i} className={`${i%2?'bg-slate-50':'bg-white'} hover:bg-emerald-50/70 ${band} border-b border-slate-100`}>
                 <td className="px-3 py-2 font-black text-slate-900 leading-tight">
                   <a className="hover:text-emerald-800 hover:underline" href={`/eleicoes/candidato/${candidateSlug(r)}`}>{r.nome}</a>
-                  {(tab==='brasilia'||Boolean(q)) && <div className="mt-1 text-[10px] uppercase font-black text-slate-500">{r.cargo}{q ? ` · ${r.uf}`:''}</div>}
+                  {(tab==='brasilia'||tab==='senado'||Boolean(q)) && <div className="mt-1 text-[10px] uppercase font-black text-slate-500">{r.cargo}{q ? ` · ${r.uf}`:''}</div>}
                 </td>
                 <td className="px-2 py-2 text-center font-black text-slate-600">{r.uf==='Distrito Federal'?'DF':r.uf}</td>
                 <td className="px-2 py-2 text-center"><span className="inline-flex min-w-[38px] justify-center rounded-md bg-slate-200 px-1.5 py-1 text-[11px] font-black text-slate-800">{r.partido22||'—'}</span></td>
