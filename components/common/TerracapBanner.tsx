@@ -33,7 +33,7 @@ export default function TerracapBanner() {
             alt="DETRAN-DF - Campanha Segurança do Motociclista 2026"
             width="728"
             height="90"
-            className="block w-full max-w-[728px] h-auto mx-auto"
+            className="block w-full max-w-[800px] h-auto mx-auto"
           />
         </a>
       </div>
