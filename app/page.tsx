@@ -54,7 +54,18 @@ export default async function Home() {
   const norm=(p:any)=>`${p?.title?.rendered??''} ${p?.excerpt?.rendered??''} ${p?.category??''} ${p?.categorySlug??''}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const isMaceio=(p:any)=>/maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p)); const maceioPosts=posts.filter(isMaceio);
   const categories=[{title:'Política',category:'politica'},{title:'Distrito Federal',category:'distrito-federal'},{title:'Economia',category:'economia'},{title:'Turismo',category:'turismo'},{title:'Gastronomia',category:'gastronomia'},{title:'Saúde',category:'saude'},{title:'Tecnologia',category:'tecnologia'},{title:'Esportes',category:'esportes'},{title:'Internacional',category:'internacional'},{title:'Cultura',category:'cultura'}];
-  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><div className="pt-4 space-y-4"><SponsorBanner sponsor="snaider"/></div><HeroCarousel posts={carrosselDeHoje}/><section className="mt-4 bg-white">
+  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><section className="mx-auto max-w-[1400px] px-4 pt-5 pb-3" aria-label="Publicidade e destaques eleitorais">
+<div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-stretch">
+  <div className="min-w-0"><SponsorBanner sponsor="snaider"/></div>
+  <a href="https://www1.folha.uol.com.br/poder/2026/10/datafolha-flavio-bolsonaro-tem-52-e-lula-48-em-votos-validos-no-segundo-turno.shtml" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-emerald-700 bg-gradient-to-br from-emerald-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
+    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-300">Notícia · Datafolha · Presidência</div><h3 className="mt-3 text-xl font-black leading-tight">Flávio 49% × Lula 45%</h3><p className="mt-2 text-sm text-emerald-50">2º turno: empate técnico nos votos totais. Nos válidos, 52% a 48%.</p></div>
+    <span className="mt-4 text-sm font-black text-emerald-300">VER PESQUISA →</span>
+  </a>
+  <a href="https://www.cnnbrasil.com.br/eleicoes/datafolha-df-celina-tem-60-dos-votos-validos-no-2-turno-grass-40/" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-blue-700 bg-gradient-to-br from-blue-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
+    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300">Notícia · Datafolha · Governo do DF</div><h3 className="mt-3 text-xl font-black leading-tight">Celina Leão 60% × Leandro Grass 40%</h3><p className="mt-2 text-sm text-blue-50">Pesquisa de 2º turno em votos válidos, divulgada em 8 de outubro.</p></div>
+    <span className="mt-4 text-sm font-black text-sky-300">VER PESQUISA →</span>
+  </a>
+</div></section><HeroCarousel posts={carrosselDeHoje}/><section className="mt-4 bg-white">
   <div className="max-w-[1400px] mx-auto px-4 py-4">
     <div className="overflow-hidden rounded-2xl bg-slate-950 shadow-xl">
       <img
