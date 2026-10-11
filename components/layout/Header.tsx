@@ -62,10 +62,17 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-8">
-            <Link href="/" className="flex items-center group">
-              <img src="https://raw.githubusercontent.com/Vozdebrasilia/tv-voz-site/main/selo-40anos-transparente.png" alt="TV Voz de Brasília — 40 anos — Você na Frente" className="h-16 w-auto object-contain" />
+        <div className="max-w-[1400px] mx-auto px-4 py-3">
+          <div className="flex items-center justify-between gap-6">
+            <Link
+              href="/"
+              className="group flex min-w-[260px] items-center rounded-2xl border border-emerald-100 bg-gradient-to-r from-white via-white to-emerald-50 px-5 py-2 shadow-[0_8px_24px_rgba(0,80,45,.13)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(0,80,45,.18)] md:min-w-[350px]"
+            >
+              <img
+                src="https://raw.githubusercontent.com/Vozdebrasilia/tv-voz-site/main/selo-40anos-transparente.png"
+                alt="TV Voz de Brasília — 40 anos — Você na Frente"
+                className="h-20 w-auto scale-110 object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,.15)] md:h-24"
+              />
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
@@ -111,7 +118,7 @@ export default function Header() {
           </div>
         )}
       </header>
-      <div className="h-36"></div>
+      <div className="h-44 md:h-48"></div>
     </>
   );
 }
