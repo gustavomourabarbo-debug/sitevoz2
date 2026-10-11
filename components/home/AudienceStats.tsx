@@ -1,58 +1,40 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
-
-type Stat = {
-  target: number;
-  final: string;
-  label: string;
-};
+type Stat = { value: string; label: string };
 
 const STATS: Stat[] = [
-  { target: 260, final: '260+', label: 'mil seguidores' },
-  { target: 10000, final: '10 mil+', label: 'horas de transmissão' },
-  { target: 1000, final: '1.000+', label: 'negócios / entrevistas' },
-  { target: 200, final: '200 milhões+', label: 'acessos por mês' },
+  { value: '260+', label: 'mil seguidores' },
+  { value: '10.000+', label: 'horas de transmissão' },
+  { value: '1.000+', label: 'negócios / entrevistas' },
+  { value: '200 milhões+', label: 'acessos por mês' },
 ];
 
-function Counter({ stat }: { stat: Stat }) {
-  const [value, setValue] = useState(0);
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    const duration = 950;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setValue(Math.floor(stat.target * eased));
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        setDone(true);
-      }
-    };
-
-    const id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [stat.target]);
-
-  const current =
-    stat.target >= 1000 ? value.toLocaleString('pt-BR') : value.toString();
+function RollingValue({ value }: { value: string }) {
+  let digitIndex = 0;
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-amber-300/25 bg-white/[0.055] px-4 py-5 text-center shadow-[0_10px_32px_rgba(0,0,0,.18)]">
-      <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/35 to-transparent animate-[statsShine_2.5s_linear_infinite]" />
-      <div className="relative z-10">
-        <div className="text-[clamp(2rem,3.7vw,3.2rem)] font-black leading-none tracking-tight text-amber-300 drop-shadow-[0_0_12px_rgba(251,191,36,.55)]">
-          {done ? stat.final : current}
-        </div>
-        <div className="mt-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/90 md:text-xs">
-          {stat.label}
-        </div>
-      </div>
+    <div className="voz-number" aria-label={value}>
+      {Array.from(value).map((char, i) => {
+        if (!/\d/.test(char)) {
+          return <span key={i} className="voz-static">{char}</span>;
+        }
+
+        const digit = Number(char);
+        const steps = digit === 0 ? 10 : digit;
+        const delay = digitIndex++ * 55;
+
+        return (
+          <span
+            key={i}
+            className="voz-digit"
+            style={{ ['--steps' as any]: steps, ['--delay' as any]: `${delay}ms` }}
+          >
+            <span className="voz-reel" aria-hidden="true">
+              {['0','1','2','3','4','5','6','7','8','9','0'].map((n, idx) => (
+                <span key={idx}>{n}</span>
+              ))}
+            </span>
+          </span>
+        );
+      })}
     </div>
   );
 }
@@ -69,16 +51,97 @@ export default function AudienceStats() {
             Números que mostram a força da nossa audiência e da nossa história
           </div>
         </div>
+
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {STATS.map((stat) => (
-            <Counter key={stat.label} stat={stat} />
+            <div key={stat.label} className="voz-stat-card">
+              <RollingValue value={stat.value} />
+              <div className="mt-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/90 md:text-xs">
+                {stat.label}
+              </div>
+            </div>
           ))}
         </div>
       </div>
-      <style jsx global>{`
-        @keyframes statsShine {
-          0% { left: -55%; }
-          100% { left: 155%; }
+
+      <style>{`
+        .voz-stat-card{
+          position:relative;
+          overflow:hidden;
+          border-radius:1rem;
+          border:1px solid rgba(252,211,77,.28);
+          background:rgba(255,255,255,.055);
+          padding:1.25rem 1rem;
+          text-align:center;
+          box-shadow:0 10px 32px rgba(0,0,0,.18);
+        }
+        .voz-stat-card::before{
+          content:"";
+          position:absolute;
+          top:-25%;
+          left:-55%;
+          width:28%;
+          height:150%;
+          transform:skewX(-14deg);
+          background:linear-gradient(90deg,transparent,rgba(255,255,255,.40),transparent);
+          animation:vozShine 2.6s linear infinite;
+        }
+        .voz-number{
+          position:relative;
+          z-index:1;
+          display:flex;
+          justify-content:center;
+          align-items:flex-end;
+          min-height:1.05em;
+          font-size:clamp(2rem,3.7vw,3.2rem);
+          line-height:1;
+          font-weight:900;
+          letter-spacing:-.035em;
+          color:#fcd34d;
+          font-variant-numeric:tabular-nums;
+          text-shadow:0 0 10px rgba(251,191,36,.5),0 0 22px rgba(251,191,36,.28);
+          animation:vozGlow 1.7s ease-in-out infinite alternate;
+        }
+        .voz-digit{
+          display:inline-block;
+          position:relative;
+          width:.61em;
+          height:1em;
+          overflow:hidden;
+        }
+        .voz-reel{
+          display:flex;
+          flex-direction:column;
+          line-height:1em;
+          transform:translateY(0);
+          animation:vozRoll .9s cubic-bezier(.12,.9,.18,1) forwards;
+          animation-delay:var(--delay);
+        }
+        .voz-reel>span{
+          display:block;
+          height:1em;
+          line-height:1em;
+          flex:0 0 1em;
+        }
+        .voz-static{
+          display:inline-block;
+          padding:0 .025em;
+        }
+        @keyframes vozRoll{
+          from{transform:translateY(0)}
+          to{transform:translateY(calc(-1em * var(--steps)))}
+        }
+        @keyframes vozShine{
+          0%{left:-55%}
+          100%{left:145%}
+        }
+        @keyframes vozGlow{
+          from{text-shadow:0 0 8px rgba(251,191,36,.42),0 0 18px rgba(251,191,36,.18)}
+          to{text-shadow:0 0 14px rgba(251,191,36,.72),0 0 30px rgba(251,191,36,.34)}
+        }
+        @media (prefers-reduced-motion: reduce){
+          .voz-reel{animation-duration:.01ms;animation-delay:0ms}
+          .voz-stat-card::before,.voz-number{animation:none}
         }
       `}</style>
     </section>
