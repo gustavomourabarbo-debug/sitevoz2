@@ -44,12 +44,12 @@ function StatCard({ stat, cycle, delay }: { stat: Stat; cycle: number; delay: nu
   }, [cycle, delay, stat.end]);
 
   return (
-    <div className="voz-stat-card">
-      <div className="voz-stat-value">
+    <div className="voz-stat-card text-white">
+      <div className="voz-stat-value !text-amber-300">
         <span>{stat.format(value)}</span>
         {stat.suffix ? <span className="voz-stat-suffix">{stat.suffix}</span> : null}
       </div>
-      <div className="voz-stat-label">{stat.label}</div>
+      <div className="voz-stat-label !text-white">{stat.label}</div>
     </div>
   );
 }
@@ -73,7 +73,7 @@ export default function AudienceStats() {
           <div className="text-xs font-black uppercase tracking-[0.26em] text-amber-300">
             TV VOZ DE BRASÍLIA · 40 ANOS
           </div>
-          <div className="mt-1 text-sm font-semibold text-white/85">
+          <div className="mt-1 text-sm font-semibold !text-white">
             Números que mostram a força da nossa audiência e da nossa história
           </div>
         </div>
