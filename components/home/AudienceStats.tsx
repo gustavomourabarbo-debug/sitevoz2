@@ -4,37 +4,32 @@ import { useEffect, useRef, useState } from 'react';
 
 type Stat = {
   end: number;
-  display: (n: number) => string;
+  format: (n: number) => string;
   label: string;
 };
 
 const STATS: Stat[] = [
-  { end: 260, display: (n) => n + '+', label: 'mil seguidores' },
-  { end: 10000, display: (n) => n.toLocaleString('pt-BR') + '+', label: 'horas de transmissão' },
-  { end: 1000, display: (n) => n.toLocaleString('pt-BR') + '+', label: 'negócios / entrevistas' },
-  { end: 200, display: (n) => n + '+', label: 'milhões de acessos / mês' },
+  { end: 260, format: (n) => n + '+', label: 'MIL SEGUIDORES' },
+  { end: 10000, format: (n) => n.toLocaleString('pt-BR') + '+', label: 'HORAS DE TRANSMISSÃO' },
+  { end: 1000, format: (n) => n.toLocaleString('pt-BR') + '+', label: 'NEGÓCIOS / ENTREVISTAS' },
+  { end: 200, format: (n) => n + ' MILHÕES+', label: 'ACESSOS POR MÊS' },
 ];
 
-function Counter({ stat, active, delay }: { stat: Stat; active: boolean; delay: number }) {
+function StatCard({ stat, run, delay }: { stat: Stat; run: number; delay: number }) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!active) return;
-
     setValue(0);
     let raf = 0;
-    let timeout = 0;
-
-    timeout = window.setTimeout(() => {
-      const duration = 1450;
+    const timer = window.setTimeout(() => {
       const started = performance.now();
+      const duration = 1200;
 
       const tick = (now: number) => {
-        const progress = Math.min((now - started) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
+        const p = Math.min((now - started) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 4);
         setValue(Math.round(stat.end * eased));
-
-        if (progress < 1) raf = requestAnimationFrame(tick);
+        if (p < 1) raf = requestAnimationFrame(tick);
         else setValue(stat.end);
       };
 
@@ -42,32 +37,41 @@ function Counter({ stat, active, delay }: { stat: Stat; active: boolean; delay: 
     }, delay);
 
     return () => {
-      window.clearTimeout(timeout);
+      window.clearTimeout(timer);
       cancelAnimationFrame(raf);
     };
-  }, [active, delay, stat.end]);
+  }, [run, delay, stat.end]);
 
   return (
-    <div className="voz-stat-card">
-      <div className="voz-stat-value">{stat.display(value)}</div>
-      <div className="voz-stat-label">{stat.label}</div>
+    <div className="relative min-w-0 overflow-hidden rounded-2xl border border-amber-300/40 bg-white/[0.07] px-3 py-5 text-center shadow-[0_12px_30px_rgba(0,0,0,.22)]">
+      <div className="pointer-events-none absolute -left-1/2 top-[-25%] h-[150%] w-[28%] -skew-x-12 bg-gradient-to-r from-transparent via-white/45 to-transparent animate-[vozStatsShine_2.4s_linear_infinite]" />
+      <div className="relative z-10 whitespace-nowrap text-[clamp(1.8rem,2.7vw,2.8rem)] font-black leading-none tracking-[-0.04em] text-amber-300 drop-shadow-[0_0_12px_rgba(251,191,36,.72)] animate-[vozStatsGlow_1.4s_ease-in-out_infinite_alternate]">
+        {stat.format(value)}
+      </div>
+      <div className="relative z-10 mt-2 text-[11px] font-black uppercase tracking-[0.14em] text-white md:text-xs">
+        {stat.label}
+      </div>
     </div>
   );
 }
 
 export default function AudienceStats() {
-  const ref = useRef<HTMLElement | null>(null);
-  const [active, setActive] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [run, setRun] = useState(0);
 
   useEffect(() => {
-    const node = ref.current;
+    const node = sectionRef.current;
     if (!node) return;
 
+    let lastRun = 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setActive(true);
-          observer.disconnect();
+          const now = Date.now();
+          if (now - lastRun > 1800) {
+            lastRun = now;
+            setRun((v) => v + 1);
+          }
         }
       },
       { threshold: 0.35 }
@@ -78,86 +82,43 @@ export default function AudienceStats() {
   }, []);
 
   return (
-    <section ref={ref} className="bg-white px-4 pb-5 pt-2" aria-label="Números da TV Voz de Brasília">
-      <div className="mx-auto max-w-[1400px] overflow-hidden rounded-[26px] border border-emerald-900/15 bg-gradient-to-r from-slate-950 via-emerald-950 to-slate-950 p-4 shadow-xl md:p-5">
+    <section ref={sectionRef} className="bg-white px-4 pb-5 pt-2" aria-label="Números da TV Voz de Brasília">
+      <div className="mx-auto max-w-[1400px] overflow-hidden rounded-[26px] border border-emerald-900/20 bg-gradient-to-r from-slate-950 via-emerald-950 to-slate-950 p-4 shadow-xl md:p-5">
         <div className="mb-4 text-center">
           <div className="text-xs font-black uppercase tracking-[0.26em] text-amber-300">
-            TV Voz de Brasília · 40 anos
+            TV VOZ DE BRASÍLIA · 40 ANOS
           </div>
-          <div className="mt-1 text-sm font-semibold text-white/80">
+          <div className="mt-1 text-sm font-semibold text-white/85">
             Números que mostram a força da nossa audiência e da nossa história
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {STATS.map((stat, i) => (
-            <Counter key={stat.label} stat={stat} active={active} delay={i * 90} />
+            <StatCard key={stat.label} stat={stat} run={run} delay={i * 100} />
           ))}
+        </div>
+
+        <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
+          <div className="flex min-w-max items-center gap-8 px-6 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-white/90 animate-[vozCrowdMove_16s_linear_infinite]">
+            <span>🎥 Jornalismo</span><span>🎙️ Entrevistas</span><span>📡 Transmissões</span><span>📲 Redes sociais</span><span>🇧🇷 Brasília · Brasil · Mundo</span>
+            <span>🎥 Jornalismo</span><span>🎙️ Entrevistas</span><span>📡 Transmissões</span><span>📲 Redes sociais</span><span>🇧🇷 Brasília · Brasil · Mundo</span>
+          </div>
         </div>
       </div>
 
-      <style jsx>{`
-        .voz-stat-card{
-          position:relative;
-          min-width:0;
-          overflow:hidden;
-          border-radius:18px;
-          border:1px solid rgba(252,211,77,.30);
-          background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
-          padding:22px 14px 20px;
-          text-align:center;
-          box-shadow:0 12px 30px rgba(0,0,0,.18);
+      <style jsx global>{`
+        @keyframes vozStatsShine {
+          0% { left: -55%; }
+          100% { left: 145%; }
         }
-        .voz-stat-card::before{
-          content:"";
-          position:absolute;
-          top:-30%;
-          left:-55%;
-          width:30%;
-          height:165%;
-          transform:skewX(-16deg);
-          background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);
-          animation:vozCardShine 2.7s linear infinite;
-          pointer-events:none;
+        @keyframes vozStatsGlow {
+          from { filter: brightness(1); }
+          to { filter: brightness(1.24); }
         }
-        .voz-stat-value{
-          position:relative;
-          z-index:1;
-          min-width:0;
-          white-space:nowrap;
-          font-size:clamp(2rem,3vw,3rem);
-          line-height:1;
-          font-weight:950;
-          letter-spacing:-.04em;
-          color:#fcd34d;
-          font-variant-numeric:tabular-nums;
-          text-shadow:0 0 10px rgba(251,191,36,.55),0 0 24px rgba(251,191,36,.28);
-          animation:vozNumberGlow 1.5s ease-in-out infinite alternate;
-        }
-        .voz-stat-label{
-          position:relative;
-          z-index:1;
-          margin-top:10px;
-          font-size:12px;
-          line-height:1.2;
-          font-weight:900;
-          text-transform:uppercase;
-          letter-spacing:.14em;
-          color:rgba(255,255,255,.92);
-        }
-        @keyframes vozCardShine{
-          0%{left:-55%}
-          100%{left:145%}
-        }
-        @keyframes vozNumberGlow{
-          from{text-shadow:0 0 8px rgba(251,191,36,.42),0 0 18px rgba(251,191,36,.16)}
-          to{text-shadow:0 0 16px rgba(251,191,36,.76),0 0 32px rgba(251,191,36,.34)}
-        }
-        @media (max-width:1279px){
-          .voz-stat-value{font-size:clamp(2.2rem,5vw,3rem)}
-        }
-        @media (max-width:639px){
-          .voz-stat-value{font-size:2.65rem}
+        @keyframes vozCrowdMove {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
