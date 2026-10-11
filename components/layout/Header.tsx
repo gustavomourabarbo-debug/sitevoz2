@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300">
+      <header className="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
         <div className="bg-gradient-to-r from-green-700 to-green-600 py-2">
           <div className="max-w-[1400px] mx-auto px-4 flex items-center justify-between">
             <div className="flex items-center gap-4 text-white text-xs">
@@ -66,12 +66,12 @@ export default function Header() {
           <div className="flex items-center justify-between gap-6">
             <Link
               href="/"
-              className="group flex min-w-[360px] items-center justify-center rounded-2xl border border-amber-200/40 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,.18)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_38px_rgba(0,0,0,.24)] sm:min-w-[430px] lg:min-w-[520px]"
+              className="group flex min-w-0 max-w-full items-center justify-center rounded-2xl border border-amber-200/40 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,.18)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_38px_rgba(0,0,0,.24)] sm:min-w-[430px] lg:min-w-[520px]"
             >
               <img
                 src="https://cdn.creativeclaw.co/u/d4de7256/images/118c61a8-f6c0-4048-8301-abadfcf5b27e.png"
                 alt="TV Voz de Brasília 40 anos - Você na Frente"
-                className="h-28 w-auto object-contain sm:h-32 lg:h-36"
+                className="block h-auto max-h-24 w-auto max-w-full object-contain sm:max-h-32 lg:max-h-36" style={{ transform: "none", animation: "none" }}
               />
             </Link>
 
@@ -118,7 +118,7 @@ export default function Header() {
           </div>
         )}
       </header>
-      <div className="h-60 lg:h-72"></div>
+
     </>
   );
 }
