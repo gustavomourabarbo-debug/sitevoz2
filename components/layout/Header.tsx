@@ -66,18 +66,19 @@ export default function Header() {
           <div className="flex items-center justify-between gap-6">
             <Link
               href="/"
-              className="group flex min-w-[420px] items-center gap-4 rounded-2xl border border-amber-200/60 bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 px-5 py-3 shadow-[0_10px_30px_rgba(0,0,0,.22)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(0,0,0,.28)] md:min-w-[560px]"
+              className="group flex items-center gap-4 rounded-2xl border border-amber-200/50 bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,.24)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_38px_rgba(0,0,0,.3)] lg:min-w-[610px] lg:px-5 lg:py-3"
             >
               <img
-                src="/logo.png?v=5"
+                src="https://raw.githubusercontent.com/Vozdebrasilia/tv-voz-site/main/logo-tv-transparente.PNG"
                 alt="TV Voz de Brasília"
-                className="h-24 w-auto object-contain md:h-32"
+                className="h-20 w-auto object-contain drop-shadow-[0_5px_12px_rgba(0,0,0,.35)] sm:h-24 lg:h-32"
               />
-              <div className="hidden min-w-[150px] flex-col items-center justify-center rounded-2xl border border-amber-300/50 bg-gradient-to-b from-amber-300 via-yellow-400 to-amber-500 px-4 py-3 text-center text-emerald-950 shadow-[0_0_24px_rgba(251,191,36,.42)] sm:flex">
-                <div className="text-4xl font-black leading-none md:text-5xl">40</div>
-                <div className="mt-1 text-sm font-black uppercase tracking-[0.22em]">anos</div>
-                <div className="mt-1 text-[10px] font-black uppercase tracking-[0.12em]">Você na frente</div>
-              </div>
+              <div className="hidden h-24 w-px bg-amber-300/25 sm:block lg:h-28" />
+              <img
+                src="https://raw.githubusercontent.com/Vozdebrasilia/tv-voz-site/main/selo-40anos-transparente.png"
+                alt="TV Voz de Brasília — 40 anos — Você na Frente"
+                className="h-20 w-auto object-contain drop-shadow-[0_0_16px_rgba(251,191,36,.36)] sm:h-24 lg:h-28"
+              />
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
@@ -123,7 +124,7 @@ export default function Header() {
           </div>
         )}
       </header>
-      <div className="h-52 md:h-60"></div>
+      <div className="h-52 lg:h-64"></div>
     </>
   );
 }
