@@ -65,7 +65,7 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             <Link href="/" className="flex items-center group">
-              <img src="/logo.png?v=3" alt="TV Voz de Brasília" className="h-16 w-auto object-contain" />
+              <img src="https://raw.githubusercontent.com/Vozdebrasilia/tv-voz-site/main/selo-40anos-transparente.png" alt="TV Voz de Brasília — 40 anos — Você na Frente" className="h-16 w-auto object-contain" />
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
