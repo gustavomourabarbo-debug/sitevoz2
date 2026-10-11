@@ -71,7 +71,7 @@ export default function Header() {
               <img
                 src="https://cdn.creativeclaw.co/u/d4de7256/images/118c61a8-f6c0-4048-8301-abadfcf5b27e.png"
                 alt="TV Voz de Brasília 40 anos - Você na Frente"
-                className="block h-auto max-h-24 w-auto max-w-full object-contain sm:max-h-32 lg:max-h-36" style={{ transform: "none", animation: "none" }}
+                className="block h-auto max-h-24 w-auto max-w-full object-contain sm:max-h-32 lg:max-h-36" style={{ transform: "rotate(-90deg)", animation: "none" }}
               />
             </Link>
 
