@@ -15,6 +15,7 @@ import InstagramVideoBanner from '@/components/common/InstagramVideoBanner';
 import SponsorBanner from '@/components/common/SponsorBanner';
 import TopStoryBanner from '@/components/common/TopStoryBanner';
 import TerracapBanner from '@/components/common/TerracapBanner';
+import AudienceStats from '@/components/home/AudienceStats';
 
 export const revalidate = 61;
 
@@ -54,7 +55,7 @@ export default async function Home() {
   const norm=(p:any)=>`${p?.title?.rendered??''} ${p?.excerpt?.rendered??''} ${p?.category??''} ${p?.categorySlug??''}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const isMaceio=(p:any)=>/maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p)); const maceioPosts=posts.filter(isMaceio);
   const categories=[{title:'Política',category:'politica'},{title:'Distrito Federal',category:'distrito-federal'},{title:'Economia',category:'economia'},{title:'Turismo',category:'turismo'},{title:'Gastronomia',category:'gastronomia'},{title:'Saúde',category:'saude'},{title:'Tecnologia',category:'tecnologia'},{title:'Esportes',category:'esportes'},{title:'Internacional',category:'internacional'},{title:'Cultura',category:'cultura'}];
-  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><section className="mx-auto max-w-[1400px] px-4 pt-5 pb-3" aria-label="Publicidade e destaques eleitorais">
+  return <div className="min-h-screen bg-gray-50"><Header/><main className="pt-16"><TrendingBar posts={posts}/><div className="pt-4"><TerracapBanner/></div><AudienceStats/><section className="mx-auto max-w-[1400px] px-4 pt-5 pb-3" aria-label="Publicidade e destaques eleitorais">
 <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-stretch">
   <a href="https://www.google.com/search?q=Snaider+engenharia+Bras%C3%ADlia" target="_blank" rel="noopener noreferrer sponsored" aria-label="Conheça a Snaider Engenharia" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-slate-700 bg-gradient-to-br from-slate-950 to-blue-950 p-5 text-white shadow-lg hover:shadow-xl">
     <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300">Publicidade · Engenharia e Construção</div><h3 className="mt-3 text-xl font-black leading-tight">Snaider Engenharia</h3><p className="mt-2 text-sm text-slate-100">Obras, reformas e soluções em engenharia com padrão premium.</p></div>
