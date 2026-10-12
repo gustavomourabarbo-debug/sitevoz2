@@ -62,17 +62,22 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-4 py-3">
-          <div className="flex items-center justify-between gap-6">
+        <div className="max-w-[1400px] mx-auto px-4 py-2">
+          <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
-              className="group flex min-w-0 max-w-full items-center justify-center rounded-2xl border border-amber-200/40 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(0,0,0,.18)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_38px_rgba(0,0,0,.24)] sm:min-w-[430px] lg:min-w-[520px]"
+              className="flex items-center gap-4 rounded-2xl border border-amber-300/35 bg-[#071728] px-4 py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
             >
               <img
-                src="https://cdn.creativeclaw.co/u/d4de7256/images/118c61a8-f6c0-4048-8301-abadfcf5b27e.png"
-                alt="TV Voz de Brasília 40 anos - Você na Frente"
-                className="block h-auto max-h-24 w-auto max-w-full object-contain sm:max-h-32 lg:max-h-36" style={{ transform: "rotate(-90deg)", animation: "none" }}
+                src="https://cdn.creativeclaw.co/u/d4de7256/images/174592fa-23f8-42f4-9e0b-b80169c08b6a.png"
+                alt="TV Voz de Brasília"
+                className="block h-[118px] w-auto object-contain sm:h-[128px]"
               />
+              <div className="hidden sm:flex flex-col items-center justify-center rounded-xl border border-amber-300/45 bg-gradient-to-b from-amber-300 to-yellow-500 px-4 py-3 text-center text-[#06321e] shadow-[0_0_18px_rgba(251,191,36,.30)]">
+                <div className="text-4xl font-black leading-none">40</div>
+                <div className="mt-1 text-sm font-black uppercase tracking-[0.18em]">anos</div>
+                <div className="mt-1 text-[10px] font-black uppercase tracking-[0.08em]">Você na frente</div>
+              </div>
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
