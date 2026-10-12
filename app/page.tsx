@@ -102,13 +102,13 @@ export default async function Home() {
     <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300">Publicidade · Engenharia e Construção</div><h3 className="mt-3 text-xl font-black leading-tight">Snaider Engenharia</h3><p className="mt-2 text-sm text-slate-100">Obras, reformas e soluções em engenharia com padrão premium.</p></div>
     <span className="mt-4 text-sm font-black text-sky-300">CONHEÇA A SNAIDER →</span>
   </a>
-  <a href="https://www1.folha.uol.com.br/poder/2026/10/datafolha-flavio-bolsonaro-tem-52-e-lula-48-em-votos-validos-no-segundo-turno.shtml" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-emerald-700 bg-gradient-to-br from-emerald-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
-    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-300">Notícia · Datafolha · Presidência</div><h3 className="mt-3 text-xl font-black leading-tight">Flávio 49% × Lula 45%</h3><p className="mt-2 text-sm text-emerald-50">2º turno: empate técnico nos votos totais. Nos válidos, 52% a 48%.</p></div>
-    <span className="mt-4 text-sm font-black text-emerald-300">VER PESQUISA →</span>
+  <a href="https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/flavio-passa-domingo-reunido-com-prefeitos-e-vereadores-de-sao-paulo" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-emerald-700 bg-gradient-to-br from-emerald-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
+    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-300">Notícia · 11/10 · Presidência</div><h3 className="mt-3 text-xl font-black leading-tight">Flávio reúne prefeitos e vereadores em São Paulo</h3><p className="mt-2 text-sm text-emerald-50">Candidato do PL fez críticas a Lula e apresentou promessas econômicas neste domingo.</p></div>
+    <span className="mt-4 text-sm font-black text-emerald-300">LER AGORA →</span>
   </a>
-  <a href="https://www.cnnbrasil.com.br/eleicoes/datafolha-df-celina-tem-60-dos-votos-validos-no-2-turno-grass-40/" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-blue-700 bg-gradient-to-br from-blue-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
-    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300">Notícia · Datafolha · Governo do DF</div><h3 className="mt-3 text-xl font-black leading-tight">Celina Leão 60% × Leandro Grass 40%</h3><p className="mt-2 text-sm text-blue-50">Pesquisa de 2º turno em votos válidos, divulgada em 8 de outubro.</p></div>
-    <span className="mt-4 text-sm font-black text-sky-300">VER PESQUISA →</span>
+  <a href="https://agenciabrasil.ebc.com.br/justica/noticia/2026-10/tse-barra-anuncios-de-lula-acusando-flavio-de-ser-contra-escala-6x1" target="_blank" rel="noopener noreferrer" className="flex min-h-[230px] flex-col justify-between rounded-2xl border border-blue-700 bg-gradient-to-br from-blue-950 to-slate-900 p-5 text-white shadow-lg hover:shadow-xl">
+    <div><div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300">Notícia · 11/10 · TSE</div><h3 className="mt-3 text-xl font-black leading-tight">TSE barra anúncios de Lula sobre Flávio e escala 6x1</h3><p className="mt-2 text-sm text-blue-50">Ministro André Mendonça proibiu novas contratações de anúncios com a acusação contra Flávio Bolsonaro.</p></div>
+    <span className="mt-4 text-sm font-black text-sky-300">LER AGORA →</span>
   </a>
 </div></section><HeroCarousel posts={carrosselDeHoje}/><section className="mt-4 bg-white">
   <div className="max-w-[1400px] mx-auto px-4 py-4">
