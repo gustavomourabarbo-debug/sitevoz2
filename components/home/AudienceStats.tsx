@@ -75,12 +75,8 @@ export default function AudienceStats() {
   const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
-    const first = window.setTimeout(() => setCycle(1), 500);
-    const interval = window.setInterval(() => setCycle((v) => v + 1), 6200);
-    return () => {
-      window.clearTimeout(first);
-      window.clearInterval(interval);
-    };
+    const first = window.setTimeout(() => setCycle(1), 350);
+    return () => window.clearTimeout(first);
   }, []);
 
   return (
