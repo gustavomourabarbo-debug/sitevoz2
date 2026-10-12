@@ -66,18 +66,13 @@ export default function Header() {
           <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
-              className="flex items-center gap-4 rounded-2xl border border-amber-300/35 bg-[#071728] px-4 py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
+              className="flex items-center justify-center rounded-2xl border border-amber-300/25 bg-[#071728] px-5 py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
             >
               <img
-                src="https://cdn.creativeclaw.co/u/d4de7256/images/174592fa-23f8-42f4-9e0b-b80169c08b6a.png"
-                alt="TV Voz de Brasília"
-                className="block h-[118px] w-auto object-contain sm:h-[128px]"
+                src="https://cdn.creativeclaw.co/u/d4de7256/images/823ac05b-9d1b-44b6-bd5e-05d993f4661c.png"
+                alt="TV Voz de Brasília 40 anos — Você na Frente"
+                className="block h-[132px] w-auto object-contain sm:h-[146px] lg:h-[156px]"
               />
-              <div className="hidden sm:flex flex-col items-center justify-center rounded-xl border border-amber-300/45 bg-gradient-to-b from-amber-300 to-yellow-500 px-4 py-3 text-center text-[#06321e] shadow-[0_0_18px_rgba(251,191,36,.30)]">
-                <div className="text-4xl font-black leading-none">40</div>
-                <div className="mt-1 text-sm font-black uppercase tracking-[0.18em]">anos</div>
-                <div className="mt-1 text-[10px] font-black uppercase tracking-[0.08em]">Você na frente</div>
-              </div>
             </Link>
 
             <div className="hidden lg:block flex-1 max-w-md">
