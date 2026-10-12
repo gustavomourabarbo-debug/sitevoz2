@@ -37,7 +37,7 @@ export default function Header() {
         <div className="bg-gradient-to-r from-green-700 to-green-600 py-2">
           <div className="max-w-[1400px] mx-auto px-4 flex items-center justify-between">
             <div className="flex items-center gap-4 text-white text-xs">
-              <span>Brasília, {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              <span>Brasília, {new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
             <div className="flex items-center gap-4 text-white text-xs">
               <a href="#" className="hover:text-yellow-300 transition-colors flex items-center gap-1">
