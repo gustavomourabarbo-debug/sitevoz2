@@ -79,6 +79,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${merriweather.variable}`}>
       <head>
         <meta name="referrer" content="no-referrer" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8560122271595564" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.pexels.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
         <script
