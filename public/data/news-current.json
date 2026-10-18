@@ -1,5 +1,110 @@
 [
   {
+    "id": "voz-20261018-1",
+    "slug": "eleitor-segundo-turno-1810",
+    "title": {
+      "rendered": "Quem não votou no primeiro turno poderá votar no segundo"
+    },
+    "excerpt": {
+      "rendered": "TSE esclarece que a ausência em 4 de outubro não impede o voto em 25 de outubro, com situação eleitoral regular."
+    },
+    "content": "<p>TSE esclarece que a ausência em 4 de outubro não impede o voto em 25 de outubro, com situação eleitoral regular.</p><p>Fonte: <a href=\"https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/eleicoes-quem-nao-votou-no-primeiro-turno-pode-participar-do-segundo\" target=\"_blank\" rel=\"noopener noreferrer\">Agência Brasil, 18 de outubro de 2026</a>.</p>",
+    "category": "Política",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "featured_image": "https://live.staticflickr.com/65535/55311116847_fd83a778ba.jpg",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "published_at": "2026-10-18T14:50:00-03:00",
+    "date": "2026-10-18T14:50:00-03:00",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/eleicoes-quem-nao-votou-no-primeiro-turno-pode-participar-do-segundo",
+    "href": "/noticia/eleitor-segundo-turno-1810"
+  },
+  {
+    "id": "voz-20261018-2",
+    "slug": "enem-idioma-prazo-1810",
+    "title": {
+      "rendered": "Enem 2026: prazo para escolher língua estrangeira termina neste domingo"
+    },
+    "excerpt": {
+      "rendered": "Estudantes inscritos automaticamente devem definir inglês ou espanhol na Página do Participante."
+    },
+    "content": "<p>Estudantes inscritos automaticamente devem definir inglês ou espanhol na Página do Participante.</p><p>Fonte: <a href=\"https://agenciabrasil.ebc.com.br/educacao/noticia/2026-10/termina-neste-domingo-prazo-escolher-idioma-da-prova-do-enem-2026\" target=\"_blank\" rel=\"noopener noreferrer\">Agência Brasil, 18 de outubro de 2026</a>.</p>",
+    "category": "Educação",
+    "categorySlug": "educacao",
+    "categoryColor": "bg-blue-700",
+    "featured_image": "https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=1200&q=80",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "published_at": "2026-10-18T14:49:00-03:00",
+    "date": "2026-10-18T14:49:00-03:00",
+    "source_url": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-10/termina-neste-domingo-prazo-escolher-idioma-da-prova-do-enem-2026",
+    "href": "/noticia/enem-idioma-prazo-1810"
+  },
+  {
+    "id": "voz-20261018-3",
+    "slug": "finep-inovacao-450milhoes-1810",
+    "title": {
+      "rendered": "Finep destina R$ 450 milhões à inovação nas regiões Norte, Nordeste e Centro-Oeste"
+    },
+    "excerpt": {
+      "rendered": "A segunda rodada de subvenção econômica terá recursos não reembolsáveis para projetos de inovação."
+    },
+    "content": "<p>A segunda rodada de subvenção econômica terá recursos não reembolsáveis para projetos de inovação.</p><p>Fonte: <a href=\"https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/empresas-de-tres-regioes-terao-aporte-de-r-450-milhoes-para-inovacao\" target=\"_blank\" rel=\"noopener noreferrer\">Agência Brasil, 18 de outubro de 2026</a>.</p>",
+    "category": "Economia",
+    "categorySlug": "economia",
+    "categoryColor": "bg-blue-700",
+    "featured_image": "https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=1200&q=80",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "published_at": "2026-10-18T14:48:00-03:00",
+    "date": "2026-10-18T14:48:00-03:00",
+    "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/empresas-de-tres-regioes-terao-aporte-de-r-450-milhoes-para-inovacao",
+    "href": "/noticia/finep-inovacao-450milhoes-1810"
+  },
+  {
+    "id": "voz-20261018-4",
+    "slug": "une-mobilizacao-1810",
+    "title": {
+      "rendered": "UNE comenta mobilização de estudantes antes do segundo turno"
+    },
+    "excerpt": {
+      "rendered": "Presidente da entidade falou sobre atos políticos, universidade pública e participação dos jovens."
+    },
+    "content": "<p>Presidente da entidade falou sobre atos políticos, universidade pública e participação dos jovens.</p><p>Fonte: <a href=\"https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/estudantes-retomam-protagonismo-em-momento-decisivo-no-pais-diz-une\" target=\"_blank\" rel=\"noopener noreferrer\">Agência Brasil, 18 de outubro de 2026</a>.</p>",
+    "category": "Política",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "featured_image": "https://live.staticflickr.com/65535/55311116847_fd83a778ba.jpg",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "published_at": "2026-10-18T14:47:00-03:00",
+    "date": "2026-10-18T14:47:00-03:00",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/estudantes-retomam-protagonismo-em-momento-decisivo-no-pais-diz-une",
+    "href": "/noticia/une-mobilizacao-1810"
+  },
+  {
+    "id": "voz-20261018-5",
+    "slug": "pescadoras-fao-1810",
+    "title": {
+      "rendered": "Pescadoras brasileiras recebem reconhecimento internacional da FAO"
+    },
+    "excerpt": {
+      "rendered": "Luena Pataxó e Joana Mousinho foram homenageadas pela organização das Nações Unidas."
+    },
+    "content": "<p>Luena Pataxó e Joana Mousinho foram homenageadas pela organização das Nações Unidas.</p><p>Fonte: <a href=\"https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-10/pescadoras-brasileiras-recebem-titulo-de-heroinas-em-premiacao-da-fao\" target=\"_blank\" rel=\"noopener noreferrer\">Agência Brasil, 18 de outubro de 2026</a>.</p>",
+    "category": "Cidadania",
+    "categorySlug": "cidadania",
+    "categoryColor": "bg-blue-700",
+    "featured_image": "https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=1200&q=80",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "published_at": "2026-10-18T14:46:00-03:00",
+    "date": "2026-10-18T14:46:00-03:00",
+    "source_url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-10/pescadoras-brasileiras-recebem-titulo-de-heroinas-em-premiacao-da-fao",
+    "href": "/noticia/pescadoras-fao-1810"
+  },
+  {
     "id": "20261017-2129",
     "title": "Luchsinger afirma que Lulinha se reuniu com ministros; Camilo nega tratar de negócios",
     "slug": "luchsinger-afirma-lulinha-reunioes-ministros-17-10-2026",
