@@ -1,3 +1,4 @@
+import currentNews from '../public/data/news-current.json';
 import { manualPolitica1109 } from './manual-politica-1109';
 import { manualDaily1209 } from './manual-daily-1209';
 
@@ -151,7 +152,7 @@ function byDateDesc(items: any[]) {
 }
 
 function mergeManual(items: any[]) {
-  const manual = [...manualDaily1209, ...manualPolitica1109].map(normalizeLovablePost);
+  const manual = [...currentNews, ...manualDaily1209, ...manualPolitica1109].map(normalizeLovablePost);
   const slugs = new Set(manual.map((p: any) => p.slug));
   return byDateDesc([...manual, ...items.filter((p: any) => !slugs.has(p.slug))]);
 }
@@ -168,7 +169,7 @@ export async function getInterviewPosts(limit = 5) {
 }
 
 export async function getPostBySlug(slug: string) {
-  const manual = [...manualDaily1209, ...manualPolitica1109].find((item: any) => item.slug === slug);
+  const manual = [...currentNews, ...manualDaily1209, ...manualPolitica1109].find((item: any) => item.slug === slug);
   if (manual) return enrichPostsWithImages(manual);
   const all = await fetchLiveNews(150);
   if (all && all.length > 0) {
