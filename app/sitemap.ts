@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/lib/wordpress';
+import currentNews from '../public/data/news-current.json';
 import fs from 'fs';
 import path from 'path';
 import { candidateSlug, parseElectionCsv } from '@/lib/election-data';
@@ -71,5 +72,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     candidatos = [];
   }
 
-  return [...estaticas, ...candidatos, ...categorias, ...noticias];
+  const recentes: MetadataRoute.Sitemap = currentNews.filter((p: any) => p.slug).map((p: any) => ({
+    url: `${BASE}/noticia/${p.slug}`,
+    lastModified: p.published_at ? new Date(p.published_at) : now,
+    changeFrequency: 'daily' as const,
+    priority: 0.95,
+  }));
+  const unicos = new Map([...estaticas, ...candidatos, ...categorias, ...noticias, ...recentes].map(item => [item.url, item]));
+  return [...unicos.values()];
 }
