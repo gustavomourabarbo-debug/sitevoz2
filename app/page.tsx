@@ -56,22 +56,32 @@ export default async function Home() {
       const t = new Date(p?.published_at || p?.date || p?.created_at || 0).getTime();
       return Number.isFinite(t) ? t : 0;
     };
-    const hoje = Date.now();
-    const publicados = [...carrosselDeHoje, ...feedPosts];
-    const recentes = publicados.filter((p:any) => {
-      const t = dataNoticia(p);
-      return t <= hoje + 3600000 && t >= hoje - 48 * 3600000;
-    }).sort((a:any,b:any) => dataNoticia(b)-dataNoticia(a));
-    const arquivo = [...publicados, ...curated].filter((p:any) => !recentes.includes(p))
-      .sort((a:any,b:any) => dataNoticia(b)-dataNoticia(a));
-    const semRepetir = new Set<string>();
-    const posts = [...recentes, ...arquivo].filter((p:any) => {
-      const k = String(p.slug || p.id || '');
-      if (!k || semRepetir.has(k)) return false;
-      semRepetir.add(k);
-      return true;
+    // Data editorial no fuso de Brasília, nunca em janela móvel de 48 horas.
+    const dataBrasilia = (valor:any) => {
+      const t = new Date(valor || 0);
+      return Number.isFinite(t.getTime())
+        ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(t)
+        : '';
+    };
+    const diaAtual = dataBrasilia(Date.now());
+    const diaAnterior = dataBrasilia(Date.now() - 24 * 3600 * 1000);
+    const publicados = [...carrosselDeHoje, ...feedPosts, ...curated];
+    const unicos = new Set<string>();
+    const posts = publicados
+      .filter((p:any) => {
+        const k = String(p.slug || p.id || '');
+        if (!k || unicos.has(k)) return false;
+        unicos.add(k);
+        return true;
+      }).sort((a:any,b:any) => dataNoticia(b)-dataNoticia(a));
+    const noticiasHoje = posts.filter((p:any) => dataBrasilia(p?.published_at || p?.date || p?.created_at) === diaAtual);
+    const noticiasOntem = posts.filter((p:any) => dataBrasilia(p?.published_at || p?.date || p?.created_at) === diaAnterior);
+    const arquivo = posts.filter((p:any) => {
+      const d = dataBrasilia(p?.published_at || p?.date || p?.created_at);
+      return d && d < diaAnterior;
     });
-    const manchetes = recentes.length ? recentes : posts.slice(0,8);
+    // Não preencher manchetes do dia com matérias antigas, mesmo quando não houver notícias novas.
+    const manchetes = noticiasHoje;
   const norm=(p:any)=>`${p?.title?.rendered??''} ${p?.excerpt?.rendered??''} ${p?.category??''} ${p?.categorySlug??''}`.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const isMaceio=(p:any)=>/maceio|alagoas|pajucara|ponta verde|praia do frances|maragogi|sao miguel dos milagres/.test(norm(p)); const maceioPosts=posts.filter(isMaceio);
   const categories=[{title:'Política',category:'politica'},{title:'Distrito Federal',category:'distrito-federal'},{title:'Economia',category:'economia'},{title:'Turismo',category:'turismo'},{title:'Gastronomia',category:'gastronomia'},{title:'Saúde',category:'saude'},{title:'Tecnologia',category:'tecnologia'},{title:'Esportes',category:'esportes'},{title:'Internacional',category:'internacional'},{title:'Cultura',category:'cultura'}];
@@ -117,5 +127,5 @@ export default async function Home() {
     </a>
   </div>
 </section>
-<section className="bg-white py-10"><div className="max-w-[1400px] mx-auto px-4"><h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">20 notícias do momento · Especial Eleições</h2><p className="text-gray-600 mb-6">Cobertura especial do primeiro turno de 2026, com atualizações do TSE, Agência Brasil e imprensa nacional.</p><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">{curated.map((p)=><a key={p.id} href={p.href} className="group block rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md"><img src={p.featured_image} alt={p.title.rendered} className="w-full h-40 object-contain bg-gray-100" loading="lazy" decoding="async" referrerPolicy="no-referrer"/><div className="p-4"><span className="text-xs font-semibold text-green-700">{p.category}</span><h3 className="mt-1 font-bold text-gray-900 group-hover:text-green-700 leading-snug">{p.title.rendered}</h3><time className="block mt-3 text-xs text-gray-500" dateTime={p.date}>{(p as any).sourceDate || "04/10/2026"}</time></div></a>)}</div><div className="mt-8 rounded-xl bg-green-50 p-5"><h3 className="font-bold text-gray-900">Pesquisas eleitorais e candidatos</h3><p className="text-sm text-gray-700 mt-1">Consulte a data, o registro e a metodologia de cada levantamento no TSE. Veja também a relação oficial dos candidatos.</p><div className="flex flex-wrap gap-4 mt-3"><a className="text-green-700 font-semibold underline" href="https://www.tse.jus.br/eleicoes/pesquisa-eleitorais/consulta-as-pesquisas-registradas">Pesquisas registradas no TSE</a><a className="text-green-700 font-semibold underline" href="https://www.tse.jus.br/eleicoes/eleicoes-2026">Candidatos e eleições 2026</a><a className="text-green-700 font-semibold underline" href="/eleicoes/comparativo-2022-2026">Planilha: eleitos 2022 x eleições 2026</a></div></div></div></section><div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={manchetes.slice(0, 30)}/></div></div><div className="mt-4"><PremiumBanner variant={0}/></div><div className="mt-6"><SponsorBanner sponsor="visao"/></div><ViralStrip/><MosaicHighlights posts={manchetes}/><div className="mt-6 mb-2"><TerracapBanner/></div><div className="mt-6 mb-2"><PremiumBanner variant={3}/></div><div className="mt-4 mb-2"><SponsorBanner sponsor="lunardi"/></div><div className="max-w-[1400px] mx-auto px-4 py-8"><div className="grid grid-cols-1 lg:grid-cols-3 gap-8"><div className="lg:col-span-2 space-y-10">{categories.map((c)=><CategoriesSection key={c.category} title={c.title} category={c.category} posts={feedPosts}/>)}</div><aside className="lg:col-span-1"><div className="lg:sticky lg:top-24"><Sidebar/></div></aside></div></div><div className="mb-2"><PremiumBanner variant={1}/></div><div className="mt-4 mb-2"><SponsorBanner sponsor="coreto"/></div>{maceioPosts.length>0&&<MaceioShowcase/>}<div className="bg-gray-50 py-8"><div className="max-w-[1400px] mx-auto px-4"><InterviewsSection posts={interviews}/></div></div><div className="mt-4 mb-2"><SponsorBanner sponsor="kumon"/></div><div className="mt-2 mb-10"><PremiumBanner variant={2}/></div></main><Footer/></div>;
+<section className="bg-white py-10"><div className="max-w-[1400px] mx-auto px-4"><h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">20 notícias do momento · Especial Eleições</h2><p className="text-gray-600 mb-6">Cobertura especial do primeiro turno de 2026, com atualizações do TSE, Agência Brasil e imprensa nacional.</p><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">{curated.map((p)=><a key={p.id} href={p.href} className="group block rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md"><img src={p.featured_image} alt={p.title.rendered} className="w-full h-40 object-contain bg-gray-100" loading="lazy" decoding="async" referrerPolicy="no-referrer"/><div className="p-4"><span className="text-xs font-semibold text-green-700">{p.category}</span><h3 className="mt-1 font-bold text-gray-900 group-hover:text-green-700 leading-snug">{p.title.rendered}</h3><time className="block mt-3 text-xs text-gray-500" dateTime={p.date}>{(p as any).sourceDate || "04/10/2026"}</time></div></a>)}</div><div className="mt-8 rounded-xl bg-green-50 p-5"><h3 className="font-bold text-gray-900">Pesquisas eleitorais e candidatos</h3><p className="text-sm text-gray-700 mt-1">Consulte a data, o registro e a metodologia de cada levantamento no TSE. Veja também a relação oficial dos candidatos.</p><div className="flex flex-wrap gap-4 mt-3"><a className="text-green-700 font-semibold underline" href="https://www.tse.jus.br/eleicoes/pesquisa-eleitorais/consulta-as-pesquisas-registradas">Pesquisas registradas no TSE</a><a className="text-green-700 font-semibold underline" href="https://www.tse.jus.br/eleicoes/eleicoes-2026">Candidatos e eleições 2026</a><a className="text-green-700 font-semibold underline" href="/eleicoes/comparativo-2022-2026">Planilha: eleitos 2022 x eleições 2026</a></div></div></div></section><div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={manchetes.slice(0, 30)}/>{noticiasOntem.length > 0 && <section className="mt-10 border-t pt-7"><h2 className="mb-4 text-xl font-bold text-slate-700">Notícias de ontem</h2><LatestNews posts={noticiasOntem}/></section>}</div></div><div className="mt-4"><PremiumBanner variant={0}/></div><div className="mt-6"><SponsorBanner sponsor="visao"/></div><ViralStrip/><MosaicHighlights posts={manchetes}/><div className="mt-6 mb-2"><TerracapBanner/></div><div className="mt-6 mb-2"><PremiumBanner variant={3}/></div><div className="mt-4 mb-2"><SponsorBanner sponsor="lunardi"/></div><div className="max-w-[1400px] mx-auto px-4 py-8"><div className="grid grid-cols-1 lg:grid-cols-3 gap-8"><div className="lg:col-span-2 space-y-10">{categories.map((c)=><CategoriesSection key={c.category} title={c.title} category={c.category} posts={noticiasHoje}/>)}</div><aside className="lg:col-span-1"><div className="lg:sticky lg:top-24"><Sidebar/></div></aside></div></div><div className="mb-2"><PremiumBanner variant={1}/></div><div className="mt-4 mb-2"><SponsorBanner sponsor="coreto"/></div>{maceioPosts.length>0&&<MaceioShowcase/>}<div className="bg-gray-50 py-8"><div className="max-w-[1400px] mx-auto px-4"><InterviewsSection posts={interviews}/>{arquivo.length > 0 && <section className="mt-12 border-t pt-8"><h2 className="mb-5 text-2xl font-bold text-slate-800">Arquivo de notícias</h2><LatestNews posts={arquivo}/></section>}</div></div><div className="mt-4 mb-2"><SponsorBanner sponsor="kumon"/></div><div className="mt-2 mb-10"><PremiumBanner variant={2}/></div></main><Footer/></div>;
 }
