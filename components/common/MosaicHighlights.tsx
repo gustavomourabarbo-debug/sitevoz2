@@ -8,7 +8,7 @@ function stripHtml(s: string) {
 }
 
 export default function MosaicHighlights({ posts = [] as any[] }) {
-  const items = (posts || []).slice(5, 11);
+  const items = (posts || []).slice(0, 5);
   if (items.length < 4) return null;
   const [big, ...rest] = items;
   const smalls = rest.slice(0, 4);
