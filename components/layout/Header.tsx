@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Menu, X, Play } from 'lucide-react';
+import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,12 +76,7 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-md">
-              <div className="relative">
-                <input type="text" placeholder="Buscar notícias..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600 transition-colors"><Search className="w-5 h-5" /></button>
-              </div>
-            </div>
+            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><DetranCampaignBanner /></div>
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
@@ -90,6 +86,9 @@ export default function Header() {
             <button className="lg:hidden text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
           </div>
         </div>
+
+        <div className="mx-auto hidden max-w-[1400px] justify-end px-4 pb-2 lg:flex"><form action="/" method="get" role="search" className="flex items-center gap-2"><input name="s" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Buscar notícias..." aria-label="Buscar notícias" className="w-48 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:border-green-600 focus:outline-none" /><button type="submit" aria-label="Pesquisar" className="rounded-lg bg-green-700 p-1.5 text-white"><Search className="h-4 w-4"/></button></form></div>
+        <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><DetranCampaignBanner /></div>
 
         <nav className="border-t border-gray-200 hidden lg:block">
           <div className="max-w-[1400px] mx-auto px-4">
