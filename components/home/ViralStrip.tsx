@@ -33,7 +33,7 @@ export default function ViralStrip() {
       .catch(() => {});
   }, []);
 
-  if (videos.length === 0) return null;
+
 
   return (
     <section className="bg-gray-900 py-8">
@@ -53,7 +53,7 @@ export default function ViralStrip() {
           </Link>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto pb-2 snap-x">
+        {videos.length === 0 ? <a href={IG_PERFIL} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-white/20 bg-white/10 px-5 py-6 text-white hover:bg-white/15"><span className="font-bold">Assista aos vídeos virais no Instagram da TV Voz de Brasília →</span><p className="mt-1 text-sm text-white/70">Novos vídeos aparecerão aqui quando estiverem disponíveis no acervo.</p></a> : <div className="flex gap-4 overflow-x-auto pb-2 snap-x">
           {videos.map((v) => (
             <a
               key={v.id}
@@ -82,7 +82,7 @@ export default function ViralStrip() {
               </p>
             </a>
           ))}
-        </div>
+        </div>}
       </div>
 
     </section>
