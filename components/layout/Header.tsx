@@ -36,11 +36,11 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
         <div className="bg-gradient-to-r from-green-700 to-green-600 py-2">
-          <div className="max-w-[1400px] mx-auto px-4 flex items-center justify-between">
-            <div className="flex items-center gap-4 text-white text-xs">
+          <div className="max-w-[1400px] mx-auto px-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+            <div className="flex items-center gap-3 text-white text-[11px] sm:text-xs">
               <span>Brasília, {new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
-            <div className="flex items-center gap-4 text-white text-xs">
+            <div className="flex items-center gap-3 text-white text-[11px] sm:text-xs">
               <a href="#" className="hover:text-yellow-300 transition-colors flex items-center gap-1">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -67,12 +67,12 @@ export default function Header() {
           <div className="flex items-center justify-between gap-4">
             <Link
               href="/"
-              className="flex items-center justify-center rounded-2xl border border-amber-300/25 bg-[#071728] px-5 py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
+              className="flex items-center justify-center rounded-2xl border border-amber-300/25 bg-[#071728] px-3 py-2 lg:px-5 lg:py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
             >
               <img
                 src="https://cdn.creativeclaw.co/u/d4de7256/images/823ac05b-9d1b-44b6-bd5e-05d993f4661c.png"
                 alt="TV Voz de Brasília 40 anos — Você na Frente"
-                className="block h-[132px] w-auto object-contain sm:h-[146px] lg:h-[156px]"
+                className="block h-20 w-auto object-contain sm:h-24 lg:h-[156px]"
               />
             </Link>
 
@@ -83,7 +83,7 @@ export default function Header() {
               <span className="font-semibold">Últimas Entrevistas</span>
             </Link>
 
-            <button className="lg:hidden text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
+            <button aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={isMobileMenuOpen} className="lg:hidden p-2 text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
           </div>
         </div>
 
