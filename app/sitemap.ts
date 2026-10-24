@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/lib/wordpress';
 import currentNews from '../public/data/news-current.json';
+import electionDayNews from '../public/data/news-2026-10-24.json';
 import fs from 'fs';
 import path from 'path';
 import { candidateSlug, parseElectionCsv } from '@/lib/election-data';
@@ -78,6 +79,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'daily' as const,
     priority: 0.95,
   }));
-  const unicos = new Map([...estaticas, ...candidatos, ...categorias, ...noticias, ...recentes].map(item => [item.url, item]));
+  const especiais: MetadataRoute.Sitemap = electionDayNews.map((p: any) => ({ url: `${BASE}/atualidade/${p.slug}`, lastModified: new Date(p.date), changeFrequency: 'daily' as const, priority: 1 }));
+  const unicos = new Map([...estaticas, ...candidatos, ...categorias, ...noticias, ...recentes, ...especiais].map(item => [item.url, item]));
   return [...unicos.values()];
 }
