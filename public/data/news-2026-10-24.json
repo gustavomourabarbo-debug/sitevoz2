@@ -1,0 +1,59 @@
+[
+  {
+    "id": "voz-20261024-0",
+    "slug": "eleicoes-segundo-turno-25-outubro-2026",
+    "title": {
+      "rendered": "Amanhã é dia de votar: Lula x Flávio e Celina x Grass no segundo turno"
+    },
+    "excerpt": {
+      "rendered": "Domingo, 25/10: brasileiros voltam às urnas. Análise de Paulo Fayad sobre a importância da apuração oficial."
+    },
+    "category": "Política",
+    "categorySlug": "politica",
+    "categoryColor": "bg-green-700",
+    "date": "2026-10-24T19:40:00-03:00",
+    "published_at": "2026-10-24T19:40:00-03:00",
+    "featured_image": "https://p2.trrsf.com/image/fget/cf/1548/0/images.terra.com/2026/09/14/2130586534-lula-flavio-bolsonaro-eleicoes-para-presidente-2026.jpg",
+    "href": "/atualidade/eleicoes-segundo-turno-25-outubro-2026",
+    "heroFill": false,
+    "author": "Paulo Fayad"
+  },
+  {
+    "id": "voz-20261024-1",
+    "slug": "datafolha-celina-grass-24-outubro",
+    "title": {
+      "rendered": "Datafolha 24/10: Celina Leão 59% e Leandro Grass 41% dos válidos"
+    },
+    "excerpt": {
+      "rendered": "Pesquisa com 1.619 entrevistados e margem de erro de 2 pontos. Análise de Paulo Fayad."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "distrito-federal",
+    "categoryColor": "bg-green-700",
+    "date": "2026-10-24T19:25:00-03:00",
+    "published_at": "2026-10-24T19:25:00-03:00",
+    "featured_image": "https://www.tse.jus.br/imagens/fotos/resultados-eleicoes-2026-1/@@images/image-1140-88609cb4387524338a7667299270a8d2.jpeg",
+    "href": "/atualidade/datafolha-celina-grass-24-outubro",
+    "heroFill": false,
+    "author": "Paulo Fayad"
+  },
+  {
+    "id": "voz-20261024-2",
+    "slug": "atlasintel-celina-grass-24-outubro",
+    "title": {
+      "rendered": "AtlasIntel DF: Celina 57,9%, Grass 42,1% dos votos válidos"
+    },
+    "excerpt": {
+      "rendered": "Pesquisa de 24/10 com registro no TSE. Veja os dados e comentários editoriais."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "distrito-federal",
+    "categoryColor": "bg-green-700",
+    "date": "2026-10-24T19:15:00-03:00",
+    "published_at": "2026-10-24T19:15:00-03:00",
+    "featured_image": "https://www.tse.jus.br/imagens/fotos/resultados-eleicoes-2026-1/@@images/image-1140-88609cb4387524338a7667299270a8d2.jpeg",
+    "href": "/atualidade/atlasintel-celina-grass-24-outubro",
+    "heroFill": false,
+    "author": "Paulo Fayad"
+  }
+]
