@@ -97,24 +97,24 @@ export default async function Home() {
   <div className="rounded-2xl border-2 border-blue-800 bg-white p-5 shadow-lg md:p-8">
     <p className="text-sm font-black uppercase tracking-widest text-blue-800">Em Evidência • Eleições 2026 • 25/10</p>
     <h2 id="exterior-title" className="mt-2 text-2xl font-black text-gray-900 md:text-4xl">Votos no exterior — boletins de urna disponíveis</h2>
-    <p className="mt-3 text-gray-600">Parcial de 26 países e territórios • Fonte: tabela CNN Brasil, atualizada às 12h49 e consultada às 13h08 de Brasília em 25/10. Valores recalculados pelas 26 linhas. Não é total mundial nem totalização oficial do TSE.</p>
+    <p className="mt-3 text-gray-600">Parcial de 29 países e territórios • Fonte: tabela CNN Brasil, atualizada às 13h14 e consultada às 13h27 de Brasília em 25/10. Valores recalculados pelas 29 linhas. Não é total mundial nem totalização oficial do TSE.</p>
     <div className="mt-6 grid items-center gap-6 md:grid-cols-2">
       <div className="flex flex-col items-center gap-4">
-        <div role="img" aria-label="Gráfico de pizza: Flávio Bolsonaro 66,31 por cento em azul, Lula 33,69 por cento em vermelho, entre 52.681 votos do recorte" className="h-64 w-64 rounded-full shadow-md" style={{background:'conic-gradient(#1d4ed8 0% 66.31%, #dc2626 66.31% 100%)'}}/>
+        <div role="img" aria-label="Gráfico de pizza: Flávio Bolsonaro 63,05 por cento em azul, Lula 36,95 por cento em vermelho, entre 58.604 votos do recorte" className="h-64 w-64 rounded-full shadow-md" style={{background:'conic-gradient(#1d4ed8 0% 63.05%, #dc2626 63.05% 100%)'}}/>
         <ol className="space-y-2 text-lg font-bold">
-          <li className="text-blue-700">1. Flávio Bolsonaro — 34.931 votos (66,31%)</li>
-          <li className="text-red-600">2. Lula — 17.750 votos (33,69%)</li>
+          <li className="text-blue-700">1. Flávio Bolsonaro — 36.952 votos (63,05%)</li>
+          <li className="text-red-600">2. Lula — 21.652 votos (36,95%)</li>
         </ol>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm md:text-base">
-          <caption className="mb-3 text-left font-bold">Votos por país/território • 52.681 votos no recorte</caption>
+          <caption className="mb-3 text-left font-bold">Votos por país/território • 58.604 votos no recorte</caption>
           <thead><tr className="border-b-2"><th className="py-2">País / território</th><th className="text-blue-700">Flávio</th><th className="text-red-600">Lula</th></tr></thead>
-          <tbody>{[["Japão",28538,7098],["Austrália",3465,6017],["China continental",134,375],["Hong Kong",133,127],["Nova Zelândia",101,418],["Singapura",121,213],["Coreia do Sul",82,148],["Malásia",44,41],["Filipinas",39,27],["Indonésia",23,15],["Tailândia",60,56],["Taiwan",130,94],["Grécia",311,255],["África do Sul",256,186],["Moçambique",117,108],["Catar",195,159],["Emirados Árabes Unidos",772,643],["Finlândia",185,550],["Estônia",33,160],["Chipre",25,29],["Jordânia",76,725],["Síria",11,106],["Kuwait",17,62],["Arábia Saudita",31,49],["Egito",16,60],["Quênia",16,29]].map(([pais,f,l])=><tr key={String(pais)} className="border-b"><th className="py-2 font-medium">{pais}</th><td className="font-bold text-blue-700">{Number(f).toLocaleString('pt-BR')}</td><td className="font-bold text-red-600">{Number(l).toLocaleString('pt-BR')}</td></tr>)}</tbody>
+          <tbody>{[["Japão",28538,7098],["Austrália",3465,6017],["China continental",134,375],["Hong Kong",133,127],["Nova Zelândia",101,418],["Singapura",121,213],["Coreia do Sul",82,148],["Malásia",44,41],["Filipinas",39,27],["Indonésia",23,15],["Tailândia",60,56],["Taiwan",130,94],["Grécia",311,255],["África do Sul",256,186],["Moçambique",117,108],["Catar",195,159],["Emirados Árabes Unidos",772,643],["Finlândia",185,550],["Estônia",33,160],["Chipre",25,29],["Jordânia",76,725],["Síria",11,106],["Kuwait",17,62],["Arábia Saudita",31,49],["Egito",16,60],["Quênia",16,29],["Israel",699,166],["Líbano",1276,2736],["Palestina",46,1000]].map(([pais,f,l])=><tr key={String(pais)} className="border-b"><th className="py-2 font-medium">{pais}</th><td className="font-bold text-blue-700">{Number(f).toLocaleString('pt-BR')}</td><td className="font-bold text-red-600">{Number(l).toLocaleString('pt-BR')}</td></tr>)}</tbody>
         </table>
       </div>
     </div>
-    <p className="mt-5 text-sm text-gray-600">Fonte: <a className="underline" href="https://www.cnnbrasil.com.br/internacional/eleicoes-2026-exterior-boletins-urna-flavio-lula/" target="_blank" rel="noreferrer">CNN Brasil, tabela de boletins de urna</a>. Índia e Turquia excluídas por boletins parciais; Israel aguardando confirmação. China continental e Hong Kong contabilizados separadamente. A totalização oficial do TSE será divulgada a partir das 17h de Brasília.</p>
+    <p className="mt-5 text-sm text-gray-600">Fonte: <a className="underline" href="https://www.cnnbrasil.com.br/internacional/eleicoes-2026-exterior-boletins-urna-flavio-lula/" target="_blank" rel="noreferrer">CNN Brasil, tabela de boletins de urna</a>. Índia e Turquia excluídas por boletins parciais; Israel, Líbano e Palestina incluídos. China continental e Hong Kong contabilizados separadamente. A totalização oficial do TSE será divulgada a partir das 17h de Brasília.</p>
   </div>
 </section><HeroCarousel posts={manchetes.slice(0,8)}/><section className="mt-4 bg-white">
   <div className="max-w-[1400px] mx-auto px-4 py-4">
