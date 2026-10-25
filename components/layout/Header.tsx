@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Menu, X, Play } from 'lucide-react';
-import MilkDonationBanner from '@/components/common/MilkDonationBanner';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -76,7 +75,7 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><MilkDonationBanner /></div>
+            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0" />
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
@@ -88,7 +87,7 @@ export default function Header() {
         </div>
 
         <div className="mx-auto hidden max-w-[1400px] justify-end px-4 pb-2 lg:flex"><form action="/" method="get" role="search" className="flex items-center gap-2"><input name="s" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Buscar notícias..." aria-label="Buscar notícias" className="w-48 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:border-green-600 focus:outline-none" /><button type="submit" aria-label="Pesquisar" className="rounded-lg bg-green-700 p-1.5 text-white"><Search className="h-4 w-4"/></button></form></div>
-        <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><MilkDonationBanner /></div>
+        
 
         <nav className="border-t border-gray-200 hidden lg:block">
           <div className="max-w-[1400px] mx-auto px-4">
