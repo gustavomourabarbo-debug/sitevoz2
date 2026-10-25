@@ -97,7 +97,7 @@ export default async function Home() {
   <div className="rounded-2xl border-2 border-blue-800 bg-white p-5 shadow-lg md:p-8">
     <p className="text-sm font-black uppercase tracking-widest text-blue-800">Em Evidência • Eleições 2026 • 25/10</p>
     <h2 id="exterior-title" className="mt-2 text-2xl font-black text-gray-900 md:text-4xl">Votos no exterior — boletins de urna disponíveis</h2>
-    <p className="mt-3 text-gray-600">Parcial de 29 países e territórios • Fonte: tabela CNN Brasil, atualizada às 13h14 e consultada às 13h27 de Brasília em 25/10. Valores recalculados pelas 29 linhas. Não é total mundial nem totalização oficial do TSE.</p>
+    <p className="mt-3 text-gray-600">Parcial de 29 países e territórios • Fonte: tabela CNN Brasil, atualizada às 13h14 e consultada nesta atualização de 25/10. Valores recalculados pelas 29 linhas. Não é total mundial nem totalização oficial do TSE.</p>
     <div className="mt-6 grid items-center gap-6 md:grid-cols-2">
       <div className="flex flex-col items-center gap-4">
         <div role="img" aria-label="Gráfico de pizza: Flávio Bolsonaro 63,05 por cento em azul, Lula 36,95 por cento em vermelho, entre 58.604 votos do recorte" className="h-64 w-64 rounded-full shadow-md" style={{background:'conic-gradient(#1d4ed8 0% 63.05%, #dc2626 63.05% 100%)'}}/>
