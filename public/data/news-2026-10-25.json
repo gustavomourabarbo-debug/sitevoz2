@@ -1,0 +1,462 @@
+[
+  {
+    "id": "voz-20261025-1",
+    "slug": "eleicoes-25-outubro-boletim-01",
+    "title": {
+      "rendered": "Segundo turno: TSE divulga boletim das 12h"
+    },
+    "excerpt": {
+      "rendered": "TSE publica o segundo relatório do dia com ocorrências, biometria e urnas. A conferência dos números oficiais evita a circulação de boatos."
+    },
+    "category": "Urgência nacional",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:55:00-03:00",
+    "published_at": "2026-10-25T12:55:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/01",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/2o-boletim-confira-as-principais-informacoes-das-eleicoes-neste-domingo-25",
+    "content": "TSE publica o segundo relatório do dia com ocorrências, biometria e urnas. A conferência dos números oficiais evita a circulação de boatos. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-2",
+    "slug": "eleicoes-25-outubro-boletim-02",
+    "title": {
+      "rendered": "TSE apresenta primeiro boletim às 10h"
+    },
+    "excerpt": {
+      "rendered": "A Justiça Eleitoral publicou seu primeiro balanço com informações sobre ocorrências, equipamentos e votação."
+    },
+    "category": "Eleições",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:48:00-03:00",
+    "published_at": "2026-10-25T12:48:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/02",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/1o-boletim-confira-as-principais-informacoes-das-eleicoes-neste-domingo-25",
+    "content": "A Justiça Eleitoral publicou seu primeiro balanço com informações sobre ocorrências, equipamentos e votação. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-3",
+    "slug": "eleicoes-25-outubro-boletim-03",
+    "title": {
+      "rendered": "158,7 milhões estão aptos a votar neste domingo"
+    },
+    "excerpt": {
+      "rendered": "O segundo turno ocorre das 8h às 17h, horário de Brasília, segundo a Agência Brasil e o TSE."
+    },
+    "category": "Brasil",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:41:00-03:00",
+    "published_at": "2026-10-25T12:41:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/03",
+    "heroFill": false,
+    "source_name": "Agência Brasil",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/confira-horario-de-votacao-neste-domingo-segundo-turno-das-eleicoes",
+    "content": "O segundo turno ocorre das 8h às 17h, horário de Brasília, segundo a Agência Brasil e o TSE. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-4",
+    "slug": "eleicoes-25-outubro-boletim-04",
+    "title": {
+      "rendered": "Celina Leão vota no Lago Norte durante segundo turno"
+    },
+    "excerpt": {
+      "rendered": "A candidata do PP votou pouco antes das 10h, segundo reportagem publicada nesta manhã."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:34:00-03:00",
+    "published_at": "2026-10-25T12:34:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://static.poder360.com.br/uploads/2026/09/celina-grass.jpg",
+    "href": "/eleicoes/boletim-25-outubro/04",
+    "heroFill": false,
+    "source_name": "CNN Brasil",
+    "source_url": "https://www.cnnbrasil.com.br/eleicoes/celina-leao-candidata-ao-governo-do-df-vota-no-2o-turno-em-brasilia/",
+    "content": "A candidata do PP votou pouco antes das 10h, segundo reportagem publicada nesta manhã. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-5",
+    "slug": "eleicoes-25-outubro-boletim-05",
+    "title": {
+      "rendered": "Leandro Grass vota no Guará 2 às 10h45"
+    },
+    "excerpt": {
+      "rendered": "O candidato do PT compareceu ao local de votação no Guará 2 e disse que acompanhará a apuração."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:27:00-03:00",
+    "published_at": "2026-10-25T12:27:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://static.poder360.com.br/uploads/2026/09/celina-grass.jpg",
+    "href": "/eleicoes/boletim-25-outubro/05",
+    "heroFill": false,
+    "source_name": "CNN Brasil",
+    "source_url": "https://www.cnnbrasil.com.br/eleicoes/leandro-grass-candidato-ao-governo-do-df-vota-no-2o-turno-em-brasilia/",
+    "content": "O candidato do PT compareceu ao local de votação no Guará 2 e disse que acompanhará a apuração. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-6",
+    "slug": "eleicoes-25-outubro-boletim-06",
+    "title": {
+      "rendered": "TRE-DF substitui cinco urnas até as 10h"
+    },
+    "excerpt": {
+      "rendered": "Balanço divulgado pela imprensa informa equipamentos trocados no Guará, Asa Norte, Lago Norte e Águas Claras."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:20:00-03:00",
+    "published_at": "2026-10-25T12:20:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/06",
+    "heroFill": false,
+    "source_name": "Correio Braziliense",
+    "source_url": "https://www.correiobraziliense.com.br/cidades-df/2026/10/amp/7527343-segundo-turno-no-df-registra-troca-de-5-urnas-na-manha-deste-domingo.html",
+    "content": "Balanço divulgado pela imprensa informa equipamentos trocados no Guará, Asa Norte, Lago Norte e Águas Claras. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-7",
+    "slug": "eleicoes-25-outubro-boletim-07",
+    "title": {
+      "rendered": "Transporte público gratuito facilita voto no DF"
+    },
+    "excerpt": {
+      "rendered": "Ônibus e metrô operam sem cobrança de passagem no dia da votação, conforme comunicado do TRE-DF."
+    },
+    "category": "Serviço ao eleitor",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T12:13:00-03:00",
+    "published_at": "2026-10-25T12:13:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/07",
+    "heroFill": false,
+    "source_name": "TRE-DF",
+    "source_url": "https://www.tre-df.jus.br/comunicacao/noticias/2026/Outubro/transporte-publico-sera-gratuito-no-distrito-federal-nos-dia-da-votacao-do-segundo-turno",
+    "content": "Ônibus e metrô operam sem cobrança de passagem no dia da votação, conforme comunicado do TRE-DF. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-8",
+    "slug": "eleicoes-25-outubro-boletim-08",
+    "title": {
+      "rendered": "Presidente do TRE-DF acompanha teste de integridade"
+    },
+    "excerpt": {
+      "rendered": "O desembargador Ângelo Passarelli participou de uma cerimônia de verificação de urnas e incentivou o comparecimento."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:55:00-03:00",
+    "published_at": "2026-10-25T11:55:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/08",
+    "heroFill": false,
+    "source_name": "Correio Braziliense",
+    "source_url": "https://www.correiobraziliense.com.br/cidades-df/2026/10/amp/7527299-presidente-do-tre-df-reforca-a-importancia-do-voto-neste-domingo.html",
+    "content": "O desembargador Ângelo Passarelli participou de uma cerimônia de verificação de urnas e incentivou o comparecimento. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-9",
+    "slug": "eleicoes-25-outubro-boletim-09",
+    "title": {
+      "rendered": "Flávio e Lula votam e comentam suas campanhas"
+    },
+    "excerpt": {
+      "rendered": "Os dois candidatos à Presidência votaram neste domingo e falaram sobre os principais temas eleitorais."
+    },
+    "category": "Política",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:48:00-03:00",
+    "published_at": "2026-10-25T11:48:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://p2.trrsf.com/image/fget/cf/1548/0/images.terra.com/2026/09/14/2130586534-lula-flavio-bolsonaro-eleicoes-para-presidente-2026.jpg",
+    "href": "/eleicoes/boletim-25-outubro/09",
+    "heroFill": false,
+    "source_name": "Folha de S.Paulo",
+    "source_url": "https://www1.folha.uol.com.br/poder/2026/10/ao-votar-no-segundo-turno-flavio-explora-medo-e-endividamento-e-lula-atribui-atos-de-rua-ao-povo.shtml",
+    "content": "Os dois candidatos à Presidência votaram neste domingo e falaram sobre os principais temas eleitorais. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-10",
+    "slug": "eleicoes-25-outubro-boletim-10",
+    "title": {
+      "rendered": "Brasil decide disputa entre Flávio e Lula"
+    },
+    "excerpt": {
+      "rendered": "O segundo turno presidencial mobiliza o eleitorado nacional; votos oficiais serão totalizados após o encerramento."
+    },
+    "category": "Política",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:41:00-03:00",
+    "published_at": "2026-10-25T11:41:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://p2.trrsf.com/image/fget/cf/1548/0/images.terra.com/2026/09/14/2130586534-lula-flavio-bolsonaro-eleicoes-para-presidente-2026.jpg",
+    "href": "/eleicoes/boletim-25-outubro/10",
+    "heroFill": false,
+    "source_name": "CNN Brasil",
+    "source_url": "https://www.cnnbrasil.com.br/eleicoes/brasil-dividido-vai-as-urnas-hoje-para-escolher-entre-flavio-e-lula/",
+    "content": "O segundo turno presidencial mobiliza o eleitorado nacional; votos oficiais serão totalizados após o encerramento. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-11",
+    "slug": "eleicoes-25-outubro-boletim-11",
+    "title": {
+      "rendered": "TSE reforça segurança com drones e cães farejadores"
+    },
+    "excerpt": {
+      "rendered": "O tribunal informou reforço de proteção no prédio onde acompanha a eleição, com equipes de segurança."
+    },
+    "category": "Segurança eleitoral",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:34:00-03:00",
+    "published_at": "2026-10-25T11:34:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/11",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/comunicacao/",
+    "content": "O tribunal informou reforço de proteção no prédio onde acompanha a eleição, com equipes de segurança. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-12",
+    "slug": "eleicoes-25-outubro-boletim-12",
+    "title": {
+      "rendered": "TSE informa substituição de 467 urnas até as 10h"
+    },
+    "excerpt": {
+      "rendered": "O boletim de ocorrência divulgado pela Justiça Eleitoral apresentou dados parciais do funcionamento dos equipamentos."
+    },
+    "category": "Brasil",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:27:00-03:00",
+    "published_at": "2026-10-25T11:27:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/12",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/comunicacao/radio/2026/Outubro",
+    "content": "O boletim de ocorrência divulgado pela Justiça Eleitoral apresentou dados parciais do funcionamento dos equipamentos. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-13",
+    "slug": "eleicoes-25-outubro-boletim-13",
+    "title": {
+      "rendered": "Mobilização de rua e disputas nas redes marcam reta final"
+    },
+    "excerpt": {
+      "rendered": "Reportagem publicada hoje analisa a movimentação das campanhas, manifestações e disputas na Justiça Eleitoral."
+    },
+    "category": "Análise",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:20:00-03:00",
+    "published_at": "2026-10-25T11:20:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://p2.trrsf.com/image/fget/cf/1548/0/images.terra.com/2026/09/14/2130586534-lula-flavio-bolsonaro-eleicoes-para-presidente-2026.jpg",
+    "href": "/eleicoes/boletim-25-outubro/13",
+    "heroFill": false,
+    "source_name": "UOL",
+    "source_url": "https://noticias.uol.com.br/eleicoes/2026/10/25/ruas-cheias-e-batalha-nas-redes-e-no-tse-marcam-2-turno-de-flavio-e-lula.htm",
+    "content": "Reportagem publicada hoje analisa a movimentação das campanhas, manifestações e disputas na Justiça Eleitoral. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-14",
+    "slug": "eleicoes-25-outubro-boletim-14",
+    "title": {
+      "rendered": "Votação termina às 17h; senhas garantem direito de quem já estiver na fila"
+    },
+    "excerpt": {
+      "rendered": "A Justiça Eleitoral determina entrega de senhas para eleitores que aguardarem na seção ao fim do horário."
+    },
+    "category": "Serviço ao eleitor",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T11:13:00-03:00",
+    "published_at": "2026-10-25T11:13:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/14",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/eleicoes/calendario-eleitoral",
+    "content": "A Justiça Eleitoral determina entrega de senhas para eleitores que aguardarem na seção ao fim do horário. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-15",
+    "slug": "eleicoes-25-outubro-boletim-15",
+    "title": {
+      "rendered": "DF também escolhe o próximo governador"
+    },
+    "excerpt": {
+      "rendered": "Além da Presidência, moradores do Distrito Federal votam entre Celina Leão e Leandro Grass."
+    },
+    "category": "Distrito Federal",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:55:00-03:00",
+    "published_at": "2026-10-25T10:55:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://static.poder360.com.br/uploads/2026/09/celina-grass.jpg",
+    "href": "/eleicoes/boletim-25-outubro/15",
+    "heroFill": false,
+    "source_name": "Agência Brasil",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/confira-horario-de-votacao-neste-domingo-segundo-turno-das-eleicoes",
+    "content": "Além da Presidência, moradores do Distrito Federal votam entre Celina Leão e Leandro Grass. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-16",
+    "slug": "eleicoes-25-outubro-boletim-16",
+    "title": {
+      "rendered": "Cinco estados também escolhem governadores"
+    },
+    "excerpt": {
+      "rendered": "Acre, Amazonas, Espírito Santo, Rio Grande do Norte e Tocantins realizam segundo turno estadual."
+    },
+    "category": "Brasil",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:48:00-03:00",
+    "published_at": "2026-10-25T10:48:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/16",
+    "heroFill": false,
+    "source_name": "Agência Brasil",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/confira-horario-de-votacao-neste-domingo-segundo-turno-das-eleicoes",
+    "content": "Acre, Amazonas, Espírito Santo, Rio Grande do Norte e Tocantins realizam segundo turno estadual. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-17",
+    "slug": "eleicoes-25-outubro-boletim-17",
+    "title": {
+      "rendered": "Metrô e ônibus do DF operam sem tarifa"
+    },
+    "excerpt": {
+      "rendered": "A operação especial permite deslocamento gratuito e reforça a oferta do transporte no dia de votar."
+    },
+    "category": "Mobilidade",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:41:00-03:00",
+    "published_at": "2026-10-25T10:41:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/17",
+    "heroFill": false,
+    "source_name": "Agência Brasil",
+    "source_url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/eleicoes-saiba-onde-havera-transporte-gratuito-no-segundo-turno",
+    "content": "A operação especial permite deslocamento gratuito e reforça a oferta do transporte no dia de votar. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-18",
+    "slug": "eleicoes-25-outubro-boletim-18",
+    "title": {
+      "rendered": "TRE-DF mantém locais de votação no segundo turno"
+    },
+    "excerpt": {
+      "rendered": "O tribunal desmentiu informações de mudanças gerais nas seções e orientou eleitoras e eleitores a conferir as informações oficiais."
+    },
+    "category": "Checagem",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:34:00-03:00",
+    "published_at": "2026-10-25T10:34:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/18",
+    "heroFill": false,
+    "source_name": "TRE-DF",
+    "source_url": "https://www.tre-df.jus.br/comunicacao",
+    "content": "O tribunal desmentiu informações de mudanças gerais nas seções e orientou eleitoras e eleitores a conferir as informações oficiais. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-19",
+    "slug": "eleicoes-25-outubro-boletim-19",
+    "title": {
+      "rendered": "Apuração e totalização terão transmissão pelo TSE"
+    },
+    "excerpt": {
+      "rendered": "A Justiça Eleitoral anuncia acompanhamento oficial após as 17h de Brasília; números provisórios precisam ser contextualizados."
+    },
+    "category": "Apuração",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:27:00-03:00",
+    "published_at": "2026-10-25T10:27:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/19",
+    "heroFill": false,
+    "source_name": "TSE",
+    "source_url": "https://www.tse.jus.br/comunicacao/radio/2026/Outubro",
+    "content": "A Justiça Eleitoral anuncia acompanhamento oficial após as 17h de Brasília; números provisórios precisam ser contextualizados. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  },
+  {
+    "id": "voz-20261025-20",
+    "slug": "eleicoes-25-outubro-boletim-20",
+    "title": {
+      "rendered": "E-Título e justificativas têm procura intensa no segundo turno"
+    },
+    "excerpt": {
+      "rendered": "A TV Senado informou números parciais de emissão de títulos digitais e justificativas do eleitorado."
+    },
+    "category": "Serviço ao eleitor",
+    "categorySlug": "politica",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-25T10:20:00-03:00",
+    "published_at": "2026-10-25T10:20:00-03:00",
+    "author": "Redação Voz de Brasília",
+    "status": "published",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Brazilian_electronic_voting_machine.jpg",
+    "href": "/eleicoes/boletim-25-outubro/20",
+    "heroFill": false,
+    "source_name": "TV Senado",
+    "source_url": "https://www12.senado.leg.br/tv/programas/noticias-1/2026/10/eleicoes-2026-justica-eleitoral-divulga-primeiro-boletim-do-segundo-turno",
+    "content": "A TV Senado informou números parciais de emissão de títulos digitais e justificativas do eleitorado. Análise editorial da Voz de Brasília: é importante acompanhar confirmações da Justiça Eleitoral e distinguir informações verificadas de relatos não confirmados."
+  }
+]
