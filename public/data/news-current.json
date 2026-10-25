@@ -1,5 +1,29 @@
 [
   {
+    "id": "voz-20261025-prorrogacao",
+    "slug": "zanin-prorroga-votacao-19h-25-outubro-2026",
+    "title": {
+      "rendered": "Zanin prorroga votação até as 19h em todo o país, informa imprensa"
+    },
+    "excerpt": {
+      "rendered": "CNN Brasil e Veja noticiam ampliação do horário do segundo turno neste domingo (25). Acompanhe a atualização."
+    },
+    "content": "<p>O ministro Cristiano Zanin, do Supremo Tribunal Federal, determinou a ampliação do horário de votação deste domingo (25) até as 19h em todo o Brasil, segundo notícias publicadas por CNN Brasil e Veja.</p><p>A medida trata da prorrogação do horário do segundo turno no mesmo dia. A reportagem acompanha os comunicados da Justiça Eleitoral para atualizar as orientações e os efeitos sobre a divulgação dos resultados.</p><h2>ANÁLISE DE PAULO FAYAD</h2><p>A informação exige precisão: ampliar o horário de votação não significa transferir a eleição para outra data. As orientações oficiais devem guiar os eleitores.</p><p>Fontes: <a href=\"https://www.cnnbrasil.com.br/eleicoes/zanin-prorroga-eleicao-ate-as-19h-deste-domingo-em-todo-o-pais/\">CNN Brasil, publicação das 17h05</a> e <a href=\"https://veja.abril.com.br/brasil/zanin-prorroga-votacao-em-todo-o-brasil-para-19h/\">Veja</a>. Notícia em atualização.</p>",
+    "category": "Eleições 2026",
+    "categorySlug": "politica",
+    "categoryColor": "bg-red-700",
+    "date": "2026-10-25T17:34:00-03:00",
+    "published_at": "2026-10-25T17:34:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "/news-images/gavel.png",
+    "image_credit": "Imagem ilustrativa do acervo do portal.",
+    "href": "/noticia/zanin-prorroga-votacao-19h-25-outubro-2026",
+    "source_name": "CNN Brasil e Veja",
+    "source_url": "https://www.cnnbrasil.com.br/eleicoes/zanin-prorroga-eleicao-ate-as-19h-deste-domingo-em-todo-o-pais/",
+    "heroFill": false
+  },
+  {
     "id": "voz-20261023-agenda",
     "slug": "agenda-23-outubro-2026",
     "title": {
