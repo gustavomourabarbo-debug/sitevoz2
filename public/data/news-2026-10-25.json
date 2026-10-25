@@ -77,7 +77,7 @@
     "excerpt": {
       "rendered": "Balanço parcial do segundo turno foi apresentado ao lado dos presidentes da Câmara e do Senado."
     },
-    "content": "<p>O presidente do TSE, Kassio Nunes Marques, destacou o baixo índice de ocorrências no segundo turno. O balanço parcial foi apresentado ao lado dos presidentes da Câmara e do Senado, conforme nota oficial das 17h14.</p><p>Fonte: <a href=\"https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-destaca-baixo-indice-de-ocorrencias-no-2o-turno\">TSE</a>.</p>",
+    "content": "<p>O presidente do TSE, Kassio Nunes Marques, destacou o baixo índice de ocorrências no segundo turno. O balanço parcial foi apresentado ao lado dos presidentes da Câmara e do Senado, conforme nota oficial das 17h14.</p><p>Fonte: <a href=\"https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-destaca-estabilidade-no-pais-neste-2o-turno-das-eleicoes-2026\">TSE</a>.</p>",
     "category": "Eleições 2026",
     "categorySlug": "politica",
     "categoryColor": "bg-red-700",
@@ -87,7 +87,7 @@
     "status": "published",
     "featured_image": "/news-images/police.png",
     "href": "/noticia/eleicoes-25-outubro-tse-baixo-indice",
-    "source_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-destaca-baixo-indice-de-ocorrencias-no-2o-turno",
+    "source_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-destaca-estabilidade-no-pais-neste-2o-turno-das-eleicoes-2026",
     "source_name": "TSE",
     "heroFill": false
   },
