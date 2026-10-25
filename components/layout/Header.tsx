@@ -101,7 +101,7 @@ export default function Header() {
         </nav>
 
         {isMobileMenuOpen && (
-          <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><DetranCampaignBanner /></div><div className="lg:hidden border-t border-gray-200 bg-white">
+          <div className="lg:hidden border-t border-gray-200 bg-white">
             <div className="max-w-[1400px] mx-auto px-4 py-4">
               <div className="mb-4"><input type="text" placeholder="Buscar notícias..." className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" /></div>
               <div className="space-y-2">
@@ -116,6 +116,7 @@ export default function Header() {
             </div>
           </div>
         )}
+        <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><DetranCampaignBanner /></div>
       </header>
 
     </>
