@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
+import MilkDonationBanner from '@/components/common/MilkDonationBanner';
 import { Search, Menu, X, Play } from 'lucide-react';
 
 export default function Header() {
@@ -76,7 +76,7 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><DetranCampaignBanner /></div>
+            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><MilkDonationBanner /></div>
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
@@ -116,7 +116,7 @@ export default function Header() {
             </div>
           </div>
         )}
-        <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><DetranCampaignBanner /></div>
+        <div className="mx-auto max-w-[1400px] px-4 pb-3 lg:hidden"><MilkDonationBanner /></div>
       </header>
 
     </>
