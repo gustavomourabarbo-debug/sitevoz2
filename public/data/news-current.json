@@ -1,5 +1,110 @@
 [
   {
+    "id": "df-comparecimento-segundo-turno-26-outubro-2026",
+    "slug": "df-comparecimento-segundo-turno-26-outubro-2026",
+    "title": {
+      "rendered": "DF teve 1,85 milhão de eleitores no segundo turno; abstenção caiu"
+    },
+    "excerpt": {
+      "rendered": "TRE-DF divulgou nesta segunda-feira balanço com aumento do comparecimento em relação ao primeiro turno."
+    },
+    "content": "<p>O comparecimento no Distrito Federal chegou a 1.854.323 eleitores no segundo turno de 25 de outubro, segundo balanço divulgado pelo TRE-DF nesta segunda-feira (26). A participação representou 82,63% do eleitorado apto, enquanto a abstenção ficou em 17,37%.</p><p>Em relação ao primeiro turno, houve 36.402 votantes a mais. O tribunal também informou que 20 urnas precisaram ser substituídas, ante 28 na etapa anterior. Os dados tratam de participação eleitoral e não constituem um placar de candidatos.</p><p>Fonte: <a href=\"https://www.tre-df.jus.br/comunicacao/noticias/2026/Outubro/segundo-turno-das-eleicoes-2026-registra-aumento-no-comparecimento-e-reducao-da-abstencao-no-df\">TRE-DF</a></p>",
+    "category": "Distrito Federal",
+    "categorySlug": "distrito-federal",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-26T16:30:00-03:00",
+    "published_at": "2026-10-26T16:30:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "https://www.tre-df.jus.br/imagens/imagens/logo-das-eleicoes-2026-fundo-preto-arte-secom-tse/@@images/image-1140-d9f11d5ab09e5e7e0491529d42ce9466.jpeg",
+    "href": "/noticia/df-comparecimento-segundo-turno-26-outubro-2026",
+    "source_url": "https://www.tre-df.jus.br/comunicacao/noticias/2026/Outubro/segundo-turno-das-eleicoes-2026-registra-aumento-no-comparecimento-e-reducao-da-abstencao-no-df"
+  },
+  {
+    "id": "enem-2026-avaliacao-educacao-basica",
+    "slug": "enem-2026-avaliacao-educacao-basica",
+    "title": {
+      "rendered": "Enem 2026 amplia função e passa a avaliar a educação básica"
+    },
+    "excerpt": {
+      "rendered": "Exame mantém acesso ao ensino superior e certificação, com provas previstas para 8 e 15 de novembro."
+    },
+    "content": "<p>O Enem de 2026 passa a integrar o Sistema de Avaliação da Educação Básica, além das funções de acesso à universidade e certificação do ensino médio. A mudança foi detalhada pelo Inep em comunicado de 22 de outubro.</p><p>Os resultados permitirão acompanhar a aprendizagem e orientar políticas educacionais. Para o financiamento da educação básica em 2026, permanece a referência do Saeb de 2025. As provas do Enem serão realizadas em 8 e 15 de novembro.</p><p>Fonte: <a href=\"https://agenciagov.ebc.com.br/noticias/202610/enem-integra-avaliacao-da-educacao-basica-entenda-as-novidades\">Inep / Agência Gov</a></p>",
+    "category": "Educação",
+    "categorySlug": "cultura",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-26T16:30:00-03:00",
+    "published_at": "2026-10-26T16:30:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "https://agenciagov.ebc.com.br/noticias/202610/enem-integra-avaliacao-da-educacao-basica-entenda-as-novidades/@@images/1f4cd0c3-7864-430d-8beb-001580323cca.png",
+    "href": "/noticia/enem-2026-avaliacao-educacao-basica",
+    "source_url": "https://agenciagov.ebc.com.br/noticias/202610/enem-integra-avaliacao-da-educacao-basica-entenda-as-novidades"
+  },
+  {
+    "id": "egov-cursos-novembro-inscricoes-27-outubro",
+    "slug": "egov-cursos-novembro-inscricoes-27-outubro",
+    "title": {
+      "rendered": "Egov abre inscrições dia 27 para 40 cursos presenciais em novembro"
+    },
+    "excerpt": {
+      "rendered": "Capacitações para servidores do DF abrangem inteligência artificial, gestão, comunicação e desenvolvimento profissional."
+    },
+    "content": "<p>Servidores distritais poderão se inscrever de 27 de outubro a 17 de novembro nas atividades presenciais da Escola de Governo do DF. A programação de novembro reúne 40 cursos.</p><p>Há formações em inteligência artificial, gestão de contratos, integridade e proteção de dados, além de comunicação e habilidades profissionais. Datas e condições de cada atividade devem ser consultadas no calendário oficial da Egov.</p><p>Fonte: <a href=\"https://www.agenciabrasilia.df.gov.br/w/servidores-ter%C3%A3o-acesso-a-atividades-presenciais-de-capacita%C3%A7%C3%A3o-em-novembro\">Agência Brasília / Egov</a></p>",
+    "category": "Educação",
+    "categorySlug": "cultura",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-26T16:30:00-03:00",
+    "published_at": "2026-10-26T16:30:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "https://www.agenciabrasilia.df.gov.br/documents/d/guest/12-9-egov-foto-divulgacao-egov-jpg",
+    "href": "/noticia/egov-cursos-novembro-inscricoes-27-outubro",
+    "source_url": "https://www.agenciabrasilia.df.gov.br/w/servidores-ter%C3%A3o-acesso-a-atividades-presenciais-de-capacita%C3%A7%C3%A3o-em-novembro"
+  },
+  {
+    "id": "workshop-propriedade-intelectual-df-29-outubro",
+    "slug": "workshop-propriedade-intelectual-df-29-outubro",
+    "title": {
+      "rendered": "DF terá workshop sobre propriedade intelectual e inovação no dia 29"
+    },
+    "excerpt": {
+      "rendered": "Secti-DF e Inpi promovem encontro às 15h no Setor Comercial Sul."
+    },
+    "content": "<p>A Secti-DF e a representação regional do Inpi realizam, em 29 de outubro, às 15h, um workshop sobre proteção de criações e ativos intelectuais no incentivo à inovação.</p><p>A atividade será no Espaço de Inovação da secretaria, no térreo do Edifício Toufic, na Quadra 2 do Setor Comercial Sul. O público prioritário é formado por profissionais que elaboram ou gerenciam editais de pesquisa e desenvolvimento.</p><p>Fonte: <a href=\"https://www.agenciabrasilia.df.gov.br/w/workshop-discute-propriedade-intelectual-para-fortalecer-o-ecossistema-de-inovacao\">Agência Brasília / Secti-DF</a></p>",
+    "category": "Tecnologia",
+    "categorySlug": "tecnologia",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-26T16:30:00-03:00",
+    "published_at": "2026-10-26T16:30:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "https://www.agenciabrasilia.df.gov.br/documents/d/guest/whatsapp-image-2026-08-05-at-09-09-59-4-jpeg",
+    "href": "/noticia/workshop-propriedade-intelectual-df-29-outubro",
+    "source_url": "https://www.agenciabrasilia.df.gov.br/w/workshop-discute-propriedade-intelectual-para-fortalecer-o-ecossistema-de-inovacao"
+  },
+  {
+    "id": "concurso-desenho-gdf-inscricoes-2026",
+    "slug": "concurso-desenho-gdf-inscricoes-2026",
+    "title": {
+      "rendered": "Concurso de desenho do GDF recebe inscrições até 8 de novembro"
+    },
+    "excerpt": {
+      "rendered": "Iniciativa é destinada a crianças de 5 a 12 anos ligadas a famílias de servidores e empregados públicos distritais."
+    },
+    "content": "<p>O GDF iniciou nesta segunda-feira (26) as inscrições para seu concurso de desenho de 2026, com prazo até 8 de novembro. Podem participar filhos, enteados e netos de servidores ativos e aposentados e de empregados públicos do DF, entre 5 e 12 anos.</p><p>A proposta deste ano trabalha respeito, amizade e inclusão. Cada criança poderá inscrever um desenho, conforme o regulamento. As famílias devem consultar as orientações oficiais para verificar os procedimentos de participação.</p><p>Fonte: <a href=\"https://www.agenciabrasilia.df.gov.br/w/concurso-de-desenho-2026-do-gdf-descubra-o-talento-de-criancas\">Agência Brasília</a></p>",
+    "category": "Cultura",
+    "categorySlug": "cultura",
+    "categoryColor": "bg-blue-700",
+    "date": "2026-10-26T16:30:00-03:00",
+    "published_at": "2026-10-26T16:30:00-03:00",
+    "author": "Paulo Fayad",
+    "status": "published",
+    "featured_image": "https://www.voznewsbrasil.com.br/assets/verticais-2026-10/educacao.jpg",
+    "href": "/noticia/concurso-desenho-gdf-inscricoes-2026",
+    "source_url": "https://www.agenciabrasilia.df.gov.br/w/concurso-de-desenho-2026-do-gdf-descubra-o-talento-de-criancas"
+  },
+  {
     "id": "flavio-bolsonaro-anuncia-pedido-anulacao-eleicao-2026",
     "slug": "flavio-bolsonaro-anuncia-pedido-anulacao-eleicao-2026",
     "title": {
