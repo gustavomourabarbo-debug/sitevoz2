@@ -129,7 +129,7 @@ const titulo = String(post.title?.rendered || post.title || '').replace(/<[^>]+>
                   <img
                     src={imagem}
                     alt={titulo}
-                    className="w-full h-96 object-cover object-[50%_22%]"
+                    className={post.slug === "parabens-celina-leao-homenagem-paulo-fayad-2026" ? "block w-full h-auto max-h-[850px] object-contain bg-slate-950" : "w-full h-96 object-cover object-center"}
                   />
                 )}
 
