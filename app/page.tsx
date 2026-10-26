@@ -113,26 +113,28 @@ export default async function Home() {
 </section>
 <section id="em-evidencia" aria-labelledby="exterior-title" className="mx-auto max-w-[1400px] px-4 py-5">
   <div className="rounded-2xl border-2 border-blue-800 bg-white p-5 shadow-lg md:p-8">
-    <p className="text-sm font-black uppercase tracking-widest text-blue-800">Em Evidência • Eleições 2026 • 25/10</p>
-    <h2 id="exterior-title" className="mt-2 text-2xl font-black text-gray-900 md:text-4xl">Votos no exterior — boletins de urna disponíveis</h2>
-    <p className="mt-3 text-gray-600">Recorte de 57 países e territórios • Fonte: CNN Brasil, atualizada em 25/10 às 16h18 (Brasília). Valores recalculados das 57 linhas. Boletins completos e parciais podem estar misturados; não é total mundial nem totalização oficial do TSE. Quantidade de urnas/seções por local não informada.</p>
+    <p className="text-sm font-black uppercase tracking-widest text-blue-800">Em Evidência • Eleições 2026 • 25/10 • atualização 22h10 (Brasília)</p>
+    <h2 id="exterior-title" className="mt-2 text-2xl font-black text-gray-900 md:text-4xl">Votação no exterior — 100% das urnas apuradas</h2>
+    <p className="mt-3 text-gray-600">Segundo turno presidencial. Totalização do exterior divulgada pela CNN Brasil em 25/10 às 22h10 (Brasília), com base nos resultados eleitorais. São 101 países com votos válidos; este é o resultado do EXTERIOR, não o total nacional. Comparecimento: 381.443 eleitores (41,63% dos 918.876 aptos).</p>
     <div className="mt-6 grid items-center gap-6 md:grid-cols-2">
       <div className="flex flex-col items-center gap-4">
-        <div role="img" aria-label="Gráfico de pizza: Flávio Bolsonaro 40,44 por cento em azul, Lula 59,56 por cento em vermelho, entre 236.109 votos do recorte" className="h-64 w-64 rounded-full shadow-md" style={{background:'conic-gradient(#1d4ed8 0% 40.44%, #dc2626 40.44% 100%)'}}/>
+        <div role="img" aria-label="Gráfico de pizza dos 371.651 votos válidos no exterior: Flávio Bolsonaro 46,14 por cento em azul, Lula 53,86 por cento em vermelho" className="h-64 w-64 rounded-full shadow-md" style={{background:'conic-gradient(#1d4ed8 0% 46.14%, #dc2626 46.14% 100%)'}}/>
         <ol className="space-y-2 text-lg font-bold">
-          <li className="text-blue-700">Flávio Bolsonaro — 95.472 votos (40,44%)</li>
-          <li className="text-red-600">Lula — 140.637 votos (59,56%)</li>
+          <li className="text-blue-700">Flávio Bolsonaro — 171.497 votos (46,14%)</li>
+          <li className="text-red-600">Lula — 200.154 votos (53,86%)</li>
         </ol>
+        <p className="text-sm font-bold text-gray-800">371.651 votos válidos no exterior • 100% das urnas apuradas</p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm md:text-base">
-          <caption className="mb-3 text-left font-bold">Votos por país/território • 236.109 votos no recorte</caption>
+          <caption className="mb-3 text-left font-bold">Países/territórios com votos individuais confirmados • ordem: Flávio (azul), Lula (vermelho)</caption>
           <thead><tr className="border-b-2"><th className="py-2">País / território</th><th className="text-blue-700">Flávio</th><th className="text-red-600">Lula</th></tr></thead>
-          <tbody>{[["Japão",28538,7098],["Israel",699,166],["Emirados Árabes Unidos",772,643],["Catar",195,159],["África do Sul",256,186],["Taiwan",130,94],["Indonésia",23,15],["Grécia",311,255],["Hong Kong",133,127],["Malásia",44,41],["Filipinas",39,27],["Tailândia",60,56],["Moçambique",117,108],["China continental",134,375],["Reino Unido",6349,10968],["Alemanha",4374,16549],["França",2039,10676],["Itália",5283,7921],["Espanha",4289,9293],["Portugal",23433,34319],["Índia",23,25],["Austrália",3465,6017],["Coreia do Sul",82,148],["Suíça",5419,7089],["Países Baixos",1383,5578],["Bélgica",2154,3064],["Suécia",591,2127],["Áustria",393,1178],["Dinamarca",243,1383],["Irlanda",1776,7194],["Noruega",248,820],["Finlândia",185,550],["Arábia Saudita",31,49],["Turquia",29,98],["Líbano",1276,2736],["Palestina",46,1000],["Egito",16,60],["Angola",118,167],["Polônia",89,268],["Hungria",117,355],["Tchéquia",86,304],["Romênia",25,40],["Sérvia",13,35],["Croácia",26,31],["Eslováquia",14,47],["Eslovênia",28,67],["Nova Zelândia",101,418],["Singapura",121,213],["Senegal",22,59],["Marrocos",6,31],["Quênia",16,29],["Jordânia",7,72],["Kuwait",17,62],["Estônia",33,160],["Chipre",25,29],["Cabo Verde",29,48],["Síria",1,10]].map(([pais,f,l])=><tr key={String(pais)} className="border-b"><th className="py-2 font-medium">{pais}</th><td className="font-bold text-blue-700">{Number(f).toLocaleString('pt-BR')}</td><td className="font-bold text-red-600">{Number(l).toLocaleString('pt-BR')}</td></tr>)}</tbody>
+          <tbody>{[["Japão",28538,7098],["Israel",699,166],["Líbano",1276,2736],["Palestina",46,1000],["China continental",134,375],["Hong Kong",133,127],["Austrália",3465,6017],["Nova Zelândia",101,418],["Taiwan",130,94],["Catar",195,159]].map(([pais,f,l])=><tr key={String(pais)} className="border-b"><th className="py-2 font-medium">{pais}</th><td className="font-bold text-blue-700">{Number(f).toLocaleString('pt-BR')}</td><td className="font-bold text-red-600">{Number(l).toLocaleString('pt-BR')}</td></tr>)}</tbody>
         </table>
+        <p className="mt-3 text-xs text-gray-600">A tabela exibe apenas dez localidades com contagens individuais verificadas; não corresponde ao total de 101 países. China continental e Hong Kong aparecem separadamente. A Índia já integra a totalização concluída: Flávio 42,11%, Lula 57,89% dos votos válidos no país, segundo a CNN.</p>
       </div>
     </div>
-    <p className="mt-5 text-sm text-gray-600">Fonte: <a className="underline" href="https://www.cnnbrasil.com.br/internacional/eleicoes-2026-exterior-boletins-urna-flavio-lula/" target="_blank" rel="noreferrer">CNN Brasil — boletins de urna, 25/10, 16h18</a>. Índia, Turquia e demais locais sem cobertura integral de urnas devem ser considerados parciais. China continental e Hong Kong contabilizados separadamente. O resumo percentual da CNN diverge da soma de suas linhas; aqui foram usados os números linha a linha. <a className="underline" href="https://www.tse.jus.br/eleicoes/eleicoes-2026-content/divulgacao-dos-resultados-das-eleicoes-2026" target="_blank" rel="noreferrer">Totalização oficial do TSE</a> a partir das 17h (Brasília).</p>
+    <p className="mt-5 text-sm text-gray-600">Fonte e lista de percentuais dos 101 países: <a className="underline" href="https://www.cnnbrasil.com.br/eleicoes/lula-tem-5386-dos-votos-validos-no-exterior-no-2o-turno-veja-o-resultado-por-pais/" target="_blank" rel="noopener noreferrer">CNN Brasil, 25/10, 22h10</a>. Consulte também a <a className="underline" href="https://resultados.tse.jus.br/oficial/app/index.html" target="_blank" rel="noopener noreferrer">totalização oficial do TSE</a>. Números e percentuais do gráfico são exclusivamente do exterior.</p>
   </div>
 </section><HeroCarousel posts={manchetes.slice(0,8)}/><section className="mt-4 bg-white">
   <div className="max-w-[1400px] mx-auto px-4 py-4">
