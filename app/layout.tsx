@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import TerracapBanner from '@/components/common/TerracapBanner';
-import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import { Inter, Merriweather } from 'next/font/google';
 
 const inter = Inter({
@@ -126,7 +125,6 @@ export default function RootLayout({
             gtag('config', 'G-YH9F8VLNCQ');
           `}
         </Script>
-        <DetranCampaignBanner />
         {children}
         <TerracapBanner />
       </body>
