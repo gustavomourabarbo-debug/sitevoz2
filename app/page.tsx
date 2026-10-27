@@ -1,4 +1,4 @@
-import verifiedToday from '@/public/data/news-2026-10-25.json';
+import verifiedToday from '@/public/data/news-2026-10-27.json';
 import Header from '@/components/layout/Header';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import LatestNews from '@/components/home/LatestNews';
