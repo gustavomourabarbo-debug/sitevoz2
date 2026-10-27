@@ -1,0 +1,87 @@
+[
+  {
+    "id": "voz-2710-0",
+    "slug": "inep-enem-locais-prova",
+    "title": {
+      "rendered": "Enem 2026: Inep libera locais de prova para participantes"
+    },
+    "excerpt": {
+      "rendered": "Cartão de confirmação disponível; provas acontecem em 8 e 15 de novembro."
+    },
+    "category": "Educação",
+    "date": "2026-10-27T18:00:00-03:00",
+    "published_at": "2026-10-27T18:00:00-03:00",
+    "featured_image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200",
+    "href": "/atualizacoes/2026-10-27/inep-enem-locais-prova",
+    "source_url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/",
+    "content": "Cartão de confirmação disponível; provas acontecem em 8 e 15 de novembro."
+  },
+  {
+    "id": "voz-2710-1",
+    "slug": "enade-prazo-questionario",
+    "title": {
+      "rendered": "Enade 2026: prazo do questionário dos ingressantes é atualizado"
+    },
+    "excerpt": {
+      "rendered": "Inep informa novo período de 30 de outubro a 18 de dezembro."
+    },
+    "category": "Educação",
+    "date": "2026-10-27T17:00:00-03:00",
+    "published_at": "2026-10-27T17:00:00-03:00",
+    "featured_image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200",
+    "href": "/atualizacoes/2026-10-27/enade-prazo-questionario",
+    "source_url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/",
+    "content": "Inep informa novo período de 30 de outubro a 18 de dezembro."
+  },
+  {
+    "id": "voz-2710-2",
+    "slug": "mp-imposto-seletivo-diesel",
+    "title": {
+      "rendered": "Governo prepara MP do Imposto Seletivo e renova apoio ao diesel"
+    },
+    "excerpt": {
+      "rendered": "Fazenda trata de alíquotas e prorrogação de subvenção ao combustível."
+    },
+    "category": "Economia",
+    "date": "2026-10-27T16:00:00-03:00",
+    "published_at": "2026-10-27T16:00:00-03:00",
+    "featured_image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200",
+    "href": "/atualizacoes/2026-10-27/mp-imposto-seletivo-diesel",
+    "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/governo-enviara-mp-do-imposto-seletivo-e-renova-subvencao-ao-diesel",
+    "content": "Fazenda trata de alíquotas e prorrogação de subvenção ao combustível."
+  },
+  {
+    "id": "voz-2710-3",
+    "slug": "durigan-meta-fiscal",
+    "title": {
+      "rendered": "Ministro da Fazenda anuncia diálogo para cumprir meta fiscal"
+    },
+    "excerpt": {
+      "rendered": "Equipe econômica estuda medidas de ajuste e contingenciamento orçamentário."
+    },
+    "category": "Economia",
+    "date": "2026-10-27T15:00:00-03:00",
+    "published_at": "2026-10-27T15:00:00-03:00",
+    "featured_image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200",
+    "href": "/atualizacoes/2026-10-27/durigan-meta-fiscal",
+    "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/governo-buscara-cumprir-meta-fiscal-com-dialogo-diz-durigan",
+    "content": "Equipe econômica estuda medidas de ajuste e contingenciamento orçamentário."
+  },
+  {
+    "id": "voz-2710-4",
+    "slug": "mpt-assedio-eleitoral",
+    "title": {
+      "rendered": "MPT registra quase 2 mil denúncias de assédio eleitoral"
+    },
+    "excerpt": {
+      "rendered": "Novo levantamento do Ministério Público do Trabalho é noticiado pela Agência Brasil."
+    },
+    "category": "Justiça",
+    "date": "2026-10-27T14:00:00-03:00",
+    "published_at": "2026-10-27T14:00:00-03:00",
+    "featured_image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
+    "href": "/atualizacoes/2026-10-27/mpt-assedio-eleitoral",
+    "source_url": "https://agenciabrasil.ebc.com.br/ultimas",
+    "content": "Novo levantamento do Ministério Público do Trabalho é noticiado pela Agência Brasil."
+  }
+]
