@@ -130,6 +130,9 @@ function enrichPostsWithImages(posts: any) {
 }
 
 async function fetchLiveNews(limit = 12): Promise<any[] | null> {
+  // O endpoint Lovable está retornando EPIPE durante a compilação na Vercel.
+  // Só habilitar a consulta remota após verificação do serviço; manter fallback editorial local.
+  if (process.env.VOZ_ENABLE_LIVE_FEED !== 'true') return null;
   try {
     const res = await fetch(`${LOVABLE_FEED}?limit=${limit}`, { method: 'GET', headers: fetchHeaders, signal: AbortSignal.timeout(3000), next: { revalidate: 120 } } as any);
     if (!res.ok) return null;
