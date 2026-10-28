@@ -1,5 +1,7 @@
 export default function MilkDonationBanner() {
-  const day = new Intl.DateTimeFormat('en-CA', {timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const p = Object.fromEntries(parts.map(x => [x.type, x.value]));
+  const day = `${p.year}-${p.month}-${p.day}`;
   if (day < '2026-10-23' || day > '2026-10-30') return null;
   return <aside aria-label="Publicidade institucional — Doação de Leite Materno 2026" className="w-full border-b border-gray-200 bg-white px-2 py-3 text-center">
     <a href="https://amamentabrasilia.saude.df.gov.br/" target="_blank" rel="noopener noreferrer sponsored" aria-label="Doação de Leite Materno 2026 — saiba como doar" className="inline-block max-w-full">
