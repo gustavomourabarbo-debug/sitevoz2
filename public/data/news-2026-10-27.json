@@ -1,5 +1,22 @@
 [
   {
+    "id": "voz-2710-bc",
+    "slug": "bc-superendividados-20-milhoes",
+    "title": {
+      "rendered": "ALERTA NO BRASIL: 20,3 milhões estão em endividamento de risco, aponta Banco Central"
+    },
+    "excerpt": {
+      "rendered": "Relatório divulgado nesta terça-feira (27) aponta avanço de 75% em cinco anos; BC prepara medidas contra oferta agressiva de crédito."
+    },
+    "category": "Economia • Brasil",
+    "date": "2026-10-27T19:58:00-03:00",
+    "published_at": "2026-10-27T19:58:00-03:00",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Edif%C3%ADcio_%22Sede%22_do_Banco_Central_do_Brasil_em_Bras%C3%ADlia.jpg",
+    "href": "/atualizacoes/2026-10-27/bc-superendividados-20-milhoes",
+    "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/numero-de-superendividados-no-brasil-cresceu-75-em-cinco-anos-diz-bc",
+    "content": "Dados do Relatório de Estabilidade Financeira do Banco Central mostram 20,3 milhões de pessoas em endividamento de risco em junho de 2026, crescimento de 75% em cinco anos. O contingente representa 17% dos devedores do Sistema Financeiro Nacional."
+  },
+  {
     "id": "voz-2710-0",
     "slug": "inep-enem-locais-prova",
     "title": {
@@ -11,7 +28,7 @@
     "category": "Educação",
     "date": "2026-10-27T18:00:00-03:00",
     "published_at": "2026-10-27T18:00:00-03:00",
-    "featured_image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Universidade_de_Bras%C3%ADlia_-_ICC.jpg",
     "href": "/atualizacoes/2026-10-27/inep-enem-locais-prova",
     "source_url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/",
     "content": "Cartão de confirmação disponível; provas acontecem em 8 e 15 de novembro."
@@ -28,7 +45,7 @@
     "category": "Educação",
     "date": "2026-10-27T17:00:00-03:00",
     "published_at": "2026-10-27T17:00:00-03:00",
-    "featured_image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Universidade_de_Bras%C3%ADlia_-_ICC.jpg",
     "href": "/atualizacoes/2026-10-27/enade-prazo-questionario",
     "source_url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/",
     "content": "Inep informa novo período de 30 de outubro a 18 de dezembro."
@@ -45,7 +62,7 @@
     "category": "Economia",
     "date": "2026-10-27T16:00:00-03:00",
     "published_at": "2026-10-27T16:00:00-03:00",
-    "featured_image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Edif%C3%ADcio_%22Sede%22_do_Banco_Central_do_Brasil_em_Bras%C3%ADlia.jpg",
     "href": "/atualizacoes/2026-10-27/mp-imposto-seletivo-diesel",
     "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/governo-enviara-mp-do-imposto-seletivo-e-renova-subvencao-ao-diesel",
     "content": "Fazenda trata de alíquotas e prorrogação de subvenção ao combustível."
@@ -62,7 +79,7 @@
     "category": "Economia",
     "date": "2026-10-27T15:00:00-03:00",
     "published_at": "2026-10-27T15:00:00-03:00",
-    "featured_image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Edif%C3%ADcio_%22Sede%22_do_Banco_Central_do_Brasil_em_Bras%C3%ADlia.jpg",
     "href": "/atualizacoes/2026-10-27/durigan-meta-fiscal",
     "source_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-10/governo-buscara-cumprir-meta-fiscal-com-dialogo-diz-durigan",
     "content": "Equipe econômica estuda medidas de ajuste e contingenciamento orçamentário."
@@ -79,7 +96,7 @@
     "category": "Justiça",
     "date": "2026-10-27T14:00:00-03:00",
     "published_at": "2026-10-27T14:00:00-03:00",
-    "featured_image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
+    "featured_image": "https://commons.wikimedia.org/wiki/Special:FilePath/Congresso_Nacional_do_Brasil.jpg",
     "href": "/atualizacoes/2026-10-27/mpt-assedio-eleitoral",
     "source_url": "https://agenciabrasil.ebc.com.br/ultimas",
     "content": "Novo levantamento do Ministério Público do Trabalho é noticiado pela Agência Brasil."
