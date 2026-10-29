@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import MilkDonationBanner from '@/components/common/MilkDonationBanner';
+import DetranNovemberCampaign from '@/components/common/DetranNovemberCampaign';
 import { Search, Menu, X, Play } from 'lucide-react';
 
 export default function Header() {
@@ -76,7 +77,8 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><MilkDonationBanner /></div>
+            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0"><MilkDonationBanner />
+            <DetranNovemberCampaign /></div>
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
