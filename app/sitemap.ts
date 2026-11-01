@@ -1,3 +1,4 @@
+import { noticias as edicaoNovembro } from '@/lib/edicao-2026-11-01';
 import type { MetadataRoute } from 'next';
 import { getPosts } from '@/lib/wordpress';
 import currentNews from '../public/data/news-current.json';
@@ -34,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const estaticas: MetadataRoute.Sitemap = [
+    ...edicaoNovembro.map(n=>({url:`${BASE}/noticias/edicao-2026-11-01/${n.id}`,lastModified:new Date("2026-11-01T09:00:00Z"),changeFrequency:"weekly" as const,priority:0.8})),
     { url: `${BASE}/`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
     { url: `${BASE}/eleicoes/resultado-eleicoes-2026`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
     { url: `${BASE}/eleicoes/comparativo-2022-2026`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
