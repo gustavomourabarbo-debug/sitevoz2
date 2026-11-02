@@ -79,8 +79,20 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0">
-            <DetranNovemberCampaign /></div>
+            <div className="flex min-w-0 flex-1 items-center justify-center gap-2 px-1 sm:gap-4 lg:gap-8">
+              <a href="https://www.voznewsbrasil.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Voz News Brasil" className="flex min-w-0 flex-1 items-center justify-center rounded-xl border border-slate-200 bg-white px-2 py-3 text-center shadow-sm transition hover:border-green-500 hover:shadow-md sm:py-4 lg:max-w-[340px]">
+                <span className="flex flex-col items-center leading-none">
+                  <span className="whitespace-nowrap text-[clamp(11px,2.5vw,29px)] font-black tracking-tight text-[#093a62]">VOZ <span className="text-green-700">NEWS</span></span>
+                  <span className="mt-1 text-[clamp(8px,1.3vw,14px)] font-bold tracking-[0.15em] text-slate-700">BRASIL</span>
+                </span>
+              </a>
+              <a href="https://www.xelvya.com/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Xelvya AI" className="flex min-w-0 flex-1 items-center justify-center rounded-xl border border-slate-200 bg-white px-2 py-3 text-center shadow-sm transition hover:border-violet-500 hover:shadow-md sm:py-4 lg:max-w-[340px]">
+                <span className="flex flex-col items-center leading-none">
+                  <span className="whitespace-nowrap text-[clamp(11px,2.5vw,29px)] font-black tracking-[0.03em] text-[#382075]">XELVYA</span>
+                  <span className="mt-1 text-[clamp(8px,1.3vw,14px)] font-semibold tracking-[0.13em] text-violet-700">INTELIGÊNCIA ARTIFICIAL</span>
+                </span>
+              </a>
+            </div>
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
