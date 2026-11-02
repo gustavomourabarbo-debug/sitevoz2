@@ -34,11 +34,17 @@ export default function AdminPanel() {
   const [saveMessage, setSaveMessage] = useState('');
 
   // Login handler
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'admin') {
+    const bytes = new TextEncoder().encode(password);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    const passwordHash = Array.from(new Uint8Array(digest))
+      .map(byte => byte.toString(16).padStart(2, '0'))
+      .join('');
+
+    if (username === 'admin' && passwordHash === 'f43e919264e7adedb235e2df3f0543f0523bab768305f34c693acab233614e8c') {
       setIsLoggedIn(true);
-      localStorage.setItem('admin_logged', 'true');
+      setPassword('');
       setLoginError('');
     } else {
       setLoginError('Usuário ou senha incorretos.');
@@ -48,16 +54,10 @@ export default function AdminPanel() {
   // Logout handler
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('admin_logged');
   };
 
   // Load posts and settings
   useEffect(() => {
-    const logged = localStorage.getItem('admin_logged');
-    if (logged === 'true') {
-      setIsLoggedIn(true);
-    }
-
     async function loadData() {
       if (!supabase) return;
       

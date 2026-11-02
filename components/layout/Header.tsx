@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import MilkDonationBanner from '@/components/common/MilkDonationBanner';
-import DetranNovemberCampaign from '@/components/common/DetranNovemberCampaign';
 import { Search, Menu, X, Play } from 'lucide-react';
 
 export default function Header() {
@@ -37,11 +35,11 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 bg-white shadow-md transition-all duration-300">
         <div className="bg-gradient-to-r from-green-700 to-green-600 py-2">
-          <div className="max-w-[1400px] mx-auto px-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-            <div className="flex items-center gap-3 text-white text-[11px] sm:text-xs">
-              <span>Brasília, {new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          <div className="max-w-[1400px] mx-auto px-4 flex items-center justify-between">
+            <div className="flex items-center gap-4 text-white text-xs">
+              <span>Brasília, {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
-            <div className="flex items-center gap-3 text-white text-[11px] sm:text-xs">
+            <div className="flex items-center gap-4 text-white text-xs">
               <a href="#" className="hover:text-yellow-300 transition-colors flex items-center gap-1">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -64,42 +62,27 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-[1400px] px-3 py-2"><MilkDonationBanner /></div>
-
-        <div className="max-w-[1400px] mx-auto px-4 py-2">
-          <div className="flex items-center justify-between gap-4">
-            <Link
-              href="/"
-              className="flex items-center justify-center rounded-2xl border border-amber-300/25 bg-[#071728] px-3 py-2 lg:px-5 lg:py-3 shadow-[0_10px_28px_rgba(0,0,0,.20)]"
-            >
-              <img
-                src="https://cdn.creativeclaw.co/u/d4de7256/images/823ac05b-9d1b-44b6-bd5e-05d993f4661c.png"
-                alt="TV Voz de Brasília 40 anos — Você na Frente"
-                className="block h-20 w-auto object-contain sm:h-24 lg:h-[156px]"
-              />
+        <div className="max-w-[1400px] mx-auto px-4 py-4">
+          <div className="flex items-center justify-between gap-8">
+            <Link href="/" className="flex items-center group">
+              <img src="/logo.png?v=3" alt="TV Voz de Brasília" className="h-16 w-auto object-contain !transform-none !animate-none" style={{ animation: "none", transform: "none" }} />
             </Link>
 
-                  <div className="bg-white px-2 py-2 flex-1">
-        <div className="flex flex-wrap items-center justify-center gap-5 md:gap-10">
-          <a href="https://www.voznewsbrasil.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Voz News Brasil">
-            <img src="https://www.voznewsbrasil.com.br/logo-voznews-oficial.png" alt="Logomarca oficial Voz News Brasil" className="h-auto max-h-16 max-w-[185px] object-contain" />
-          </a>
-          <a href="https://www.xelvya.com/" target="_blank" rel="noopener noreferrer" aria-label="Xelvya AI" className="text-2xl font-bold text-slate-900">XELVYA AI</a>
-        </div>
-      </div>
-
+            <div className="hidden lg:block flex-1 max-w-md">
+              <div className="relative">
+                <input type="text" placeholder="Buscar notícias..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent" />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600 transition-colors"><Search className="w-5 h-5" /></button>
+              </div>
+            </div>
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
               <span className="font-semibold">Últimas Entrevistas</span>
             </Link>
 
-            <button aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={isMobileMenuOpen} className="lg:hidden p-2 text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
+            <button className="lg:hidden text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button>
           </div>
         </div>
-
-        <div className="mx-auto hidden max-w-[1400px] justify-end px-4 pb-2 lg:flex"><form action="/" method="get" role="search" className="flex items-center gap-2"><input name="s" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Buscar notícias..." aria-label="Buscar notícias" className="w-48 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:border-green-600 focus:outline-none" /><button type="submit" aria-label="Pesquisar" className="rounded-lg bg-green-700 p-1.5 text-white"><Search className="h-4 w-4"/></button></form></div>
-        
 
         <nav className="border-t border-gray-200 hidden lg:block">
           <div className="max-w-[1400px] mx-auto px-4">
@@ -128,6 +111,7 @@ export default function Header() {
           </div>
         )}
       </header>
+      <div className="h-36"></div>
     </>
   );
 }

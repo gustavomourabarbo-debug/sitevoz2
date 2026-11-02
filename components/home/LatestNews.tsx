@@ -70,7 +70,6 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
       if (posts && posts.length > 0) {
         setLatestNews(ordenarRecentes(posts));
         setIsLoading(false);
-        return;
       }
 
       if (supabase) {
@@ -171,7 +170,7 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
           {[...latestNews, ...latestNews].map((news, index) => (
             <Link
               key={`${news.id}-${index}`}
-              href={news.href || `/noticia/${news.slug}`}
+              href={`/noticia/${news.slug}`}
               className="group flex-shrink-0 w-[260px] bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
             >
               <div className="relative h-40 overflow-hidden bg-gray-100">

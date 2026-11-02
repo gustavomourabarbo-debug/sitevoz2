@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import TerracapBanner from '@/components/common/TerracapBanner';
+import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import { Inter, Merriweather } from 'next/font/google';
 
 const inter = Inter({
@@ -79,7 +79,6 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${merriweather.variable}`}>
       <head>
         <meta name="referrer" content="no-referrer" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8560122271595564" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://images.pexels.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
         <script
@@ -125,8 +124,8 @@ export default function RootLayout({
             gtag('config', 'G-YH9F8VLNCQ');
           `}
         </Script>
+        <DetranCampaignBanner />
         {children}
-        <TerracapBanner />
       </body>
     </html>
   );
