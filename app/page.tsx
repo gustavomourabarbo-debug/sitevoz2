@@ -58,13 +58,12 @@ export default async function Home() {
   const capaAtual = atuais.length ? atuais : recentes.slice(0, 8);
   const postsDestaques = [...capaAtual, ...recentes.filter((p: any) => !capaAtual.includes(p))];
   const heroPosts = capaAtual.slice(0, 8);
-  const edicao31Posts = [{"id":"tv31-cidadania","slug":"tv31-cidadania","title":{"rendered":"Encontro nacional do SUAS reúne propostas para fortalecer direitos e participação social"},"excerpt":{"rendered":"Reportagem original da TV Voz de Brasília com fonte oficial divulgada em 30/10/2026."},"category":"Cidadania","date":"2026-10-30T20:00:00-03:00","published_at":"2026-10-30T20:00:00-03:00","featured_image":"https://www.gov.br/mds/pt-br/noticias/encontro-nacional-dos-usuarios-do-suas-encerra-programacao-com-construcao-coletiva-de-carta-por-direitos-e-participacao-social/foto-divulgacao-mds/@@images/b0763b39-e1cb-4857-8a07-42949e7c676c.jpeg","href":"/noticias/edicao-31-outubro/#cidadania"},{"id":"tv31-energia","slug":"tv31-energia","title":{"rendered":"Leilão de transmissão termina com R$ 8,8 bilhões em investimentos"},"excerpt":{"rendered":"Reportagem original da TV Voz de Brasília com fonte oficial divulgada em 30/10/2026."},"category":"Energia","date":"2026-10-30T20:00:00-03:00","published_at":"2026-10-30T20:00:00-03:00","featured_image":"https://www.gov.br/aneel/pt-br/assuntos/noticias/2026/leilao-de-transmissao-no-4-2026-termina-com-os-8-lotes-arrematados-e-economia-para-o-consumidor/@@images/image-800-f58692531d8a1d9502228e9a16b5ca09.jpeg","href":"/noticias/edicao-31-outubro/#energia"},{"id":"tv31-saude","slug":"tv31-saude","title":{"rendered":"Belo Horizonte terá hospital 100% SUS com 250 novos leitos"},"excerpt":{"rendered":"Reportagem original da TV Voz de Brasília com fonte oficial divulgada em 30/10/2026."},"category":"Saúde","date":"2026-10-30T20:00:00-03:00","published_at":"2026-10-30T20:00:00-03:00","featured_image":"https://www.gov.br/saude/pt-br/assuntos/noticias/2026/outubro/belo-horizonte-mg-tera-novo-hospital-100-sus-com-oferta-de-servicos-especializados/pauta-bh.jpg/@@images/c935c025-5fc8-4538-af38-f11c57a0c34d.jpeg","href":"/noticias/edicao-31-outubro/#saude"},{"id":"tv31-transportes","slug":"tv31-transportes","title":{"rendered":"Brasil apresenta R$ 262,6 bilhões em projetos de transporte"},"excerpt":{"rendered":"Reportagem original da TV Voz de Brasília com fonte oficial divulgada em 30/10/2026."},"category":"Mobilidade","date":"2026-10-30T20:00:00-03:00","published_at":"2026-10-30T20:00:00-03:00","featured_image":"https://www.gov.br/transportes/pt-br/assuntos/noticias/2026/copy_of_10/em-londres-ministerio-dos-transportes-da-inicio-a-uma-serie-de-reunioes-com-fortes-investidores-estrangeiros-nesta-sexta-30/investidores-estrangeiros-em-londres.jpeg/@@images/image-1280-fcce63ea39740aa64929fc6a24be0fb3.jpeg","href":"/noticias/edicao-31-outubro/#transportes"},{"id":"tv31-cultura","slug":"tv31-cultura","title":{"rendered":"Brasil amplia cooperação internacional em dança"},"excerpt":{"rendered":"Reportagem original da TV Voz de Brasília com fonte oficial divulgada em 30/10/2026."},"category":"Cultura","date":"2026-10-30T20:00:00-03:00","published_at":"2026-10-30T20:00:00-03:00","featured_image":"https://www.gov.br/cultura/pt-br/assuntos/noticias/ministra-da-cultura-destaca-iniciativas-para-o-fortalecimento-da-danca-durante-encontro-internacional-promovido-pela-funarte/carrossel.png/@@images/d15df154-2043-4fb4-a34e-000e3b2b90e5.png","href":"/noticias/edicao-31-outubro/#cultura"}];
   const topStory = {
-    href: '/noticias/edicao-31-outubro/#cidadania',
-    category: 'Brasília • Cidadania',
-    title: { rendered: 'Encontro nacional do SUAS reúne propostas para fortalecer direitos e participação social' },
-    excerpt: { rendered: 'Participantes encerram encontro em Brasília com propostas sobre assistência social, direitos e participação popular, divulgadas em 30 de outubro.' },
-    featured_image: 'https://www.gov.br/mds/pt-br/noticias/encontro-nacional-dos-usuarios-do-suas-encerra-programacao-com-construcao-coletiva-de-carta-por-direitos-e-participacao-social/foto-divulgacao-mds/@@images/b0763b39-e1cb-4857-8a07-42949e7c676c.jpeg',
+    href: '/noticias/edicao-30-outubro/#finados',
+    category: 'Brasília e Entorno',
+    title: { rendered: 'PRF reforça fiscalização nas rodovias do DF e Entorno para o feriado de Finados' },
+    excerpt: { rendered: 'Operação de 30 de outubro a 2 de novembro busca prevenir acidentes. Veja as orientações aos motoristas e as demais notícias verificadas.' },
+    featured_image: 'https://www.gov.br/prf/pt-br/noticias/estaduais/distrito-federal/prf-reforca-fiscalizacao-no-df-e-entorno-durante-a-operacao-finados-2026/@@images/image-1600-0ff198658edd999c91f34ce36d32d1fe.jpeg',
   };
 
   const categories: { title: string; category: string }[] = [
@@ -79,26 +78,26 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main className="pt-0">
-        <TrendingBar posts={[...edicao31Posts, ...postsDestaques]} />
+        <TrendingBar posts={postsDestaques} />
         <div className="pt-4 space-y-4">
           {topStory && (
             <div className="max-w-[1400px] mx-auto px-4">
               <TopStoryBanner
                 href={topStory.href || `/noticia/${topStory.slug}`}
-                kicker="MANCHETE • BRASÍLIA • FONTE 30/10/2026 • EDIÇÃO 31/10"
+                kicker="MANCHETE • BRASÍLIA • FONTE 29/10/2026 • EDIÇÃO 30/10"
                 title={typeof topStory.title === 'object' ? topStory.title?.rendered || '' : topStory.title || ''}
                 excerpt={typeof topStory.excerpt === 'object' ? topStory.excerpt?.rendered || '' : topStory.excerpt || ''}
                 image={topStory.featured_image}
               />
             </div>
           )}
-          <section aria-label="Quatro notícias verificadas de 30 de outubro" className="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <section aria-label="Quatro notícias verificadas de 29 de outubro" className="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              ['energia','ENERGIA','Leilão de transmissão termina com R$ 8,8 bilhões em investimentos'],
-              ['saude','SAÚDE','Belo Horizonte terá hospital 100% SUS com 250 novos leitos'],
-              ['transportes','MOBILIDADE','Brasil apresenta R$ 262,6 bilhões em projetos de transporte'],
-              ['cultura','CULTURA','Brasil amplia cooperação internacional em dança'],
-            ].map(([id,tag,title]) => <a key={id} href={`/noticias/edicao-31-outubro/#${id}`} className="block rounded-xl border border-amber-300 bg-white shadow-md p-5 hover:shadow-xl"><small className="text-amber-700 font-bold">FONTE 30/10 • {tag}</small><h3 className="text-lg font-bold text-slate-900 mt-2">{title}</h3><span className="text-blue-700 font-bold text-sm mt-3 block">LER REPORTAGEM →</span></a>)}
+              ['habitacao','HABITAÇÃO','FGTS aprova R$ 144,5 bilhões para habitação em 2027'],
+              ['energia','ENERGIA','Leilão de transmissão prevê R$ 8,9 bilhões em investimentos'],
+              ['saude','SAÚDE','SUS terá R$ 3,95 bilhões para novo ciclo de projetos do Proadi'],
+              ['educacao','EDUCAÇÃO','Revisão para o Enem mobiliza estudantes da EJA no Piauí'],
+            ].map(([id,tag,title]) => <a key={id} href={`/noticias/edicao-30-outubro/#${id}`} className="block rounded-xl border border-amber-300 bg-white shadow-md p-5 hover:shadow-xl"><small className="text-amber-700 font-bold">FONTE 29/10 • {tag}</small><h3 className="text-lg font-bold text-slate-900 mt-2">{title}</h3><span className="text-blue-700 font-bold text-sm mt-3 block">LER REPORTAGEM →</span></a>)}
           </section>
           <SponsorBanner sponsor="snaider" />
         </div>
@@ -112,11 +111,11 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={[...edicao31Posts, ...capaAtual]} /></div></div>
+        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4"><LatestNews posts={capaAtual} /></div></div>
         <div className="mt-4"><PremiumBanner variant={0} /></div>
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
-        <MosaicHighlights posts={[...edicao31Posts, ...postsDestaques]} />
+        <MosaicHighlights posts={postsDestaques} />
 
 
         <div className="mt-6 mb-2">
