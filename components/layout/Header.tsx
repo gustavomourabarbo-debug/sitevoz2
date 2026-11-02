@@ -121,7 +121,14 @@ export default function Header() {
           </div>
         )}
       </header>
-
+      <div className="bg-white border-b border-amber-300 py-4 px-4">
+        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-8 md:gap-20">
+          <a href="https://www.voznewsbrasil.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Voz News Brasil">
+            <img src="https://www.voznewsbrasil.com.br/logo-voznews-oficial.png" alt="Logomarca oficial Voz News Brasil" className="h-auto max-h-20 max-w-[240px] object-contain" />
+          </a>
+          <a href="https://www.xelvya.com/" target="_blank" rel="noopener noreferrer" aria-label="Xelvya AI" className="text-3xl font-bold text-slate-900">XELVYA AI</a>
+        </div>
+      </div>
     </>
   );
 }
