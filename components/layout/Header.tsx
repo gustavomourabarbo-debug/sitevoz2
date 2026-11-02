@@ -79,8 +79,15 @@ export default function Header() {
               />
             </Link>
 
-            <div className="hidden lg:block flex-1 max-w-[760px] min-w-0">
-            <DetranNovemberCampaign /></div>
+                  <div className="bg-white px-2 py-2 flex-1">
+        <div className="flex flex-wrap items-center justify-center gap-5 md:gap-10">
+          <a href="https://www.voznewsbrasil.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Voz News Brasil">
+            <img src="https://www.voznewsbrasil.com.br/logo-voznews-oficial.png" alt="Logomarca oficial Voz News Brasil" className="h-auto max-h-16 max-w-[185px] object-contain" />
+          </a>
+          <a href="https://www.xelvya.com/" target="_blank" rel="noopener noreferrer" aria-label="Xelvya AI" className="text-2xl font-bold text-slate-900">XELVYA AI</a>
+        </div>
+      </div>
+
 
             <Link href="/entrevistas" className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-md hover:shadow-lg">
               <Play className="w-4 h-4 fill-white" />
@@ -121,14 +128,6 @@ export default function Header() {
           </div>
         )}
       </header>
-      <div className="bg-white border-b border-amber-300 py-4 px-4">
-        <div className="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-8 md:gap-20">
-          <a href="https://www.voznewsbrasil.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Voz News Brasil">
-            <img src="https://www.voznewsbrasil.com.br/logo-voznews-oficial.png" alt="Logomarca oficial Voz News Brasil" className="h-auto max-h-20 max-w-[240px] object-contain" />
-          </a>
-          <a href="https://www.xelvya.com/" target="_blank" rel="noopener noreferrer" aria-label="Xelvya AI" className="text-3xl font-bold text-slate-900">XELVYA AI</a>
-        </div>
-      </div>
     </>
   );
 }
