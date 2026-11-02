@@ -125,6 +125,7 @@ export default function RootLayout({
             gtag('config', 'G-YH9F8VLNCQ');
           `}
         </Script>
+        <Script src="https://www.voznewsbrasil.com.br/leite-materno-2026.js" strategy="afterInteractive" />
         {children}
         <TerracapBanner />
       </body>
