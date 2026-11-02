@@ -13,7 +13,6 @@ import ViralStrip from '@/components/home/ViralStrip';
 import InstagramVideoBanner from '@/components/common/InstagramVideoBanner';
 import SponsorBanner from '@/components/common/SponsorBanner';
 import TopStoryBanner from '@/components/common/TopStoryBanner';
-import TerracapBanner from '@/components/common/TerracapBanner';
 
 export const revalidate = 61;
 
@@ -118,7 +117,7 @@ export default async function Home() {
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
         <MosaicHighlights posts={[...edicao31Posts, ...postsDestaques]} />
-        <div className="mt-6 mb-2"><TerracapBanner /></div>
+
 
         <div className="mt-6 mb-2">
           <PremiumBanner variant={3} />
