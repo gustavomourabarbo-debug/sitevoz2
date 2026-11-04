@@ -1,0 +1,38 @@
+export const noticias = [
+  {
+    slug: 'qualificadf-movel',
+    texto: ["Quem procura qualificação profissional no Distrito Federal tem até 17 de novembro para se inscrever no QualificaDF Móvel. A nova oferta reúne 907 vagas gratuitas e distribui as turmas entre Taguatinga Sul, Cruzeiro, São Sebastião e Sol Nascente.", "A programação inclui formações ligadas a tecnologia, beleza, cuidados e empreendedorismo. As aulas começam em 24 de novembro. O cadastro é feito no site da Secretaria de Desenvolvimento Econômico, Trabalho e Renda do DF.", "Antes de se inscrever, vale conferir no edital a unidade, a turma e o horário. Como os cursos são oferecidos em quatro regiões, essa consulta ajuda a escolher a formação que cabe na rotina."],
+    editoria: 'Educação e trabalho',
+    titulo: 'QualificaDF Móvel oferece 907 vagas gratuitas em quatro regiões',
+    resumo: 'Taguatinga Sul, Cruzeiro, São Sebastião e Sol Nascente recebem cursos de qualificação. As inscrições vão até 17 de novembro e as aulas começam no dia 24.',
+    fonte: 'Agência Brasília',
+    url: 'https://www.agenciabrasilia.df.gov.br/w/gdf-abre-907-vagas-gratuitas-em-cursos-do-qualificadf-movel-em-quatro-regioes-do-df',
+  },
+  {
+    slug: 'emendas-federais-df',
+    texto: ["O Governo do Distrito Federal apresentou à bancada federal 420 propostas para orientar a indicação de emendas ao Orçamento de 2027. A carteira reúne demandas que, somadas, chegam a R$ 4,3 bilhões.", "Entre os setores contemplados estão saúde, educação, infraestrutura, inovação e assistência social. Na mobilidade, uma das demandas é modernizar a comunicação por rádio do Metrô-DF, cujo sistema atual foi apontado como obsoleto.", "O valor de R$ 4,3 bilhões é o total das propostas. A destinação dos recursos depende das indicações parlamentares e das etapas de execução do orçamento."],
+    editoria: 'Distrito Federal',
+    titulo: 'GDF propõe 420 projetos para emendas federais de 2027',
+    resumo: 'A lista entregue à bancada do DF reúne R$ 4,3 bilhões em propostas nas áreas de saúde, educação, infraestrutura e assistência social, entre outras.',
+    fonte: 'Agência Brasília',
+    url: 'https://www.agenciabrasilia.df.gov.br/w/gdf-sugere-420-projetos-para-captar-r-43-bilhoes-em-emendas-federais',
+  },
+  {
+    slug: 'gdf-saude',
+    texto: ["O GDF Saúde manterá em 2027 os valores das mensalidades praticados em 2026. A decisão foi aprovada pelo Conselho de Administração do Instituto de Assistência à Saúde dos Servidores do DF.", "Para servidores e dependentes inscritos, a medida retira o reajuste da mensalidade do planejamento familiar do próximo ano. O programa atende mais de 104 mil beneficiários ativos, segundo o Inas.", "O instituto informa que a rede reúne mais de 2,5 mil prestadores credenciados. A decisão anunciada se refere aos valores das mensalidades."],
+    editoria: 'Saúde',
+    titulo: 'GDF Saúde mantém mensalidades sem reajuste em 2027',
+    resumo: 'O conselho do Inas aprovou a manutenção dos valores pagos por servidores do DF e seus dependentes.',
+    fonte: 'Agência Brasília',
+    url: 'https://www.agenciabrasilia.df.gov.br/w/gdf-saude-tera-reajuste-zero-nas-mensalidades-em-2027',
+  },
+  {
+    slug: 'lei-rouanet',
+    texto: ["O governo federal registrou 25,6 mil propostas culturais apresentadas à Lei Rouanet em 2026, o maior número informado para o mecanismo. O balanço foi divulgado em 4 de novembro.", "O volume mede o interesse de produtores e organizações em apresentar projetos ao incentivo cultural. Da inscrição até a execução, cada proposta passa por etapas de análise e, quando autorizada, de captação de recursos.", "Por isso, o número de inscrições ajuda a entender a procura pelo mecanismo, enquanto aprovações e valores captados são indicadores distintos."],
+    editoria: 'Cultura',
+    titulo: 'Lei Rouanet recebe 25,6 mil propostas culturais em 2026',
+    resumo: 'O balanço federal registra recorde de inscrições de projetos no mecanismo de incentivo à cultura.',
+    fonte: 'Agência Gov',
+    url: 'https://agenciagov.ebc.com.br/noticias/202611/lei-rouanet-bate-recorde-de-25-6-mil-propostas-culturais-em-2026-1',
+  },
+];

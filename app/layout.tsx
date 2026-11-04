@@ -16,6 +16,8 @@ const merriweather = Merriweather({
   display: 'swap',
 });
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   referrer: 'no-referrer',
   title: 'TV Voz de Brasília - Portal de Notícias do Distrito Federal',
