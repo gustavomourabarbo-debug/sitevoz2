@@ -63,10 +63,18 @@ export default function Header() {
         </div>
 
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-8">
-            <Link href="/" className="flex items-center group">
-              <img src="/logo.png?v=3" alt="TV Voz de Brasília" className="h-16 w-auto object-contain !transform-none !animate-none" style={{ animation: "none", transform: "none" }} />
-            </Link>
+          <div className="flex items-center justify-between gap-3 md:gap-6">
+            <div className="flex flex-1 lg:flex-none items-center justify-between sm:justify-start gap-3 sm:gap-8 min-w-0" aria-label="Marcas do grupo">
+              <Link href="/" className="flex items-center shrink-0" aria-label="TV Voz de Brasília">
+                <img src="/marcas/voz-brasilia-40.webp" alt="TV Voz de Brasília — 40 anos — Você na Frente" className="h-16 sm:h-24 w-auto max-w-[28vw] object-contain" />
+              </Link>
+              <a href="https://voznewsbrasil.com.br" target="_blank" rel="noopener noreferrer" className="flex items-center min-w-0" aria-label="Voz News Brasil">
+                <img src="/marcas/voz-news.webp" alt="Voz News Brasil" className="h-auto w-24 sm:w-40 max-w-[28vw] object-contain" />
+              </a>
+              <a href="https://xelvya.com" target="_blank" rel="noopener noreferrer" className="flex items-center min-w-0" aria-label="Xelvya">
+                <img src="/marcas/xelvya.webp" alt="XELVYA AI" className="h-16 sm:h-24 w-auto max-w-[28vw] object-contain" />
+              </a>
+            </div>
 
             <div className="hidden lg:block flex-1 max-w-md">
               <div className="relative">
