@@ -1,4 +1,3 @@
-import EdicaoNovembro03 from '@/components/home/EdicaoNovembro03';
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import Header from '@/components/layout/Header';
 import LatestNews from '@/components/home/LatestNews';
@@ -51,7 +50,7 @@ export default async function Home() {
 
   // A primeira dobra prioriza estritamente as notícias dos últimos dois dias.
   // As matérias anteriores permanecem nas editorias e no arquivo, sem ocupar a vitrine.
-  const agora = Date.parse('2026-11-03T23:59:59-03:00');
+  const agora = Date.now();
   const atuais = recentes.filter((p: any) => {
     const data = new Date(p?.published_at || p?.created_at || p?.date || 0).getTime();
     return Number.isFinite(data) && data <= agora && data >= agora - 48 * 60 * 60 * 1000;
@@ -77,31 +76,18 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header dataEdicao="2026-11-03" />
+      <Header  />
       <main className="pt-0">
-        <EdicaoNovembro03 />
         <DetranCampaignBanner />
-        <section aria-label="Edição de 2 de novembro com fontes verificadas" className="max-w-[1400px] mx-auto px-4 pt-5"><div className="rounded-2xl border-2 border-amber-400 bg-slate-900 text-white p-5 md:p-8"><p className="text-amber-300 text-sm font-extrabold tracking-wide">EDIÇÃO 02/11/2026 • FERIADO DE FINADOS • FATOS PUBLICADOS EM 30/10 E 01/11</p><h2 className="text-3xl md:text-5xl font-black my-3">Finados no DF: serviços, saúde, educação e movimento na capital</h2><p className="text-lg text-slate-200 mb-5">Seleção jornalística com cinco reportagens completas, fotografias documentais e fontes oficiais. Os fatos mantêm suas datas originais; nenhuma ocorrência antiga é apresentada como notícia de hoje.</p><a href="/noticias/edicao-02-novembro/#finados" className="inline-block bg-amber-400 text-slate-950 font-black px-5 py-3 rounded-lg">LER MANCHETE COMPLETA →</a><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">{[["saude","Saúde pública: prevenção e atendimento no DF","01/11"],["corrida","Corrida do Servidor movimentou Brasília","01/11"],["tecnologia","Oficinas de tecnologia para estudantes","01/11"],["viagens","Aeroportos projetam mais de 2 milhões de passageiros","30/10"]].map(([id,title,date])=><a key={id} href={`/noticias/edicao-02-novembro/#${id}`} className="bg-slate-800 border border-slate-600 rounded-lg p-4 hover:border-amber-300"><small className="text-amber-300">FONTE {date}/2026</small><h3 className="font-bold text-lg mt-2">{title}</h3><span className="text-amber-300 font-bold text-xs">LER REPORTAGEM →</span></a>)}</div></div></section>
+        <section aria-label="Edição de 4 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
+          <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
+            <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 04/11/2026 · DISTRITO FEDERAL</p>
+            <h1 className="my-4 text-3xl md:text-5xl font-black">Guará recebe encontro de inovação e cidades inteligentes nesta quarta-feira</h1>
+            <p className="text-lg text-slate-200">HackaCity Guará reúne tecnologia, empreendedorismo e economia criativa nos dias 4 e 5 de novembro. Entrada gratuita.</p>
+            <a href="/noticias/guara-inovacao-04-novembro" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Leia a reportagem completa</a>
+          </article>
+        </section>
         <div className="pt-4 space-y-4">
-          {topStory && (
-            <div className="max-w-[1400px] mx-auto px-4">
-              <TopStoryBanner
-                href={topStory.href}
-                kicker="MANCHETE • BRASÍLIA • FONTE 29/10/2026 • EDIÇÃO 30/10"
-                title={typeof topStory.title === 'object' ? topStory.title?.rendered || '' : topStory.title || ''}
-                excerpt={typeof topStory.excerpt === 'object' ? topStory.excerpt?.rendered || '' : topStory.excerpt || ''}
-                image={topStory.featured_image}
-              />
-            </div>
-          )}
-          <section aria-label="Quatro notícias verificadas de 29 de outubro" className="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              ['habitacao','HABITAÇÃO','FGTS aprova R$ 144,5 bilhões para habitação em 2027'],
-              ['energia','ENERGIA','Leilão de transmissão prevê R$ 8,9 bilhões em investimentos'],
-              ['saude','SAÚDE','SUS terá R$ 3,95 bilhões para novo ciclo de projetos do Proadi'],
-              ['educacao','EDUCAÇÃO','Revisão para o Enem mobiliza estudantes da EJA no Piauí'],
-            ].map(([id,tag,title]) => <a key={id} href={`/noticias/edicao-30-outubro/#${id}`} className="block rounded-xl border border-amber-300 bg-white shadow-md p-5 hover:shadow-xl"><small className="text-amber-700 font-bold">FONTE 29/10 • {tag}</small><h3 className="text-lg font-bold text-slate-900 mt-2">{title}</h3><span className="text-blue-700 font-bold text-sm mt-3 block">LER REPORTAGEM →</span></a>)}
-          </section>
           <SponsorBanner sponsor="snaider" />
         </div>
         <div className="w-full bg-[#020617] py-4">
@@ -114,7 +100,7 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4">{atuais.length > 0 ? <LatestNews posts={atuais} /> : <div className="rounded-xl border border-slate-200 bg-slate-50 p-5"><h2 className="text-xl font-bold text-slate-900">Arquivo jornalístico preservado</h2><p className="text-slate-600">As reportagens de datas anteriores continuam disponíveis nas editorias e no acervo. Não há matérias de 02/11 confirmadas para esta faixa de últimas notícias.</p></div>}</div></div>
+        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4">{atuais.length > 0 ? <LatestNews posts={atuais} /> : <div className="rounded-xl border border-slate-200 bg-slate-50 p-5"><h2 className="text-xl font-bold text-slate-900">Arquivo jornalístico preservado</h2><p className="text-slate-600">As reportagens de datas anteriores continuam disponíveis nas editorias e no acervo. Ainda não há outras matérias recentes confirmadas nesta faixa. Consulte o arquivo jornalístico abaixo.</p></div>}</div></div>
         <div className="mt-4"><PremiumBanner variant={0} /></div>
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
