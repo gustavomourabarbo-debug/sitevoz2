@@ -1,6 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import MilkDonationBanner from '@/components/common/MilkDonationBanner';
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import { Inter, Merriweather } from 'next/font/google';
 
@@ -126,7 +125,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <MilkDonationBanner />
+        <DetranCampaignBanner />
         {children}
 
       </body>
