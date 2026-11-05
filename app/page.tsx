@@ -79,13 +79,19 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <DetranCampaignBanner />
-        <section aria-label="Edição de 4 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
+        <section aria-label="Edição de 5 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
           <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
-            <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 04/11/2026 · DISTRITO FEDERAL</p>
-            <h1 className="my-4 text-3xl md:text-5xl font-black">Guará recebe encontro de inovação e cidades inteligentes nesta quarta-feira</h1>
-            <p className="text-lg text-slate-200">HackaCity Guará reúne tecnologia, empreendedorismo e economia criativa nos dias 4 e 5 de novembro. Entrada gratuita.</p>
-            <a href="/noticias/guara-inovacao-04-novembro" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Leia a reportagem completa</a>
+            <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 05/11/2026 · DISTRITO FEDERAL</p>
+            <h1 className="my-4 text-3xl md:text-5xl font-black">Rota do Quiosque poderá selecionar até 100 estabelecimentos no DF</h1>
+            <p className="text-lg text-slate-200">GDF lançou iniciativa de capacitação e circuito gastronômico para negócios locais, com inscrições anunciadas até 6 de novembro. Informação publicada pela Agência Brasília em 5/11.</p>
+            <a href="/noticias/edicao-05-novembro/#gastronomia" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Leia a reportagem completa</a>
           </article>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+            <a href="/noticias/edicao-05-novembro/#saude" className="rounded-xl border border-amber-300 bg-white p-4 text-slate-900 shadow-sm hover:shadow-lg"><span className="text-xs font-bold text-amber-700">FONTE 05/11 • Saúde</span><h2 className="font-bold text-lg mt-2">Saúde detalha repasses federais para o piso da enfermagem</h2><span className="text-blue-800 font-bold text-sm">LER REPORTAGEM →</span></a>
+            <a href="/noticias/edicao-05-novembro/#tecnologia" className="rounded-xl border border-amber-300 bg-white p-4 text-slate-900 shadow-sm hover:shadow-lg"><span className="text-xs font-bold text-amber-700">FONTE 05/11 • Tecnologia</span><h2 className="font-bold text-lg mt-2">Serpro realiza programação de soberania em IA em Brasília</h2><span className="text-blue-800 font-bold text-sm">LER REPORTAGEM →</span></a>
+            <a href="/noticias/edicao-05-novembro/#mobilidade" className="rounded-xl border border-amber-300 bg-white p-4 text-slate-900 shadow-sm hover:shadow-lg"><span className="text-xs font-bold text-amber-700">FONTE 05/11 • Mobilidade</span><h2 className="font-bold text-lg mt-2">Seminário Via Viva debate segurança viária e frotas limpas</h2><span className="text-blue-800 font-bold text-sm">LER REPORTAGEM →</span></a>
+            <a href="/noticias/edicao-05-novembro/#economia" className="rounded-xl border border-amber-300 bg-white p-4 text-slate-900 shadow-sm hover:shadow-lg"><span className="text-xs font-bold text-amber-700">FONTE 05/11 • Economia</span><h2 className="font-bold text-lg mt-2">IBGE inclui divulgação da produção industrial no calendário de 5 de novembro</h2><span className="text-blue-800 font-bold text-sm">LER REPORTAGEM →</span></a>
+          </div>
         </section>
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="snaider" />
