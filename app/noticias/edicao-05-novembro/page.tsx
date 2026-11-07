@@ -1,3 +1,4 @@
+import Header from '@/components/layout/Header';
 const materias = [
   {
     "id": "nota-legal",
@@ -80,8 +81,8 @@ export const metadata = {
 
 export default function EdicaoCincoNovembro() {
  return (
-  <main className="min-h-screen bg-slate-50 text-slate-900">
-    <header className="bg-emerald-800 px-5 py-5 text-white"><div className="mx-auto max-w-5xl"><a href="/" className="font-bold hover:underline">TV VOZ DE BRASÍLIA</a><p className="mt-2 text-sm">Edição especial • Notícias de 05/11/2026 • Brasília</p></div></header>
+  <><Header dataEdicao="2026-11-05" /><main className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="bg-emerald-900 px-5 py-3 text-center text-sm font-semibold tracking-wide text-white" aria-label="Data da edição">Edição de 5 de novembro de 2026</div>
     <div className="mx-auto max-w-5xl px-5 py-9">
       <section aria-label="Capa da edição de 5 de novembro de 2026" className="mb-8 overflow-hidden rounded-2xl border border-amber-400 bg-slate-900 px-6 py-8 text-white shadow-lg md:px-10 md:py-12">
         <p className="mb-3 text-sm font-extrabold uppercase tracking-wide text-amber-300">Capa da edição • Quinta-feira, 05/11/2026 • Distrito Federal</p>
@@ -93,7 +94,7 @@ export default function EdicaoCincoNovembro() {
       <h2 className="text-2xl font-extrabold leading-tight md:text-3xl">Outras reportagens da edição de 5 de novembro de 2026</h2>
       <p className="mt-4 text-base text-slate-600">Reportagens redigidas pela TV Voz de Brasília com base em informações identificadas e publicadas em 05/11. As fontes oficiais são indicadas ao final de cada texto.</p>
       <nav aria-label="Índice das notícias" className="my-7 flex flex-wrap gap-2">{materias.map((m)=><a key={m.id} href={"#"+m.id} className="rounded-lg bg-emerald-900 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700">{m.tag}</a>)}</nav>
-      {materias.map((m)=><article id={m.id} key={m.id} className="mb-7 scroll-mt-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
+      {materias.map((m)=><article id={m.id} key={m.id} className="mb-7 scroll-mt-64 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
         <p className="text-xs font-extrabold uppercase tracking-wider text-emerald-700">{m.tag} • Publicado em 05/11/2026</p>
         <h2 className="my-3 text-2xl font-extrabold leading-tight md:text-3xl">{m.title}</h2>
         <p className="mb-5 text-lg font-medium text-slate-600">{m.summary}</p>
@@ -102,6 +103,6 @@ export default function EdicaoCincoNovembro() {
       </article>)}
       <a href="/" className="font-bold text-emerald-900 underline">Voltar à capa da TV Voz de Brasília</a>
     </div>
-  </main>
+  </main></>
  );
 }
