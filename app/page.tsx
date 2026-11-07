@@ -95,6 +95,33 @@ export default async function Home() {
 <a href="/noticias/edicao-07-novembro/#semifinal" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-lg"><small className="font-extrabold text-emerald-800">Esporte · FONTE 07/11/2026 08h00</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">Atlético-MG e Grêmio disputam hoje vaga na final da Copa do Brasil</h2><p className="my-2 text-sm text-slate-600">Jogo de volta da semifinal está previsto para as 18h, em Belo Horizonte.</p><span className="font-bold text-emerald-800">LER REPORTAGEM →</span></a>
 <a href="/noticias/edicao-07-novembro/#mutirao-hospitais" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-lg"><small className="font-extrabold text-emerald-800">Saúde e Bem-Estar · FONTE 06/11/2026 17h25 (agenda de 07/11)</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">Neste sábado, hospitais universitários têm mutirão com previsão de 49 mil atendimentos</h2><p className="my-2 text-sm text-slate-600">Dia E mobiliza 47 hospitais federais em consultas, exames e cirurgias; notícia de referência publicada em 06/11.</p><span className="font-bold text-emerald-800">LER REPORTAGEM →</span></a>
 </div><p className="mt-4 text-sm text-slate-600">Edições anteriores: <a href="/noticias/edicao-06-novembro" className="font-semibold text-emerald-800 underline">06/11</a> e <a href="/noticias/edicao-05-novembro" className="font-semibold text-emerald-800 underline">05/11</a>.</p></section>
+        <section aria-label="Lula e Celina Leão na capa" className="mx-auto mt-7 max-w-[1400px] px-4">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+            <div><p className="text-sm font-extrabold uppercase tracking-wide text-emerald-800">Governo Federal e Governo do DF</p><h2 className="text-2xl font-black text-slate-900 md:text-3xl">Lula e Celina Leão: notícias em acompanhamento</h2></div>
+            <span className="text-sm font-bold text-slate-600">Atualização editorial: 07/11/2026</span>
+          </div>
+          <p className="mb-5 text-sm text-slate-600">Notícias verificadas com suas datas originais. As fotografias são registros oficiais de arquivo, não imagens realizadas hoje.</p>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <a href="/noticias/governos-07-novembro/#lula" className="block">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg/500px-Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg" alt="Fotografia real do presidente Lula com faixa presidencial, de arquivo" className="h-64 w-full bg-slate-100 object-contain object-center md:h-72" loading="lazy" />
+                <div className="px-5 pb-5 pt-3"><p className="text-xs font-bold uppercase text-emerald-700">Governo Federal · Fonte 06/11 · Acompanhamento 07/11</p><h3 className="mt-2 text-xl font-extrabold text-slate-900">Lula sanciona nova lei de avaliação da formação médica</h3><p className="mt-2 text-sm text-slate-700">A regra torna o Enamed requisito para o exercício profissional dos futuros médicos, segundo o Ministério da Saúde.</p><span className="mt-3 inline-block text-sm font-bold text-emerald-800">Ler reportagem no portal →</span></div>
+              </a>
+              <p className="px-5 pb-4 text-xs text-slate-500">Foto de arquivo (2023): Ricardo Stuckert/PR · CC BY 2.0</p>
+            </article>
+            <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <a href="/noticias/governos-07-novembro/#celina" className="block">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Celina_Leao_Posse_2026.jpg/960px-Celina_Leao_Posse_2026.jpg" alt="Fotografia real da governadora Celina Leão na solenidade de posse de março de 2026" className="h-64 w-full bg-slate-100 object-cover object-center md:h-72" loading="lazy" />
+                <div className="px-5 pb-5 pt-3"><p className="text-xs font-bold uppercase text-emerald-700">Governo do DF · Fonte 06/11 · Acompanhamento 07/11</p><h3 className="mt-2 text-xl font-extrabold text-slate-900">Celina destaca expansão da saúde com nova UPA em Águas Claras</h3><p className="mt-2 text-sm text-slate-700">Unidade em obras terá 65 leitos e investimento de R$ 17,6 milhões, conforme a Agência Brasília.</p><span className="mt-3 inline-block text-sm font-bold text-emerald-800">Ler reportagem no portal →</span></div>
+              </a>
+              <p className="px-5 pb-4 text-xs text-slate-500">Foto de arquivo (30/03/2026): George Gianni/Agência Brasília · CC BY 4.0</p>
+            </article>
+          </div>
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <a href="/noticias/governos-07-novembro/#energia-federal" className="block rounded-xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-xs font-bold text-emerald-700">GOVERNO FEDERAL · 06/11/2026</p><h3 className="mt-1 text-lg font-bold text-slate-900">CNPE define diretrizes para reduzir dependência de combustíveis fósseis</h3><span className="mt-2 block text-sm font-bold text-emerald-800">Ler no portal →</span></a>
+            <a href="/noticias/governos-07-novembro/#enem-federal" className="block rounded-xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-xs font-bold text-emerald-700">GOVERNO FEDERAL · SERVIÇO 07/11/2026</p><h3 className="mt-1 text-lg font-bold text-slate-900">Enem: MEC e Inep orientam candidatos para as provas de domingo (8)</h3><span className="mt-2 block text-sm font-bold text-emerald-800">Ler no portal →</span></a>
+          </div>
+        </section>
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="snaider" />
         </div>
