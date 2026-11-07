@@ -79,14 +79,22 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <DetranCampaignBanner />
-        <section aria-label="Edição de 4 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
-          <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
-            <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 04/11/2026 · DISTRITO FEDERAL</p>
-            <h1 className="my-4 text-3xl md:text-5xl font-black">Guará recebe encontro de inovação e cidades inteligentes nesta quarta-feira</h1>
-            <p className="text-lg text-slate-200">HackaCity Guará reúne tecnologia, empreendedorismo e economia criativa nos dias 4 e 5 de novembro. Entrada gratuita.</p>
-            <a href="/noticias/guara-inovacao-04-novembro" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Leia a reportagem completa</a>
-          </article>
-        </section>
+        <section aria-label="Notícias verificadas de 5 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
+  <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
+    <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 05/11/2026 · NOTÍCIAS CONFIRMADAS</p>
+    <h1 className="my-4 text-3xl md:text-5xl font-black">GDF realiza segundo sorteio de 2026 do Nota Legal</h1>
+    <p className="text-lg text-slate-200">O sorteio foi realizado na quinta-feira (5) e transmitido nos canais oficiais do governo distrital.</p>
+    <a href="/noticias/edicao-05-novembro/#nota-legal" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Ler reportagem completa</a>
+    <p className="mt-3 text-xs text-slate-300">Fonte: Agência Brasília — 05/11/2026</p>
+  </article>
+  <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <a key="mobilidade" href="/noticias/edicao-05-novembro/#mobilidade" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-lg"><small className="font-extrabold text-emerald-800">Mobilidade · 05/11/2026</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">São Sebastião recebe obras de calçadas com acessibilidade</h2><p className="my-2 text-sm text-slate-600">Intervenções nas ruas Gameleira e da Ponte incluem rampas e piso tátil; investimento informado é de cerca de R$ 780 mil.</p><span className="font-bold text-emerald-800">Ler reportagem →</span></a>
+  <a key="industria" href="/noticias/edicao-05-novembro/#industria" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-lg"><small className="font-extrabold text-emerald-800">Economia · 05/11/2026</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">Produção industrial brasileira cai 0,8% em setembro, informa IBGE</h2><p className="my-2 text-sm text-slate-600">Pesquisa divulgada em 5 de novembro registra a quarta retração da indústria em cinco meses.</p><span className="font-bold text-emerald-800">Ler reportagem →</span></a>
+  <a key="leilao-der" href="/noticias/edicao-05-novembro/#leilao-der" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-lg"><small className="font-extrabold text-emerald-800">Mobilidade · 05/11/2026</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">DER-DF anuncia leilão de veículos para 27 de novembro</h2><p className="my-2 text-sm text-slate-600">O 11º leilão público de 2026 será online; visitação dos lotes está prevista para 25 e 26 de novembro.</p><span className="font-bold text-emerald-800">Ler reportagem →</span></a>
+  <a key="basquete" href="/noticias/edicao-05-novembro/#basquete" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-lg"><small className="font-extrabold text-emerald-800">Educação e Esporte · 05/11/2026</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">Estudantes do DF representam Brasília no basquete dos Jogos da Juventude</h2><p className="my-2 text-sm text-slate-600">Atletas formadas em centros de iniciação desportiva da rede pública participam da competição nacional.</p><span className="font-bold text-emerald-800">Ler reportagem →</span></a>
+  <a key="quiosque" href="/noticias/edicao-05-novembro/#quiosque" className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-lg"><small className="font-extrabold text-emerald-800">Gastronomia e Negócios · 05/11/2026</small><h2 className="mt-2 text-lg font-bold leading-snug text-slate-900">Rota do Quiosque abre seleção de até 100 negócios no DF</h2><p className="my-2 text-sm text-slate-600">Programa combina capacitação para empreendedores, circuito gastronômico e premiação de comida de rua.</p><span className="font-bold text-emerald-800">Ler reportagem →</span></a>
+  </div>
+</section>
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="snaider" />
         </div>
