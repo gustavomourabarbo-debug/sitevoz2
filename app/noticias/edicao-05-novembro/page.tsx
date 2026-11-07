@@ -83,7 +83,14 @@ export default function EdicaoCincoNovembro() {
   <main className="min-h-screen bg-slate-50 text-slate-900">
     <header className="bg-emerald-800 px-5 py-5 text-white"><div className="mx-auto max-w-5xl"><a href="/" className="font-bold hover:underline">TV VOZ DE BRASÍLIA</a><p className="mt-2 text-sm">Edição especial • Notícias de 05/11/2026 • Brasília</p></div></header>
     <div className="mx-auto max-w-5xl px-5 py-9">
-      <h1 className="text-3xl font-extrabold leading-tight md:text-5xl">Notícias confirmadas de 5 de novembro de 2026</h1>
+      <section aria-label="Capa da edição de 5 de novembro de 2026" className="mb-8 overflow-hidden rounded-2xl border border-amber-400 bg-slate-900 px-6 py-8 text-white shadow-lg md:px-10 md:py-12">
+        <p className="mb-3 text-sm font-extrabold uppercase tracking-wide text-amber-300">Capa da edição • Quinta-feira, 05/11/2026 • Distrito Federal</p>
+        <h1 className="text-3xl font-black leading-tight md:text-5xl">Sorteio do Nota Legal foi realizado hoje, 5 de novembro</h1>
+        <p className="mt-5 text-lg leading-relaxed text-slate-200">O segundo sorteio de 2026 foi realizado nesta quinta-feira (5) e transmitido nos canais oficiais do GDF.</p>
+        <a href="#nota-legal" className="mt-6 inline-block rounded-lg bg-amber-400 px-5 py-3 font-extrabold text-slate-950 hover:bg-amber-300">Ler a reportagem completa</a>
+        <p className="mt-4 text-xs text-slate-300">Fonte: Agência Brasília • Informação referente a 05/11/2026</p>
+      </section>
+      <h2 className="text-2xl font-extrabold leading-tight md:text-3xl">Outras reportagens da edição de 5 de novembro de 2026</h2>
       <p className="mt-4 text-base text-slate-600">Reportagens redigidas pela TV Voz de Brasília com base em informações identificadas e publicadas em 05/11. As fontes oficiais são indicadas ao final de cada texto.</p>
       <nav aria-label="Índice das notícias" className="my-7 flex flex-wrap gap-2">{materias.map((m)=><a key={m.id} href={"#"+m.id} className="rounded-lg bg-emerald-900 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700">{m.tag}</a>)}</nav>
       {materias.map((m)=><article id={m.id} key={m.id} className="mb-7 scroll-mt-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
