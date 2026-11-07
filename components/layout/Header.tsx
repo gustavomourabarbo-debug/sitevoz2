@@ -29,6 +29,7 @@ export default function Header({ dataEdicao }: { dataEdicao?: string } = {}) {
     { label: 'Esportes', href: '/categoria/esportes' },
     { label: 'Economia', href: '/categoria/economia' },
     { label: 'Internacional', href: '/categoria/internacional' },
+    { label: 'CLUBE DE PERMUTAS', href: '/clube-de-permutas' },
   ];
 
   return (
