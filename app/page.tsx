@@ -82,7 +82,7 @@ export default async function Home() {
         <section aria-label="Notícias verificadas de 5 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
   <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
     <p className="text-sm font-extrabold text-amber-300">EDIÇÃO 05/11/2026 · NOTÍCIAS CONFIRMADAS</p>
-    <h1 className="my-4 text-3xl md:text-5xl font-black">GDF realiza segundo sorteio de 2026 do Nota Legal</h1>
+    <h1 className="my-4 text-3xl md:text-5xl font-black">GDF realiza hoje o segundo sorteio de 2026 do Nota Legal</h1>
     <p className="text-lg text-slate-200">O sorteio foi realizado na quinta-feira (5) e transmitido nos canais oficiais do governo distrital.</p>
     <a href="/noticias/edicao-05-novembro/#nota-legal" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Ler reportagem completa</a>
     <p className="mt-3 text-xs text-slate-300">Fonte: Agência Brasília — 05/11/2026</p>

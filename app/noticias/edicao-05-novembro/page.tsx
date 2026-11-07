@@ -2,7 +2,7 @@ const materias = [
   {
     "id": "nota-legal",
     "tag": "Distrito Federal",
-    "title": "GDF realiza segundo sorteio de 2026 do Nota Legal",
+    "title": "GDF realiza hoje o segundo sorteio de 2026 do Nota Legal",
     "summary": "O sorteio foi realizado na quinta-feira (5) e transmitido nos canais oficiais do governo distrital.",
     "paragraphs": [
       "O segundo sorteio do programa Nota Legal de 2026 foi realizado em 5 de novembro, segundo atualização divulgada pela Agência Brasília às 15h30. A transmissão ocorreu pelo canal oficial do GDF no YouTube.",
