@@ -4,7 +4,7 @@ export default function Noticia() {
  return <><Header dataEdicao="2026-11-04" /><main className="mx-auto max-w-4xl px-5 py-12 text-slate-900">
  <p className="font-bold text-green-700">DISTRITO FEDERAL · 04/11/2026</p>
  <h1 className="mt-3 text-4xl font-extrabold leading-tight">Guará recebe encontro de inovação e cidades inteligentes nesta quarta-feira</h1>
- <p className="mt-5 text-xl text-slate-700">Programação gratuita reúne tecnologia, empreendedorismo, desenvolvimento de jogos e economia criativa nos dias 4 e 5 de novembro.</p>
+ <figure className="my-6 overflow-hidden rounded-xl border border-slate-200 bg-slate-50"><img src="https://www.agenciabrasilia.df.gov.br/documents/d/guest/foto-divulgacao-administracao-do-guara-01-jpeg-1" alt="Imagem de divulgação do HackaCity Guará" className="block max-h-[440px] w-full object-cover" loading="lazy" referrerPolicy="no-referrer"/><figcaption className="px-3 py-2 text-xs text-slate-600">Imagem: Administração Regional do Guará / Agência Brasília • Divulgação 27/10/2026</figcaption></figure><p className="mt-5 text-xl text-slate-700">Programação gratuita reúne tecnologia, empreendedorismo, desenvolvimento de jogos e economia criativa nos dias 4 e 5 de novembro.</p>
  <p className="my-5 text-sm text-slate-500">Redação TV Voz de Brasília · 4 de novembro de 2026</p>
  <div className="space-y-5 text-lg leading-relaxed">
  <p>O Guará II recebe nesta quarta-feira (4) e quinta-feira (5) o HackaCity Guará — Mutirão Cidade Inteligente. A iniciativa foi anunciada pela Agência Brasília e propõe aproximar moradores, empreendedores e desenvolvedores de soluções para problemas urbanos.</p>
