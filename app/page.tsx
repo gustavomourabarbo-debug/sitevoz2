@@ -79,6 +79,14 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <DetranCampaignBanner />
+        <section aria-label="Cobertura especial ENEM 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
+          <a href="/noticias/enem-2026-gabarito-oficial" className="block rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-900 px-6 py-7 text-white shadow-xl hover:shadow-2xl">
+            <span className="text-sm font-black tracking-wider text-amber-300">COBERTURA ESPECIAL • ENEM 2026 • 08/11</span>
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight md:text-5xl">Gabarito oficial ainda não foi divulgado pelo Inep</h2>
+            <p className="mt-3 max-w-4xl text-base text-blue-100 md:text-lg">O primeiro dia de provas terminou neste domingo. O segundo será em 15 de novembro. Veja quando as respostas oficiais devem ser publicadas e como identificar a cor do caderno.</p>
+            <strong className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 text-sm font-black text-slate-950">ACOMPANHAR GABARITO OFICIAL →</strong>
+          </a>
+        </section>
         <section aria-label="Edição jornalística de 7 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
 <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
 <p className="text-sm font-extrabold text-amber-300">EDIÇÃO DE HOJE • SÁBADO, 07/11/2026 • FONTE 07/11</p>
