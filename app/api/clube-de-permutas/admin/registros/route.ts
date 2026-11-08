@@ -9,27 +9,27 @@ async function getDoc(path:string){
  if(!blob?.stream)return null;
  return JSON.parse(await new Response(blob.stream).text());
 }
-export async function GET(){
+export async function GET(request:Request){
  if(!isAdmin())return NextResponse.json({erro:'Acesso não autorizado.'},{status:401});
  try{
-  const rows:any[]=[];let cursor: string|undefined;
-  for(let i=0;i<10;i++){
-   const result=await list({prefix:'credenciamento/convites/',limit:100,cursor});
-   for(const blob of result.blobs){
+  const cursor=new URL(request.url).searchParams.get('cursor')||undefined;
+  if(cursor&&cursor.length>1000)return NextResponse.json({erro:'Página inválida.'},{status:400});
+  const result=await list({prefix:'credenciamento/convites/',limit:25,cursor});
+  const rows=await Promise.all(result.blobs.map(async blob=>{
     const protocolo=blob.pathname.split('/').at(-1)?.replace(/\.json$/,'')||'';
-    if(!uuid.test(protocolo))continue;
+    if(!uuid.test(protocolo))return null;
     const [convite,ficha,decisao]=await Promise.all([
-     getDoc('credenciamento/convites/'+protocolo+'.json'),
-     getDoc('credenciamento/fichas/'+protocolo+'.json'),
-     getDoc('credenciamento/decisoes/'+protocolo+'.json')
+      getDoc('credenciamento/convites/'+protocolo+'.json'),
+      getDoc('credenciamento/fichas/'+protocolo+'.json'),
+      getDoc('credenciamento/decisoes/'+protocolo+'.json')
     ]);
-    if(convite)rows.push({protocolo,nome:convite.nome,email:convite.email,perfil:convite.perfil,criadoEm:convite.criadoEm,
-       ficha,decisao,status:decisao?.status|| (ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')});
-   }
-   if(!result.hasMore||!result.cursor)break;cursor=result.cursor;
-  }
-  rows.sort((a,b)=>(b.criadoEm||'').localeCompare(a.criadoEm||''));
-  return NextResponse.json({ok:true,registros:rows,total:rows.length},{headers:{'Cache-Control':'no-store, private'}});
+    if(!convite)return null;
+    return {protocolo,nome:convite.nome,email:convite.email,perfil:convite.perfil,criadoEm:convite.criadoEm,
+       ficha,decisao,status:decisao?.status||(ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')};
+  }));
+  const registros=rows.filter(Boolean).sort((a:any,b:any)=>(b.criadoEm||'').localeCompare(a.criadoEm||''));
+  return NextResponse.json({ok:true,registros,total:registros.length,hasMore:result.hasMore,cursor:result.cursor||null},
+    {headers:{'Cache-Control':'no-store, private'}});
  }catch(e){
   console.error('Clube admin: falha consulta',e instanceof Error?e.name:'erro');
   return NextResponse.json({erro:'Falha ao carregar registros.'},{status:500});
