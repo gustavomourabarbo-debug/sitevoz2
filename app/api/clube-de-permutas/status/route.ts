@@ -12,8 +12,14 @@ export async function GET(request:Request){
   if(!convite?.stream)return NextResponse.json({erro:'Protocolo não localizado.'},{status:404});
   const ficha=await get('credenciamento/fichas/'+protocolo+'.json',{access:'private'}).catch(()=>null);
   const emAnalise=Boolean(ficha?.stream);
-  return NextResponse.json({ok:true,protocolo,status:emAnalise?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO',
-   mensagem:emAnalise?'Sua ficha foi recebida e aguarda conferência da equipe.':'Seu pré-cadastro foi recebido. Preencha a ficha de credenciamento para continuar.',
+  const decisao=await get('credenciamento/decisoes/'+protocolo+'.json',{access:'private'}).catch(()=>null);
+  const registro=decisao?.stream?JSON.parse(await new Response(decisao.stream).text()):null;
+  const status=registro?.status|| (emAnalise?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO');
+  const mensagem=status==='APROVADO'?'Seu credenciamento foi aprovado. Aguarde a liberação da sua área de associado.':
+     status==='REPROVADO'?'O credenciamento não foi aprovado. Entre em contato com a equipe para esclarecimentos.':
+     emAnalise?'Sua ficha foi recebida e aguarda conferência da equipe.':'Seu pré-cadastro foi recebido. Preencha a ficha de credenciamento para continuar.';
+  return NextResponse.json({ok:true,protocolo,status,
+   mensagem,
    atualizadoEm:new Date().toISOString()}, {headers:{'Cache-Control':'no-store, private'}});
  }catch{
   return NextResponse.json({erro:'Não foi possível consultar agora. Tente novamente.'},{status:503});
