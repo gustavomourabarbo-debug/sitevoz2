@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/clube-de-permutas' },
 };
 const itens = [
-  ['01','Quem participa','Empresas, MEIs, profissionais autônomos e pessoas físicas maiores de 18 anos, mediante análise e aprovação.'],
+  ['01','Quem participa','Qualquer empresa ou profissional pode solicitar participação, independentemente de porte ou modalidade de atuação, conforme as regras do clube.'],
   ['02','O que pode negociar','Produtos e serviços lícitos, próprios, disponíveis e descritos com preço em reais, condições, prazo e localização.'],
   ['03','Como negociar','O clube adotará permutas multilaterais por créditos comerciais cuja unidade ainda será definida. Propostas e operações dependerão de aceite, verificação, regras contratuais e saldo legítimo; ainda não há carteira ativa.'],
   ['04','Taxas e comissões','Valores de adesão, mensalidade e comissão serão apresentados para aceite antes de qualquer cobrança. Não há cobrança automática neste pré-cadastro.'],
