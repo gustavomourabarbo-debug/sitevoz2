@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import Painel from './Painel';
 export const metadata: Metadata={title:'Clube de Permutas | Fintech e Blockchain',description:'Plataforma integrada do Clube de Permutas, fintech e projeto de criptomoeda.',alternates:{canonical:'/clube-de-permutas/plataforma'}};
 const modulos=[
 ['Marketplace','Vitrine de produtos e serviços, propostas, negociação, entrega e confirmação.','Planejado'],
@@ -21,7 +20,6 @@ export default function Plataforma(){return <><Header/><main className="min-h-sc
 <section className="bg-white border-y border-slate-200 px-5 py-14"><div className="max-w-6xl mx-auto"><h2 className="text-3xl font-black">Como uma permuta gera receita</h2>
 <div className="grid md:grid-cols-3 gap-4 mt-6">{[['1','Negociação','Duas partes definem produto, valor, entrega e aceite.'],['2','Conciliação','O módulo financeiro identifica a comissão cobrada e seu efetivo pagamento em reais.'],['3','Auditoria','Cada operação terá número, comprovante, estado e histórico de movimentações.']].map(([n,t,d])=><div key={n} className="bg-slate-50 border border-slate-200 rounded-xl p-5"><p className="font-black text-emerald-800 text-3xl">{n}</p><h3 className="font-bold text-lg mt-3">{t}</h3><p className="mt-2 text-slate-600">{d}</p></div>)}</div>
 </div></section>
-<section id="simulador" className="max-w-6xl mx-auto px-5 py-14"><h2 className="text-3xl font-black">Projeção de receita bruta</h2><p className="text-slate-600 mt-3 mb-6">Simule operações e associados. Os resultados não representam receitas realizadas.</p><Painel/></section>
 <section className="bg-slate-950 px-5 py-14 text-white"><div className="max-w-6xl mx-auto"><h2 className="text-3xl font-black">Criptomoeda própria: projeto pré-emissão</h2><p className="text-slate-300 mt-4 max-w-4xl">O nome ainda será escolhido. Créditos comerciais de permuta e eventual token negociável em mercados externos terão regras distintas até que uma análise técnica, econômica e jurídica determine a arquitetura final. Não há promessa de paridade, rendimentos ou listagem em corretoras.</p>
 <p className="text-amber-300 mt-5 font-semibold">Exigências: identificação de associados, revisão BCB/CVM e fiscal, auditoria de contratos inteligentes, política de emissão, custódia e combate à fraude.</p><a className="inline-block mt-6 underline text-amber-300" href="/clube-de-permutas">Voltar ao Clube de Permutas</a></div></section>
 </main><Footer/></>}
