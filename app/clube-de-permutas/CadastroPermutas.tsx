@@ -8,7 +8,7 @@ function formatarCidadeUF(valor:string){
  return iniciaisMaiusculas(corresponde[1].trim())+'/'+corresponde[3].toLocaleUpperCase('pt-BR');
 }
 export default function CadastroPermutas(){
- const [nome,setNome]=useState(''),[email,setEmail]=useState(''),[telefone,setTelefone]=useState(''),[cidade,setCidade]=useState(''),[perfil,setPerfil]=useState('Empresa'),[oferta,setOferta]=useState(''),[busca,setBusca]=useState(''),[aceite,setAceite]=useState(false),[enviado,setEnviado]=useState(false),[enviando,setEnviando]=useState(false),[erro,setErro]=useState('');
+ const [nome,setNome]=useState(''),[email,setEmail]=useState(''),[telefone,setTelefone]=useState(''),[cidade,setCidade]=useState(''),[perfil,setPerfil]=useState('Empresa'),[oferta,setOferta]=useState(''),[busca,setBusca]=useState(''),[aceite,setAceite]=useState(false),[enviado,setEnviado]=useState(false),[enviando,setEnviando]=useState(false),[erro,setErro]=useState(''),[protocolo,setProtocolo]=useState(''),[emailEnviado,setEmailEnviado]=useState(false);
  const campo='w-full rounded-lg border border-slate-300 p-3 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600';
  async function enviar(e:FormEvent<HTMLFormElement>){
   e.preventDefault();
@@ -25,6 +25,8 @@ export default function CadastroPermutas(){
    });
    const dados=await resposta.json().catch(()=>({}));
    if(!resposta.ok)throw new Error(typeof dados.erro==='string'?dados.erro:'Não foi possível concluir a inscrição. Tente novamente.');
+   setProtocolo(typeof dados.protocolo==='string'?dados.protocolo:'');
+   setEmailEnviado(dados.emailEnviado===true);
    setEnviado(true);
   }catch(e){setErro(e instanceof Error?e.message:'Não foi possível concluir a inscrição.');}
   finally{setEnviando(false);}
@@ -37,7 +39,7 @@ export default function CadastroPermutas(){
  <label className="font-semibold">Que produtos ou serviços você procura para receber em permuta? <textarea className={campo+' mt-2 min-h-28'} required maxLength={1200} value={busca} onChange={e=>setBusca(e.target.value)} onBlur={()=>setBusca(iniciaisMaiusculas(busca))} placeholder="Descreva os produtos ou serviços que deseja receber na troca"/></label>
  <label className="flex gap-3 text-sm text-slate-600 items-start"><input className="mt-1" type="checkbox" required checked={aceite} onChange={e=>setAceite(e.target.checked)}/><span>Li as regras preliminares e autorizo o uso dos meus dados exclusivamente para contato sobre meu pré-cadastro, conforme a LGPD.</span></label>
  <button className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl py-4 px-6" type="submit" disabled={enviando}>{enviando?'ENVIANDO...':'ENVIAR PRÉ-CADASTRO'}</button>
- {enviado&&<p role="status" className="bg-green-50 border border-green-200 rounded-lg p-4 text-green-950">Seu pré-cadastro foi recebido com sucesso. O Clube de Permutas entrará em contato após a análise.</p>}
+ {enviado&&<div role="status" className="bg-green-50 border border-green-200 rounded-lg p-4 text-green-950"><strong>Pré-cadastro recebido.</strong><p className="mt-2">Para solicitar o credenciamento, preencha agora a ficha empresarial ou profissional com endereço, dados de atividade e três referências comerciais.</p>{protocolo&&<a className="mt-4 inline-block rounded-lg bg-emerald-800 text-white font-bold px-5 py-3" href={'/clube-de-permutas/credenciamento?protocolo='+encodeURIComponent(protocolo)}>PREENCHER FICHA DE CREDENCIAMENTO</a>}<p className="mt-3 text-sm">{emailEnviado?'Enviamos também o convite para seu e-mail cadastrado.':'O link da ficha está disponível acima. O envio automático por e-mail ainda não está ativo.'}</p></div>}
  {erro&&<p role="alert" className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-900">{erro}</p>}
  <p className="text-xs text-slate-500">Não há pagamento nesta etapa. Nunca envie senhas, documentos ou dados bancários neste formulário.</p>
  </form>
