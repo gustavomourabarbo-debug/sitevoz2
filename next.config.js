@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: { serverComponentsExternalPackages: ['@vercel/blob', 'undici'] },
   eslint: {
     ignoreDuringBuilds: true,
   },
