@@ -3,8 +3,9 @@ import {useState,type FormEvent} from 'react';
 type Registro={protocolo:string;nome:string;email:string;perfil:string;criadoEm:string;status:string;ficha?:any;decisao?:any};
 export default function PainelAdmin(){
  const [password,setPassword]=useState(''),[autenticado,setAutenticado]=useState(false),[itens,setItens]=useState<Registro[]>([]);
+ const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false);
  const [erro,setErro]=useState(''),[ocupado,setOcupado]=useState(false),[observacoes,setObservacoes]=useState<Record<string,string>>({});
- async function carregar(){const r=await fetch('/api/clube-de-permutas/admin/registros',{cache:'no-store'});const d=await r.json();if(!r.ok)throw new Error(d.erro||'Acesso não autorizado.');setItens(d.registros||[]);setAutenticado(true);}
+ async function carregar(proxima?:string){const r=await fetch('/api/clube-de-permutas/admin/registros'+(proxima?'?cursor='+encodeURIComponent(proxima):''),{cache:'no-store'});const d=await r.json();if(!r.ok)throw new Error(d.erro||'Acesso não autorizado.');setItens(atual=>proxima?[...atual,...(d.registros||[])]:d.registros||[]);setCursor(d.cursor||null);setMais(Boolean(d.hasMore));setAutenticado(true);}
  async function login(e:FormEvent){e.preventDefault();setErro('');setOcupado(true);
  try{const r=await fetch('/api/clube-de-permutas/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password})});
  if(!r.ok)throw new Error('Senha incorreta ou acesso indisponível.');setPassword('');await carregar();}catch(e){setErro(e instanceof Error?e.message:'Erro de acesso.');}finally{setOcupado(false)}}
@@ -26,5 +27,6 @@ export default function PainelAdmin(){
  <div className="flex gap-2 flex-wrap"><button disabled={ocupado} onClick={()=>acao(item,'APROVADO')} className="bg-emerald-800 text-white font-semibold rounded-lg py-2 px-4">APROVAR</button><button disabled={ocupado} onClick={()=>acao(item,'EM_ANALISE')} className="bg-amber-100 text-amber-900 font-semibold rounded-lg py-2 px-4">EM ANÁLISE</button><button disabled={ocupado} onClick={()=>acao(item,'REPROVADO')} className="bg-red-50 text-red-800 font-semibold rounded-lg py-2 px-4">REPROVAR</button></div></>}
  {!item.ficha&&<p className="text-amber-800">Aguardando preenchimento da ficha de credenciamento.</p>}
  </article>)}
+ {mais&&cursor&&<button disabled={ocupado} className="border border-emerald-800 text-emerald-800 bg-white p-4 rounded-xl font-bold" onClick={()=>carregar(cursor).catch(e=>setErro(String(e)))}>CARREGAR MAIS CADASTROS</button>}
  </div>;
 }
