@@ -74,6 +74,7 @@ const materias = [
   }
 ];
 
+const fotosEditoriais={"nota-legal":["https://agenciabrasilia.df.gov.br/documents/d/guest/55634513701_190f9fccce_c-jpg","Imagem: Agência Brasília / divulgação Nota Legal"],"mobilidade":["https://agenciabrasilia.df.gov.br/documents/d/guest/dentro-rua-gameleira-jpg","Foto: Agência Brasília • 05/11/2026"],"industria":["https://imagens.ebc.com.br/34HJ2q2IljlftBJreKdXPxU2LFM=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/industria_automobilisticaautomovel_fabrica.jpg?itok=_LrySXfF","Foto documental de fábrica: Agência Brasil/EBC"],"leilao-der":["https://www.agenciabrasilia.df.gov.br/documents/d/guest/imagemmeramenteilustrativa-jpeg","Foto ilustrativa: DER-DF / Agência Brasília"],"basquete":["https://www.agenciabrasilia.df.gov.br/documents/d/guest/foto-capa-estrelas-basquete-convertida-1-jpg","Foto: Agência Brasília/SEEDF, 05/11/2026"],"quiosque":["https://agenciabrasilia.df.gov.br/documents/d/guest/28-10-rota-do-quiosque-jpg","Foto: Agência Brasília • imagem da iniciativa"]};
 export const metadata = {
   title: "Edição de 5 de novembro de 2026 | TV Voz de Brasília",
   description: "Seis reportagens autorais da TV Voz de Brasília com fontes oficiais publicadas em 5 de novembro de 2026.",
@@ -97,7 +98,7 @@ export default function EdicaoCincoNovembro() {
       {materias.map((m)=><article id={m.id} key={m.id} className="mb-7 scroll-mt-64 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-9">
         <p className="text-xs font-extrabold uppercase tracking-wider text-emerald-700">{m.tag} • Publicado em 05/11/2026</p>
         <h2 className="my-3 text-2xl font-extrabold leading-tight md:text-3xl">{m.title}</h2>
-        <p className="mb-5 text-lg font-medium text-slate-600">{m.summary}</p>
+        <figure className="my-5 overflow-hidden rounded-xl border border-slate-200 bg-slate-50"><img src={fotosEditoriais[m.id][0]} alt={"Foto documental relacionada a: "+m.title} className="block max-h-[440px] w-full object-cover" loading="lazy" referrerPolicy="no-referrer"/><figcaption className="px-3 py-2 text-xs text-slate-600">{fotosEditoriais[m.id][1]}</figcaption></figure><p className="mb-5 text-lg font-medium text-slate-600">{m.summary}</p>
         {m.paragraphs.map((p,i)=><p className="mb-4 leading-relaxed" key={i}>{p}</p>)}
         <p className="mt-6 border-t border-slate-200 pt-4 text-sm"><strong>Apuração e referência: </strong><a className="text-emerald-800 underline" href={m.url} target="_blank" rel="noopener noreferrer">{m.source}</a></p>
       </article>)}
