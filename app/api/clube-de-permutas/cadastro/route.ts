@@ -30,10 +30,11 @@ export async function POST(request: Request) {
   if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_STORE_ID)
    return NextResponse.json({ erro: 'Recebimento temporariamente indisponível.' }, { status: 503 });
 
+  const whatsappAutorizado = body.whatsappAutorizado === true;
   const protocolo = randomUUID();
   const registro = {
     protocolo, data: new Date().toISOString(), nome, perfil, email,
-    telefone, cidade, oferta, busca, consentimento: true,
+    telefone, cidade, oferta, busca, consentimento: true, whatsappAutorizado,
     origem: 'vozdebrasilia.com.br/clube-de-permutas'
   };
   await put('inscricoes/'+new Date().toISOString().slice(0,10)+'/'+protocolo+'.json',
@@ -47,6 +48,7 @@ export async function POST(request: Request) {
       access:'private', contentType:'application/json', addRandomSuffix:false
     });
   let emailEnviado=false;
+  let whatsappEnviado=false;
   // O disparo depende de provedor transacional autenticado e remetente verificado.
   // Não usamos a conta do visitante nem informamos envio caso a API rejeite.
   if(process.env.RESEND_API_KEY && process.env.CLUBE_EMAIL_REMETENTE){
@@ -64,8 +66,22 @@ export async function POST(request: Request) {
     if(!retorno.ok)console.error('Clube: e-mail de credenciamento não entregue ao provedor',retorno.status);
    }catch {console.error('Clube: falha de comunicação com provedor de e-mail');}
   }
+  // WhatsApp Cloud API: somente com aceite específico e modelo previamente aprovado pela Meta.
+  const telefoneInternacional = telefone.replace(/\D/g,'');
+  const telefoneWA = telefoneInternacional.length===10||telefoneInternacional.length===11?'55'+telefoneInternacional:telefoneInternacional;
+  if(whatsappAutorizado && /^55\d{10,11}$/.test(telefoneWA) && process.env.WHATSAPP_PHONE_NUMBER_ID && process.env.WHATSAPP_ACCESS_TOKEN && process.env.WHATSAPP_TEMPLATE_CADASTRO){
+    try{
+      const respostaWA=await fetch('https://graph.facebook.com/v22.0/'+encodeURIComponent(process.env.WHATSAPP_PHONE_NUMBER_ID)+'/messages',{
+        method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+process.env.WHATSAPP_ACCESS_TOKEN},
+        body:JSON.stringify({messaging_product:'whatsapp',to:telefoneWA,type:'template',
+          template:{name:process.env.WHATSAPP_TEMPLATE_CADASTRO,language:{code:'pt_BR'}}}),cache:'no-store'
+      });
+      whatsappEnviado=respostaWA.ok;
+      if(!respostaWA.ok)console.error('Clube: falha WhatsApp API',respostaWA.status);
+    }catch{console.error('Clube: erro de comunicação WhatsApp');}
+  }
   console.info('Clube de Permutas: cadastro gravado', protocolo);
-  return NextResponse.json({ ok: true, protocolo, emailEnviado }, {
+  return NextResponse.json({ ok: true, protocolo, emailEnviado, whatsappEnviado, status:'EM_ANALISE' }, {
     headers: { 'Cache-Control': 'no-store' }
   });
  } catch (error) {
