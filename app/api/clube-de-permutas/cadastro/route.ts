@@ -41,6 +41,11 @@ export async function POST(request: Request) {
       access: 'private', contentType: 'application/json',
       addRandomSuffix: false
     });
+  // O protocolo opaco permite continuar a qualificação sem expor dados do associado.
+  await put('credenciamento/convites/'+protocolo+'.json',
+    JSON.stringify({protocolo, perfil, email, nome, criadoEm:new Date().toISOString()}), {
+      access:'private', contentType:'application/json', addRandomSuffix:false
+    });
   console.info('Clube de Permutas: cadastro gravado', protocolo);
   return NextResponse.json({ ok: true, protocolo }, {
     headers: { 'Cache-Control': 'no-store' }
