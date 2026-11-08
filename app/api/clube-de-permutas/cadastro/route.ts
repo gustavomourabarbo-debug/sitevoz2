@@ -25,7 +25,7 @@ export async function POST(request: Request) {
    return NextResponse.json({ erro: 'Preencha todos os campos e autorize o contato.' }, { status: 400 });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
    return NextResponse.json({ erro: 'Informe um e-mail válido.' }, { status: 400 });
-  if (!['Empresa','MEI','Profissional autônomo','Pessoa física'].includes(perfil))
+  if (!['Empresa','Profissional'].includes(perfil))
    return NextResponse.json({ erro: 'Perfil inválido.' }, { status: 400 });
   if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.BLOB_STORE_ID)
    return NextResponse.json({ erro: 'Recebimento temporariamente indisponível.' }, { status: 503 });
