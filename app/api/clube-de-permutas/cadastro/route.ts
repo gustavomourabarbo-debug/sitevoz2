@@ -7,6 +7,8 @@ export const dynamic = 'force-dynamic';
 
 const texto = (valor: unknown, limite: number) =>
  typeof valor === 'string' ? valor.trim().slice(0, limite) : '';
+const iniciaisMaiusculas = (valor: string) => valor.replace(/(^|[\s'/-])(\p{L})/gu, (_:string, separador:string, letra:string) => separador + letra.toLocaleUpperCase('pt-BR'));
+const cidadeUF = (valor: string) => { const m=valor.match(/^(.*?)(\s*[/,–-]\s*|\s+)([a-zA-Z]{2})$/u); return m?iniciaisMaiusculas(m[1].trim())+'/'+m[3].toUpperCase():iniciaisMaiusculas(valor); };
 
 export async function POST(request: Request) {
  try {
@@ -17,8 +19,8 @@ export async function POST(request: Request) {
 
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== 'object') return NextResponse.json({ erro: 'Dados inválidos.' }, { status: 400 });
-  const nome = texto(body.nome,120), email = texto(body.email,200), telefone = texto(body.telefone,40);
-  const cidade = texto(body.cidade,100), perfil = texto(body.perfil,50), oferta = texto(body.oferta,1200), busca = texto(body.busca,1200);
+  const nome = iniciaisMaiusculas(texto(body.nome,120)), email = texto(body.email,200).toLowerCase(), telefone = texto(body.telefone,40);
+  const cidade = cidadeUF(texto(body.cidade,100)), perfil = texto(body.perfil,50), oferta = iniciaisMaiusculas(texto(body.oferta,1200)), busca = iniciaisMaiusculas(texto(body.busca,1200));
   if (!nome || !email || !telefone || !cidade || !perfil || !oferta || !busca || body.aceite !== true)
    return NextResponse.json({ erro: 'Preencha todos os campos e autorize o contato.' }, { status: 400 });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
@@ -39,6 +41,7 @@ export async function POST(request: Request) {
       access: 'private', contentType: 'application/json',
       addRandomSuffix: false
     });
+  console.info('Clube de Permutas: cadastro gravado', protocolo);
   return NextResponse.json({ ok: true, protocolo }, {
     headers: { 'Cache-Control': 'no-store' }
   });
