@@ -46,8 +46,26 @@ export async function POST(request: Request) {
     JSON.stringify({protocolo, perfil, email, nome, criadoEm:new Date().toISOString()}), {
       access:'private', contentType:'application/json', addRandomSuffix:false
     });
+  let emailEnviado=false;
+  // O disparo depende de provedor transacional autenticado e remetente verificado.
+  // Não usamos a conta do visitante nem informamos envio caso a API rejeite.
+  if(process.env.RESEND_API_KEY && process.env.CLUBE_EMAIL_REMETENTE){
+   const endereco='https://www.vozdebrasilia.com.br/clube-de-permutas/credenciamento?protocolo='+encodeURIComponent(protocolo);
+   try {
+    const retorno=await fetch('https://api.resend.com/emails',{method:'POST',
+     headers:{Authorization:'Bearer '+process.env.RESEND_API_KEY,'Content-Type':'application/json'},
+     body:JSON.stringify({
+       from:'Clube de Permutas <'+process.env.CLUBE_EMAIL_REMETENTE+'>',
+       to:[email],
+       subject:'Clube de Permutas — complete seu credenciamento',
+       text:'Olá, '+nome+'!\\n\\nRecebemos seu pré-cadastro no Clube de Permutas. Para validar sua empresa ou atuação profissional, preencha a ficha complementar: '+endereco+'\\n\\nPrecisaremos de endereço comercial, contatos, CNPJ quando aplicável, área de atuação e três referências comerciais autorizadas. O envio da ficha não significa aprovação automática.\\n\\nEquipe Clube de Permutas — TV Voz de Brasília'
+     }),cache:'no-store'});
+    emailEnviado=retorno.ok;
+    if(!retorno.ok)console.error('Clube: e-mail de credenciamento não entregue ao provedor',retorno.status);
+   }catch {console.error('Clube: falha de comunicação com provedor de e-mail');}
+  }
   console.info('Clube de Permutas: cadastro gravado', protocolo);
-  return NextResponse.json({ ok: true, protocolo }, {
+  return NextResponse.json({ ok: true, protocolo, emailEnviado }, {
     headers: { 'Cache-Control': 'no-store' }
   });
  } catch (error) {
