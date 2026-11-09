@@ -1,12 +1,32 @@
 'use client';
 import {useState,type FormEvent} from 'react';
+type Oferta={id:string;titulo:string;descricao:string;categoria:string;empresa:string;cidade:string;valorReferencia:number;quantidade:string;status:string;associado?:{email:string;protocolo:string};avaliacao?:{observacao:string}};
 type Proposta={id:string;ofertaTitulo:string;email:string;mensagem:string;protocolo:string;status:string;criadaEm:string};
 export default function OfertasAdmin(){
  const [dados,setDados]=useState({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  const [propostas,setPropostas]=useState<Proposta[]>([]),[erro,setErro]=useState(''),[ok,setOk]=useState(''),[ocupado,setOcupado]=useState(false);
  const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false);
+ const [ofertas,setOfertas]=useState<Oferta[]>([]),[ofertasCursor,setOfertasCursor]=useState<string|null>(null),[ofertasMais,setOfertasMais]=useState(false),[notas,setNotas]=useState<Record<string,string>>({});
  const [andamentos,setAndamentos]=useState<Record<string,{status:string;observacao:string;comprador:boolean;vendedor:boolean}>>({});
  const alterar=(k:keyof typeof dados,v:string)=>setDados(p=>({...p,[k]:v}));
+ async function carregarOfertas(proxima?:string){
+  setOcupado(true);setErro('');
+  try{
+   const r=await fetch('/api/clube-de-permutas/admin/ofertas'+(proxima?'?cursor='+encodeURIComponent(proxima):''),{cache:'no-store'});
+   const d=await r.json();if(!r.ok)throw new Error(d.erro||'Falha ao carregar ofertas.');
+   setOfertas(old=>proxima?[...old,...d.ofertas]:d.ofertas||[]);
+   setOfertasCursor(d.cursor||null);setOfertasMais(Boolean(d.hasMore));
+  }catch(e){setErro(e instanceof Error?e.message:'Falha ao consultar ofertas.');}finally{setOcupado(false)}
+ }
+ async function moderar(o:Oferta,status:string){
+  const observacao=(notas[o.id]||'').trim();setOcupado(true);setErro('');setOk('');
+  try{
+   const r=await fetch('/api/clube-de-permutas/admin/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({id:o.id,status,observacao})});
+   const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Não foi possível registrar decisão.');
+   setOk('Decisão registrada para a oferta '+o.id);await carregarOfertas();
+  }catch(e){setErro(e instanceof Error?e.message:'Falha ao moderar oferta.');}finally{setOcupado(false)}
+ }
  async function publicar(e:FormEvent){e.preventDefault();setOcupado(true);setErro('');setOk('');
  try{const r=await fetch('/api/clube-de-permutas/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...dados,valorReferencia:Number(dados.valorReferencia)})});
  const d=await r.json();if(!r.ok)throw new Error(d.erro||'Falha ao publicar.');
@@ -31,7 +51,22 @@ export default function OfertasAdmin(){
  setPropostas(old=>proxima?[...old,...d.propostas]:d.propostas);setCursor(d.cursor||null);setMais(Boolean(d.hasMore));
  }catch(e){setErro(e instanceof Error?e.message:'Não foi possível consultar. Faça login no painel de credenciamento primeiro.');}finally{setOcupado(false)}}
  return <div className="grid gap-8"><div className="rounded-xl border bg-amber-50 border-amber-200 px-5 py-4 text-sm">Acesse primeiro o <a className="text-emerald-900 font-bold underline" href="/clube-de-permutas/administracao">painel de credenciamento</a> e faça login. Só publique ofertas cuja existência, preço e autorização do ofertante tenham sido verificados.</div>
- <form onSubmit={publicar} className="bg-white p-6 rounded-2xl border shadow-sm grid gap-4"><h2 className="font-black text-2xl">Publicar uma oferta verificada</h2>
+ <section className="bg-white rounded-2xl border shadow-sm p-6"><h2 className="text-2xl font-black">Ofertas enviadas pelos associados</h2><p className="text-sm text-slate-600 mt-2">Confira a descrição, o valor e a autorização do associado antes de publicar. Cada decisão fica registrada.</p>
+ <button disabled={ocupado} onClick={()=>carregarOfertas()} className="bg-slate-900 text-white rounded-lg py-3 px-5 font-bold mt-4">CARREGAR OFERTAS RECEBIDAS</button>
+ <div className="grid gap-4 mt-5">{ofertas.map(o=><article key={o.id} className="border border-slate-200 rounded-xl bg-slate-50 p-5">
+ <div className="flex flex-wrap justify-between gap-3"><h3 className="font-black text-lg">{o.titulo}</h3><span className="font-bold text-emerald-900">{o.status.replace(/_/g,' ')}</span></div>
+ <p className="text-sm text-slate-700 mt-2">{o.empresa} • {o.cidade} • {o.categoria}</p>
+ <p className="mt-2 whitespace-pre-wrap">{o.descricao}</p><p className="mt-2 text-sm">Quantidade: {o.quantidade}</p>
+ <p className="font-bold mt-2">Valor de referência: R$ {Number(o.valorReferencia).toLocaleString('pt-BR',{minimumFractionDigits:2})}</p>
+ {o.associado&&<p className="text-xs mt-2">Associado: {o.associado.email} • {o.associado.protocolo}</p>}
+ <label className="block font-semibold text-sm mt-4">Observação para a decisão<textarea required maxLength={700} className="mt-2 block w-full p-3 border border-slate-300 rounded-lg" value={notas[o.id]||''} onChange={e=>setNotas(s=>({...s,[o.id]:e.target.value}))} placeholder="Ex.: validade e disponibilidade conferidas com o ofertante"/></label>
+ <div className="flex flex-wrap gap-2 mt-3">
+ <button disabled={ocupado} onClick={()=>moderar(o,'PUBLICADA')} className="bg-emerald-800 text-white rounded-lg px-4 py-3 font-bold">APROVAR PUBLICAÇÃO</button>
+ <button disabled={ocupado} onClick={()=>moderar(o,'REPROVADA')} className="bg-red-100 text-red-900 rounded-lg px-4 py-3 font-bold">REJEITAR</button>
+ <button disabled={ocupado} onClick={()=>moderar(o,'SUSPENSA')} className="bg-amber-100 text-amber-900 rounded-lg px-4 py-3 font-bold">SUSPENDER</button>
+ </div></article>)}</div>
+ {ofertasMais&&ofertasCursor&&<button disabled={ocupado} onClick={()=>carregarOfertas(ofertasCursor)} className="mt-4 text-emerald-800 font-bold underline">Carregar mais ofertas</button>}</section>
+  <form onSubmit={publicar} className="bg-white p-6 rounded-2xl border shadow-sm grid gap-4"><h2 className="font-black text-2xl">Publicar uma oferta verificada</h2>
  {([
  ['titulo','Título do produto ou serviço'],['empresa','Nome público da empresa ofertante'],['categoria','Categoria'],['cidade','Cidade / UF'],['quantidade','Quantidade e condições de disponibilidade'],['valorReferencia','Valor de referência em reais']
  ] as [keyof typeof dados,string][]).map(([k,label])=><label className="block font-semibold" key={k}>{label}<input required type={k==='valorReferencia'?'number':'text'} min={k==='valorReferencia'?0.01:undefined} step={k==='valorReferencia'?'0.01':undefined} maxLength={140} value={dados[k]} onChange={e=>alterar(k,e.target.value)} className="mt-2 block w-full border border-slate-300 rounded-lg p-3"/></label>)}
