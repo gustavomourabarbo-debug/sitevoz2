@@ -1,0 +1,6 @@
+import type {Metadata} from 'next';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import Catalogo from './Catalogo';
+export const metadata:Metadata={title:'Catálogo de ofertas | Clube de Permutas',description:'Consulte ofertas disponibilizadas e registre seu interesse em uma negociação assistida.',alternates:{canonical:'/clube-de-permutas/ofertas'}};
+export default function Pagina(){return <><Header/><main className="min-h-screen bg-slate-50 px-5 py-14 text-slate-900"><div className="max-w-6xl mx-auto"><p className="uppercase tracking-widest text-emerald-800 font-bold text-sm">Clube de Permutas Brasil</p><h1 className="text-4xl md:text-5xl font-black mt-2">Ofertas e oportunidades</h1><p className="text-slate-600 mt-4 max-w-4xl">Explore ofertas publicadas pela administração do clube. Associados com credenciamento aprovado podem registrar propostas. A negociação é acompanhada pela equipe; nenhuma permuta é concluída automaticamente e não há movimentação de tokens ou pagamentos nesta etapa.</p><Catalogo/></div></main><Footer/></>}
