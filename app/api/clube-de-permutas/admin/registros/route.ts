@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import {get,list,put} from '@vercel/blob';
 import {isAdmin,sameOrigin} from '@/lib/clube-admin';
+import {notificarDecisao} from '@/lib/clube-notificacoes';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -58,12 +59,16 @@ export async function POST(request:Request){
  const observacao=typeof b?.observacao==='string'?b.observacao.trim().slice(0,500):'';
  if(!uuid.test(protocolo)||!['APROVADO','REPROVADO','EM_ANALISE'].includes(status))
   return NextResponse.json({erro:'Dados inválidos.'},{status:400});
- const ficha=await getDoc('credenciamento/fichas/'+protocolo+'.json');
- if(!ficha)return NextResponse.json({erro:'Ficha de credenciamento ainda não enviada. Consulte a ficha antes de aprovar.'},{status:409});
+ const [ficha,convite]=await Promise.all([
+  getDoc('credenciamento/fichas/'+protocolo+'.json'),
+  getDoc('credenciamento/convites/'+protocolo+'.json')
+ ]);
+ if(!ficha||!convite)return NextResponse.json({erro:'Ficha de credenciamento ainda não enviada. Consulte a ficha antes de aprovar.'},{status:409});
  const registro={protocolo,status,observacao,data:new Date().toISOString(),origem:'admin_clube'};
  try{
   await put('credenciamento/decisoes/'+protocolo+'.json',JSON.stringify(registro),
    {access:'private',contentType:'application/json',addRandomSuffix:false,allowOverwrite:true});
-  return NextResponse.json({ok:true,status},{headers:{'Cache-Control':'no-store'}});
+  const notificacao=await notificarDecisao({email:convite.email,nome:convite.nome,protocolo,status});
+  return NextResponse.json({ok:true,status,notificacao},{headers:{'Cache-Control':'no-store'}});
  }catch{return NextResponse.json({erro:'Falha ao gravar a decisão.'},{status:500});}
 }
