@@ -79,6 +79,19 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <DetranCampaignBanner />
+        <section aria-label="Atualização jornalística 9 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5">
+          <div className="rounded-2xl border-2 border-green-700 bg-white p-6 shadow-md md:p-8">
+            <p className="text-sm font-extrabold uppercase tracking-wider text-green-800">EDIÇÃO DE SEGUNDA-FEIRA • 09/11/2026 • FONTES OFICIAIS 07–08/11</p>
+            <h1 className="mt-2 text-3xl font-black text-slate-900 md:text-4xl">Enem, acolhimento social, CRLV-e e saúde no Distrito Federal</h1>
+            <p className="mt-3 text-base text-slate-700">Notícias verificadas, com datas e fontes identificadas. A edição anterior permanece disponível no acervo.</p>
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
+              <a href="/noticias/edicao-9-novembro-2026#enem" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">Enem 2026: provas de 8/11 concluídas; segunda etapa em 15/11 →</a>
+              <a href="/noticias/edicao-9-novembro-2026#acolhimento" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">GDF programa acolhimento social nesta segunda, 9/11 →</a>
+              <a href="/noticias/edicao-9-novembro-2026#crlv" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">Licenciamento 2026: atenção aos finais de placas →</a>
+              <a href="/noticias/edicao-9-novembro-2026#saude" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">GDF anuncia 57 vagas para médicos de família →</a>
+            </div>
+          </div>
+        </section>
         <section aria-label="Cobertura especial ENEM 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
           <a href="/noticias/enem-2026-gabarito-oficial" className="block rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-900 px-6 py-7 text-white shadow-xl hover:shadow-2xl">
             <span className="text-sm font-black tracking-wider text-amber-300">COBERTURA ESPECIAL • ENEM 2026 • 08/11</span>
@@ -89,7 +102,7 @@ export default async function Home() {
         </section>
         <section aria-label="Edição jornalística de 7 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
 <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
-<p className="text-sm font-extrabold text-amber-300">EDIÇÃO DE HOJE • SÁBADO, 07/11/2026 • FONTE 07/11</p>
+<p className="text-sm font-extrabold text-amber-300">ARQUIVO JORNALÍSTICO • SÁBADO, 07/11/2026 • FONTE 07/11</p>
 <img src="https://imagens.ebc.com.br/VpwCdcitCs4h6WVIzbY3FZl3zdE=/1600x800/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2025/11/12/_d6a9124.jpg?itok=KbZPYXax" alt="Imagem da reportagem sobre o vale-refeição" loading="lazy" referrerPolicy="no-referrer" className="mb-4 h-72 w-full rounded-xl object-cover" /><h1 className="my-4 text-3xl md:text-5xl font-black">Vale-refeição e vale-alimentação passam por mudanças neste sábado; integração ainda enfrenta desafios</h1>
 <p className="text-lg text-slate-200">Mudanças previstas no PAT ampliam a possibilidade de aceitação em diferentes maquininhas, mas a implementação depende dos sistemas das operadoras.</p>
 <a href="/noticias/edicao-07-novembro/#vales" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Ler a reportagem completa</a>
