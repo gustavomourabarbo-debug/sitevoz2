@@ -12,7 +12,22 @@ async function getDoc(path:string){
 export async function GET(request:Request){
  if(!isAdmin())return NextResponse.json({erro:'Acesso não autorizado.'},{status:401});
  try{
-  const cursor=new URL(request.url).searchParams.get('cursor')||undefined;
+  const url=new URL(request.url);
+  const protocoloBusca=url.searchParams.get('protocolo')||'';
+  if(protocoloBusca){
+    if(!uuid.test(protocoloBusca))return NextResponse.json({erro:'Protocolo inválido.'},{status:400});
+    const [convite,ficha,decisao]=await Promise.all([
+      getDoc('credenciamento/convites/'+protocoloBusca+'.json'),
+      getDoc('credenciamento/fichas/'+protocoloBusca+'.json'),
+      getDoc('credenciamento/decisoes/'+protocoloBusca+'.json')
+    ]);
+    if(!convite)return NextResponse.json({erro:'Não encontramos o pré-cadastro deste protocolo.'},{status:404});
+    const registro={protocolo:protocoloBusca,nome:convite.nome,email:convite.email,perfil:convite.perfil,
+      criadoEm:convite.criadoEm,ficha,decisao,status:decisao?.status||(ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')};
+    return NextResponse.json({ok:true,registros:[registro],total:1,hasMore:false,cursor:null},
+      {headers:{'Cache-Control':'no-store, private'}});
+  }
+  const cursor=url.searchParams.get('cursor')||undefined;
   if(cursor&&cursor.length>1000)return NextResponse.json({erro:'Página inválida.'},{status:400});
   const result=await list({prefix:'credenciamento/convites/',limit:25,cursor});
   const rows=await Promise.all(result.blobs.map(async blob=>{
@@ -44,7 +59,7 @@ export async function POST(request:Request){
  if(!uuid.test(protocolo)||!['APROVADO','REPROVADO','EM_ANALISE'].includes(status))
   return NextResponse.json({erro:'Dados inválidos.'},{status:400});
  const ficha=await getDoc('credenciamento/fichas/'+protocolo+'.json');
- if(!ficha)return NextResponse.json({erro:'Ficha de credenciamento ainda não enviada.'},{status:409});
+ if(!ficha)return NextResponse.json({erro:'Ficha de credenciamento ainda não enviada. Consulte a ficha antes de aprovar.'},{status:409});
  const registro={protocolo,status,observacao,data:new Date().toISOString(),origem:'admin_clube'};
  try{
   await put('credenciamento/decisoes/'+protocolo+'.json',JSON.stringify(registro),
