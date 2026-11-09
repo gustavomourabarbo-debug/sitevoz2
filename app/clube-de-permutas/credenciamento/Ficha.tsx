@@ -1,5 +1,5 @@
 'use client';
-import {useState,useRef,type FormEvent} from 'react';
+import {useState,useRef,useEffect,type FormEvent} from 'react';
 const capitalizar=(v:string)=>v.replace(/(^|[\s'/-])(\p{L})/gu,(_,sep:string,letra:string)=>sep+letra.toLocaleUpperCase('pt-BR'));
 const numeros=(valor:string,limite:number)=>valor.replace(/\D/g,'').slice(0,limite);
 function formatarCnpj(valor:string){
@@ -18,6 +18,16 @@ export default function Ficha({protocolo}:{protocolo:string}){
  const [declaracao,setDeclaracao]=useState(false),[autoriza,setAutoriza]=useState(false),[enviando,setEnviando]=useState(false),[ok,setOk]=useState(false),[erro,setErro]=useState('');
  const [consultandoCep,setConsultandoCep]=useState(false),[avisoCep,setAvisoCep]=useState('');
  const ultimaBuscaCep=useRef('');
+ const confirmacaoRef=useRef<HTMLDivElement>(null);
+ useEffect(()=>{
+  if(ok){
+   const id=requestAnimationFrame(()=>{
+    confirmacaoRef.current?.scrollIntoView({behavior:'smooth',block:'start'});
+    confirmacaoRef.current?.focus({preventScroll:true});
+   });
+   return ()=>cancelAnimationFrame(id);
+  }
+ },[ok]);
  const classe='mt-2 w-full rounded-lg border border-slate-300 p-3 bg-white text-slate-900';
  const atualizar=(campo:keyof typeof dados,valor:string)=>setDados(p=>({...p,[campo]:valor}));
  async function consultarCep(valor:string){
@@ -57,7 +67,7 @@ export default function Ficha({protocolo}:{protocolo:string}){
  }catch(e){setErro(e instanceof Error?e.message:'Não foi possível enviar.');}finally{setEnviando(false)}
  }
  if(!protocolo)return <p className="bg-amber-50 p-5 rounded-xl">Para preencher a ficha, realize primeiro o pré-cadastro. O link exclusivo aparecerá em seguida.</p>;
- if(ok)return <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8"><h2 className="text-2xl font-bold text-emerald-900">Ficha recebida para análise!</h2><p className="mt-3">Sua empresa ou atividade profissional ainda não está credenciada. A equipe verificará seus dados e referências antes da aprovação.</p><p className="mt-3 text-sm">Protocolo: {protocolo}</p></div>;
+ if(ok)return <div ref={confirmacaoRef} tabIndex={-1} role="status" className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 scroll-mt-36 focus:outline-none"><h2 className="text-2xl font-bold text-emerald-900">Ficha recebida para análise!</h2><p className="mt-3">Sua empresa ou atividade profissional ainda não está credenciada. A equipe verificará seus dados e referências antes da aprovação.</p><p className="mt-3 text-sm font-semibold break-all">Protocolo: {protocolo}</p><a className="inline-block mt-5 bg-emerald-800 text-white font-bold px-5 py-3 rounded-lg" href={'/clube-de-permutas/consulta?protocolo='+encodeURIComponent(protocolo)}>ACOMPANHAR MEU CADASTRO</a><p className="mt-3 text-sm text-emerald-900">Guarde seu protocolo. Os dados estão disponíveis à equipe no painel administrativo restrito.</p></div>;
  return <form onSubmit={enviar} className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm grid gap-5">
  <p className="bg-blue-50 border border-blue-200 text-blue-950 p-4 rounded-lg text-sm">Segunda etapa obrigatória para credenciamento. Os dados serão analisados; nenhum perfil será considerado validado automaticamente.</p>
  <label className="font-semibold">Tipo de participante<select className={classe} value={perfil} onChange={e=>{setPerfil(e.target.value);atualizar('cnpj','');}}><option>Empresa</option><option>Profissional Liberal</option></select></label>
