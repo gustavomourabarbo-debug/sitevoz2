@@ -3,20 +3,26 @@ import {useState,type FormEvent} from 'react';
 type Registro={protocolo:string;nome:string;email:string;perfil:string;criadoEm:string;status:string;ficha?:any;decisao?:any};
 export default function PainelAdmin(){
  const [password,setPassword]=useState(''),[autenticado,setAutenticado]=useState(false),[itens,setItens]=useState<Registro[]>([]);
- const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false);
+ const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false),[buscaProtocolo,setBuscaProtocolo]=useState(''),[mensagem,setMensagem]=useState('');
  const [erro,setErro]=useState(''),[ocupado,setOcupado]=useState(false),[observacoes,setObservacoes]=useState<Record<string,string>>({});
- async function carregar(proxima?:string){const r=await fetch('/api/clube-de-permutas/admin/registros'+(proxima?'?cursor='+encodeURIComponent(proxima):''),{cache:'no-store'});const d=await r.json();if(!r.ok)throw new Error(d.erro||'Acesso não autorizado.');setItens(atual=>proxima?[...atual,...(d.registros||[])]:d.registros||[]);setCursor(d.cursor||null);setMais(Boolean(d.hasMore));setAutenticado(true);}
+ async function carregar(proxima?:string,exato?:string){const parametros=exato?'?protocolo='+encodeURIComponent(exato):proxima?'?cursor='+encodeURIComponent(proxima):'';const r=await fetch('/api/clube-de-permutas/admin/registros'+parametros,{cache:'no-store'});const d=await r.json();if(!r.ok)throw new Error(d.erro||'Acesso não autorizado.');setItens(atual=>proxima&&!exato?[...atual,...(d.registros||[])]:d.registros||[]);setCursor(d.cursor||null);setMais(Boolean(d.hasMore));setAutenticado(true);}
  async function login(e:FormEvent){e.preventDefault();setErro('');setOcupado(true);
  try{const r=await fetch('/api/clube-de-permutas/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password})});
  if(!r.ok)throw new Error('Senha incorreta ou acesso indisponível.');setPassword('');await carregar();}catch(e){setErro(e instanceof Error?e.message:'Erro de acesso.');}finally{setOcupado(false)}}
- async function acao(item:Registro,status:string){setOcupado(true);setErro('');try{
+ async function acao(item:Registro,status:string){setOcupado(true);setErro('');setMensagem('');try{
  const r=await fetch('/api/clube-de-permutas/admin/registros',{method:'POST',headers:{'content-type':'application/json'},
  body:JSON.stringify({protocolo:item.protocolo,status,observacao:observacoes[item.protocolo]||''})});
- const d=await r.json();if(!r.ok)throw new Error(d.erro||'Falha ao registrar decisão.');await carregar();
+ const d=await r.json();if(!r.ok)throw new Error(d.erro||'Falha ao registrar decisão.');await carregar(undefined,item.protocolo);setBuscaProtocolo(item.protocolo);setMensagem(status==='APROVADO'?'Credenciamento APROVADO e registrado com sucesso.':status==='REPROVADO'?'Credenciamento REPROVADO e registrado com sucesso.':'Status EM ANÁLISE registrado com sucesso.');
  }catch(e){setErro(e instanceof Error?e.message:'Erro ao atualizar.');}finally{setOcupado(false)}}
  if(!autenticado)return <form onSubmit={login} className="max-w-md bg-white rounded-xl border border-slate-200 p-7 shadow-sm"><label className="block font-bold">Senha administrativa<input required autoComplete="current-password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-3 w-full border border-slate-300 rounded-lg p-3"/></label><button disabled={ocupado} className="mt-5 bg-emerald-800 text-white p-4 rounded-xl font-bold w-full">ENTRAR NO PAINEL</button>{erro&&<p className="text-red-800 mt-3">{erro}</p>}</form>;
  return <div className="grid gap-5">
  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 flex flex-wrap items-center justify-between gap-3"><p className="font-semibold">Gerencie também as ofertas e propostas comerciais do clube.</p><a href="/clube-de-permutas/administracao/ofertas" className="bg-emerald-800 text-white rounded-lg px-5 py-3 font-bold">ABRIR OFERTAS E PROPOSTAS</a></div>
+ <form onSubmit={e=>{e.preventDefault();setErro('');setMensagem('');carregar(undefined,buscaProtocolo.trim()).catch(err=>setErro(err instanceof Error?err.message:'Não foi possível localizar.'));}} className="bg-white p-5 rounded-xl border border-slate-200 flex flex-wrap items-end gap-3">
+ <label className="flex-1 min-w-60 font-bold">Localizar ficha pelo protocolo<input className="mt-2 w-full border border-slate-300 rounded-lg p-3 font-mono text-sm" required placeholder="Cole o protocolo do associado" value={buscaProtocolo} onChange={e=>setBuscaProtocolo(e.target.value)}/></label>
+ <button type="submit" disabled={ocupado} className="bg-emerald-800 text-white rounded-lg py-3 px-5 font-bold">LOCALIZAR E ANALISAR</button>
+ <button type="button" onClick={()=>{setBuscaProtocolo('');carregar().catch(e=>setErro(String(e)));}} className="bg-slate-100 rounded-lg py-3 px-5 font-semibold">VER TODOS</button>
+ </form>
+ {mensagem&&<p role="status" className="bg-emerald-50 text-emerald-950 border border-emerald-200 rounded-xl p-4 font-semibold">{mensagem}</p>}
  <div className="bg-white rounded-xl p-5 border flex flex-wrap items-center justify-between gap-3"><div><p className="text-slate-600">Pré-cadastros localizados</p><p className="text-3xl font-black">{itens.length}</p></div><button className="px-4 py-3 rounded-lg bg-emerald-800 text-white" onClick={()=>carregar().catch(e=>setErro(String(e)))}>ATUALIZAR</button></div>
  {erro&&<p role="alert" className="text-red-800 bg-red-50 p-4 rounded-lg">{erro}</p>}
  {itens.length===0&&<p className="bg-white border p-6 rounded-xl">Nenhum cadastro encontrado no armazenamento atual.</p>}
@@ -25,8 +31,8 @@ export default function PainelAdmin(){
  {item.ficha&&<details className="bg-slate-50 rounded-lg p-4"><summary className="cursor-pointer font-semibold">Ver ficha para conferência</summary><div className="mt-3 space-y-2 text-sm"><p>Responsável: {item.ficha.responsavel}</p><p>Identificação: {item.ficha.tipoDocumento} {item.ficha.documento||item.ficha.cnpj}</p><p>Endereço: {item.ficha.endereco} — {item.ficha.cidade}, {item.ficha.cep}</p><p>Telefone: {item.ficha.telefone}</p><p>Atividade: {item.ficha.atividade}</p><p>Tempo de atuação: {item.ficha.tempo}</p>
  <p className="font-bold">Referências comerciais</p>{(item.ficha.referencias||[]).map((r:any,i:number)=><p key={i}>{i+1}. {r.empresa} • {r.contato} • {r.telefone}</p>)}</div></details>}
  {item.ficha&&<><label className="text-sm font-semibold">Anotações da análise<textarea className="w-full mt-2 p-3 border rounded-lg" maxLength={500} value={observacoes[item.protocolo]??item.decisao?.observacao??''} onChange={e=>setObservacoes(s=>({...s,[item.protocolo]:e.target.value}))}/></label>
- <div className="flex gap-2 flex-wrap"><button disabled={ocupado} onClick={()=>acao(item,'APROVADO')} className="bg-emerald-800 text-white font-semibold rounded-lg py-2 px-4">APROVAR</button><button disabled={ocupado} onClick={()=>acao(item,'EM_ANALISE')} className="bg-amber-100 text-amber-900 font-semibold rounded-lg py-2 px-4">EM ANÁLISE</button><button disabled={ocupado} onClick={()=>acao(item,'REPROVADO')} className="bg-red-50 text-red-800 font-semibold rounded-lg py-2 px-4">REPROVAR</button></div></>}
- {!item.ficha&&<p className="text-amber-800">Aguardando preenchimento da ficha de credenciamento.</p>}
+ <div className="flex gap-2 flex-wrap"><button type="button" disabled={ocupado} onClick={()=>acao(item,'APROVADO')} className="bg-emerald-800 hover:bg-emerald-900 disabled:opacity-50 text-white font-bold rounded-lg py-3 px-6">✓ APROVAR CADASTRO</button><button disabled={ocupado} onClick={()=>acao(item,'EM_ANALISE')} className="bg-amber-100 text-amber-900 font-semibold rounded-lg py-2 px-4">EM ANÁLISE</button><button disabled={ocupado} onClick={()=>acao(item,'REPROVADO')} className="bg-red-50 text-red-800 font-semibold rounded-lg py-2 px-4">REPROVAR</button></div></>}
+ {!item.ficha&&<p className="text-amber-800">A ficha complementar ainda não foi localizada. A aprovação será habilitada após o recebimento da ficha.</p>}
  </article>)}
  {mais&&cursor&&<button disabled={ocupado} className="border border-emerald-800 text-emerald-800 bg-white p-4 rounded-xl font-bold" onClick={()=>carregar(cursor).catch(e=>setErro(String(e)))}>CARREGAR MAIS CADASTROS</button>}
  </div>;
