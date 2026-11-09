@@ -5,7 +5,6 @@ import {isAdmin,sameOrigin} from '@/lib/clube-admin';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const txt=(x:unknown,n:number)=>typeof x==='string'?x.trim().slice(0,n):'';
-const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[89ab][0-9a-f]{12}$/i;
 const uuidReal=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 async function doc(path:string){const f=await get(path,{access:'private'}).catch(()=>null);return f?.stream?JSON.parse(await new Response(f.stream).text()):null;}
 export async function POST(request:Request){
@@ -38,9 +37,31 @@ export async function GET(request:Request){
   const l=await list({prefix:'clube/propostas/',limit:40,cursor});
   const itens=await Promise.all(l.blobs.map(async b=>{
    const id=b.pathname.split('/').pop()?.replace('.json','')||'';
-   return uuidReal.test(id)?doc('clube/propostas/'+id+'.json'):null;
+   if(!uuidReal.test(id))return null;
+   const [p,estado]=await Promise.all([doc('clube/propostas/'+id+'.json'),doc('clube/estados/'+id+'.json')]);
+   return p?{...p,status:estado?.status||p.status,estado}:null;
   }));
   return NextResponse.json({propostas:itens.filter(Boolean),hasMore:l.hasMore,cursor:l.cursor||null},
    {headers:{'Cache-Control':'no-store, private'}});
  }catch{return NextResponse.json({erro:'Falha ao consultar propostas.'},{status:503});}
+}
+
+export async function PATCH(request:Request){
+ if(!isAdmin()||!sameOrigin(request))return NextResponse.json({erro:'Acesso não autorizado.'},{status:401});
+ const b=await request.json().catch(()=>null);
+ const id=txt(b?.id,50),status=txt(b?.status,50),observacao=txt(b?.observacao,800);
+ const validos=['AGUARDANDO_CONTATO','CONTATO_REALIZADO','EM_NEGOCIACAO','AGUARDANDO_COMPROVANTES','CONCLUIDA','CANCELADA'];
+ if(!uuidReal.test(id)||!validos.includes(status)||!observacao)
+  return NextResponse.json({erro:'Escolha o estado e registre uma observação auditável.'},{status:400});
+ try{
+ const proposta=await doc('clube/propostas/'+id+'.json');
+ if(!proposta)return NextResponse.json({erro:'Proposta inexistente.'},{status:404});
+ if(status==='CONCLUIDA'&&!(b?.confirmacaoComprador===true&&b?.confirmacaoVendedor===true&&observacao.length>=20))
+  return NextResponse.json({erro:'Para concluir, registre evidências e confirme que comprador e ofertante aprovaram o negócio.'},{status:400});
+ const evento={id:randomUUID(),propostaId:id,status,observacao,
+  confirmacaoComprador:b?.confirmacaoComprador===true,confirmacaoVendedor:b?.confirmacaoVendedor===true,data:new Date().toISOString()};
+ await put('clube/eventos/'+id+'/'+evento.id+'.json',JSON.stringify(evento),{access:'private',contentType:'application/json',addRandomSuffix:false});
+ await put('clube/estados/'+id+'.json',JSON.stringify(evento),{access:'private',contentType:'application/json',addRandomSuffix:false,allowOverwrite:true});
+ return NextResponse.json({ok:true,status});
+ }catch{return NextResponse.json({erro:'Falha ao registrar andamento.'},{status:500});}
 }
