@@ -79,27 +79,29 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <DetranCampaignBanner />
-        <section aria-label="Atualização jornalística 9 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5">
-          <div className="rounded-2xl border-2 border-green-700 bg-white p-6 shadow-md md:p-8">
-            <p className="text-sm font-extrabold uppercase tracking-wider text-green-800">EDIÇÃO DE SEGUNDA-FEIRA • 09/11/2026 • FONTES OFICIAIS 07–08/11</p>
-            <h1 className="mt-2 text-3xl font-black text-slate-900 md:text-4xl">Enem, acolhimento social, CRLV-e e saúde no Distrito Federal</h1>
-            <p className="mt-3 text-base text-slate-700">Notícias verificadas, com datas e fontes identificadas. A edição anterior permanece disponível no acervo.</p>
-            <div className="mt-5 grid gap-3 md:grid-cols-2">
-              <a href="/noticias/edicao-9-novembro-2026#enem" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">Enem 2026: provas de 8/11 concluídas; segunda etapa em 15/11 →</a>
-              <a href="/noticias/edicao-9-novembro-2026#acolhimento" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">GDF programa acolhimento social nesta segunda, 9/11 →</a>
-              <a href="/noticias/edicao-9-novembro-2026#crlv" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">Licenciamento 2026: atenção aos finais de placas →</a>
-              <a href="/noticias/edicao-9-novembro-2026#saude" className="rounded-xl bg-green-50 p-4 font-bold text-green-900 hover:underline">GDF anuncia 57 vagas para médicos de família →</a>
-            </div>
-          </div>
-        </section>
-        <section aria-label="Cobertura especial ENEM 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
-          <a href="/noticias/enem-2026-gabarito-oficial" className="block rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-900 px-6 py-7 text-white shadow-xl hover:shadow-2xl">
-            <span className="text-sm font-black tracking-wider text-amber-300">COBERTURA ESPECIAL • ENEM 2026 • 08/11</span>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight md:text-5xl">Gabarito oficial ainda não foi divulgado pelo Inep</h2>
-            <p className="mt-3 max-w-4xl text-base text-blue-100 md:text-lg">O primeiro dia de provas terminou neste domingo. O segundo será em 15 de novembro. Veja quando as respostas oficiais devem ser publicadas e como identificar a cor do caderno.</p>
-            <strong className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 text-sm font-black text-slate-950">ACOMPANHAR GABARITO OFICIAL →</strong>
-          </a>
-        </section>
+        <section aria-label="Atualização jornalística de 9 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-5">
+  <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 p-6 text-white shadow-xl md:p-8">
+    <p className="text-sm font-extrabold uppercase tracking-wider text-amber-300">EDIÇÃO ATUALIZADA • SEGUNDA-FEIRA, 09/11/2026 • FONTES DE 09/11</p>
+    <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Enem 2026: candidatos já conhecem as regras para pedir reaplicação</h1>
+    <p className="mt-3 max-w-5xl text-lg text-blue-100">O Inep receberá de 16 a 20 de novembro os pedidos de reaplicação de candidatos elegíveis. As novas provas estão previstas para 15 e 16 de dezembro. A segunda etapa regular será em 15 de novembro.</p>
+    <a href="https://agenciabrasil.ebc.com.br/educacao/noticia/2026-11/enem-2026-saiba-quem-tem-direito-a-reaplicacao-do-exame" target="_blank" rel="noopener noreferrer" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 text-sm font-black text-slate-950">LER REPORTAGEM COMPLETA • 09/11 →</a>
+  </div>
+  <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {[
+      {categoria:'JUSTIÇA E CIDADANIA',titulo:'Justiça pede derrubada de 348 perfis que anunciam bets ilegais',resumo:'Ação anunciada pelo Ministério da Justiça nesta segunda-feira.',url:'https://agenciagov.ebc.com.br/noticias'},
+      {categoria:'ECONOMIA',titulo:'Comércio exterior do Brasil movimenta US$ 66,3 bilhões em outubro',resumo:'Balanço oficial destaca recorde na corrente de comércio.',url:'https://agenciagov.ebc.com.br/noticias'},
+      {categoria:'TRABALHO E RENDA',titulo:'Mulheres respondem pela maior parcela dos empregos formais criados em setembro',resumo:'Resultados do mercado de trabalho divulgados em 9 de novembro.',url:'https://agenciagov.ebc.com.br/noticias'},
+      {categoria:'SAÚDE E PREVIDÊNCIA',titulo:'INSS amplia perícias médicas por telemedicina para 900 agências',resumo:'Atendimento remoto passa a alcançar mais unidades.',url:'https://agenciagov.ebc.com.br/noticias'},
+      {categoria:'TECNOLOGIA E CONECTIVIDADE',titulo:'Governo anuncia novos cabos submarinos para ampliar conexão digital',resumo:'Projeto busca expandir a infraestrutura nacional de comunicações.',url:'https://agenciagov.ebc.com.br/noticias'},
+      {categoria:'EDUCAÇÃO • ENEM',titulo:'Enem 2026 registra participação histórica de estudantes da rede pública',resumo:'Cobertura sobre a presença dos estudantes no primeiro dia do exame.',url:'https://agenciabrasil.ebc.com.br/radioagencia-nacional/educacao/audio/2026-11/enem-2026-registra-recorde-de-participacao-de-alunos-da-rede-publica'}
+    ].map(item=><a key={item.titulo} href={item.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border border-amber-200 bg-white p-5 shadow-md transition-shadow hover:shadow-xl">
+      <small className="font-extrabold tracking-wide text-amber-800">{item.categoria} • 09/11/2026</small>
+      <h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">{item.titulo}</h2>
+      <p className="mt-2 text-sm text-slate-600">{item.resumo}</p>
+      <span className="mt-3 block text-sm font-bold text-blue-700">VER FONTE OFICIAL →</span>
+    </a>)}
+  </div>
+</section>
         <section aria-label="Edição jornalística de 7 de novembro de 2026" className="max-w-[1400px] mx-auto px-4 pt-5">
 <article className="rounded-2xl bg-slate-900 text-white p-6 md:p-9">
 <p className="text-sm font-extrabold text-amber-300">ARQUIVO JORNALÍSTICO • SÁBADO, 07/11/2026 • FONTE 07/11</p>
