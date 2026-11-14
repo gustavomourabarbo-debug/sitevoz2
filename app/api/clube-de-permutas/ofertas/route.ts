@@ -2,6 +2,7 @@ import {NextResponse} from 'next/server';
 import {get,list,put} from '@vercel/blob';
 import {randomUUID} from 'node:crypto';
 import {isAdmin,sameOrigin} from '@/lib/clube-admin';
+import {notificarClube} from '@/lib/clube-notificacoes';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const txt=(x:unknown,n:number)=>typeof x==='string'?x.trim().slice(0,n):'';
@@ -58,6 +59,14 @@ export async function POST(request:Request){
  try{
   await put('clube/ofertas/'+id+'.json',JSON.stringify(registro),
    {access:'private',contentType:'application/json',addRandomSuffix:false});
-  return NextResponse.json({ok:true,id,status:registro.status},{status:201});
+  const notificacaoClube=modoAssociado?await notificarClube({
+    assunto:'Clube de Permutas — nova oferta para análise: '+titulo,
+    corpo:'Nova oferta enviada para revisão.\n\nAssociado: '+(associado?.nome||empresa)+
+      '\nE-mail: '+(associado?.email||'')+'\nTítulo: '+titulo+
+      '\nValor de referência (R$): '+valorReferencia+'\nProtocolo da oferta: '+id+
+      '\n\nAnalise e aprove no painel comercial: https://www.vozdebrasilia.com.br/clube-de-permutas/administracao/ofertas',
+    protocolo:associado?.protocolo||id
+  }):{enviado:false,motivo:'OFERTA_ADMINISTRATIVA'};
+  return NextResponse.json({ok:true,id,status:registro.status,notificacaoClube},{status:201});
  }catch{return NextResponse.json({erro:'Não foi possível publicar a oferta.'},{status:500});}
 }
