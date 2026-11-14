@@ -23,7 +23,7 @@ export default function Area({protocoloInicial}:{protocoloInicial:string}){
  setResultado(d.id);setDados({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  }catch(err){setErro(err instanceof Error?err.message:'Falha no envio.');requestAnimationFrame(()=>avisoRef.current?.scrollIntoView({behavior:'smooth',block:'center'}));}finally{setEnviando(false)}}
  return <div className="mt-8 grid gap-6">
- <div className="border border-amber-200 bg-amber-50 rounded-xl p-5"><strong>CAMBRIQO: moeda futura, não emitida.</strong><p className="text-sm text-slate-700 mt-2">Informe o valor de referência de cada produto ou serviço em reais. Não existe saldo CAMBRIQO, câmbio oficial, carteira ativa ou transferência de moeda. O clube não emite créditos automaticamente.</p></div>
+ <div className="border border-amber-200 bg-amber-50 rounded-xl p-5"><strong>CREDIX: créditos digitais ainda não emitidos.</strong><p className="text-sm text-slate-700 mt-2">Informe o valor de referência de cada produto ou serviço em reais. Não existe saldo CREDIX, preço de aquisição definido, carteira ativa ou transferência de créditos. O clube não emite créditos automaticamente.</p></div>
  <form className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm grid gap-5" onSubmit={enviar}>
  <h2 className="text-2xl font-black">Cadastrar produto ou serviço</h2>
  <label className="font-semibold">Protocolo aprovado<input required className={campo+' font-mono text-sm'} value={protocolo} onChange={e=>{setProtocolo(e.target.value);setStatusCadastro('');}}/></label>
