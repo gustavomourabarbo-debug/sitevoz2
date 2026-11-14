@@ -24,7 +24,7 @@ export default function OfertasAdmin(){
    const r=await fetch('/api/clube-de-permutas/admin/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({id:o.id,status,observacao})});
    const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Não foi possível registrar decisão.');
-   setOk('Decisão registrada para a oferta '+o.id);await carregarOfertas();
+   setOk('Decisão registrada para a oferta '+o.id+'. '+(d.notificacao?.enviado===true?'O serviço de e-mail aceitou o aviso ao associado.':'Aviso automático não enviado: provedor de e-mail não configurado ou indisponível.'));await carregarOfertas();
   }catch(e){setErro(e instanceof Error?e.message:'Falha ao moderar oferta.');}finally{setOcupado(false)}
  }
  async function publicar(e:FormEvent){e.preventDefault();setOcupado(true);setErro('');setOk('');
