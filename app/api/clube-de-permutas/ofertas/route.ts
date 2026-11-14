@@ -42,8 +42,10 @@ export async function POST(request:Request){
     doc('credenciamento/convites/'+protocolo+'.json'),
     doc('credenciamento/decisoes/'+protocolo+'.json')
   ]);
-  if(!convite||convite.email!==email||decisao?.status!=='APROVADO')
-   return NextResponse.json({erro:'A publicação está disponível apenas para associados aprovados. Verifique seu protocolo e e-mail.'},{status:403});
+  if(!convite)return NextResponse.json({erro:'Protocolo não localizado. Use o protocolo recebido no pré-cadastro.'},{status:404});
+  if(decisao?.status!=='APROVADO')return NextResponse.json({erro:'Este protocolo ainda não está aprovado para cadastrar ofertas. Consulte a situação do credenciamento.'},{status:403});
+  if(String(convite.email||'').trim().toLowerCase()!==email)
+   return NextResponse.json({erro:'Este protocolo está aprovado, mas o e-mail informado é diferente do e-mail utilizado no pré-cadastro. Informe exatamente o e-mail original.'},{status:403});
   associado={protocolo,email,nome:convite.nome};
  }
  const titulo=txt(b?.titulo,140),descricao=txt(b?.descricao,1300),categoria=txt(b?.categoria,75);
