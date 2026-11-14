@@ -1,5 +1,6 @@
 'use client';
 import {useState,type FormEvent} from 'react';
+import {formatarValorBR,valorBRParaNumero} from '@/lib/moeda-br';
 export default function Area({protocoloInicial}:{protocoloInicial:string}){
  const [protocolo,setProtocolo]=useState(protocoloInicial),[email,setEmail]=useState(''),[dados,setDados]=useState({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  const [aceite,setAceite]=useState(false),[enviando,setEnviando]=useState(false),[erro,setErro]=useState(''),[resultado,setResultado]=useState('');
@@ -7,7 +8,7 @@ export default function Area({protocoloInicial}:{protocoloInicial:string}){
  const alterar=(key:keyof typeof dados,valor:string)=>setDados(d=>({...d,[key]:valor}));
  async function enviar(e:FormEvent){e.preventDefault();if(enviando)return;setEnviando(true);setErro('');setResultado('');
  try{const r=await fetch('/api/clube-de-permutas/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},
- body:JSON.stringify({...dados,origem:'ASSOCIADO',protocolo,email,autorizacao:aceite,valorReferencia:Number(dados.valorReferencia)})});
+ body:JSON.stringify({...dados,origem:'ASSOCIADO',protocolo,email,autorizacao:aceite,valorReferencia:valorBRParaNumero(dados.valorReferencia)})});
  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Não foi possível enviar sua oferta.');
  setResultado(d.id);setDados({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  }catch(err){setErro(err instanceof Error?err.message:'Falha no envio.');}finally{setEnviando(false)}}
@@ -21,7 +22,7 @@ export default function Area({protocoloInicial}:{protocoloInicial:string}){
  <label className="font-semibold">Empresa ofertante<input required maxLength={120} className={campo} value={dados.empresa} onChange={e=>alterar('empresa',e.target.value)} placeholder="Nome comercial"/></label>
  <div className="grid md:grid-cols-2 gap-4"><label className="font-semibold">Categoria<input required maxLength={75} className={campo} value={dados.categoria} onChange={e=>alterar('categoria',e.target.value)} placeholder="Ex.: Hotelaria"/></label><label className="font-semibold">Cidade/UF<input required maxLength={100} className={campo} value={dados.cidade} onChange={e=>alterar('cidade',e.target.value)} placeholder="Brasília/DF"/></label></div>
  <label className="font-semibold">Quantidade e disponibilidade<input required maxLength={60} className={campo} value={dados.quantidade} onChange={e=>alterar('quantidade',e.target.value)} placeholder="Ex.: 10 unidades disponíveis"/></label>
- <label className="font-semibold">Valor de referência em R$<input required type="number" min="0.01" step="0.01" className={campo} value={dados.valorReferencia} onChange={e=>alterar('valorReferencia',e.target.value)}/></label>
+ <label className="font-semibold">Valor de referência (R$)<input required type="text" inputMode="numeric" autoComplete="off" placeholder="R$ 0,00" className={campo} value={dados.valorReferencia} onChange={e=>alterar('valorReferencia',formatarValorBR(e.target.value))}/><span className="block mt-1 text-xs text-slate-500">Valores em reais, com vírgula nos centavos. Exemplo: R$ 1.250,50</span></label>
  <label className="font-semibold">Descrição, condições, prazos e entrega<textarea required minLength={20} maxLength={1300} className={campo+' min-h-32'} value={dados.descricao} onChange={e=>alterar('descricao',e.target.value)} placeholder="Descreva exatamente o que pode oferecer e as condições da permuta"/></label>
  <label className="text-sm flex gap-3 items-start"><input type="checkbox" className="mt-1" required checked={aceite} onChange={e=>setAceite(e.target.checked)}/><span>Declaro que tenho autorização para oferecer o produto/serviço. Entendo que a publicação depende de análise e não representa negócio fechado nem crédito financeiro.</span></label>
  <button type="submit" disabled={enviando} className="rounded-xl bg-emerald-800 text-white font-black p-4 disabled:opacity-60">{enviando?'ENVIANDO...':'ENVIAR OFERTA PARA APROVAÇÃO'}</button>
