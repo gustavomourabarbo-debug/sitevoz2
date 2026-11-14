@@ -1,5 +1,6 @@
 'use client';
 import {useState,type FormEvent} from 'react';
+import {formatarValorBR,valorBRParaNumero} from '@/lib/moeda-br';
 type Oferta={id:string;titulo:string;descricao:string;categoria:string;empresa:string;cidade:string;valorReferencia:number;quantidade:string;status:string;associado?:{email:string;protocolo:string};avaliacao?:{observacao:string}};
 type Proposta={id:string;ofertaTitulo:string;email:string;mensagem:string;protocolo:string;status:string;criadaEm:string};
 export default function OfertasAdmin(){
@@ -28,7 +29,7 @@ export default function OfertasAdmin(){
   }catch(e){setErro(e instanceof Error?e.message:'Falha ao moderar oferta.');}finally{setOcupado(false)}
  }
  async function publicar(e:FormEvent){e.preventDefault();setOcupado(true);setErro('');setOk('');
- try{const r=await fetch('/api/clube-de-permutas/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...dados,valorReferencia:Number(dados.valorReferencia)})});
+ try{const r=await fetch('/api/clube-de-permutas/ofertas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...dados,valorReferencia:valorBRParaNumero(dados.valorReferencia)})});
  const d=await r.json();if(!r.ok)throw new Error(d.erro||'Falha ao publicar.');
  setOk('Oferta publicada. Código: '+d.id);setDados({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  }catch(e){setErro(e instanceof Error?e.message:'Não foi possível publicar. Faça login no painel primeiro.');}finally{setOcupado(false)}}
@@ -69,7 +70,7 @@ export default function OfertasAdmin(){
   <form onSubmit={publicar} className="bg-white p-6 rounded-2xl border shadow-sm grid gap-4"><h2 className="font-black text-2xl">Publicar uma oferta verificada</h2>
  {([
  ['titulo','Título do produto ou serviço'],['empresa','Nome público da empresa ofertante'],['categoria','Categoria'],['cidade','Cidade / UF'],['quantidade','Quantidade e condições de disponibilidade'],['valorReferencia','Valor de referência em reais']
- ] as [keyof typeof dados,string][]).map(([k,label])=><label className="block font-semibold" key={k}>{label}<input required type={k==='valorReferencia'?'number':'text'} min={k==='valorReferencia'?0.01:undefined} step={k==='valorReferencia'?'0.01':undefined} maxLength={140} value={dados[k]} onChange={e=>alterar(k,e.target.value)} className="mt-2 block w-full border border-slate-300 rounded-lg p-3"/></label>)}
+ ] as [keyof typeof dados,string][]).map(([k,label])=><label className="block font-semibold" key={k}>{label}<input required type="text" inputMode={k==='valorReferencia'?'numeric':undefined} placeholder={k==='valorReferencia'?'R$ 0,00':undefined} maxLength={140} value={dados[k]} onChange={e=>alterar(k,k==='valorReferencia'?formatarValorBR(e.target.value):e.target.value)} className="mt-2 block w-full border border-slate-300 rounded-lg p-3"/></label>)}
  <label className="block font-semibold">Descrição e condições de entrega<textarea required minLength={20} maxLength={1300} value={dados.descricao} onChange={e=>alterar('descricao',e.target.value)} className="mt-2 block w-full border border-slate-300 rounded-lg p-3 min-h-28"/></label>
  <button disabled={ocupado} className="bg-emerald-800 text-white font-bold px-6 py-4 rounded-xl">PUBLICAR OFERTA</button></form>
  <div className="bg-white p-6 rounded-2xl border"><h2 className="font-black text-2xl">Propostas de associados</h2><button disabled={ocupado} onClick={()=>carregar()} className="bg-slate-900 text-white mt-4 rounded-lg px-5 py-3 font-bold">CONSULTAR PROPOSTAS</button>
