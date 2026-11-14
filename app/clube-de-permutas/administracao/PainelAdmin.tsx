@@ -1,6 +1,6 @@
 'use client';
 import {useState,type FormEvent} from 'react';
-type Registro={protocolo:string;nome:string;email:string;perfil:string;criadoEm:string;status:string;ficha?:any;decisao?:any};
+type Registro={protocolo:string;nome:string;email:string;perfil:string;criadoEm:string;status:string;oferta?:string;busca?:string;telefone?:string;ficha?:any;decisao?:any};
 export default function PainelAdmin(){
  const [password,setPassword]=useState(''),[autenticado,setAutenticado]=useState(false),[itens,setItens]=useState<Registro[]>([]);
  const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false),[buscaProtocolo,setBuscaProtocolo]=useState(''),[mensagem,setMensagem]=useState('');
@@ -47,6 +47,7 @@ export default function PainelAdmin(){
  {itens.length===0&&<p className="bg-white border p-6 rounded-xl">Nenhum cadastro encontrado no armazenamento atual.</p>}
  {itens.map(item=><article key={item.protocolo} className="bg-white border border-slate-200 rounded-xl p-6 grid gap-3">
  <div className="flex justify-between flex-wrap gap-3"><div><h2 className="font-black text-xl">{item.nome}</h2><p className="text-slate-600 text-sm">{item.perfil} • {item.email}</p><p className="text-xs text-slate-500 break-all">{item.protocolo}</p></div><span className="font-bold text-emerald-800">{item.status.replace(/_/g,' ')}</span></div>
+ {(item.oferta||item.busca)&&<section className="bg-blue-50 border border-blue-100 rounded-lg p-4 grid gap-2"><h3 className="font-bold">Perfil comercial para formação de permutas</h3>{item.oferta&&<p className="text-sm"><strong>O que oferece:</strong> {item.oferta}</p>}{item.busca&&<p className="text-sm"><strong>O que procura:</strong> {item.busca}</p>}{item.telefone&&<p className="text-sm"><strong>Telefone:</strong> {item.telefone}</p>}</section>}
  {item.ficha&&<details className="bg-slate-50 rounded-lg p-4"><summary className="cursor-pointer font-semibold">Ver ficha para conferência</summary><div className="mt-3 space-y-2 text-sm"><p>Responsável: {item.ficha.responsavel}</p><p>Identificação: {item.ficha.tipoDocumento} {item.ficha.documento||item.ficha.cnpj}</p><p>Endereço: {item.ficha.endereco} — {item.ficha.cidade}, {item.ficha.cep}</p><p>Telefone: {item.ficha.telefone}</p><p>Atividade: {item.ficha.atividade}</p><p>Tempo de atuação: {item.ficha.tempo}</p>
  <p className="font-bold">Referências comerciais</p>{(item.ficha.referencias||[]).map((r:any,i:number)=><p key={i}>{i+1}. {r.empresa} • {r.contato} • {r.telefone}</p>)}</div></details>}
  {item.status==='APROVADO'&&<div className="flex flex-wrap gap-3 items-center bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
