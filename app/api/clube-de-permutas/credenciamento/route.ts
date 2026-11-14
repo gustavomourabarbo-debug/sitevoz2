@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { get, put } from '@vercel/blob';
+import {notificarClube} from '@/lib/clube-notificacoes';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -60,7 +61,15 @@ export async function POST(request:Request){
     access:'private',contentType:'application/json',addRandomSuffix:false,allowOverwrite:false
   });
   console.info('Clube: ficha recebida',protocolo);
-  return NextResponse.json({ok:true,protocolo,status:'Em análise'}, {headers:{'Cache-Control':'no-store'}});
+  const notificacaoClube=await notificarClube({
+    assunto:'Clube de Permutas — nova ficha para análise: '+razao,
+    corpo:'Nova ficha de credenciamento recebida.\n\nEmpresa/profissional: '+razao+
+     '\nResponsável: '+responsavel+'\nE-mail: '+email+
+     '\nProtocolo: '+protocolo+'\n\nConsulte dados e referências no painel administrativo restrito: https://www.vozdebrasilia.com.br/clube-de-permutas/administracao',
+    protocolo
+  });
+  return NextResponse.json({ok:true,protocolo,status:'Em análise',notificacaoClube},
+    {headers:{'Cache-Control':'no-store'}});
  }catch(error){
   if(error instanceof Error&&/already exists|already exists|overwrite/i.test(error.message))
     return NextResponse.json({erro:'Este credenciamento já foi registrado e está em análise.'},{status:409});
