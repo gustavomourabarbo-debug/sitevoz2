@@ -1,6 +1,7 @@
 import {NextResponse} from 'next/server';
 import {get,list,put} from '@vercel/blob';
 import {isAdmin,sameOrigin} from '@/lib/clube-admin';
+import {notificarOferta} from '@/lib/clube-notificacoes';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
@@ -37,6 +38,10 @@ export async function POST(request:Request){
   const registro={id,status,observacao,avaliadaEm:new Date().toISOString()};
   await put('clube/ofertas/avaliacoes/'+id+'.json',JSON.stringify(registro),
     {access:'private',contentType:'application/json',addRandomSuffix:false,allowOverwrite:true});
-  return NextResponse.json({ok:true,status});
+  const notificacao=oferta.associado?.email?await notificarOferta({
+   email:oferta.associado.email,nome:oferta.associado.nome||oferta.empresa,
+   ofertaId:id,titulo:oferta.titulo,status
+  }):{enviado:false,motivo:'OFERTA_ADMINISTRATIVA'};
+  return NextResponse.json({ok:true,status,notificacao});
  }catch{return NextResponse.json({erro:'Não foi possível salvar a decisão.'},{status:503});}
 }
