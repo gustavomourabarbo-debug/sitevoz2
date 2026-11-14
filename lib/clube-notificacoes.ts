@@ -26,3 +26,23 @@ export async function notificarDecisao({email,nome,protocolo,status}:{email:stri
   return {enviado:true,motivo:'ACEITO_PELO_PROVEDOR'};
  }catch{return {enviado:false,motivo:'FALHA_DE_CONEXAO'};}
 }
+
+export async function notificarClube({assunto,corpo,protocolo}:{assunto:string;corpo:string;protocolo:string}){
+ const token=process.env.RESEND_API_KEY;
+ const remetente=process.env.CLUBE_EMAIL_REMETENTE;
+ const destino=process.env.CLUBE_EMAIL_DESTINO;
+ if(!token||!remetente||!destino)return {enviado:false,motivo:'PROVEDOR_OU_DESTINATARIO_NAO_CONFIGURADO'};
+ try{
+  const resposta=await fetch('https://api.resend.com/emails',{method:'POST',
+    headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+    body:JSON.stringify({from:'Clube de Permutas <'+remetente+'>',to:[destino],subject:assunto,text:corpo}),
+    cache:'no-store'});
+  if(!resposta.ok)return {enviado:false,motivo:'ERRO_PROVEDOR_'+resposta.status};
+  const json=await resposta.json().catch(()=>null);
+  await put('clube/notificacoes/'+protocolo+'/'+randomUUID()+'.json',
+    JSON.stringify({destinoTipo:'CLUBE',protocolo,assunto,enviadoEm:new Date().toISOString(),codigo:json?.id||null,
+      aceitoPeloProvedor:true}),
+    {access:'private',contentType:'application/json',addRandomSuffix:false}).catch(()=>{});
+  return {enviado:true,motivo:'ACEITO_PELO_PROVEDOR'};
+ }catch{return {enviado:false,motivo:'FALHA_DE_CONEXAO'};}
+}
