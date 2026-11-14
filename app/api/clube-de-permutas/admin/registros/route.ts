@@ -23,8 +23,10 @@ export async function GET(request:Request){
       getDoc('credenciamento/decisoes/'+protocoloBusca+'.json')
     ]);
     if(!convite)return NextResponse.json({erro:'Não encontramos o pré-cadastro deste protocolo.'},{status:404});
+    const inscricao=await getDoc('inscricoes/'+String(convite.criadoEm||'').slice(0,10)+'/'+protocoloBusca+'.json');
     const registro={protocolo:protocoloBusca,nome:convite.nome,email:convite.email,perfil:convite.perfil,
-      criadoEm:convite.criadoEm,ficha,decisao,status:decisao?.status||(ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')};
+      criadoEm:convite.criadoEm,oferta:inscricao?.oferta||'',busca:inscricao?.busca||'',telefone:inscricao?.telefone||'',
+      ficha,decisao,status:decisao?.status||(ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')};
     return NextResponse.json({ok:true,registros:[registro],total:1,hasMore:false,cursor:null},
       {headers:{'Cache-Control':'no-store, private'}});
   }
@@ -40,7 +42,9 @@ export async function GET(request:Request){
       getDoc('credenciamento/decisoes/'+protocolo+'.json')
     ]);
     if(!convite)return null;
+    const inscricao=await getDoc('inscricoes/'+String(convite.criadoEm||'').slice(0,10)+'/'+protocolo+'.json');
     return {protocolo,nome:convite.nome,email:convite.email,perfil:convite.perfil,criadoEm:convite.criadoEm,
+       oferta:inscricao?.oferta||'',busca:inscricao?.busca||'',telefone:inscricao?.telefone||'',
        ficha,decisao,status:decisao?.status||(ficha?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO')};
   }));
   const registros=rows.filter(Boolean).sort((a:any,b:any)=>(b.criadoEm||'').localeCompare(a.criadoEm||''));
