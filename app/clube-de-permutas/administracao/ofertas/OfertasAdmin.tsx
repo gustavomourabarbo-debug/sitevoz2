@@ -2,14 +2,26 @@
 import {useState,type FormEvent} from 'react';
 import {formatarValorBR,valorBRParaNumero} from '@/lib/moeda-br';
 type Oferta={id:string;titulo:string;descricao:string;categoria:string;empresa:string;cidade:string;valorReferencia:number;quantidade:string;status:string;associado?:{email:string;protocolo:string};avaliacao?:{observacao:string}};
+type Interesse={id:string;nome:string;email:string;protocolo:string;motivo:string;criadoEm:string;status:string};
 type Proposta={id:string;ofertaTitulo:string;email:string;mensagem:string;protocolo:string;status:string;criadaEm:string};
 export default function OfertasAdmin(){
  const [dados,setDados]=useState({titulo:'',descricao:'',categoria:'',cidade:'',empresa:'',quantidade:'',valorReferencia:''});
  const [propostas,setPropostas]=useState<Proposta[]>([]),[erro,setErro]=useState(''),[ok,setOk]=useState(''),[ocupado,setOcupado]=useState(false);
  const [cursor,setCursor]=useState<string|null>(null),[mais,setMais]=useState(false);
+ const [interesses,setInteresses]=useState<Interesse[]>([]),[cursorCredix,setCursorCredix]=useState<string|null>(null),[maisCredix,setMaisCredix]=useState(false);
  const [ofertas,setOfertas]=useState<Oferta[]>([]),[ofertasCursor,setOfertasCursor]=useState<string|null>(null),[ofertasMais,setOfertasMais]=useState(false),[notas,setNotas]=useState<Record<string,string>>({});
  const [andamentos,setAndamentos]=useState<Record<string,{status:string;observacao:string;comprador:boolean;vendedor:boolean}>>({});
  const alterar=(k:keyof typeof dados,v:string)=>setDados(p=>({...p,[k]:v}));
+ async function carregarInteresses(proxima?:string){
+ setOcupado(true);setErro('');
+ try{
+  const r=await fetch('/api/clube-de-permutas/admin/credix'+(proxima?'?cursor='+encodeURIComponent(proxima):''),{cache:'no-store'});
+  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Falha na consulta.');
+  setInteresses(v=>proxima?[...v,...(d.solicitacoes||[])]:d.solicitacoes||[]);
+  setCursorCredix(d.cursor||null);setMaisCredix(Boolean(d.hasMore));
+ }catch(e){setErro(e instanceof Error?e.message:'Consulta indisponível.');}
+ finally{setOcupado(false)}
+ }
  async function carregarOfertas(proxima?:string){
   setOcupado(true);setErro('');
   try{
@@ -52,7 +64,13 @@ export default function OfertasAdmin(){
  setPropostas(old=>proxima?[...old,...d.propostas]:d.propostas);setCursor(d.cursor||null);setMais(Boolean(d.hasMore));
  }catch(e){setErro(e instanceof Error?e.message:'Não foi possível consultar. Faça login no painel de credenciamento primeiro.');}finally{setOcupado(false)}}
  return <div className="grid gap-8"><div className="rounded-xl border bg-amber-50 border-amber-200 px-5 py-4 text-sm">Acesse primeiro o <a className="text-emerald-900 font-bold underline" href="/clube-de-permutas/administracao">painel de credenciamento</a> e faça login. Só publique ofertas cuja existência, preço e autorização do ofertante tenham sido verificados.</div>
- <section className="bg-white rounded-2xl border shadow-sm p-6"><h2 className="text-2xl font-black">Ofertas enviadas pelos associados</h2><p className="text-sm text-slate-600 mt-2">Confira a descrição, o valor e a autorização do associado antes de publicar. Cada decisão fica registrada.</p>
+ <section className="bg-white rounded-2xl border shadow-sm p-6"><h2 className="text-2xl font-black">Solicitações de CREDIX</h2><p className="text-slate-600 text-sm mt-2">Registros de interesse, sem pagamentos ou créditos emitidos.</p>
+ <button disabled={ocupado} onClick={()=>void carregarInteresses()} className="bg-slate-900 text-white rounded-lg px-5 py-3 mt-4 font-bold">VER INTERESSES REGISTRADOS</button>
+ <div className="grid gap-3 mt-4">{interesses.map(i=><article key={i.id} className="border rounded-lg p-4 bg-slate-50">
+ <p className="font-black">{i.nome}</p><p className="text-sm">{i.email} • {i.status}</p><p className="text-sm mt-2 whitespace-pre-wrap">{i.motivo}</p><p className="text-xs text-slate-500 mt-2 break-all">Protocolo: {i.protocolo} • Registro: {i.id}</p>
+ </article>)}</div>{maisCredix&&cursorCredix&&<button disabled={ocupado} onClick={()=>void carregarInteresses(cursorCredix)} className="underline mt-3 text-emerald-800 font-bold">Carregar mais solicitações</button>}
+ </section>
+  <section className="bg-white rounded-2xl border shadow-sm p-6"><h2 className="text-2xl font-black">Ofertas enviadas pelos associados</h2><p className="text-sm text-slate-600 mt-2">Confira a descrição, o valor e a autorização do associado antes de publicar. Cada decisão fica registrada.</p>
  <button disabled={ocupado} onClick={()=>carregarOfertas()} className="bg-slate-900 text-white rounded-lg py-3 px-5 font-bold mt-4">CARREGAR OFERTAS RECEBIDAS</button>
  <div className="grid gap-4 mt-5">{ofertas.map(o=><article key={o.id} className="border border-slate-200 rounded-xl bg-slate-50 p-5">
  <div className="flex flex-wrap justify-between gap-3"><h3 className="font-black text-lg">{o.titulo}</h3><span className="font-bold text-emerald-900">{o.status.replace(/_/g,' ')}</span></div>
