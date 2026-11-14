@@ -15,7 +15,7 @@ export async function GET(request:Request){
   const decisao=await get('credenciamento/decisoes/'+protocolo+'.json',{access:'private'}).catch(()=>null);
   const registro=decisao?.stream?JSON.parse(await new Response(decisao.stream).text()):null;
   const status=registro?.status|| (emAnalise?'EM_ANALISE':'AGUARDANDO_CREDENCIAMENTO');
-  const mensagem=status==='APROVADO'?'Seu credenciamento foi aprovado. Aguarde a liberação da sua área de associado.':
+  const mensagem=status==='APROVADO'?'Seu credenciamento foi aprovado. Acesse a área do associado para cadastrar produtos e serviços para análise e publicação.':
      status==='REPROVADO'?'O credenciamento não foi aprovado. Entre em contato com a equipe para esclarecimentos.':
      emAnalise?'Sua ficha foi recebida e aguarda conferência da equipe.':'Seu pré-cadastro foi recebido. Preencha a ficha de credenciamento para continuar.';
   return NextResponse.json({ok:true,protocolo,status,
