@@ -46,3 +46,22 @@ export async function notificarClube({assunto,corpo,protocolo}:{assunto:string;c
   return {enviado:true,motivo:'ACEITO_PELO_PROVEDOR'};
  }catch{return {enviado:false,motivo:'FALHA_DE_CONEXAO'};}
 }
+
+export async function notificarOferta({email,nome,ofertaId,titulo,status}:{email:string;nome:string;ofertaId:string;titulo:string;status:'PUBLICADA'|'REPROVADA'|'SUSPENSA'}){
+ const token=process.env.RESEND_API_KEY,remetente=process.env.CLUBE_EMAIL_REMETENTE;
+ if(!token||!remetente)return {enviado:false,motivo:'PROVEDOR_NAO_CONFIGURADO'};
+ const texto=status==='PUBLICADA'
+  ?'Sua oferta foi aprovada e publicada no catálogo do Clube de Permutas Brasil.'
+  :status==='SUSPENSA'?'Sua oferta foi suspensa do catálogo para conferência.':
+   'Sua oferta não foi aprovada nesta avaliação. Consulte a administração do Clube para mais informações.';
+ const corpo='Olá, '+nome+'!\n\n'+texto+'\n\nOferta: '+titulo+
+  '\nIdentificação: '+ofertaId+'\n\nCatálogo: https://www.vozdebrasilia.com.br/clube-de-permutas/ofertas'+
+  '\n\nClube de Permutas Brasil — TV Voz de Brasília';
+ try{
+  const r=await fetch('https://api.resend.com/emails',{method:'POST',
+   headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
+   body:JSON.stringify({from:'Clube de Permutas <'+remetente+'>',to:[email],
+    subject:'Clube de Permutas — atualização da sua oferta',text:corpo}),cache:'no-store'});
+  return r.ok?{enviado:true,motivo:'ACEITO_PELO_PROVEDOR'}:{enviado:false,motivo:'ERRO_PROVEDOR_'+r.status};
+ }catch{return {enviado:false,motivo:'FALHA_DE_CONEXAO'};}
+}
