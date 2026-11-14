@@ -13,17 +13,21 @@ export async function POST(request:Request){
  const b=await request.json().catch(()=>null);
  const ofertaId=txt(b?.ofertaId,50),protocolo=txt(b?.protocolo,50);
  const email=txt(b?.email,200).toLowerCase(),mensagem=txt(b?.mensagem,1000);
- if(!uuidReal.test(ofertaId)||!uuidReal.test(protocolo)||!email||!mensagem||b?.aceite!==true)
+ const modalidade=txt(b?.modalidade,30)||'PERMUTA_DIRETA';
+ if(!uuidReal.test(ofertaId)||!uuidReal.test(protocolo)||!email||!mensagem||!['PERMUTA_DIRETA','COMPRA_REAIS','NEGOCIAR_CONDICOES'].includes(modalidade)||b?.aceite!==true)
    return NextResponse.json({erro:'Informe uma oferta, seu protocolo, e-mail e proposta.'},{status:400});
  try{
   const [oferta,cadastro,decisao]=await Promise.all([
    doc('clube/ofertas/'+ofertaId+'.json'),doc('credenciamento/convites/'+protocolo+'.json'),
    doc('credenciamento/decisoes/'+protocolo+'.json')]);
-  if(!oferta||oferta.status!=='PUBLICADA')return NextResponse.json({erro:'Oferta indisponível.'},{status:404});
-  if(!cadastro||cadastro.email!==email||decisao?.status!=='APROVADO')
+  const moderacao=oferta?await doc('clube/ofertas/avaliacoes/'+ofertaId+'.json'):null;
+  if(!oferta||(moderacao?.status||oferta.status)!=='PUBLICADA')return NextResponse.json({erro:'Oferta indisponível.'},{status:404});
+  if(!cadastro||String(cadastro.email||'').toLowerCase()!==email||decisao?.status!=='APROVADO')
    return NextResponse.json({erro:'Para propor negociações, seu credenciamento precisa estar aprovado e o e-mail deve corresponder ao cadastro.'},{status:403});
+  if(oferta.associado?.protocolo===protocolo)return NextResponse.json({erro:'Você não pode propor uma negociação para a própria oferta.'},{status:400});
   const id=randomUUID();
-  const registro={id,ofertaId,ofertaTitulo:oferta.titulo,protocolo,email,mensagem,
+  const registro={id,ofertaId,ofertaTitulo:oferta.titulo,protocolo,email,mensagem,modalidade,
+     ofertanteProtocolo:oferta.associado?.protocolo||null,ofertanteEmail:oferta.associado?.email||null,
      status:'AGUARDANDO_CONTATO',criadaEm:new Date().toISOString(),aceite:true};
   await put('clube/propostas/'+id+'.json',JSON.stringify(registro),{access:'private',contentType:'application/json',addRandomSuffix:false});
   return NextResponse.json({ok:true,id,status:'AGUARDANDO_CONTATO'},{status:201});
