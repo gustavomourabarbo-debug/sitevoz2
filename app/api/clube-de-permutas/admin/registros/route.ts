@@ -1,7 +1,7 @@
 import {NextResponse} from 'next/server';
 import {get,list,put} from '@vercel/blob';
 import {isAdmin,sameOrigin} from '@/lib/clube-admin';
-import {notificarDecisao} from '@/lib/clube-notificacoes';
+import {notificarDecisao,notificarClube} from '@/lib/clube-notificacoes';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -68,7 +68,13 @@ export async function POST(request:Request){
  try{
   await put('credenciamento/decisoes/'+protocolo+'.json',JSON.stringify(registro),
    {access:'private',contentType:'application/json',addRandomSuffix:false,allowOverwrite:true});
-  const notificacao=await notificarDecisao({email:convite.email,nome:convite.nome,protocolo,status});
-  return NextResponse.json({ok:true,status,notificacao},{headers:{'Cache-Control':'no-store'}});
+  const [notificacao,notificacaoClube]=await Promise.all([
+   notificarDecisao({email:convite.email,nome:convite.nome,protocolo,status}),
+   notificarClube({assunto:'Clube de Permutas — credenciamento '+status+': '+convite.nome,
+     corpo:'Decisão de credenciamento registrada.\n\nAssociado: '+convite.nome+'\nE-mail: '+convite.email+
+       '\nStatus: '+status+'\nProtocolo: '+protocolo+
+       '\n\nPainel: https://www.vozdebrasilia.com.br/clube-de-permutas/administracao',protocolo})
+  ]);
+  return NextResponse.json({ok:true,status,notificacao,notificacaoClube},{headers:{'Cache-Control':'no-store'}});
  }catch{return NextResponse.json({erro:'Falha ao gravar a decisão.'},{status:500});}
 }
