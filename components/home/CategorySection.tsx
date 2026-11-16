@@ -8,17 +8,18 @@ import { getNewsByCategory, EnrichedNews } from '@/lib/news-service';
 interface CategorySectionProps {
   title?: string;
   category?: string;
+  initialPosts?: any[];
 }
 
-export default function CategorySection({ title = 'Política', category = 'politica' }: CategorySectionProps = {}) {
-  const [news, setNews] = useState<EnrichedNews[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function CategorySection({ title = 'Política', category = 'politica', initialPosts = [] }: CategorySectionProps = {}) {
+  const [news, setNews] = useState<EnrichedNews[]>(initialPosts.map((p: any) => ({ ...p, title: typeof p.title === 'string' ? p.title : p.title?.rendered || '', published_at: p.published_at || p.date || p.created_at })) as EnrichedNews[]);
+  const [isLoading, setIsLoading] = useState(initialPosts.length === 0);
 
   useEffect(() => {
     async function fetchNews() {
       try {
         const data = await getNewsByCategory(category, 4);
-        setNews(data);
+        if (data.length > 0) setNews(data);
       } catch (err) {
         console.error(`Error fetching category ${category} news:`, err);
       } finally {
