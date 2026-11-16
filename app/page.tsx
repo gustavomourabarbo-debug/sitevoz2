@@ -116,6 +116,25 @@ export default async function Home() {
           <SponsorBanner sponsor="lunardi" />
         </div>
 
+        <section className="mx-auto max-w-[1400px] px-4 py-8" aria-label="Reportagens completas do arquivo">
+          <h2 className="mb-2 text-2xl font-bold text-slate-900">Reportagens e análises do acervo</h2>
+          <p className="mb-6 text-slate-600">Conteúdo jornalístico publicado pela TV Voz de Brasília. Consulte a data original de cada reportagem.</p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.filter((p: any) => String(p?.content?.rendered || p?.content || '').replace(/<[^>]*>/g, '').trim().length >= 500 && p?.slug && p?.featured_image).slice(0, 12).map((p: any) => (
+              <article key={p.slug} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <a href={`/noticia/${encodeURIComponent(p.slug)}`} className="block">
+                  <img src={p.featured_image} alt="" loading="lazy" className="h-44 w-full object-cover" />
+                  <div className="p-5">
+                    <p className="mb-2 text-xs font-semibold text-slate-500">{p.category || 'Jornalismo'} · {p.date ? new Date(p.date).toLocaleDateString('pt-BR') : 'Arquivo'}</p>
+                    <h3 className="text-lg font-bold text-slate-900">{String(p.title?.rendered || p.title || '').replace(/<[^>]*>/g, '')}</h3>
+                    <p className="mt-3 text-sm text-slate-600">{String(p.excerpt?.rendered || p.excerpt || '').replace(/<[^>]*>/g, '').slice(0, 180)}</p>
+                    <span className="mt-4 inline-block font-semibold text-green-700">Ler reportagem completa</span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
         <div className="max-w-[1400px] mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-10">{categories.map((c) => (<CategoriesSection key={c.category} title={c.title} category={c.category} initialPosts={posts.filter((p: any) => p.categorySlug === c.category && p.featured_image && (p.content?.rendered || p.content)).slice(0, 4)} />))}</div>
