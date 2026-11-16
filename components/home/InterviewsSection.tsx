@@ -75,6 +75,18 @@ export default function InterviewsSection({
       <section className="rounded-xl border border-green-200 bg-white p-6" aria-label="Entrevistas da TV Voz de Brasília">
         <h2 className="text-2xl font-bold text-gray-900">Entrevistas de Paulo Fayad</h2>
         <p className="mt-2 text-gray-700">Assista às entrevistas autorais da TV Voz de Brasília com lideranças do Distrito Federal e do Congresso Nacional.</p>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {[
+            { name: 'Júlio César Ribeiro', href: '/entrevista-com-o-deputado-julio-cesar-jornalista-paulo-fayad/', image: 'https://www.camara.leg.br/internet/deputado/bandep/204372.jpg' },
+            { name: 'Erika Kokay', href: '/entrevista-com-a-deputada-federal-erika-kokay-apresentador-paulo-fayad/', image: 'https://www.camara.leg.br/internet/deputado/bandep/160575.jpg' },
+            { name: 'Chico Vigilante', href: '/entrevista-com-deputado-distrital-chico-vigilante-apresentador-paulo-fayad/', image: 'https://www.cl.df.gov.br/documents/10162/33185635/Chico%2BVigilante%2B-%2B2023-2026.jpg/b2187cf2-5479-e17f-861d-8212b201ac73?imageThumbnail=3&t=1740158439023' },
+          ].map((item) => (
+            <Link key={item.name} href={item.href} className="overflow-hidden rounded-xl border border-gray-200 bg-slate-50 hover:shadow-md">
+              <img src={item.image} alt={item.name} loading="lazy" className="h-44 w-full object-cover object-top" />
+              <div className="p-4"><h3 className="font-bold text-gray-900">Entrevista com {item.name}</h3><p className="mt-2 text-sm text-green-700">Leia no portal</p></div>
+            </Link>
+          ))}
+        </div>
         <Link href="/entrevistas" className="mt-4 inline-block rounded-lg bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800">Ver entrevistas</Link>
       </section>
     );
