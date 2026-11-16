@@ -132,35 +132,10 @@ export default function Footer() {
           </div>
  
           <div>
-            <h3 className="font-bold text-lg mb-4">Newsletter</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Receba as principais notícias do dia direto no seu e-mail.
-            </p>
-            <div className="flex gap-2 mb-6">
-              <input
-                type="email"
-                placeholder="Seu e-mail"
-                className="flex-1 px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600 text-sm"
-              />
-              <button className="bg-gradient-to-r from-green-600 to-green-700 px-4 py-2 rounded-lg hover:from-green-700 hover:to-green-800 transition-all">
-                <Mail className="w-5 h-5" />
-              </button>
-            </div>
- 
-            <div className="space-y-2">
-              <div className="flex items-start gap-2 text-gray-400 text-sm">
-                <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>SCS, Quadra 6, Bloco A, Ed. Marilena - Brasília/DF</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Phone className="w-4 h-4 flex-shrink-0" />
-                <span>(61) 3333-4444</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Mail className="w-4 h-4 flex-shrink-0" />
-                <span>contato@tvvozdebrasilia.com.br</span>
-              </div>
-            </div>
+            <h3 className="font-bold text-lg mb-4">Fale com a redação</h3>
+            <p className="text-gray-400 text-sm mb-4">Sugestões de pauta, entrevistas e propostas comerciais para a TV Voz de Brasília.</p>
+            <a href="https://www.instagram.com/tvvozdebrasilia/" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 text-sm">Contato pelo Instagram oficial</a>
+            <p className="text-gray-400 text-sm mt-4">Brasília, Distrito Federal, Brasil.</p>
           </div>
         </div>
  
