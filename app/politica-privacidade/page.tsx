@@ -1,0 +1,7 @@
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import Link from 'next/link';
+
+export const metadata = { title: 'Política de Privacidade | TV Voz de Brasília', description: 'Este portal pode tratar informações técnicas de navegação, como endereço IP, dados do navegador e cookies, para funcionamento, segurança, análise de a' };
+
+export default function Page() { return <div className="min-h-screen bg-gray-50"><Header /><main className="mx-auto max-w-4xl px-5 pt-28 pb-16"><article className="rounded-2xl bg-white p-8 shadow-sm"><h1 className="mb-6 text-3xl font-bold text-gray-900">Política de Privacidade</h1><p className="mb-5 leading-8 text-gray-700">Este portal pode tratar informações técnicas de navegação, como endereço IP, dados do navegador e cookies, para funcionamento, segurança, análise de audiência e publicidade, conforme os serviços efetivamente habilitados.</p><p className="mb-5 leading-8 text-gray-700">Serviços de terceiros, incluindo ferramentas de análise e plataformas de publicidade, podem aplicar suas próprias políticas de privacidade. O visitante pode gerenciar cookies nas configurações do navegador.</p><p className="mb-5 leading-8 text-gray-700">Para dúvidas sobre privacidade ou solicitações relativas a dados pessoais, entre em contato pelo canal oficial indicado na página Contato.</p><p className="mt-8"><Link href="/contato" className="font-semibold text-green-700">Contato oficial</Link></p></article></main><Footer /></div> }
