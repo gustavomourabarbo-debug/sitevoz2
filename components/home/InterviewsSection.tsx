@@ -71,7 +71,7 @@ export default function InterviewsSection({
   }, [posts]);
 
   if (!interviews.length) {
-    return <div>Nenhuma entrevista encontrada.</div>;
+    return (\n      <section className="rounded-xl border border-green-200 bg-white p-6" aria-label="Entrevistas da TV Voz de Brasília">\n        <h2 className="text-2xl font-bold text-gray-900">Entrevistas de Paulo Fayad</h2>\n        <p className="mt-2 text-gray-700">Assista às entrevistas autorais da TV Voz de Brasília com lideranças do Distrito Federal e do Congresso Nacional.</p>\n        <Link href="/entrevistas" className="mt-4 inline-block rounded-lg bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800">Ver entrevistas</Link>\n      </section>\n    );
   }
 
   return (
