@@ -21,12 +21,12 @@ export default function InterviewsSection({
       title: post.title?.rendered || post.title || 'Sem título',
       guest: post.author || 'TV Voz de Brasília',
       role: 'Entrevista Exclusiva',
-      image: post.featured_image || (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) || 'https://via.placeholder.com/600x400?text=Entrevista',
-      duration: 'AO VIVO',
+      image: post.featured_image || (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) || '',
+      duration: 'ACERVO',
       date: post.date || new Date(post.published_at || post.created_at).toLocaleDateString('pt-BR'),
       slug: post.slug || '',
     }));
-    setInterviews(formattedStatic);
+    setInterviews(formattedStatic.filter((p) => Boolean(p.image && p.slug)));
 
     // 2. Fetch live interviews from Supabase at runtime
     async function loadLiveInterviews() {
@@ -35,7 +35,7 @@ export default function InterviewsSection({
           const { data, error } = await supabase
             .from('news')
             .select('*')
-            .or('categoryslug.eq.entrevista,categoryslug.eq.entrevistas,category.eq.Agenda Voz,category.eq.Entrevista')
+            .in('category', ['Entrevista', 'Entrevistas', 'Agenda Voz'])
             .order('published_at', { ascending: false });
 
           if (!error && data && data.length > 0) {
@@ -44,7 +44,7 @@ export default function InterviewsSection({
               title: item.title,
               guest: item.author || 'TV Voz de Brasília',
               role: 'Entrevista Exclusiva',
-              image: item.featured_image || 'https://via.placeholder.com/600x400?text=Entrevista',
+              image: item.featured_image || '',
               duration: 'AO VIVO',
               date: new Date(item.published_at || item.created_at).toLocaleDateString('pt-BR'),
               slug: item.slug,
@@ -59,7 +59,7 @@ export default function InterviewsSection({
               }
             });
 
-            setInterviews(merged.slice(0, 40));
+            setInterviews(merged.filter((p) => Boolean(p.image && p.slug)).slice(0, 40));
           }
         } catch (e) {
           console.warn('Error loading live interviews from Supabase:', e);
