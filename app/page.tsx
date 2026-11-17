@@ -76,9 +76,18 @@ export default async function Home() {
             <div className="mt-4 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
               <div>
                 <h1 className="mt-2 text-3xl font-black leading-tight text-slate-950 md:text-5xl">Paulo Fayad no BNDES: encontro com Aloizio Mercadante</h1>
-                <p className="mt-3 text-sm text-slate-500">Foto de Mercadante na COP31, em 11/11/2026: Ricardo Stuckert/PR · CC BY-SA 4.0</p>
+                
               </div>
-              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/11.11.2026_-_Comitiva_brasileira_na_COP31_%2855656873651%29.jpg" alt="Aloizio Mercadante integra a comitiva brasileira na COP31, na Turquia" className="h-64 w-full rounded-xl object-cover object-center md:h-80" loading="eager" />
+              <div className="grid grid-cols-2 gap-3">
+                <figure className="overflow-hidden rounded-xl bg-slate-100">
+                  <img src="https://www.voznewsbrasil.com.br/studio-paulo-source.png" alt="Paulo Fayad — imagem do acervo da TV Voz de Brasília" className="h-64 w-full object-contain md:h-80" loading="eager" />
+                  <figcaption className="p-2 text-center text-sm font-semibold text-slate-800">Paulo Fayad</figcaption>
+                </figure>
+                <figure className="overflow-hidden rounded-xl bg-slate-100">
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/11.11.2026_-_Comitiva_brasileira_na_COP31_%2855656873651%29.jpg" alt="Aloizio Mercadante na COP31, foto da comitiva brasileira" className="h-64 w-full object-cover object-left md:h-80" loading="eager" />
+                  <figcaption className="p-2 text-center text-sm font-semibold text-slate-800">Aloizio Mercadante · COP31</figcaption>
+                </figure>
+              </div>
             </div>
             <p className="mt-3 text-lg text-slate-700">Gravação de podcast com o presidente do BNDES, Aloizio Mercadante, na sede do banco.</p>
           </div>
