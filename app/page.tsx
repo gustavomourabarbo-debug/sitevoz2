@@ -70,6 +70,13 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <section className="mx-auto max-w-[1400px] px-4 pt-5" aria-label="Destaque principal: Aloizio Mercadante">
+          <div className="rounded-2xl border-l-8 border-green-700 bg-white px-6 py-7 shadow-lg">
+            <p className="text-sm font-bold uppercase tracking-widest text-green-700">Destaque principal · 17/11/2026</p>
+            <h1 className="mt-2 text-3xl font-black leading-tight text-slate-950 md:text-5xl">Paulo Fayad no BNDES: encontro com Aloizio Mercadante</h1>
+            <p className="mt-3 text-lg text-slate-700">Gravação de podcast com o presidente do BNDES, Aloizio Mercadante, na sede do banco.</p>
+          </div>
+        </section>
         <DetranCampaignBanner />
         <section className="mx-auto max-w-[1400px] px-4 pt-7 pb-4" aria-label="Entrevistas autorais da TV Voz de Brasília">
           <div className="mb-5 rounded-2xl bg-slate-900 p-7 text-white">
