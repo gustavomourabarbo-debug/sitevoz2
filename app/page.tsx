@@ -80,11 +80,11 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <figure className="overflow-hidden rounded-xl bg-slate-100">
-                  <img src="https://www.voznewsbrasil.com.br/studio-paulo-source.png" alt="Paulo Fayad — imagem do acervo da TV Voz de Brasília" className="h-64 w-full object-contain md:h-80" loading="eager" />
+                  <img src="https://www.voznewsbrasil.com.br/studio-paulo-source.png" alt="Paulo Fayad — imagem do acervo da TV Voz de Brasília" className="h-64 w-full object-cover object-top md:h-80" loading="eager" />
                   <figcaption className="p-2 text-center text-sm font-semibold text-slate-800">Paulo Fayad</figcaption>
                 </figure>
                 <figure className="overflow-hidden rounded-xl bg-slate-100">
-                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/11.11.2026_-_Comitiva_brasileira_na_COP31_%2855656873651%29.jpg" alt="Aloizio Mercadante na COP31, foto da comitiva brasileira" className="h-64 w-full object-cover object-left md:h-80" loading="eager" />
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/11.11.2026_-_Comitiva_brasileira_na_COP31_%2855656873651%29.jpg" alt="Aloizio Mercadante na COP31, foto da comitiva brasileira" className="h-64 w-full object-cover object-[12%_center] md:h-80" loading="eager" />
                   <figcaption className="p-2 text-center text-sm font-semibold text-slate-800">Aloizio Mercadante · COP31</figcaption>
                 </figure>
               </div>
