@@ -5,6 +5,15 @@ import Link from 'next/link';
 import { Play, Clock, User } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
+function dataBR(value: any): string {
+  if (!value) return '';
+  const raw = String(value);
+  const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (match) return `${match[3]}/${match[2]}/${match[1]}`;
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? '' : date.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+}
+
 interface InterviewsSectionProps {
   posts: any[];
 }
@@ -23,7 +32,7 @@ export default function InterviewsSection({
       role: 'Entrevista Exclusiva',
       image: post.featured_image || (post._embedded?.['wp:featuredmedia']?.[0]?.source_url) || '',
       duration: 'ACERVO',
-      date: post.date || new Date(post.published_at || post.created_at).toLocaleDateString('pt-BR'),
+      date: dataBR(post.date || post.published_at || post.created_at),
       slug: post.slug || '',
     }));
     setInterviews(formattedStatic.filter((p) => Boolean(p.image && p.slug)));
@@ -46,7 +55,7 @@ export default function InterviewsSection({
               role: 'Entrevista Exclusiva',
               image: item.featured_image || '',
               duration: 'AO VIVO',
-              date: new Date(item.published_at || item.created_at).toLocaleDateString('pt-BR'),
+              date: dataBR(item.published_at || item.created_at),
               slug: item.slug,
             }));
 
