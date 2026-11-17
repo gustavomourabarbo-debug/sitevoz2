@@ -58,14 +58,6 @@ export default async function Home() {
   const capaAtual = atuais.length ? atuais : recentes.slice(0, 8);
   const postsDestaques = [...capaAtual, ...recentes.filter((p: any) => !capaAtual.includes(p))];
   const heroPosts = capaAtual.slice(0, 8);
-  const topStory = {
-    href: '/noticias/edicao-30-outubro/#finados',
-    category: 'Brasília e Entorno',
-    title: { rendered: 'PRF reforça fiscalização nas rodovias do DF e Entorno para o feriado de Finados' },
-    excerpt: { rendered: 'Operação de 30 de outubro a 2 de novembro busca prevenir acidentes. Veja as orientações aos motoristas e as demais notícias verificadas.' },
-    featured_image: 'https://www.gov.br/prf/pt-br/noticias/estaduais/distrito-federal/prf-reforca-fiscalizacao-no-df-e-entorno-durante-a-operacao-finados-2026/@@images/image-1600-0ff198658edd999c91f34ce36d32d1fe.jpeg',
-  };
-
   const categories: { title: string; category: string }[] = [
     { title: 'Política', category: 'politica' }, { title: 'Distrito Federal', category: 'distrito-federal' },
     { title: 'Economia', category: 'economia' }, { title: 'Turismo', category: 'turismo' },
@@ -82,11 +74,11 @@ export default async function Home() {
         <section className="mx-auto max-w-[1400px] px-4 pt-7 pb-4" aria-label="Entrevistas autorais da TV Voz de Brasília">
           <div className="mb-5 rounded-2xl bg-slate-900 p-7 text-white">
             <p className="text-sm font-bold uppercase tracking-wider text-amber-300">Jornalismo e conteúdo original</p>
-            <h1 className="mt-2 text-3xl font-black md:text-5xl">TV Voz de Brasília — entrevistas e notícias</h1>
-            <p className="mt-3 max-w-3xl text-lg text-slate-200">Entrevistas de Paulo Fayad, reportagens e cobertura de Brasília e do Brasil. Conheça nosso acervo de entrevistas autorais.</p>
-            <a href="/entrevistas" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Explorar entrevistas</a>
+            <h1 className="mt-2 text-3xl font-black md:text-5xl">Brasília em pauta. O Brasil em destaque.</h1>
+            <p className="mt-3 max-w-3xl text-lg text-slate-200">Jornalismo independente, grandes conversas e cobertura dos assuntos que movimentam o país.</p>
+            <a href="/entrevistas" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Conheça nossas conversas</a>
           </div>
-          <InterviewsSection posts={interviews} />
+          <InterviewsSection posts={interviews.filter((p: any) => Boolean(p?.featured_image || p?._embedded?.['wp:featuredmedia']?.[0]?.source_url))} />
         </section>
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="snaider" />
