@@ -55,7 +55,7 @@ export default async function Home() {
     const data = new Date(p?.published_at || p?.created_at || p?.date || 0).getTime();
     return Number.isFinite(data) && data <= agora && data >= agora - 48 * 60 * 60 * 1000;
   });
-  const capaAtual = atuais.length ? atuais : recentes.slice(0, 8);
+  const capaAtual = atuais;
   const postsDestaques = [...capaAtual, ...recentes.filter((p: any) => !capaAtual.includes(p))];
   const heroPosts = capaAtual.slice(0, 8);
   const categories: { title: string; category: string }[] = [
@@ -78,7 +78,7 @@ export default async function Home() {
             <p className="mt-3 max-w-3xl text-lg text-slate-200">Jornalismo independente, grandes conversas e cobertura dos assuntos que movimentam o país.</p>
             <a href="/entrevistas" className="mt-5 inline-block rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950">Conheça nossas conversas</a>
           </div>
-          <InterviewsSection posts={interviews.filter((p: any) => Boolean(p?.featured_image || p?._embedded?.['wp:featuredmedia']?.[0]?.source_url))} />
+          <InterviewsSection posts={interviews} />
         </section>
         <div className="pt-4 space-y-4">
           <SponsorBanner sponsor="snaider" />
