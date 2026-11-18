@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/fetch-caesb-46319.mjs && next build && node scripts/rename-next.js && python scripts/zip_build.py",
+    "build": "next build && node scripts/rename-next.js && python scripts/zip_build.py",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "vercel-build": "node scripts/fetch-caesb-46319.mjs && next build"
+    "vercel-build": "next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
