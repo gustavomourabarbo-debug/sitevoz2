@@ -2,6 +2,7 @@ import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import Header from '@/components/layout/Header';
 import Cop31Highlights from '@/components/home/Cop31Highlights';
 import BrasiliaHighlights from '@/components/home/BrasiliaHighlights';
+import ClubePermutasConvite from '@/components/home/ClubePermutasConvite';
 import LatestNews from '@/components/home/LatestNews';
 import InterviewsSection from '@/components/home/InterviewsSection';
 import Sidebar from '@/components/layout/Sidebar';
@@ -72,6 +73,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <ClubePermutasConvite />
         <BrasiliaHighlights />
         <Cop31Highlights />
 
