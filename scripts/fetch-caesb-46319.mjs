@@ -2,11 +2,12 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 
 // Materiais originais fornecidos pela Mene & Portella, PI 46319.
-// A agência ainda não forneceu CHUVA no tamanho contratado de 728 x 90.
+// Uso dos quatro originais de maior resolução 970 x 250, sem ampliação nem recorte.
 const assets = [
-  { slug: 'cafe', id: '1AyWaZ3o1fZIPUBcMCl95s3GyVYd9_PDm' },
-  { slug: 'vaso', id: '1S7JN_0oVHYFaSs3zc4dhcIVn-FiC2yMH' },
-  { slug: 'oleo', id: '1_6zUYCqdRxZz3EdNpXb5842gcfzPCYPh' },
+  { slug: 'cafe', id: '1na9qTUS1Q697w_JJTSxq2r6Xc2SE8X0r' },
+  { slug: 'vaso', id: '1tO-v1Y3MZ1iw14hL-SJTo4b1Z8MIuEgm' },
+  { slug: 'oleo', id: '1ftiQEDbZTsapl-cLarKwN8O6yzeSIjw0' },
+  { slug: 'chuva', id: '14Y6dczyhHPD_kE1JqgjgfascvHag2mXU' },
 ];
 const folder = resolve(process.cwd(), 'public', 'publicidade', 'caesb-46319');
 await mkdir(folder, { recursive: true });
@@ -19,7 +20,7 @@ async function download(asset) {
   let lastError;
   for (const url of urls) {
     try {
-      const response = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(25000) });
+      const response = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(45000) });
       if (!response.ok) throw new Error('HTTP ' + response.status);
       const bytes = Buffer.from(await response.arrayBuffer());
       if (bytes.length < 100000 || bytes.toString('ascii', 4, 8) !== 'ftyp') {
