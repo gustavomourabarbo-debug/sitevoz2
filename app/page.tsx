@@ -1,6 +1,7 @@
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import Header from '@/components/layout/Header';
 import Cop31Highlights from '@/components/home/Cop31Highlights';
+import BrasiliaHighlights from '@/components/home/BrasiliaHighlights';
 import LatestNews from '@/components/home/LatestNews';
 import InterviewsSection from '@/components/home/InterviewsSection';
 import Sidebar from '@/components/layout/Sidebar';
@@ -71,14 +72,10 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <BrasiliaHighlights />
         <Cop31Highlights />
 
-        <section className="mx-auto max-w-[1400px] px-4 pt-5" aria-label="Banco do Brasil">
-          <div className="rounded-2xl bg-[#f8d92f] px-6 py-5 text-[#173a83] shadow-sm md:flex md:items-center md:justify-between">
-            <div><p className="mt-1 text-3xl font-black">Banco do Brasil</p><p className="mt-1 text-base font-medium">Soluções financeiras para pessoas e empresas.</p></div>
-            <a className="mt-4 inline-block rounded-lg bg-[#173a83] px-5 py-3 font-bold text-white md:mt-0" href="https://www.bb.com.br/" target="_blank" rel="noopener noreferrer">Conheça o BB</a>
-          </div>
-        </section>
+
         <section className="mx-auto max-w-[1400px] px-4 pt-7" aria-label="Notícias verificadas de 18 de novembro de 2026">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-3xl font-black text-slate-900">Destaques de hoje — 18/11/2026</h2>
