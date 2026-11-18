@@ -95,7 +95,7 @@ export default function CaesbCampaignBanner() {
               playsInline
               preload="metadata"
               aria-label={'Anúncio CAESB — tema ' + current.name}
-              className="block h-full w-full object-cover"
+              className="pointer-events-none block h-full w-full object-cover"
               onPlaying={countImpression}
               onError={() => setMode((previous) => previous === 'local' ? 'drive' : 'missing')}
             />

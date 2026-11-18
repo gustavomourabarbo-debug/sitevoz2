@@ -1,4 +1,5 @@
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
+import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
 import Header from '@/components/layout/Header';
 import Cop31Highlights from '@/components/home/Cop31Highlights';
 import LatestNews from '@/components/home/LatestNews';
@@ -71,6 +72,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <CaesbCampaignBanner />
         <Cop31Highlights />
 
         <section className="mx-auto max-w-[1400px] px-4 pt-5" aria-label="Banco do Brasil">
