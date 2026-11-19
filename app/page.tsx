@@ -75,6 +75,12 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <ClubePermutasConvite />
+        <section className="mx-auto max-w-[1400px] px-4 pt-4" aria-label="Conheça a XELVYA AI">
+          <a href="/xelvya" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-violet-200 bg-gradient-to-r from-indigo-950 to-violet-800 p-5 text-white shadow-md hover:shadow-lg">
+            <div><span className="text-xs font-bold uppercase tracking-widest text-indigo-200">Tecnologia e inteligência artificial</span><h2 className="mt-1 text-2xl font-black">XELVYA AI • Inteligência ao seu lado</h2><p className="mt-1 text-sm text-indigo-100">Conheça a nossa IA em português — pronuncia-se Xél-via.</p></div>
+            <span className="rounded-lg bg-white px-5 py-3 font-bold text-indigo-950">Conhecer a XELVYA</span>
+          </a>
+        </section>
         <Cupula19Nov />
         <BrasiliaHighlights />
         <Cop31Highlights />
