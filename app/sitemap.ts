@@ -30,6 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const estaticas: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, lastModified: now, changeFrequency: 'hourly', priority: 1 },
+    { url: `${BASE}/xelvya`, lastModified: new Date('2026-11-19'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/videos`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${BASE}/entrevistas`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
   ];
