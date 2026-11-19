@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import { brasiliaStories } from '@/lib/brasilia-stories';
 export default function BrasiliaIndex(){
 return <div className="min-h-screen bg-slate-50"><Header/><main className="mx-auto max-w-[1400px] px-4 py-10">
- <h1 className="text-4xl font-black text-slate-900">Brasília — 18 de novembro</h1>
+ <h1 className="text-4xl font-black text-slate-900">Brasília — reportagens recentes</h1>
  <p className="mt-2 text-gray-600">Reportagens originais da Redação Voz de Brasília.</p>
  <div className="mt-8 grid gap-6 md:grid-cols-3">{brasiliaStories.map(a=><Link href={'/brasilia/'+a.slug} key={a.slug} className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-lg">
   <img src={a.image} alt={a.alt} className="h-52 w-full object-cover" referrerPolicy="no-referrer"/>
