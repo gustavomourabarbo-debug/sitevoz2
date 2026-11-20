@@ -2,7 +2,7 @@
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Play, ExternalLink } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 const interviews = [
   {
@@ -11,7 +11,6 @@ const interviews = [
     headline: 'LEILA DO VÔLEI SEM RODEIOS',
     sub: 'Paulo Fayad conversa com Leila Barros sobre trajetória, Brasília e vida pública.',
     image: 'https://legis.senado.leg.br/senadores/fotos-oficiais/5979',
-    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Leila%20do%20V%C3%B4lei%20Paulo%20Fayad',
   },
   {
     name: 'Júlio César Ribeiro',
@@ -19,7 +18,6 @@ const interviews = [
     headline: 'JÚLIO CÉSAR: PERGUNTAS DIRETAS',
     sub: 'Uma conversa sobre mandato, prioridades e os temas que movimentam o Distrito Federal.',
     image: 'https://www.camara.leg.br/internet/deputado/bandep/204372.jpg',
-    url: 'https://www.vozdebrasilia.com.br/entrevista-com-o-deputado-julio-cesar-jornalista-paulo-fayad/',
   },
   {
     name: 'Rôney Nemer',
@@ -27,7 +25,6 @@ const interviews = [
     headline: 'RÔNEY NEMER FALA SEM FILTRO',
     sub: 'Paulo Fayad entrevista Rôney Nemer sobre experiência pública, Brasília e os desafios do DF.',
     image: 'https://dados.agenciasertao.com/json/v1/eleicoes/2026/fotos/70002538503.jpg',
-    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Roney%20Nemer%20Paulo%20Fayad',
   },
   {
     name: 'Erika Kokay',
@@ -35,7 +32,6 @@ const interviews = [
     headline: 'ERIKA KOKAY NO CENTRO DO DEBATE',
     sub: 'A deputada federal conversa com Paulo Fayad sobre Congresso, Brasília e suas principais pautas.',
     image: 'https://www.camara.leg.br/internet/deputado/bandep/160575.jpg',
-    url: 'https://www.vozdebrasilia.com.br/entrevista-com-a-deputada-federal-erika-kokay-apresentador-paulo-fayad/',
   },
   {
     name: 'Izalci Lucas',
@@ -43,7 +39,6 @@ const interviews = [
     headline: 'IZALCI LUCAS: CARA A CARA',
     sub: 'Paulo Fayad conduz uma entrevista direta sobre política nacional e os rumos de Brasília.',
     image: 'https://legis.senado.leg.br/senadores/fotos-oficiais/4770',
-    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Izalci%20Lucas%20Paulo%20Fayad',
   },
   {
     name: 'Chico Vigilante',
@@ -51,7 +46,6 @@ const interviews = [
     headline: 'CHICO VIGILANTE ABRE O JOGO',
     sub: 'Uma conversa franca com Paulo Fayad sobre gestão pública, trabalhadores e os desafios do DF.',
     image: 'https://www.cl.df.gov.br/documents/10162/33185635/Chico%2BVigilante%2B-%2B2023-2026.jpg/b2187cf2-5479-e17f-861d-8212b201ac73?imageThumbnail=3&t=1740158439023',
-    url: 'https://www.vozdebrasilia.com.br/entrevista-com-deputado-distrital-chico-vigilante-apresentador-paulo-fayad/',
   },
   {
     name: 'Dra. Jane',
@@ -59,7 +53,6 @@ const interviews = [
     headline: 'DRA. JANE: SEM MEIAS PALAVRAS',
     sub: 'Paulo Fayad conversa com a parlamentar sobre segurança pública, mandato e Distrito Federal.',
     image: 'https://www.cl.df.gov.br/documents/10162/35054112/251107AP03A%280339%29.jpg/8770a532-8ee4-9628-2449-e3321d621290?version=1.0&t=1762532064071&download=true',
-    url: 'https://www.youtube.com/@VozdebrasiliaTV/search?query=Dra%20Jane%20Paulo%20Fayad',
   },
 ];
 
@@ -108,16 +101,7 @@ export default function EntrevistasPage() {
 
                 <div className="p-6">
                   <p className="text-zinc-300 leading-relaxed min-h-[72px]">{item.sub}</p>
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 transition px-5 py-3 font-black"
-                  >
-                    <Play className="w-5 h-5 fill-white" />
-                    Assistir entrevista
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <p className="mt-5 text-sm text-zinc-400">Registro do acervo de entrevistas da TV Voz de Brasília.</p>
                 </div>
               </article>
             ))}
