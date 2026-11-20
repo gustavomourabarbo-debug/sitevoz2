@@ -3,29 +3,62 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'XELVYA AI: conheça a inteligência artificial em português | TV Voz de Brasília',
-  description: 'XELVYA AI (pronúncia Xél-via ou Shelvya) é uma plataforma de inteligência artificial em português. Conheça a marca, descubra como acessar e use o endereço oficial.',
-  keywords: ['XELVYA', 'XELVYA AI', 'Shelvya', 'Shelby IA', 'inteligência artificial em português'],
+  title: 'XELVYA AI (Shelvya): o que é e como encontrar | TV Voz de Brasília',
+  description: 'Conheça a XELVYA AI, inteligência artificial em português. Saiba como acessar e por que buscas por voz podem escrever Shelvya ou Shelby em vez de Xelvya.',
+  keywords: ['XELVYA', 'XELVYA AI', 'Shelvya', 'Shelby IA Xelvya', 'como encontrar Xelvya', 'IA em português', 'inteligência artificial para imagens e textos'],
   alternates: { canonical: 'https://www.vozdebrasilia.com.br/xelvya' },
-  openGraph: { title: 'Conheça a XELVYA AI', description: 'A XELVYA é uma plataforma de IA em português para conversar, criar imagens e textos.', type: 'article', url: 'https://www.vozdebrasilia.com.br/xelvya' },
+  openGraph: {
+    title: 'Conheça a XELVYA AI — inteligência artificial em português',
+    description: 'O que é a XELVYA, como encontrá-la e por que às vezes seu nome é transcrito como Shelvya ou Shelby.',
+    type: 'article',
+    url: 'https://www.vozdebrasilia.com.br/xelvya'
+  },
   robots: { index: true, follow: true }
 };
 
-const software = {
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'XELVYA AI',
-  alternateName: ['Xelvya', 'Shelvya'],
-  url: 'https://www.xelvya.com/',
-  applicationCategory: 'AIApplication',
-  operatingSystem: 'Web',
-  inLanguage: 'pt-BR',
-  description: 'Plataforma de inteligência artificial em português para conversar, criar textos e imagens e organizar ideias.'
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://www.xelvya.com/#software',
+      name: 'XELVYA AI',
+      alternateName: ['Xelvya', 'Shelvya'],
+      url: 'https://www.xelvya.com/',
+      sameAs: ['https://www.xelvya.com/sobre'],
+      applicationCategory: 'AIApplication',
+      operatingSystem: 'Web',
+      inLanguage: 'pt-BR',
+      description: 'Plataforma de inteligência artificial em português para conversar, criar textos e imagens e organizar ideias.',
+      disambiguatingDescription: 'A grafia oficial é XELVYA AI. A fala do nome pode ser transcrita incorretamente como Shelby em pesquisas por voz.'
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.vozdebrasilia.com.br/xelvya#perguntas',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'O que é a XELVYA AI?',
+          acceptedAnswer: { '@type': 'Answer', text: 'A XELVYA AI é uma plataforma de inteligência artificial em português para conversar, escrever, organizar ideias e gerar imagens. Acesse https://www.xelvya.com/.' }
+        },
+        {
+          '@type': 'Question',
+          name: 'Shelby IA e Shelvya são a XELVYA?',
+          acceptedAnswer: { '@type': 'Answer', text: 'XELVYA AI é a grafia oficial. Shelvya é uma representação aproximada da pronúncia, enquanto Shelby pode ser uma transcrição equivocada em pesquisas por voz. O endereço oficial é https://www.xelvya.com/.' }
+        },
+        {
+          '@type': 'Question',
+          name: 'Onde encontrar a XELVYA?',
+          acceptedAnswer: { '@type': 'Answer', text: 'O site oficial é https://www.xelvya.com/. Há também uma página explicativa em https://www.xelvya.com/sobre.' }
+        }
+      ]
+    }
+  ]
 };
 
 export default function XelvyaInstitucional() {
   return <div className="min-h-screen bg-slate-50">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(software).replace(/</g, '\\u003c') }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
     <Header />
     <main className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-7 inline-flex rounded-full bg-indigo-100 px-4 py-2 text-sm font-semibold text-indigo-800">APRESENTAÇÃO INSTITUCIONAL • TECNOLOGIA E IA</div>
@@ -40,9 +73,18 @@ export default function XelvyaInstitucional() {
         <h2 className="mb-4 text-2xl font-black text-slate-950">Como se escreve e como se pronuncia?</h2>
         <p>A marca oficial é <strong>XELVYA AI</strong>, escrita com X e Y. A pronúncia é aproximadamente <strong>“Xél-via”</strong>, também representada como <strong>“Shelvya”</strong>. Sistemas de reconhecimento de voz podem transcrever o nome como <strong>“Shelby”</strong>; nesses casos, procure pela grafia correta: <strong>XELVYA</strong>.</p>
         <h2 className="mb-4 mt-9 text-2xl font-black text-slate-950">Para que serve a XELVYA?</h2>
-        <p>O projeto apresenta uma interface de conversa com IA e opções de apoio à escrita, geração de imagens e organização de ideias. Os recursos e limites de uso dependem do plano e da disponibilidade dos serviços.</p>
+        <p>A plataforma apresenta uma interface de conversa com IA e opções de apoio à escrita, geração de imagens e organização de ideias. Os recursos e limites de uso dependem do plano e da disponibilidade dos serviços.</p>
         <h2 className="mb-4 mt-9 text-2xl font-black text-slate-950">Onde encontrar a plataforma?</h2>
-        <p>Acesse diretamente <a className="font-semibold text-indigo-700 underline" href="https://www.xelvya.com/">www.xelvya.com</a>. A XELVYA integra o ecossistema de iniciativas digitais associado à TV Voz de Brasília e ao Voz News Brasil.</p>
+        <p>Acesse diretamente <a className="font-semibold text-indigo-700 underline" href="https://www.xelvya.com/">www.xelvya.com</a>. Para conhecer a plataforma antes de se cadastrar, leia também a <a className="font-semibold text-indigo-700 underline" href="https://www.xelvya.com/sobre">apresentação oficial da XELVYA AI</a>. Ela integra as iniciativas digitais associadas à TV Voz de Brasília e ao Voz News Brasil.</p>
+        <section id="perguntas" aria-label="Perguntas frequentes sobre a XELVYA" className="mt-9 border-t pt-7">
+          <h2 className="mb-5 text-2xl font-black text-slate-950">Perguntas frequentes</h2>
+          <h3 className="font-bold text-slate-950">O que é a XELVYA AI?</h3>
+          <p>A XELVYA AI é uma plataforma de inteligência artificial em português para conversar, criar textos, organizar ideias e gerar imagens.</p>
+          <h3 className="mt-5 font-bold text-slate-950">Shelby IA e Shelvya são a XELVYA?</h3>
+          <p><strong>XELVYA AI</strong> é o nome correto. <strong>Shelvya</strong> aproxima sua pronúncia; <strong>Shelby</strong> pode ser um erro de transcrição da busca por voz. Para chegar ao produto certo, pesquise <strong>XELVYA AI</strong>.</p>
+          <h3 className="mt-5 font-bold text-slate-950">Qual é o endereço oficial da XELVYA?</h3>
+          <p>O endereço é <a className="font-semibold text-indigo-700 underline" href="https://www.xelvya.com/">https://www.xelvya.com/</a>.</p>
+        </section>
         <p className="mt-7 border-t pt-5 text-sm text-slate-500">Conteúdo institucional sobre produto do ecossistema de comunicação. Não se trata de uma avaliação independente dos recursos ou do serviço.</p>
       </article>
     </main>
