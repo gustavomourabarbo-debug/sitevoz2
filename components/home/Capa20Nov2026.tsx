@@ -1,7 +1,7 @@
 const capa = {
-  image: "https://www.gov.br/secom/pt-br/acompanhe-a-secom/noticias/2025/11/marcha-das-mulheres-negras-por-reparacao-e-bem-viver-da-voz-a-milhares-de-participantes-em-brasilia/marcha-das-mulheres-negras_agencia-brasil.jpeg/@@images/4acf50dd-63df-4346-8dce-337163c16e73.jpeg",
+  image: "https://www.gov.br/igualdaderacial/pt-br/assuntos/noticias/marcha-das-mulheres-negras-por-reparacao-e-bem-viver-reune-milhares-em-brasilia/20251125marchamnegras1.jpg/@@images/image-2002-72447359c086af0e19476636206633b4.jpeg",
   title: "Consciência Negra: 20 de novembro mobiliza o Brasil por memória, cultura e igualdade",
-  caption: "Foto real de arquivo: Marcha das Mulheres Negras, em Brasília, em 2025. A imagem não retrata atos de 20/11/2026.",
+  caption: "Foto real de arquivo: Marcha das Mulheres Negras, Brasília, 25/11/2025. Crédito: Ricardo Stuckert/PR. A imagem não retrata atos de 20/11/2026.",
 };
 const materias = [
   {
