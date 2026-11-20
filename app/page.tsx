@@ -1,7 +1,7 @@
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import Header from '@/components/layout/Header';
 import Cop31Highlights from '@/components/home/Cop31Highlights';
-import Cupula19Nov from '@/components/home/Cupula19Nov';
+import Capa20Nov2026 from '@/components/home/Capa20Nov2026';
 import BrasiliaHighlights from '@/components/home/BrasiliaHighlights';
 import ClubePermutasConvite from '@/components/home/ClubePermutasConvite';
 import LatestNews from '@/components/home/LatestNews';
@@ -74,6 +74,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <Capa20Nov2026 />
         <ClubePermutasConvite />
         <section className="mx-auto max-w-[1400px] px-4 pt-4" aria-label="Conheça a XELVYA AI">
           <a href="/xelvya" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-violet-200 bg-gradient-to-r from-indigo-950 to-violet-800 p-5 text-white shadow-md hover:shadow-lg">
@@ -81,7 +82,6 @@ export default async function Home() {
             <span className="rounded-lg bg-white px-5 py-3 font-bold text-indigo-950">Conhecer a XELVYA</span>
           </a>
         </section>
-        <Cupula19Nov />
         <BrasiliaHighlights />
         <Cop31Highlights />
 
