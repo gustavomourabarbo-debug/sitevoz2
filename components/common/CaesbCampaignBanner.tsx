@@ -24,6 +24,8 @@ export default function CaesbCampaignBanner() {
   const [date, setDate] = useState('');
   const [index, setIndex] = useState(0);
   const [mode, setMode] = useState<SourceMode>('local');
+  const [playing, setPlaying] = useState(false);
+  const [imageAvailable, setImageAvailable] = useState(true);
   const countedRef = useRef<string>('');
 
   useEffect(() => {
@@ -40,6 +42,8 @@ export default function CaesbCampaignBanner() {
 
   useEffect(() => {
     setMode('local');
+    setPlaying(false);
+    setImageAvailable(true);
   }, [index]);
 
   const isActive = date >= '2026-11-18' && date <= '2026-11-25';
@@ -49,6 +53,7 @@ export default function CaesbCampaignBanner() {
   const localSrc = '/publicidade/caesb-46319/' + current.slug + '.mp4';
   const driveSrc = 'https://drive.google.com/uc?export=download&id=' + current.fileId;
   const src = mode === 'drive' ? driveSrc : localSrc;
+  const posterSrc = 'https://drive.google.com/thumbnail?id=' + current.fileId + '&sz=w1600';
 
   const countImpression = () => {
     const token = current.slug + ':' + index + ':' + mode;
@@ -80,24 +85,36 @@ export default function CaesbCampaignBanner() {
           className="relative block w-full overflow-hidden rounded-md border border-gray-200 bg-white"
           style={{ aspectRatio: '970 / 250' }}
         >
-          {mode === 'missing' ? (
-            <span className="flex h-full items-center justify-center px-3 text-center text-sm font-semibold text-blue-900">
+          {/* Mostra imediatamente o quadro original da campanha, inclusive antes do vídeo carregar.
+              O material é obtido do arquivo oficial da CAESB; nunca mostramos peça inventada. */}
+          {imageAvailable && (
+            <img
+              key={current.slug + ':poster'}
+              src={posterSrc}
+              alt={'CAESB — campanha Uso Correto da Rede de Esgoto — ' + current.name}
+              className="absolute inset-0 block h-full w-full object-contain bg-white"
+              onError={() => setImageAvailable(false)}
+            />
+          )}
+          {!imageAvailable && mode === 'missing' && (
+            <span className="absolute inset-0 flex items-center justify-center px-3 text-center text-sm font-semibold text-blue-900">
               CAESB — Uso correto da rede de esgoto. Saiba mais no site oficial.
             </span>
-          ) : (
+          )}
+          {mode !== 'missing' && (
             <video
               key={current.slug + ':' + mode}
               src={src}
-              poster={'https://drive.google.com/thumbnail?id=' + current.fileId + '&sz=w970'}
+              poster={posterSrc}
               muted
               autoPlay
               loop
               playsInline
               preload="metadata"
               aria-label={'Anúncio CAESB — tema ' + current.name}
-              className="pointer-events-none block h-full w-full object-cover"
-              onPlaying={countImpression}
-              onError={() => setMode((previous) => previous === 'local' ? 'drive' : 'missing')}
+              className={'pointer-events-none absolute inset-0 block h-full w-full object-contain ' + (playing ? 'opacity-100' : 'opacity-0')}
+              onPlaying={() => { setPlaying(true); countImpression(); }}
+              onError={() => { setPlaying(false); setMode((previous) => previous === 'local' ? 'drive' : 'missing'); }}
             />
           )}
         </a>
