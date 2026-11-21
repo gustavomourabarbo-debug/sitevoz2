@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
 import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
+import GdfMiddleOnInternalPages from '@/components/common/GdfMiddleOnInternalPages';
 import { Inter, Merriweather } from 'next/font/google';
 
 const inter = Inter({
@@ -133,6 +134,8 @@ export default function RootLayout({
         <CaesbCampaignBanner />
         <GdfCampaignBanner />
         {children}
+        <GdfMiddleOnInternalPages />
+        <GdfCampaignBanner placement="footer" />
 
       </body>
     </html>
