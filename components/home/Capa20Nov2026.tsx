@@ -69,11 +69,14 @@ export default function Capa20Nov2026() {
             <p className="mt-3">O 20 de novembro recorda a morte de Zumbi dos Palmares em 1695 e se consolidou como data de reconhecimento da história e da atuação de lideranças negras. A celebração nacional, contudo, vai além da memória: também coloca em debate políticas de educação, renda, representação, cultura, justiça e combate ao racismo.</p>
             <p className="mt-3">A programação organizada no DF inclui atividades culturais abertas ao público. Informações sobre funcionamento de serviços distritais no feriado foram divulgadas pelo GDF; parte das unidades não terá atendimento regular.</p>
           </details>
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
-            <a className="text-blue-800 underline" href="https://www12.senado.leg.br/assessoria-de-imprensa/releases/congresso-nacional-recebe-projecao-mapeada-em-homenagem-ao-dia-nacional-de-zumbi-e-da-consciencia-negra" target="_blank" rel="noopener noreferrer">Fonte: Senado Federal</a>
-            <a className="text-blue-800 underline" href="https://www.gov.br/cultura/pt-br/assuntos/noticias/minc-celebra-o-dia-da-consciencia-negra-com-acoes-afirmativas-e-programacao-cultural" target="_blank" rel="noopener noreferrer">Fonte: Ministério da Cultura</a>
-            <a className="text-blue-800 underline" href="https://www.agenciabrasilia.df.gov.br/w/confira-o-que-abre-e-o-que-fecha-no-df-no-feriado-da-consciencia-negra" target="_blank" rel="noopener noreferrer">Serviços no DF durante o feriado</a>
-          </div>
+          <details className="mt-5 border-t border-slate-200 pt-3 text-sm text-slate-600">
+            <summary className="cursor-pointer font-medium">Documentos consultados e informações úteis</summary>
+            <div className="mt-3 flex flex-wrap gap-4">
+              <a className="text-blue-800 underline" href="https://www12.senado.leg.br/assessoria-de-imprensa/releases/congresso-nacional-recebe-projecao-mapeada-em-homenagem-ao-dia-nacional-de-zumbi-e-da-consciencia-negra" target="_blank" rel="noopener noreferrer">Senado Federal</a>
+              <a className="text-blue-800 underline" href="https://www.gov.br/cultura/pt-br/assuntos/noticias/minc-celebra-o-dia-da-consciencia-negra-com-acoes-afirmativas-e-programacao-cultural" target="_blank" rel="noopener noreferrer">Ministério da Cultura</a>
+              <a className="text-blue-800 underline" href="https://www.agenciabrasilia.df.gov.br/w/confira-o-que-abre-e-o-que-fecha-no-df-no-feriado-da-consciencia-negra" target="_blank" rel="noopener noreferrer">Funcionamento dos serviços no DF</a>
+            </div>
+          </details>
         </div>
       </article>
 
