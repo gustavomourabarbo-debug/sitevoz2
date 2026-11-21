@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
-import BancoDoBrasilBanner from '@/components/common/BancoDoBrasilBanner';
+import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
 import { Inter, Merriweather } from 'next/font/google';
 
 const inter = Inter({
@@ -131,7 +131,7 @@ export default function RootLayout({
 
         <DetranCampaignBanner />
         <CaesbCampaignBanner />
-        <BancoDoBrasilBanner />
+        <GdfCampaignBanner />
         {children}
 
       </body>
