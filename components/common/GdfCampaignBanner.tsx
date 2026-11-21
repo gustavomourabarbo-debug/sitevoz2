@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 const href = 'https://agenciabrasilia.df.gov.br/w/programa-viva-flor-amplia-protecao-a-mulheres-em-situacao-de-violencia-no-df';
 const image = '/publicidade/gdf-145080/banner.gif';
-export default function GdfCampaignBanner({ placement = 'sitewide' }: { placement?: 'sitewide' | 'middle' }) {
+export default function GdfCampaignBanner({ placement = 'sitewide' }: { placement?: 'sitewide' | 'middle' | 'footer' }) {
   const [active, setActive] = useState(false);
   useEffect(() => {
     const update = () => {
@@ -17,7 +17,6 @@ export default function GdfCampaignBanner({ placement = 'sitewide' }: { placemen
   return (
     <section className="relative z-0 mx-auto w-full max-w-[1400px] px-4 py-3" aria-label="Publicidade GDF - PI 145080">
       <div className="mx-auto w-full max-w-[728px]">
-        <div className="mb-1 text-[10px] uppercase tracking-wide text-gray-500">Publicidade · GDF · PI 145080</div>
         <a href={href} target="_blank" rel="noopener noreferrer sponsored" title="GDF - Entregas 2026 - Viva Flor" className="block w-full">
           <img src={image} width={728} height={90} alt="GDF - Entregas 2026 - Proteção às Mulheres - Programa Viva Flor" className="block h-auto w-full" loading={placement === 'middle' ? 'lazy' : 'eager'} onLoad={() => {
             if (typeof (window as any).gtag === 'function') (window as any).gtag('event','gdf_pi_145080_impression',{campaign_id:'145080',placement,non_interaction:true});
