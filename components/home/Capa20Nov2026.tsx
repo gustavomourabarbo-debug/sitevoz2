@@ -24,8 +24,8 @@ const materias = [
     categoria: "BRASIL • IGUALDADE RACIAL",
     dataFato: "19/11/2026",
     titulo: "Governo Lula destaca ações de igualdade racial e presença negra no serviço público",
-    imagem: "https://www.gov.br/mj/pt-br/assuntos/noticias/mjsp-participa-de-cerimonia-no-dia-da-consciencia-negra-no-palacio-do-planalto/mjsp-participa-de-cerimonia-no-dia-da-consciencia-negra-no-palacio-do-planalto/@@images/0abbcc2b-92b5-4413-931d-9b3f823ded07.jpeg",
-    legenda: "Lula em cerimônia anterior sobre igualdade racial. Foto real de arquivo: Governo Federal; não é registro de 20/11/2026.",
+    imagem: "https://www.gov.br/planejamento/pt-br/assuntos/noticias/2026/imagens/55156120202_eb131de887_o.jpg/@@images/image-1847-ab43b5834cceb5a118f2f34172060dff.jpeg",
+    legenda: "Presidente Luiz Inácio Lula da Silva. Foto: Ricardo Stuckert/PR.",
     resumo: "Na véspera do feriado, ministérios divulgaram programação cultural e levantamento sobre o ingresso de pessoas negras na administração pública federal.",
     texto: [
       "Às vésperas do Dia Nacional de Zumbi e da Consciência Negra, o governo federal apresentou ações do Novembro Negro voltadas à cultura afro-brasileira e ao enfrentamento da discriminação racial. O Ministério da Cultura destacou a campanha Cultura Negra Vive e atividades de valorização da produção cultural negra.",
@@ -93,10 +93,10 @@ export default function Capa20Nov2026() {
                 <img src={m.imagem} alt="Celina Leão em fotografia de arquivo" className="h-64 w-full object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
               </a>
             ) : (
-              <img src={m.imagem} alt={m.legenda} className="h-64 w-full bg-slate-50 object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
+              <img src={m.imagem} alt={m.categoria === "BRASIL • IGUALDADE RACIAL" ? "Presidente Luiz Inácio Lula da Silva em fotografia oficial" : m.legenda} className="h-64 w-full bg-slate-50 object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
             )}
             <div className="p-6">
-              <p className="text-xs leading-5 text-slate-500">{m.legenda}</p>
+              
               <p className="mt-3 text-xs font-black uppercase tracking-wide text-green-800">{m.categoria} · 20/11/2026</p>
               {isCelina ? (
                 <a href={reportagem} className="group">
