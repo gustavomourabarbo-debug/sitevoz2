@@ -2,18 +2,19 @@ import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
 
 const stories = [
   {
-    section: 'POLÍTICA • BRASIL',
-    title: 'Lula manifesta solidariedade ao Rio Grande do Sul após tempestade devastadora',
-    summary: 'Presidente falou neste sábado (21) sobre as vítimas do temporal em Tupanciretã e a mobilização de ministérios para apoiar a população.',
+    section: 'POLÍTICA • ECONOMIA',
+    title: 'Lula defende ajuste fiscal e afirma que mercado financeiro não ditará os rumos do Brasil',
+    summary: 'Em live neste sábado (21), presidente rebate críticas à proposta para o Orçamento de 2027 e afirma que não cortará programas sociais.',
     image: 'https://www.gov.br/planejamento/pt-br/assuntos/noticias/2026/imagens/55156120202_eb131de887_o.jpg/@@images/image-1847-ab43b5834cceb5a118f2f34172060dff.jpeg',
-    alt: 'Presidente Luiz Inácio Lula da Silva em foto de arquivo',
-    credit: 'Lula: fotografia oficial de arquivo, utilizada para ilustrar notícia de 21/11',
-    source: 'Agência Brasil • 21/11/2026, 12h20',
-    sourceUrl: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-presta-solidariedade-cidade-gaucha-devastada-por-tempestade',
+    alt: 'Presidente Luiz Inácio Lula da Silva em fotografia oficial de arquivo',
+    credit: 'Lula: foto oficial de arquivo; a imagem não retrata a transmissão de 21/11',
+    source: 'Agência Brasil • publicado em 21/11/2026, às 14h12',
+    sourceUrl: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/o-sistema-financeiro-nao-vai-me-ensinar-dirigir-o-brasil-diz-lula',
     paragraphs: [
-      'O presidente Luiz Inácio Lula da Silva se manifestou neste sábado (21) sobre as consequências do temporal que atingiu Tupanciretã, no Rio Grande do Sul, na madrugada de sexta-feira. A tempestade deixou mortos, feridos e milhares de moradores com prejuízos em suas residências.',
-      'Segundo a Agência Brasil, Lula destacou a presença de integrantes do governo federal na cidade e afirmou que a prioridade é reunir esforços para a recuperação das áreas atingidas. Equipes de diferentes ministérios atuam na articulação com autoridades estaduais e locais.',
-      'A Defesa Civil gaúcha informou neste sábado que as tempestades atingiram pelo menos 33 municípios do estado. A situação exige atenção às famílias desalojadas, à rede de serviços essenciais e à reconstrução dos imóveis danificados.'
+      'Em uma transmissão ao vivo nas redes sociais neste sábado, 21 de novembro, o presidente Luiz Inácio Lula da Silva defendeu o projeto de ajuste fiscal do governo e reagiu a críticas do mercado financeiro e de integrantes da esquerda. A conversa foi conduzida pelo deputado André Janones, na Granja do Torto, em Brasília.',
+      'A proposta, já aprovada pelo Senado e ainda pendente de análise na Câmara dos Deputados, combina contenção de despesas e aumento de receitas. Segundo a Agência Brasil, a previsão apresentada é de impacto fiscal entre R$ 45,1 bilhões e R$ 56,1 bilhões em 2027.',
+      'Lula afirmou que não aceitará que o sistema financeiro determine as prioridades de seu governo. Também defendeu o ministro do Planejamento, Bruno Moretti, e disse que o ajuste não retirará recursos destinados à população de baixa renda.',
+      'O presidente declarou ainda que não pretende elevar a idade mínima de aposentadoria no próximo mandato e abordou a possibilidade de criar uma pasta dedicada às pessoas idosas. São compromissos e propostas mencionados na entrevista, não medidas já implementadas.'
     ]
   },
   {
@@ -86,21 +87,21 @@ export default function Capa21Nov2026() {
             />
           </div>
           <div className="flex flex-col justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-6 text-white md:p-9">
-            <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Saúde • 21/11/2026</p>
-            <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Água Quente terá primeira UPA com investimento de R$ 17,3 milhões</h1>
-            <p className="mt-4 text-base leading-7 text-slate-100">Governadora Celina Leão destaca ampliação da rede. A unidade em construção terá 65 leitos modulares, raio-X e preparação para tomógrafo.</p>
-            <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão. Foto real de arquivo: George Gianni/GDF (2024). A imagem não retrata as obras de 21/11.</p>
+            <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Gestão pública • 21/11/2026</p>
+            <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl">GDF estuda aproveitar estrutura da posse de Lula no Réveillon de Brasília</h1>
+            <p className="mt-4 text-base leading-7 text-slate-100">Gestão de Celina Leão avalia negociar o uso de palcos e equipamentos para reduzir as despesas da festa de fim de ano na capital.</p>
+            <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão. Foto real de arquivo: George Gianni/GDF (2024). A imagem é ilustrativa.</p>
           </div>
         </div>
         <div className="space-y-3 px-6 py-6 text-base leading-7 text-slate-800 md:px-9">
-          <p>O Governo do Distrito Federal detalhou neste sábado, 21 de novembro, as obras da primeira Unidade de Pronto Atendimento (UPA) da região administrativa de Água Quente. O investimento de R$ 17,3 milhões integra um conjunto de seis unidades em construção para reforçar a rede de urgência e emergência.</p>
-          <p>A estrutura contará com 65 leitos modulares para adultos e crianças, sala de raio-X, preparação para receber tomógrafo e sistema de energia solar. O projeto está em fase de acabamento e foi pensado para diminuir a necessidade de deslocamento da população a outras regiões em busca de assistência.</p>
-          <p>Em declarações divulgadas pela Agência Brasília, a governadora Celina Leão afirmou que a expansão depende de planejamento e recursos garantidos. A execução está sob responsabilidade do Instituto de Gestão Estratégica de Saúde do Distrito Federal (IgesDF).</p>
+          <p>O Governo do Distrito Federal avalia pedir autorização para utilizar, no Réveillon de Brasília, parte da infraestrutura prevista para os shows da posse presidencial de Lula, programada para 5 de janeiro de 2027. A informação foi divulgada neste sábado, 21 de novembro, pela coluna Painel, da Folha de S.Paulo.</p>
+          <p>O plano em estudo tem como objetivo reduzir o custo das celebrações de fim de ano em um momento de contenção de despesas da administração da governadora Celina Leão. O governo local também considera contratar artistas da região, com cachês menores.</p>
+          <p>Segundo a reportagem, a proposta está relacionada à montagem de estruturas para o festival da posse, como palcos e outros equipamentos de apoio. O eventual compartilhamento exigiria negociação entre os organizadores e os órgãos responsáveis pelos eventos.</p>
           <details className="rounded-lg bg-slate-50 p-4">
             <summary className="cursor-pointer font-bold text-blue-900">Leia a reportagem completa</summary>
-            <p className="mt-3">Com a instalação da UPA, a população de Água Quente deverá contar com atendimento mais próximo para casos que precisam de avaliação de urgência. A construção se soma às iniciativas em Águas Claras, Guará, Sol Nascente, Taguatinga e outras regiões incluídas no pacote de expansão.</p>
-            <p className="mt-3">A promessa de redução do tempo de deslocamento depende da conclusão da obra, aquisição de equipamentos, contratação das equipes e início do funcionamento. Não há, nesta reportagem, anúncio de inauguração da unidade em 21 de novembro.</p>
-            <p className="mt-3 text-sm"><a href="https://agenciabrasilia.df.gov.br/w/com-investimento-de-r-173-milhoes-agua-quente-vai-ter-sua-primeira-upa" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-800 underline">Informações e fotos das obras na Agência Brasília (21/11)</a></p>
+            <p className="mt-3">A possibilidade surge após o GDF ter reduzido despesas de celebrações anteriores e priorizado serviços públicos. A ideia de aproveitar equipamentos de outro evento busca manter uma programação de Réveillon com menor custo para os cofres locais.</p>
+            <p className="mt-3">Até o momento, trata-se de intenção noticiada pela imprensa: não há confirmação de acordo formal, de estrutura cedida nem de contratação de atrações. A realização da festa dependerá das decisões das autoridades e da organização dos dois eventos.</p>
+            <p className="mt-3 text-sm"><a href="https://www1.folha.uol.com.br/colunas/painel/2026/11/governo-do-df-quer-aproveitar-estrutura-de-festival-da-posse-de-lula-para-festa-de-reveillon.shtml" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-800 underline">Fonte: Folha de S.Paulo — Painel, 21/11/2026</a></p>
           </details>
         </div>
       </article>
