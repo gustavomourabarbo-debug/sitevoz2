@@ -80,22 +80,41 @@ export default function Capa20Nov2026() {
       <div className="mt-6" aria-label="Campanha CAESB acima da reportagem da governadora Celina Leão"><CaesbCampaignBanner /></div>
 
       <div className="mt-6 grid gap-5 md:grid-cols-2">
-        {materias.map((m) => (
+        {materias.map((m) => {
+          const isCelina = m.categoria === 'DISTRITO FEDERAL';
+          const reportagem = '/noticia/celina-leao-negociacao-dividas-df';
+          return (
           <article key={m.titulo} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md">
-            <img src={m.imagem} alt={m.legenda} className="h-64 w-full bg-slate-50 object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
+            {isCelina ? (
+              <a href={reportagem} aria-label={'Ler reportagem completa: ' + m.titulo} className="block bg-slate-50">
+                <img src={m.imagem} alt="Celina Leão em fotografia de arquivo" className="h-64 w-full object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
+              </a>
+            ) : (
+              <img src={m.imagem} alt={m.legenda} className="h-64 w-full bg-slate-50 object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
+            )}
             <div className="p-6">
               <p className="text-xs leading-5 text-slate-500">{m.legenda}</p>
-              <p className="mt-3 text-xs font-black uppercase tracking-wide text-green-800">{m.categoria} • Fato de {m.dataFato} • Reportagem de 20/11</p>
-              <h3 className="mt-2 text-2xl font-extrabold leading-tight text-slate-900">{m.titulo}</h3>
+              <p className="mt-3 text-xs font-black uppercase tracking-wide text-green-800">{m.categoria} · 20/11/2026</p>
+              {isCelina ? (
+                <a href={reportagem} className="group">
+                  <h3 className="mt-2 text-2xl font-extrabold leading-tight text-slate-900 group-hover:text-blue-800">{m.titulo}</h3>
+                </a>
+              ) : (
+                <h3 className="mt-2 text-2xl font-extrabold leading-tight text-slate-900">{m.titulo}</h3>
+              )}
               <p className="mt-3 text-base leading-7 text-slate-700">{m.resumo}</p>
-              <details className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <summary className="cursor-pointer font-bold text-green-800">Ler reportagem completa</summary>
-                {m.texto.map((paragrafo, idx) => <p key={idx} className="mt-3 text-sm leading-7 text-slate-700">{paragrafo}</p>)}
-              </details>
-              <a href={m.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-sm font-bold text-blue-800 underline">Conferir fonte oficial: {m.fonte}</a>
+              {isCelina ? (
+                <a href={reportagem} className="mt-5 inline-flex rounded-lg bg-blue-800 px-5 py-3 font-bold text-white hover:bg-blue-900">LER REPORTAGEM COMPLETA →</a>
+              ) : (
+                <details className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                  <summary className="cursor-pointer font-bold text-green-800">Ler reportagem</summary>
+                  {m.texto.map((paragrafo, idx) => <p key={idx} className="mt-3 text-sm leading-7 text-slate-700">{paragrafo}</p>)}
+                </details>
+              )}
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
