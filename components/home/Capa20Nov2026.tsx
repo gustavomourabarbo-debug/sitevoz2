@@ -1,3 +1,4 @@
+import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
 const capa = {
   image: "https://www.gov.br/igualdaderacial/pt-br/assuntos/noticias/marcha-das-mulheres-negras-por-reparacao-e-bem-viver-reune-milhares-em-brasilia/20251125marchamnegras1.jpg/@@images/image-2002-72447359c086af0e19476636206633b4.jpeg",
   title: "Consciência Negra: 20 de novembro mobiliza o Brasil por memória, cultura e igualdade",
@@ -76,10 +77,12 @@ export default function Capa20Nov2026() {
         </div>
       </article>
 
+      <div className="mt-6" aria-label="Campanha CAESB acima da reportagem da governadora Celina Leão"><CaesbCampaignBanner /></div>
+
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         {materias.map((m) => (
           <article key={m.titulo} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md">
-            <img src={m.imagem} alt={m.legenda} className="h-64 w-full object-cover object-top" loading="eager" referrerPolicy="no-referrer" />
+            <img src={m.imagem} alt={m.legenda} className="h-64 w-full bg-slate-50 object-contain object-center" loading="eager" referrerPolicy="no-referrer" />
             <div className="p-6">
               <p className="text-xs leading-5 text-slate-500">{m.legenda}</p>
               <p className="mt-3 text-xs font-black uppercase tracking-wide text-green-800">{m.categoria} • Fato de {m.dataFato} • Reportagem de 20/11</p>
