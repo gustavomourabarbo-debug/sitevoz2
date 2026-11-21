@@ -79,8 +79,8 @@ export default function Capa21Nov2026() {
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[280px] bg-slate-100">
             <img
-              src="https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2024/12/31140019/53153252639_3e99496d5c_k.jpg"
-              alt="Governadora Celina Leão em fotografia real de arquivo"
+              src="https://uploads.diariodopoder.com.br/2026/09/a6349a2f-governadora-do-distrito-federal-e-candidata-a-reeleicao-celina-leao-pp-foto-sara-marques-agencia-cldf.jpg"
+              alt="Celina Leão durante pronunciamento na Câmara Legislativa do Distrito Federal em 2026"
               className="h-full w-full object-contain"
               loading="eager"
               referrerPolicy="no-referrer"
@@ -90,7 +90,7 @@ export default function Capa21Nov2026() {
             <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Gestão pública • 21/11/2026</p>
             <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl">GDF estuda aproveitar estrutura da posse de Lula no Réveillon de Brasília</h1>
             <p className="mt-4 text-base leading-7 text-slate-100">Gestão de Celina Leão avalia negociar o uso de palcos e equipamentos para reduzir as despesas da festa de fim de ano na capital.</p>
-            <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão. Foto real de arquivo: George Gianni/GDF (2024). A imagem é ilustrativa.</p>
+            <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão em fotografia real de arquivo de 2026. Foto: Sara Marques/Agência CLDF. A imagem não retrata o fato noticiado neste sábado.</p>
           </div>
         </div>
         <div className="space-y-3 px-6 py-6 text-base leading-7 text-slate-800 md:px-9">
