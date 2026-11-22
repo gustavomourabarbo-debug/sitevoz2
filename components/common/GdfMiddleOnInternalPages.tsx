@@ -18,6 +18,14 @@ export default function GdfMiddleOnInternalPages() {
     const main = document.querySelector('main');
     if (!main) return;
 
+    // Editorial pages with a reserved slot get the banner at the intended
+    // point in the story, rather than wherever the automatic midpoint falls.
+    const explicitSlot = main.querySelector<HTMLElement>('[data-gdf-internal-middle-slot]');
+    if (explicitSlot) {
+      setMount(explicitSlot);
+      return () => setMount(null);
+    }
+
     const slot = document.createElement('div');
     slot.setAttribute('data-gdf-internal-middle', 'true');
     let parent: Element = main;
