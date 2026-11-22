@@ -17,7 +17,6 @@ import ViralStrip from '@/components/home/ViralStrip';
 import InstagramVideoBanner from '@/components/common/InstagramVideoBanner';
 import SponsorBanner from '@/components/common/SponsorBanner';
 import TopStoryBanner from '@/components/common/TopStoryBanner';
-import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
 
 export const revalidate = 61;
 
@@ -138,7 +137,6 @@ export default async function Home() {
             />
           </div>
         </div>
-        <GdfCampaignBanner placement="middle" />
         <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4">{atuais.length > 0 ? <LatestNews posts={atuais} /> : <div className="rounded-xl border border-slate-200 bg-slate-50 p-5"><h2 className="text-xl font-bold text-slate-900">Arquivo jornalístico preservado</h2><p className="text-slate-600">As reportagens de datas anteriores continuam disponíveis nas editorias e no acervo. Ainda não há outras matérias recentes confirmadas nesta faixa. Consulte o arquivo jornalístico abaixo.</p></div>}</div></div>
         <div className="mt-4"><PremiumBanner variant={0} /></div>
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
