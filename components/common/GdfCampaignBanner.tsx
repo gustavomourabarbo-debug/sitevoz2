@@ -16,7 +16,7 @@ export default function GdfCampaignBanner({ placement = 'sitewide' }: { placemen
   if (!active) return null;
   return (
     <section className="relative z-0 mx-auto w-full max-w-[1400px] px-4 py-3" aria-label="Publicidade GDF - PI 145080">
-      <div className="mx-auto w-full max-w-[728px]">
+      <div className="mx-auto w-full max-w-[900px]">
         <a href={href} target="_blank" rel="noopener noreferrer sponsored" title="GDF - Entregas 2026 - Viva Flor" className="block w-full">
           <img src={image} width={728} height={90} alt="GDF - Entregas 2026 - Proteção às Mulheres - Programa Viva Flor" className="block h-auto w-full" loading={placement === 'middle' ? 'lazy' : 'eager'} onLoad={() => {
             if (typeof (window as any).gtag === 'function') (window as any).gtag('event','gdf_pi_145080_impression',{campaign_id:'145080',placement,non_interaction:true});
