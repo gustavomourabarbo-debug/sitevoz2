@@ -74,6 +74,20 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <section className="mx-auto max-w-[1400px] px-4 pt-5 pb-4" aria-label="Manchete: Shakira confirma quatro shows no Brasil">
+          <a href="/shakira-brasil-2027" className="group grid overflow-hidden rounded-2xl border-2 border-amber-400 bg-slate-950 text-white shadow-xl transition-shadow hover:shadow-2xl md:grid-cols-[43%_57%]">
+            <div className="relative min-h-[320px] overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/SHARIKA_MEDELLIN_13_04_2025_%28122%29.jpg" alt="Shakira em apresentação real da turnê Las Mujeres Ya No Lloran em 2025" className="h-full w-full object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105" loading="eager" />
+              <span className="absolute bottom-2 left-3 rounded bg-black/70 px-3 py-1 text-xs text-white">Foto real de arquivo: J.ébey / Wikimedia Commons (CC0)</span>
+            </div>
+            <div className="flex flex-col justify-center px-6 py-8 md:px-10">
+              <span className="text-sm font-black uppercase tracking-widest text-amber-300">Manchete de hoje · 22/11/2026 · Cultura e Turismo</span>
+              <h2 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Shakira volta ao Brasil: quatro shows entre o Réveillon e janeiro</h2>
+              <p className="mt-4 text-base leading-relaxed text-blue-100 md:text-lg">Balneário Camboriú (31/12), Cariacica (03/01), Salvador (06/01) e Fortaleza (09/01). Ingressos começam a ser vendidos em 26 de novembro.</p>
+              <span className="mt-6 inline-flex w-fit rounded-lg bg-amber-300 px-6 py-3 font-black text-slate-950">CONFIRA LOCAIS, DATAS E INGRESSOS →</span>
+            </div>
+          </a>
+        </section>
         <Capa21Nov2026 />
         <ClubePermutasConvite />
         <section className="mx-auto max-w-[1400px] px-4 pt-4" aria-label="Conheça a XELVYA AI">
