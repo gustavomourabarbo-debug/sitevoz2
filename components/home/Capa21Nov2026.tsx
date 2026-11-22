@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
 
 const stories = [
@@ -76,34 +77,28 @@ export default function Capa21Nov2026() {
       </div>
 
       <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
-        <div className="grid lg:grid-cols-2">
-          <div className="relative min-h-[280px] bg-slate-100">
-            <img
-              src="https://uploads.diariodopoder.com.br/2026/09/a6349a2f-governadora-do-distrito-federal-e-candidata-a-reeleicao-celina-leao-pp-foto-sara-marques-agencia-cldf.jpg"
-              alt="Celina Leão durante pronunciamento na Câmara Legislativa do Distrito Federal em 2026"
-              className="h-full w-full object-contain"
-              loading="eager"
-              referrerPolicy="no-referrer"
-            />
+        <Link href="/distrito-federal/celina-leao-reveillon-2026" className="group block" aria-label="Abrir notícia completa sobre Celina Leão e o Réveillon de Brasília">
+          <div className="grid lg:grid-cols-2">
+            <div className="relative min-h-[280px] bg-slate-100">
+              <img
+                src="https://uploads.diariodopoder.com.br/2026/09/a6349a2f-governadora-do-distrito-federal-e-candidata-a-reeleicao-celina-leao-pp-foto-sara-marques-agencia-cldf.jpg"
+                alt="Celina Leão em fotografia real feita na Câmara Legislativa do DF em 2026"
+                className="h-full w-full object-contain"
+                loading="eager"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="flex flex-col justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-6 text-white md:p-9">
+              <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Gestão pública • 21/11/2026</p>
+              <h1 className="mt-3 text-3xl font-black leading-tight group-hover:underline md:text-5xl">GDF estuda aproveitar estrutura da posse de Lula no Réveillon de Brasília</h1>
+              <p className="mt-4 text-base leading-7 text-slate-100">Gestão de Celina Leão avalia negociar o uso de palcos e equipamentos para reduzir as despesas da festa de fim de ano na capital.</p>
+              <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão. Foto de arquivo: Sara Marques/Agência CLDF (2026).</p>
+              <span className="mt-6 inline-flex w-fit items-center rounded-lg bg-amber-400 px-5 py-3 font-black text-slate-950 transition-colors group-hover:bg-amber-300">
+                Leia a reportagem completa
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-6 text-white md:p-9">
-            <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Gestão pública • 21/11/2026</p>
-            <h1 className="mt-3 text-3xl font-black leading-tight md:text-5xl">GDF estuda aproveitar estrutura da posse de Lula no Réveillon de Brasília</h1>
-            <p className="mt-4 text-base leading-7 text-slate-100">Gestão de Celina Leão avalia negociar o uso de palcos e equipamentos para reduzir as despesas da festa de fim de ano na capital.</p>
-            <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão em fotografia real de arquivo de 2026. Foto: Sara Marques/Agência CLDF. A imagem não retrata o fato noticiado neste sábado.</p>
-          </div>
-        </div>
-        <div className="space-y-3 px-6 py-6 text-base leading-7 text-slate-800 md:px-9">
-          <p>O Governo do Distrito Federal avalia pedir autorização para utilizar, no Réveillon de Brasília, parte da infraestrutura prevista para os shows da posse presidencial de Lula, programada para 5 de janeiro de 2027. A informação foi divulgada neste sábado, 21 de novembro, pela coluna Painel, da Folha de S.Paulo.</p>
-          <p>O plano em estudo tem como objetivo reduzir o custo das celebrações de fim de ano em um momento de contenção de despesas da administração da governadora Celina Leão. O governo local também considera contratar artistas da região, com cachês menores.</p>
-          <p>Segundo a reportagem, a proposta está relacionada à montagem de estruturas para o festival da posse, como palcos e outros equipamentos de apoio. O eventual compartilhamento exigiria negociação entre os organizadores e os órgãos responsáveis pelos eventos.</p>
-          <details className="rounded-lg bg-slate-50 p-4">
-            <summary className="cursor-pointer font-bold text-blue-900">Leia a reportagem completa</summary>
-            <p className="mt-3">A possibilidade surge após o GDF ter reduzido despesas de celebrações anteriores e priorizado serviços públicos. A ideia de aproveitar equipamentos de outro evento busca manter uma programação de Réveillon com menor custo para os cofres locais.</p>
-            <p className="mt-3">Até o momento, trata-se de intenção noticiada pela imprensa: não há confirmação de acordo formal, de estrutura cedida nem de contratação de atrações. A realização da festa dependerá das decisões das autoridades e da organização dos dois eventos.</p>
-            <p className="mt-3 text-sm"><a href="https://www1.folha.uol.com.br/colunas/painel/2026/11/governo-do-df-quer-aproveitar-estrutura-de-festival-da-posse-de-lula-para-festa-de-reveillon.shtml" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-800 underline">Fonte: Folha de S.Paulo — Painel, 21/11/2026</a></p>
-          </details>
-        </div>
+        </Link>
       </article>
 
       <div className="mt-6" aria-label="Publicidade CAESB PI 46319 para registro da campanha"><CaesbCampaignBanner /></div>
