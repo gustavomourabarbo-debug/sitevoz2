@@ -1,3 +1,4 @@
+import { manualDaily2311 } from './manual-daily-2311';
 import { manualDaily0410 } from './manual-daily-0410';
 import { manualPolitica1109 } from './manual-politica-1109';
 import { manualDaily1209 } from './manual-daily-1209';
@@ -20,7 +21,7 @@ function enrichPostsWithImages(posts:any){const enrich=(post:any)=>{if(!post)ret
 async function fetchLiveNews(limit=12):Promise<any[]|null>{try{const res=await fetch(`${LOVABLE_FEED}?limit=${limit}`,{method:'GET',headers:fetchHeaders,cache:'no-store'} as any);if(!res.ok)return null;const data=await res.json();const items=Array.isArray(data)?data:data.items;if(!Array.isArray(items))return null;return items.map(normalizeLovablePost);}catch(err){console.error('Error fetching live news:',err);return null;}}
 function loadStaticNews():any[]{try{const localNews=require('../public/data/news.json');return Array.isArray(localNews)?localNews.map(normalizeLovablePost):[];}catch(err){console.error('Error loading static news:',err);return[];}}
 function byDateDesc(items:any[]){return[...items].sort((a,b)=>new Date(b?.published_at||b?.created_at||b?.date||0).getTime()-new Date(a?.published_at||a?.created_at||a?.date||0).getTime());}
-function allManual(){return[...manualDaily0410,...manualMorning1509,...manualDaily1509,...manualPolitica1409Noite,...manualPolitica1409,...manualDaily1409,...manualDaily1309,...manualDaily1209,...manualPolitica1109];}
+function allManual(){return[...manualDaily2311,...manualDaily0410,...manualMorning1509,...manualDaily1509,...manualPolitica1409Noite,...manualPolitica1409,...manualDaily1409,...manualDaily1309,...manualDaily1209,...manualPolitica1109];}
 function mergeManual(items:any[]){const manual=allManual().map(normalizeLovablePost);const slugs=new Set(manual.map((p:any)=>p.slug));return byDateDesc([...manual,...items.filter((p:any)=>!slugs.has(p.slug))]);}
 export async function getPosts(limit=12){const live=await fetchLiveNews(Math.max(limit,150));const source=live&&live.length>0?live:loadStaticNews();return enrichPostsWithImages(mergeManual(source).slice(0,limit));}
 export async function getInterviewPosts(limit=5){const all=await getPosts(150);return all.filter((news:any)=>news.categorySlug==='entrevista'||news.categorySlug==='entrevistas'||news.category==='Agenda Voz').slice(0,limit);}
