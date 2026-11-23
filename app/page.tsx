@@ -74,6 +74,23 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
+          <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
+            <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">Júlio César e Rôney Nemer: os compromissos dos eleitos com o Distrito Federal</h1>
+            <p className="mt-3 text-base text-blue-100">Duas reportagens acompanham a agenda de 2027 na Câmara dos Deputados e na Câmara Legislativa do DF.</p>
+          </div>
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
+            <a href="/noticia/julio-cesar-reeleito-esporte-protecao-mulheres-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
+              <img src="https://www.camara.leg.br/internet/deputado/bandep/204372.jpg" alt="Fotografia oficial do deputado Júlio César Ribeiro" className="h-60 w-full object-contain bg-slate-100" />
+              <div className="p-5"><span className="text-xs font-bold text-amber-700">POLÍTICA · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Júlio César reforça esporte, juventude e proteção às mulheres como prioridades</h2><p className="mt-2 text-slate-700">Reeleito para o terceiro mandato, deputado federal projeta ações sociais e esportivas para 2027.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
+            </a>
+            <a href="/noticia/roney-nemer-retorno-cldf-mandato-participativo-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
+              <img src="https://images.metroimg.com/2022/04/12154107/roney-2.jpg" alt="Rôney Nemer, fotografia de arquivo" className="h-60 w-full object-contain bg-slate-100" />
+              <div className="p-5"><span className="text-xs font-bold text-amber-700">DISTRITO FEDERAL · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Rôney Nemer prepara retorno à CLDF e defende mandato participativo</h2><p className="mt-2 text-slate-700">Deputado eleito coloca saúde, transporte e desenvolvimento urbano entre suas prioridades.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
+            </a>
+          </div>
+        </section>
         <section className="mx-auto max-w-[1400px] px-4 pt-5 pb-4" aria-label="Manchete: Shakira confirma quatro shows no Brasil">
           <a href="/shakira-brasil-2027" className="group grid overflow-hidden rounded-2xl border-2 border-amber-400 bg-slate-950 text-white shadow-xl transition-shadow hover:shadow-2xl md:grid-cols-[43%_57%]">
             <div className="relative min-h-[320px] overflow-hidden">
@@ -81,7 +98,7 @@ export default async function Home() {
               <span className="absolute bottom-2 left-3 rounded bg-black/70 px-3 py-1 text-xs text-white">Foto real de arquivo: J.ébey / Wikimedia Commons (CC0)</span>
             </div>
             <div className="flex flex-col justify-center px-6 py-8 md:px-10">
-              <span className="text-sm font-black uppercase tracking-widest text-amber-300">Manchete de hoje · 22/11/2026 · Cultura e Turismo</span>
+              <span className="text-sm font-black uppercase tracking-widest text-amber-300">Destaque cultural · 22/11/2026 · Cultura e Turismo</span>
               <h2 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Shakira volta ao Brasil: quatro shows entre o Réveillon e janeiro</h2>
               <p className="mt-4 text-base leading-relaxed text-blue-100 md:text-lg">Balneário Camboriú (31/12), Cariacica (03/01), Salvador (06/01) e Fortaleza (09/01). Ingressos começam a ser vendidos em 26 de novembro.</p>
               <span className="mt-6 inline-flex w-fit rounded-lg bg-amber-300 px-6 py-3 font-black text-slate-950">CONFIRA LOCAIS, DATAS E INGRESSOS →</span>
