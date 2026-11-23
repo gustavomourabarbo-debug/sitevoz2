@@ -68,35 +68,35 @@ const stories = [
 
 export default function Capa21Nov2026() {
   return (
-    <section className="mx-auto max-w-[1400px] px-4 pt-6 pb-5" aria-label="Capa da edição de sábado, 21 de novembro de 2026">
-      <div className="mb-5" aria-label="Banner do GDF acima da edição de sábado">
+    <section className="mx-auto max-w-[1400px] px-4 pt-6 pb-5" aria-label="Capa da edição de domingo, 22 de novembro de 2026">
+      <div className="mb-5" aria-label="Banner do GDF acima da edição de domingo">
         <GdfCampaignBanner />
       </div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b-4 border-blue-900 pb-3">
         <div>
-          <p className="text-sm font-black uppercase tracking-widest text-blue-900">Edição de sábado • 21 de novembro de 2026</p>
-          <h2 className="mt-1 text-2xl font-black text-slate-900 md:text-3xl">Brasília e Brasil: as notícias deste sábado</h2>
+          <p className="text-sm font-black uppercase tracking-widest text-blue-900">Edição de domingo • 22 de novembro de 2026</p>
+          <h2 className="mt-1 text-2xl font-black text-slate-900 md:text-3xl">Brasília e Brasil: notícias deste domingo</h2>
         </div>
-        <span className="rounded-full bg-slate-900 px-4 py-2 text-xs font-bold text-white">ATUALIZADO EM 21/11</span>
+        <span className="rounded-full bg-slate-900 px-4 py-2 text-xs font-bold text-white">ATUALIZADO EM 22/11</span>
       </div>
 
       <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
-        <Link href="/distrito-federal/celina-leao-reveillon-2026" className="group block" aria-label="Abrir notícia completa sobre Celina Leão e o Réveillon de Brasília">
+        <Link href="/brasilia/celina-leao-estadio-sobradinho-17-novembro" className="group block" aria-label="Abrir reportagem completa sobre Celina Leão e o estádio de Sobradinho">
           <div className="grid lg:grid-cols-2">
             <div className="relative min-h-[280px] bg-slate-100">
               <img
-                src="https://uploads.diariodopoder.com.br/2026/09/a6349a2f-governadora-do-distrito-federal-e-candidata-a-reeleicao-celina-leao-pp-foto-sara-marques-agencia-cldf.jpg"
-                alt="Celina Leão em fotografia real feita na Câmara Legislativa do DF em 2026"
+                src="https://agenciabrasilia.df.gov.br/documents/d/guest/whatsapp-image-2026-11-17-at-19-59-00-jpeg"
+                alt="Celina Leão na entrega da nova pista de atletismo no Estádio Augustinho Lima, em Sobradinho, em 17 de novembro de 2026"
                 className="h-full w-full object-contain"
                 loading="eager"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex flex-col justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-6 text-white md:p-9">
-              <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Gestão pública • 21/11/2026</p>
-              <h1 className="mt-3 text-3xl font-black leading-tight group-hover:underline md:text-5xl">GDF estuda aproveitar estrutura da posse de Lula no Réveillon de Brasília</h1>
-              <p className="mt-4 text-base leading-7 text-slate-100">Gestão de Celina Leão avalia negociar o uso de palcos e equipamentos para reduzir as despesas da festa de fim de ano na capital.</p>
-              <p className="mt-4 text-xs leading-5 text-slate-300">Celina Leão. Foto de arquivo: Sara Marques/Agência CLDF (2026).</p>
+              <p className="text-xs font-black uppercase tracking-widest text-amber-300">Distrito Federal • Esporte e infraestrutura • Edição de 22/11/2026</p>
+              <h1 className="mt-3 text-3xl font-black leading-tight group-hover:underline md:text-5xl">Celina Leão entrega pista de atletismo e nova iluminação em Sobradinho</h1>
+              <p className="mt-4 text-base leading-7 text-slate-100">Em balanço da semana, a reforma de R$ 5,5 milhões do Estádio Augustinho Lima destaca novas condições de treino e uso comunitário. A entrega ocorreu em 17 de novembro.</p>
+              <p className="mt-4 text-xs leading-5 text-slate-300">Foto do evento de 17/11/2026: Joel Rodrigues / Agência Brasília.</p>
               <span className="mt-6 inline-flex w-fit items-center rounded-lg bg-amber-400 px-5 py-3 font-black text-slate-950 transition-colors group-hover:bg-amber-300">
                 Leia a reportagem completa
               </span>
