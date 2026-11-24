@@ -6,9 +6,9 @@ const stories = [
     section: 'POLÍTICA • ECONOMIA',
     title: 'Lula defende ajuste fiscal e afirma que mercado financeiro não ditará os rumos do Brasil',
     summary: 'Em live neste sábado (21), presidente rebate críticas à proposta para o Orçamento de 2027 e afirma que não cortará programas sociais.',
-    image: 'https://www.gov.br/planejamento/pt-br/assuntos/noticias/2026/imagens/55156120202_eb131de887_o.jpg/@@images/image-1847-ab43b5834cceb5a118f2f34172060dff.jpeg',
-    alt: 'Presidente Luiz Inácio Lula da Silva em fotografia oficial de arquivo',
-    credit: 'Lula: foto oficial de arquivo; a imagem não retrata a transmissão de 21/11',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg/960px-Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg',
+    alt: 'Retrato oficial de Luiz Inácio Lula da Silva',
+    credit: 'Foto: Ricardo Stuckert/PR · Wikimedia Commons (CC BY 2.0)',
     source: 'Agência Brasil • publicado em 21/11/2026, às 14h12',
     sourceUrl: 'https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/o-sistema-financeiro-nao-vai-me-ensinar-dirigir-o-brasil-diz-lula',
     paragraphs: [
