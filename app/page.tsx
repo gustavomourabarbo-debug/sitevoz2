@@ -93,7 +93,7 @@ export default async function Home() {
             </a>
           </div>
         </section>
-        <section id="agenda-governadora" aria-label="Agenda da governadora do Distrito Federal" className="mx-auto max-w-[1400px] px-4 pb-4">
+        <section aria-label="Agendas públicas" className="mx-auto max-w-[1400px] px-4 pb-4"><div className="grid max-w-[856px] grid-cols-1 items-start gap-3 sm:grid-cols-2"><div id="agenda-governadora">
           <details className="group w-full max-w-[420px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
             <summary className="flex cursor-pointer list-none items-center gap-3 p-4 text-slate-900 hover:bg-slate-50 focus-visible:outline focus-visible:outline-blue-700 [&::-webkit-details-marker]:hidden">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-white" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></svg></span>
@@ -113,7 +113,28 @@ export default async function Home() {
             <p className="mt-3 text-sm text-slate-600">Os horários e demais compromissos de 23 a 29/11 não foram confirmados nesta consulta. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
             </div>
           </details>
-        </section>
+        </div><div id="agenda-presidente">
+          <details className="group w-full max-w-[420px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <summary className="flex cursor-pointer list-none items-center gap-3 p-4 text-slate-900 hover:bg-slate-50 focus-visible:outline focus-visible:outline-blue-700 [&::-webkit-details-marker]:hidden">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-white" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></svg></span>
+              <span className="min-w-0 flex-1"><span className="block text-base font-extrabold leading-snug">Agenda do presidente Lula</span><span className="mt-1 block text-xs font-semibold text-blue-800">Consultar compromissos</span></span>
+              <span className="shrink-0 text-xl text-blue-900 transition-transform group-open:rotate-180" aria-hidden="true">⌄</span>
+            </summary>
+            <div className="border-t border-slate-200 p-4 text-sm leading-relaxed">
+              <p className="font-semibold text-slate-600">Terça-feira, 24 de novembro de 2026</p>
+              <h3 className="mt-4 text-lg font-bold text-slate-900">Compromissos divulgados</h3>
+              <ul className="mt-3 space-y-3 text-slate-700">
+                <li><strong>9h30</strong> — Audiência com Oswaldo Malatesta, chefe do gabinete pessoal.</li>
+                <li><strong>11h</strong> — Cerimônia de entrega de credenciais diplomáticas.</li>
+                <li><strong>14h40</strong> — Reunião com Marcelo Weick, responsável pelos assuntos jurídicos da Casa Civil.</li>
+                <li><strong>15h</strong> — Audiência com Miriam Belchior, ministra da Casa Civil.</li>
+              </ul>
+              <p className="mt-3 text-xs text-slate-600">Programação divulgada pela imprensa em 24/11; sujeita a alterações. A consulta direta ao calendário do Planalto não estava disponível nesta atualização.</p>
+              <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/agenda-do-presidente-da-republica-lula" target="_blank" rel="noopener noreferrer">Consultar agenda oficial do Planalto →</a>
+              <p className="mt-3 text-xs text-slate-500">Fonte: Política Real / Bancada Sulista.</p>
+            </div>
+          </details>
+        </div></div></section>
         <section aria-label="Bontempo móveis planejados" className="mx-auto max-w-[1400px] px-4 py-6">
           <a href="https://www.bontempo.com.br/" target="_blank" rel="noopener sponsored noreferrer" className="group block overflow-hidden rounded-2xl border border-amber-400 bg-[#161816] text-white shadow-2xl">
             <div className="grid md:grid-cols-[1fr_1.1fr]">
