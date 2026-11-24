@@ -100,6 +100,7 @@ export default async function Home() {
             </div>
           </a>
         </section>
+        <section aria-label="Entrevista com Henrique Bertolazzi" className="mx-auto max-w-[1400px] px-4 py-5"><article className="grid overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl md:grid-cols-2"><iframe className="aspect-video w-full" src="https://www.youtube-nocookie.com/embed/rJ9fTOX_9b0" title="Entrevista com Henrique Bertolazzi" allowFullScreen /><div className="p-8"><p className="font-bold text-amber-300">ENTREVISTA ESPECIAL · ACERVO TV VOZ</p><h2 className="mt-3 text-3xl font-black">Henrique Bertolazzi | Bontempo Móveis</h2><p className="mt-4">Entrevista concedida a Paulo Fayad, publicada em 31 de março de 2024 no canal TV Voz de Brasília.</p><a className="mt-5 inline-block rounded bg-amber-300 px-5 py-3 font-bold text-slate-950" href="https://www.youtube.com/watch?v=rJ9fTOX_9b0">Assistir no YouTube</a><a className="mt-4 block text-amber-200 underline" href="https://www.bontempo.com.br/">Conheça a Bontempo</a></div></article></section>
         <section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
           <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
             <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
