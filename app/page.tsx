@@ -75,6 +75,22 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <section id="agenda-governadora" aria-label="Agenda da governadora do Distrito Federal" className="mx-auto max-w-[1400px] px-4 py-5">
+          <div className="rounded-2xl border border-blue-200 bg-white p-5 shadow-md md:p-7">
+            <div className="text-xs font-bold uppercase tracking-wider text-blue-800">Distrito Federal · Agenda pública</div>
+            <h2 className="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">Agenda da governadora Celina Leão</h2>
+            <p className="mt-1 font-semibold text-slate-600">Semana de 23 a 29 de novembro de 2026 · Boletim de 24/11</p>
+            <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.df.gov.br/agenda-do-governador" target="_blank" rel="noopener noreferrer">Consultar programação oficial do dia e da semana →</a>
+            <h3 className="mt-5 text-lg font-bold text-slate-900">Terça-feira, 24/11 — compromissos realizados e confirmados pelo GDF</h3>
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">Ceilândia — visita à Feira do Produtor</h4><p className="mt-1 text-slate-700">Acompanhamento da recuperação da cobertura e da ampliação do estacionamento. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://agenciabrasilia.df.gov.br/w/feira-do-produtor-de-ceilandia-recebe-nova-cobertura-termoacustica?redirect=%2Fnoticias" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
+              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">P Sul, Ceilândia — obras de drenagem</h4><p className="mt-1 text-slate-700">Assinatura de ata de registro de preços e autorização de intervenções de drenagem. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://www.agenciabrasilia.df.gov.br/w/gdf-lanca-pacote-de-quase-r-15-milhoes-para-drenagem-pluvial-em-ceilandia" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
+            </div>
+            <h3 className="mt-5 text-lg font-bold text-slate-900">Atos divulgados nesta semana</h3>
+            <p className="mt-2 text-slate-700"><strong>23/11:</strong> divulgação da proposta de atualização dos valores venais para o IPVA de 2027. <strong>24/11:</strong> anúncio de ponto facultativo em 5 e 6 de janeiro de 2027.</p>
+            <p className="mt-3 text-sm text-slate-600">Os horários e demais compromissos de 23 a 29/11 não foram confirmados nesta consulta. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
+          </div>
+        </section>
         <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
           <GdfCampaignBanner />
         </div>
