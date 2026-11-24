@@ -13,9 +13,7 @@ export default function GdfCampaignBanner({ placement = 'sitewide' }: { placemen
     const timer = window.setInterval(update, 60000);
     return () => window.clearInterval(timer);
   }, []);
-  // Pausa temporária solicitada pelo responsável do portal; preservar a campanha.
-  const temporarilyPaused = true;
-  if (temporarilyPaused || !active) return null;
+  if (!active) return null;
   return (
     <section className="relative z-0 mx-auto w-full max-w-[1400px] px-4 py-3" aria-label="Publicidade GDF - PI 145080">
       <div className="mx-auto w-full max-w-[900px]">
