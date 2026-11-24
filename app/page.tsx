@@ -75,22 +75,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
-        <section id="agenda-governadora" aria-label="Agenda da governadora do Distrito Federal" className="mx-auto max-w-[1400px] px-4 py-5">
-          <div className="rounded-2xl border border-blue-200 bg-white p-5 shadow-md md:p-7">
-            <div className="text-xs font-bold uppercase tracking-wider text-blue-800">Distrito Federal · Agenda pública</div>
-            <h2 className="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">Agenda da governadora Celina Leão</h2>
-            <p className="mt-1 font-semibold text-slate-600">Semana de 23 a 29 de novembro de 2026 · Boletim de 24/11</p>
-            <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.df.gov.br/agenda-do-governador" target="_blank" rel="noopener noreferrer">Consultar programação oficial do dia e da semana →</a>
-            <h3 className="mt-5 text-lg font-bold text-slate-900">Terça-feira, 24/11 — compromissos realizados e confirmados pelo GDF</h3>
-            <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">Ceilândia — visita à Feira do Produtor</h4><p className="mt-1 text-slate-700">Acompanhamento da recuperação da cobertura e da ampliação do estacionamento. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://agenciabrasilia.df.gov.br/w/feira-do-produtor-de-ceilandia-recebe-nova-cobertura-termoacustica?redirect=%2Fnoticias" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
-              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">P Sul, Ceilândia — obras de drenagem</h4><p className="mt-1 text-slate-700">Assinatura de ata de registro de preços e autorização de intervenções de drenagem. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://www.agenciabrasilia.df.gov.br/w/gdf-lanca-pacote-de-quase-r-15-milhoes-para-drenagem-pluvial-em-ceilandia" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
-            </div>
-            <h3 className="mt-5 text-lg font-bold text-slate-900">Atos divulgados nesta semana</h3>
-            <p className="mt-2 text-slate-700"><strong>23/11:</strong> divulgação da proposta de atualização dos valores venais para o IPVA de 2027. <strong>24/11:</strong> anúncio de ponto facultativo em 5 e 6 de janeiro de 2027.</p>
-            <p className="mt-3 text-sm text-slate-600">Os horários e demais compromissos de 23 a 29/11 não foram confirmados nesta consulta. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
-          </div>
-        </section>
+        
         <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
           <GdfCampaignBanner />
         </div>
@@ -107,6 +92,27 @@ export default async function Home() {
               <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 23/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Câmara aprova texto-base do ajuste fiscal defendido por Lula</h3><p className="mt-3 text-slate-700">A Câmara dos Deputados aprovou na noite de segunda-feira o texto-base do projeto de ajuste das contas públicas para 2027. O presidente havia defendido a proposta e respondido a questionamentos sobre os gastos do governo.</p><p className="mt-2 text-xs text-slate-500">Foto: Ricardo Stuckert/PR · Wikimedia Commons (CC BY 2.0).</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
             </a>
           </div>
+        </section>
+        <section id="agenda-governadora" aria-label="Agenda da governadora do Distrito Federal" className="mx-auto max-w-[1400px] px-4 pb-4">
+          <details className="group w-full max-w-[420px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <summary className="flex cursor-pointer list-none items-center gap-3 p-4 text-slate-900 hover:bg-slate-50 focus-visible:outline focus-visible:outline-blue-700 [&::-webkit-details-marker]:hidden">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-white" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></svg></span>
+              <span className="min-w-0 flex-1"><span className="block text-base font-extrabold leading-snug">Agenda da governadora Celina Leão</span><span className="mt-1 block text-xs font-semibold text-blue-800">Consultar compromissos</span></span>
+              <span className="shrink-0 text-xl text-blue-900 transition-transform group-open:rotate-180" aria-hidden="true">⌄</span>
+            </summary>
+            <div className="border-t border-slate-200 p-4 text-sm leading-relaxed">
+              <p className="mt-1 font-semibold text-slate-600">Semana de 23 a 29 de novembro de 2026 · Boletim de 24/11</p>
+            <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.df.gov.br/agenda-do-governador" target="_blank" rel="noopener noreferrer">Consultar programação oficial do dia e da semana →</a>
+            <h3 className="mt-5 text-lg font-bold text-slate-900">Terça-feira, 24/11 — compromissos realizados e confirmados pelo GDF</h3>
+            <div className="mt-3 grid gap-3">
+              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">Ceilândia — visita à Feira do Produtor</h4><p className="mt-1 text-slate-700">Acompanhamento da recuperação da cobertura e da ampliação do estacionamento. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://agenciabrasilia.df.gov.br/w/feira-do-produtor-de-ceilandia-recebe-nova-cobertura-termoacustica?redirect=%2Fnoticias" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
+              <div className="rounded-lg border border-slate-200 p-4"><h4 className="font-bold text-slate-900">P Sul, Ceilândia — obras de drenagem</h4><p className="mt-1 text-slate-700">Assinatura de ata de registro de preços e autorização de intervenções de drenagem. Horário do compromisso não confirmado.</p><a className="mt-2 inline-block text-sm font-semibold text-blue-800 underline" href="https://www.agenciabrasilia.df.gov.br/w/gdf-lanca-pacote-de-quase-r-15-milhoes-para-drenagem-pluvial-em-ceilandia" target="_blank" rel="noopener noreferrer">Registro oficial</a></div>
+            </div>
+            <h3 className="mt-5 text-lg font-bold text-slate-900">Atos divulgados nesta semana</h3>
+            <p className="mt-2 text-slate-700"><strong>23/11:</strong> divulgação da proposta de atualização dos valores venais para o IPVA de 2027. <strong>24/11:</strong> anúncio de ponto facultativo em 5 e 6 de janeiro de 2027.</p>
+            <p className="mt-3 text-sm text-slate-600">Os horários e demais compromissos de 23 a 29/11 não foram confirmados nesta consulta. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
+            </div>
+          </details>
         </section>
         <section aria-label="Bontempo móveis planejados" className="mx-auto max-w-[1400px] px-4 py-6">
           <a href="https://www.bontempo.com.br/" target="_blank" rel="noopener sponsored noreferrer" className="group block overflow-hidden rounded-2xl border border-amber-400 bg-[#161816] text-white shadow-2xl">
