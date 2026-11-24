@@ -2,6 +2,7 @@ import DetranCampaignBanner from '@/components/common/DetranCampaignBanner';
 import Header from '@/components/layout/Header';
 import Cop31Highlights from '@/components/home/Cop31Highlights';
 import Capa21Nov2026 from '@/components/home/Capa21Nov2026';
+import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
 import BrasiliaHighlights from '@/components/home/BrasiliaHighlights';
 import ClubePermutasConvite from '@/components/home/ClubePermutasConvite';
 import LatestNews from '@/components/home/LatestNews';
@@ -74,6 +75,9 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+        <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
+          <GdfCampaignBanner />
+        </div>
         <section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
           <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
             <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
