@@ -1,14 +1,10 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
-
 /**
- * Mantém a campanha do GDF em todas as páginas internas.
- * Na capa o banner já é renderizado por Capa21Nov2026, evitando duplicação.
+ * Campanha do GDF temporariamente oculta apenas nas páginas internas
+ * para permitir a captura de telas solicitada pela direção editorial.
+ * A capa continua renderizando o banner por Capa21Nov2026.
  */
 export default function GdfInternalPagesBanner() {
-  const pathname = usePathname();
-  if (!pathname || pathname === '/') return null;
-  return <GdfCampaignBanner placement="sitewide" />;
+  return null;
 }
