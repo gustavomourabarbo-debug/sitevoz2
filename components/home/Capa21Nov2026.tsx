@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import CaesbCampaignBanner from '@/components/common/CaesbCampaignBanner';
-import GdfCampaignBanner from '@/components/common/GdfCampaignBanner';
 
 const stories = [
   {
@@ -69,9 +68,6 @@ const stories = [
 export default function Capa21Nov2026() {
   return (
     <section className="mx-auto max-w-[1400px] px-4 pt-6 pb-5" aria-label="Capa da edição de domingo, 22 de novembro de 2026">
-      <div className="mb-5" aria-label="Banner do GDF acima da edição de domingo">
-        <GdfCampaignBanner />
-      </div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b-4 border-blue-900 pb-3">
         <div>
           <p className="text-sm font-black uppercase tracking-widest text-blue-900">Edição de domingo • 22 de novembro de 2026</p>
