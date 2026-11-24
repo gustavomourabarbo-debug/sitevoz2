@@ -78,6 +78,28 @@ export default async function Home() {
         <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
           <GdfCampaignBanner />
         </div>
+        {/* Atualização editorial verificada 24/11/2026; imagens de arquivo identificadas */}
+        <section aria-label="Destaques de 23 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-6">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-extrabold text-slate-950">BRASÍLIA E BRASIL · DESTAQUES DE ONTEM</h2><span className="text-sm font-bold text-slate-600">Fatos de segunda-feira, 23/11/2026</span></div>
+          <div className="grid gap-5 md:grid-cols-2">
+            <article className="overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200">
+              <img className="h-64 w-full object-cover" src="https://midias.correiobraziliense.com.br/_midias/jpg/2026/04/20/675x450/1_whatsapp-image-2026-04-20-at-14-57-40--1--66369988.jpg" alt="Celina Leão em fotografia de arquivo, abril de 2026" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">DISTRITO FEDERAL · 23/11/2026 · FOTO DE ARQUIVO</p><h3 className="mt-2 text-2xl font-black text-slate-950">Celina Leão regulamenta política climática do DF</h3><p className="mt-3 text-slate-700">Decreto publicado nesta segunda-feira estabelece diretrizes para reduzir emissões e preparar o Distrito Federal para os efeitos das mudanças climáticas. A decisão coloca a execução e o acompanhamento de metas ambientais no centro da agenda local.</p><a className="mt-4 inline-block font-bold text-blue-800 underline" href="https://jornaldebrasilia.com.br/brasilia/celina-leao-regulamenta-politica-climatica-do-distrito-federal/" target="_blank" rel="noopener noreferrer">Conferir reportagem e documentação ↗</a></div>
+            </article>
+            <article className="overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200">
+              <img className="h-64 w-full object-cover" src="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2023/01/presidente-lula-divulga-foto-oficial/lula-foto-oficial.jpg" alt="Presidente Lula em fotografia oficial de arquivo; não representa sessão de 23 de novembro" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 23/11/2026 · FOTO OFICIAL DE ARQUIVO</p><h3 className="mt-2 text-2xl font-black text-slate-950">Câmara aprova texto-base do ajuste fiscal defendido por Lula</h3><p className="mt-3 text-slate-700">A Câmara dos Deputados aprovou na noite de segunda-feira o texto-base do projeto de ajuste das contas públicas para 2027. O presidente havia defendido a proposta e respondido a questionamentos sobre os gastos do governo.</p><a className="mt-4 inline-block font-bold text-blue-800 underline" href="https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/camara-aprova-texto-base-do-projeto-de-ajuste-fiscal" target="_blank" rel="noopener noreferrer">Conferir reportagem e tramitação ↗</a></div>
+            </article>
+          </div>
+        </section>
+        <section aria-label="Bontempo móveis planejados" className="mx-auto max-w-[1400px] px-4 py-6">
+          <a href="https://www.bontempo.com.br/" target="_blank" rel="noopener sponsored noreferrer" className="group block overflow-hidden rounded-2xl border border-amber-400 bg-[#161816] text-white shadow-2xl">
+            <div className="grid md:grid-cols-[1fr_1.1fr]">
+              <div className="flex flex-col justify-center p-8 md:p-12"><p className="text-sm font-semibold tracking-[.35em] text-amber-300">PUBLICIDADE · DESIGN E DECORAÇÃO</p><p className="mt-5 text-5xl font-light tracking-[.15em] md:text-6xl">BONTEMPO</p><h2 className="mt-5 text-3xl font-semibold leading-tight md:text-4xl">O extraordinário começa em casa.</h2><p className="mt-4 text-lg text-stone-300">Móveis planejados, personalidade e sofisticação para ambientes que contam a sua história.</p><span className="mt-7 inline-block w-fit border border-amber-300 px-6 py-3 font-bold tracking-widest text-amber-200 group-hover:bg-amber-300 group-hover:text-black">CONHEÇA A BONTEMPO ↗</span></div>
+              <div className="min-h-[290px] bg-[linear-gradient(135deg,#35382f,#7c6b52_45%,#242823)] flex items-center justify-center p-8"><div className="border border-white/30 p-8 text-center"><p className="text-2xl font-light tracking-widest">DESIGN QUE EXPRESSA</p><p className="mt-3 text-4xl font-light tracking-[.2em]">VOCÊ.</p><p className="mt-6 text-sm tracking-widest text-amber-100">BONTEMPO · MÓVEIS PLANEJADOS</p></div></div>
+            </div>
+          </a>
+        </section>
         <section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
           <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
             <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
