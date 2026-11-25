@@ -128,6 +128,11 @@ export default function Footer() {
                   Termos de Uso
                 </Link>
               </li>
+              <li>
+                <a href="https://institutobraziljust.org.br/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-400 transition-colors text-sm">
+                  Instituto Brazil Just (IBJ) — projetos sociais
+                </a>
+              </li>
             </ul>
           </div>
  
