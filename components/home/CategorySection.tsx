@@ -12,14 +12,15 @@ interface CategorySectionProps {
 }
 
 export default function CategorySection({ title = 'Política', category = 'politica', initialPosts = [] }: CategorySectionProps = {}) {
-  const [news, setNews] = useState<EnrichedNews[]>(initialPosts.map((p: any) => ({ ...p, title: typeof p.title === 'string' ? p.title : p.title?.rendered || '', published_at: p.published_at || p.date || p.created_at })) as EnrichedNews[]);
+  const [news, setNews] = useState<EnrichedNews[]>(initialPosts.filter((p: any) => category !== 'tecnologia' || !/\b(trump|lula|bolsonaro)\b/i.test(String(p.title?.rendered || p.title || ''))).map((p: any) => ({ ...p, title: typeof p.title === 'string' ? p.title : p.title?.rendered || '', published_at: p.published_at || p.date || p.created_at })) as EnrichedNews[]);
   const [isLoading, setIsLoading] = useState(initialPosts.length === 0);
 
   useEffect(() => {
     async function fetchNews() {
       try {
         const data = await getNewsByCategory(category, 4);
-        if (data.length > 0) setNews(data);
+        const verified = data.filter(item => item.categorySlug === category && (category !== 'tecnologia' || !/\b(trump|lula|bolsonaro)\b/i.test(String(item.title))));
+        setNews(verified);
       } catch (err) {
         console.error(`Error fetching category ${category} news:`, err);
       } finally {
