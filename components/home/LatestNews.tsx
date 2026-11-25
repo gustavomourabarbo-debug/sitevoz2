@@ -159,15 +159,15 @@ export default function LatestNews({ posts = [] }: LatestNewsProps) {
         <div className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent" />
       </div>
 
-      <div className="relative overflow-hidden" ref={containerRef}>
+      <div className="relative overflow-x-auto" ref={containerRef}>
         <div
           className="flex gap-4 transition-transform"
           style={{
-            transform: `translateX(-${offset}px)`,
-            width: `${latestNews.length * 2 * 280}px`,
+            transform: 'none',
+            width: `${latestNews.length * 280}px`,
           }}
         >
-          {[...latestNews, ...latestNews].map((news, index) => (
+          {latestNews.map((news, index) => (
             <Link
               key={`${news.id}-${index}`}
               href={`/noticia/${news.slug}`}
