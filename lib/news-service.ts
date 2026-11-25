@@ -12,9 +12,14 @@ const archive = archiveNews as any[];
 const currentSlugs = new Set(current.map((n) => n.slug));
 const combined = [...current, ...archive.filter((n) => !currentSlugs.has(n.slug) && n.id !== '900001')];
 
+const correctedCategory = (item: any) => {
+  const title = String(item.title?.rendered || item.title || '').toLowerCase();
+  if (item.categorySlug === 'tecnologia' && /trump|lula|bolsonaro/.test(title) && !/inteligência artificial|tecnologia|software|internet|digital/.test(title)) return 'politica';
+  return item.categorySlug || 'distrito-federal';
+};
 const news: EnrichedNews[] = combined.map((item: any) => ({
   ...item,
-  categorySlug: item.categorySlug || 'distrito-federal',
+  categorySlug: correctedCategory(item),
   categoryColor: item.categoryColor || 'bg-blue-600',
   featured_image: item.featured_image || '/news-images/senado.png',
 })) as EnrichedNews[];
