@@ -129,9 +129,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://institutobraziljust.org.br/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-400 transition-colors text-sm">
+                <Link href="/instituto-brazil-just" className="text-gray-400 hover:text-green-400 transition-colors text-sm">
                   Instituto Brazil Just (IBJ) — projetos sociais
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
