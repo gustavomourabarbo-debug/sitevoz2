@@ -13,7 +13,9 @@ export default function GdfCampaignBanner({ placement = 'sitewide' }: { placemen
     const timer = window.setInterval(update, 60000);
     return () => window.clearInterval(timer);
   }, []);
-  if (!active) return null;
+  // Ocultação temporária solicitada pela direção: GDF Viva Flor, em todas as páginas.
+  const hiddenOnRequest = true;
+  if (hiddenOnRequest || !active) return null;
   return (
     <section className="relative z-0 mx-auto w-full max-w-[1400px] px-4 py-3" aria-label="Publicidade GDF - PI 145080">
       <div className="mx-auto w-full max-w-[900px]">
