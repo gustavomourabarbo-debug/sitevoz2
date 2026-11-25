@@ -79,17 +79,17 @@ export default async function Home() {
         <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
           <GdfCampaignBanner />
         </div>
-        {/* Atualização editorial verificada 24/11/2026; imagens de arquivo identificadas */}
-        <section aria-label="Destaques de 23 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-6">
+        {/* Edição de 25/11/2026; fotos documentais de arquivo identificadas */}
+        <section aria-label="Destaques de 25 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-6">
           <div className="mb-5 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-extrabold text-slate-950">BRASÍLIA E BRASIL</h2></div>
           <div className="grid gap-5 md:grid-cols-2">
-            <a href="/destaque/celina-leao-politica-climatica-df" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
-              <img className="h-64 w-full object-cover" src="https://midias.correiobraziliense.com.br/_midias/jpg/2026/04/20/675x450/1_whatsapp-image-2026-04-20-at-14-57-40--1--66369988.jpg" alt="Celina Leão em fotografia institucional" referrerPolicy="no-referrer" />
-              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">DISTRITO FEDERAL · 23/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Celina Leão regulamenta política climática do DF</h3><p className="mt-3 text-slate-700">Decreto publicado nesta segunda-feira estabelece diretrizes para reduzir emissões e preparar o Distrito Federal para os efeitos das mudanças climáticas. A decisão coloca a execução e o acompanhamento de metas ambientais no centro da agenda local.</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
+            <a href="/noticia/celina-gdf-saude-credito-inas-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
+              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Brasilia_DF_Brasil_-_C%C3%A2mara_legislativa_-_panoramio.jpg" alt="Edifício da CLDF em fotografia documental de arquivo" referrerPolicy="no-referrer" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">DISTRITO FEDERAL · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Proposta de Celina Leão para reforçar GDF Saúde recebe aval da CLDF</h3><p className="mt-3 text-slate-700">Crédito suplementar de R$ 125,6 milhões ao Inas foi aprovado na terça-feira (24) e aguarda sanção. Foto documental de arquivo da CLDF (2013): Josue Marinho, CC BY 3.0.</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
             </a>
-            <a href="/destaque/camara-aprova-ajuste-fiscal-lula" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
-              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg/960px-Foto_oficial_de_Luiz_In%C3%A1cio_Lula_da_Silva_%282023%E2%80%932027%29.jpg" alt="Luiz Inácio Lula da Silva em retrato oficial" referrerPolicy="no-referrer" />
-              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 23/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Câmara aprova texto-base do ajuste fiscal defendido por Lula</h3><p className="mt-3 text-slate-700">A Câmara dos Deputados aprovou na noite de segunda-feira o texto-base do projeto de ajuste das contas públicas para 2027. O presidente havia defendido a proposta e respondido a questionamentos sobre os gastos do governo.</p><p className="mt-2 text-xs text-slate-500">Foto: Ricardo Stuckert/PR · Wikimedia Commons (CC BY 2.0).</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
+            <a href="/noticia/lula-ajuste-fiscal-orcamento-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
+              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Imagens_de_Bras%C3%ADlia_-_Pal%C3%A1cio_do_Congresso_Nacional_%2854578742790%29.jpg" alt="Congresso Nacional em fotografia documental de arquivo" referrerPolicy="no-referrer" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Após sanção de Lula, governo libera R$ 3,43 bilhões do orçamento</h3><p className="mt-3 text-slate-700">Relatório divulgado na terça-feira (24) reduz a contenção de despesas, mas amplia a projeção de déficit primário.</p><p className="mt-2 text-xs text-slate-500">Foto documental de arquivo (09/06/2025): Leonardo Sá/Agência Senado · Wikimedia Commons (CC BY 2.0).</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
             </a>
           </div>
         </section>
@@ -101,7 +101,7 @@ export default async function Home() {
               <span className="shrink-0 text-xl text-blue-900 transition-transform group-open:rotate-180" aria-hidden="true">⌄</span>
             </summary>
             <div className="border-t border-slate-200 p-4 text-sm leading-relaxed">
-              <p className="mt-1 font-semibold text-slate-600">Semana de 23 a 29 de novembro de 2026 · Boletim de 24/11</p>
+              <p className="mt-1 font-semibold text-slate-600">Semana de 23 a 29 de novembro de 2026 · Consulta de 25/11</p>
             <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.df.gov.br/agenda-do-governador" target="_blank" rel="noopener noreferrer">Consultar programação oficial do dia e da semana →</a>
             <h3 className="mt-5 text-lg font-bold text-slate-900">Terça-feira, 24/11 — compromissos realizados e confirmados pelo GDF</h3>
             <div className="mt-3 grid gap-3">
@@ -110,7 +110,7 @@ export default async function Home() {
             </div>
             <h3 className="mt-5 text-lg font-bold text-slate-900">Atos divulgados nesta semana</h3>
             <p className="mt-2 text-slate-700"><strong>23/11:</strong> divulgação da proposta de atualização dos valores venais para o IPVA de 2027. <strong>24/11:</strong> anúncio de ponto facultativo em 5 e 6 de janeiro de 2027.</p>
-            <p className="mt-3 text-sm text-slate-600">Os horários e demais compromissos de 23 a 29/11 não foram confirmados nesta consulta. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
+            <p className="mt-3 text-sm text-slate-600">A consulta de 25/11 não confirmou novos compromissos da governadora; os registros acima são de 24/11. A programação oficial pode sofrer alterações; consulte o calendário do GDF acima. Fontes: GDF e Agência Brasília.</p>
             </div>
           </details>
         </div><div id="agenda-presidente">
@@ -121,17 +121,9 @@ export default async function Home() {
               <span className="shrink-0 text-xl text-blue-900 transition-transform group-open:rotate-180" aria-hidden="true">⌄</span>
             </summary>
             <div className="border-t border-slate-200 p-4 text-sm leading-relaxed">
-              <p className="font-semibold text-slate-600">Terça-feira, 24 de novembro de 2026</p>
-              <h3 className="mt-4 text-lg font-bold text-slate-900">Compromissos divulgados</h3>
-              <ul className="mt-3 space-y-3 text-slate-700">
-                <li><strong>9h30</strong> — Audiência com Oswaldo Malatesta, chefe do gabinete pessoal.</li>
-                <li><strong>11h</strong> — Cerimônia de entrega de credenciais diplomáticas.</li>
-                <li><strong>14h40</strong> — Reunião com Marcelo Weick, responsável pelos assuntos jurídicos da Casa Civil.</li>
-                <li><strong>15h</strong> — Audiência com Miriam Belchior, ministra da Casa Civil.</li>
-              </ul>
-              <p className="mt-3 text-xs text-slate-600">Programação divulgada pela imprensa em 24/11; sujeita a alterações. A consulta direta ao calendário do Planalto não estava disponível nesta atualização.</p>
+              <p className="font-semibold text-slate-600">Quarta-feira, 25 de novembro de 2026</p><h3 className="mt-4 text-lg font-bold text-slate-900">Compromisso confirmado</h3><ul className="mt-3 space-y-3 text-slate-700"><li><strong>15h às 16h</strong> — Reunião com Bruno Moretti, ministro do Planejamento e Orçamento, no Palácio da Alvorada.</li></ul><p className="mt-3 text-xs text-slate-600">Registro publicado em 24/11 no sistema e-Agendas da CGU, na agenda ministerial. Demais compromissos não confirmados nesta consulta.</p>
               <a className="mt-3 inline-block rounded-lg bg-blue-900 px-4 py-3 font-bold text-white" href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/agenda-do-presidente-da-republica-lula" target="_blank" rel="noopener noreferrer">Consultar agenda oficial do Planalto →</a>
-              <p className="mt-3 text-xs text-slate-500">Fonte: Política Real / Bancada Sulista.</p>
+              <p className="mt-3 text-xs text-slate-500">Fonte: e-Agendas / CGU.</p>
             </div>
           </details>
         </div></div></section>
