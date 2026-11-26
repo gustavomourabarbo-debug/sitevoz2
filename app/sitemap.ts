@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/xelvya`, lastModified: new Date('2026-11-20'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE}/videos`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
     { url: `${BASE}/entrevistas`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${BASE}/instituto-brazil-just`, lastModified: new Date('2026-11-25'), changeFrequency: 'monthly', priority: 0.8 },
   ];
 
   const categorias: MetadataRoute.Sitemap = CATEGORIAS.map((slug) => ({
