@@ -74,9 +74,6 @@ export default function CaesbCampaignBanner() {
   return (
     <section className="relative z-0 mx-auto max-w-[1400px] px-4 pt-3" aria-label="Publicidade CAESB PI 46319">
       <div className="mx-auto w-full max-w-[825px]">
-        <div className="mb-1 text-center text-[10px] uppercase tracking-wide text-gray-500">
-          Publicidade · CAESB · PI 46319
-        </div>
         <a
           href="https://www.caesb.df.gov.br/"
           target="_blank"
