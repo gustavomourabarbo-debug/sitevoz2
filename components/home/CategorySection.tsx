@@ -13,7 +13,6 @@ interface CategorySectionProps {
 
 export default function CategorySection({ title = 'Política', category = 'politica', initialPosts = [] }: CategorySectionProps = {}) {
   const [news, setNews] = useState<EnrichedNews[]>(initialPosts.filter((p: any) => category !== 'tecnologia' || !/\b(trump|lula|bolsonaro)\b/i.test(String(p.title?.rendered || p.title || ''))).map((p: any) => ({ ...p, title: typeof p.title === 'string' ? p.title : p.title?.rendered || '', published_at: p.published_at || p.date || p.created_at })) as EnrichedNews[]);
-  const [isLoading, setIsLoading] = useState(initialPosts.length === 0);
 
   useEffect(() => {
     async function fetchNews() {
@@ -23,29 +22,12 @@ export default function CategorySection({ title = 'Política', category = 'polit
         setNews(verified);
       } catch (err) {
         console.error(`Error fetching category ${category} news:`, err);
-      } finally {
-        setIsLoading(false);
       }
     }
     fetchNews();
   }, [category]);
 
-  if (isLoading) {
-    return (
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <div className="w-1 h-8 bg-gradient-to-b from-green-600 to-green-700 rounded-full" />
-            {title}
-          </h2>
-        </div>
-        <div className="h-40 flex items-center justify-center">
-          <div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
-        </div>
-      </div>
-    );
-  }
-
+  // Do not publish empty category headings in the server-rendered homepage.
   if (news.length === 0) return null;
 
   return (
