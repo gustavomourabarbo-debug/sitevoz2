@@ -53,7 +53,7 @@ export default function CaesbCampaignBanner() {
   const localSrc = '/publicidade/caesb-46319/' + current.slug + '.mp4';
   const driveSrc = 'https://drive.google.com/uc?export=download&id=' + current.fileId;
   const src = mode === 'drive' ? driveSrc : localSrc;
-  const posterSrc = 'https://drive.google.com/thumbnail?id=' + current.fileId + '&sz=w1600';
+  const posterSrc = '/publicidade/caesb-46319/' + current.slug + '.png';
 
   const countImpression = () => {
     const token = current.slug + ':' + index + ':' + mode;
