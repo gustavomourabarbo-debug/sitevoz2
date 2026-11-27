@@ -75,6 +75,7 @@ export default async function Home() {
     <div className="min-h-screen bg-gray-50">
       <Header  />
       <main className="pt-0">
+<section id="charge-trabuco-2026-11-27" aria-label="Charge editorial de 27 de novembro" className="mx-auto max-w-[1400px] px-4 py-5"><div className="grid gap-5 rounded-2xl border border-amber-400 bg-slate-950 p-5 text-white md:grid-cols-2"><video src="https://static.metricool.com/planner/202611/6885599-file-16867010696485176087.mp4" controls playsInline preload="metadata" className="mx-auto max-h-[500px] w-full rounded-lg object-contain" /><div className="flex flex-col justify-center"><span className="text-sm font-bold uppercase text-amber-300">Charge editorial · 27/11/2026</span><h2 className="mt-2 text-3xl font-black">Trabuco aceita convite para comandar a Fazenda em 2027</h2><p className="mt-3">O Planalto confirmou a escolha em 26 de novembro. O Bradesco confirmou a informação ao mercado nesta sexta-feira (27). A posse está prevista para 2027.</p><p className="mt-3 text-lg font-bold">Espingarda de boca larga... Estamos ferrados!</p><p className="mt-3 text-sm text-slate-300">Opinião e sátira. Ideia: Renato Riella. Animação produzida com IA; não representa cena real. Trilha instrumental original.</p></div></div></section>
         
         <div className="mx-auto max-w-[1400px] pt-4" aria-label="Campanha Viva Flor do GDF acima das notícias de Júlio César e Rôney Nemer">
           <GdfCampaignBanner />
