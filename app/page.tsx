@@ -57,10 +57,9 @@ export default async function Home() {
   // A primeira dobra prioriza estritamente as notícias dos últimos dois dias.
   // As matérias anteriores permanecem nas editorias e no arquivo, sem ocupar a vitrine.
   const agora = Date.now();
-  const atuais = recentes.filter((p: any) => {
-    const data = new Date(p?.published_at || p?.created_at || p?.date || 0).getTime();
-    return Number.isFinite(data) && data <= agora && data >= agora - 48 * 60 * 60 * 1000;
-  });
+  const diaBrasilia = (d: Date) => new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+  const hoje = diaBrasilia(new Date(agora));
+  const atuais = recentes.filter((p:any)=>{const raw=p?.published_at || p?.date || p?.created_at; if(!raw || !p.slug) return false; const data=new Date(raw); return Number.isFinite(data.getTime()) && data.getTime()<=agora && diaBrasilia(data)===hoje;});
   const capaAtual = atuais;
   const postsDestaques = [...capaAtual, ...recentes.filter((p: any) => !capaAtual.includes(p))];
   const heroPosts = capaAtual.slice(0, 8);
@@ -77,28 +76,8 @@ export default async function Home() {
       <Header  />
       <main className="pt-0">
         <GdfCampaignBanner placement="sitewide" />
-<section id="charge-trabuco-2026-11-27" aria-label="Charge editorial de 27 de novembro" className="mx-auto max-w-[1400px] px-4 py-5"><div className="grid gap-5 rounded-2xl border border-amber-400 bg-slate-950 p-5 text-white md:grid-cols-2"><video src="https://static.metricool.com/planner/202611/6885599-file-16867010696485176087.mp4" poster="https://imagens.ebc.com.br/kYEDeQTsKiXWzt7Cp77Xtia4J6I%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/26/55658423199-64cb95626f-k.jpg?itok=dru95R4x" controls playsInline preload="auto" autoPlay muted loop className="mx-auto block aspect-square max-h-[500px] w-full rounded-lg bg-slate-800 object-contain" /><div className="flex flex-col justify-center"><span className="text-sm font-bold uppercase text-amber-300">Charge editorial · 27/11/2026</span><h2 className="mt-2 text-3xl font-black"><a href="/noticia/trabuco-fazenda-2027-analise" className="hover:underline focus-visible:underline">Trabuco aceita convite para comandar a Fazenda em 2027</a></h2><p className="mt-3">O Planalto confirmou a escolha em 26 de novembro. O Bradesco confirmou a informação ao mercado nesta sexta-feira (27). A posse está prevista para 2027.</p><p className="mt-3 text-lg font-bold">Espingarda de boca larga... Estamos ferrados!</p><p className="mt-3 text-sm text-slate-300">Opinião e sátira. Ideia: Renato Riella. Animação produzida com IA; não representa cena real. Trilha instrumental original.</p><a href="/noticia/trabuco-fazenda-2027-analise" className="mt-4 inline-flex w-fit rounded-lg bg-amber-300 px-5 py-3 font-black text-slate-950 hover:bg-amber-200">LER ANÁLISE COMPLETA DE PAULO FAYAD →</a></div></div></section>
-<section id="charge-caixa-brb-2026-11-27" className="mx-auto max-w-[1400px] px-4 py-5" aria-label="Charge editorial Caixa e BRB"><div className="grid items-center gap-5 rounded-2xl border border-amber-400 bg-white p-5 md:grid-cols-2"><div><video src="https://static.metricool.com/planner/202611/6885599-file-16205665926275444574.mp4" autoPlay muted loop playsInline controls preload="auto" className="mx-auto block aspect-square max-h-[480px] w-full rounded-xl object-contain bg-slate-100"/><a href="https://static.metricool.com/planner/202611/6885599-file-16205665926275444574.mp4" className="mt-2 inline-block text-sm font-bold text-blue-800">Abrir vídeo com som</a></div><div><span className="text-sm font-bold uppercase text-blue-800">Charge editorial · 27/11/2026</span><h2 className="mt-2 text-3xl font-black text-slate-950">Caixa vai engolir o BRB?</h2><p className="mt-3 text-lg text-slate-700">Sátira sobre as discussões a respeito do futuro do Banco de Brasília. A aquisição pela Caixa não está confirmada.</p><p className="mt-3 text-sm text-slate-600">Animação produzida com IA. Ative o áudio no vídeo para ouvir os efeitos sonoros.</p></div></div></section>
-
-<section id="boletim-gdf-brasil-2711" className="mx-auto max-w-[1400px] px-4 py-6" aria-label="Notícias GDF e Governo Federal"><div className="mb-5 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-black text-slate-950">BRASÍLIA E BRASIL</h2><p className="text-sm text-slate-600">Edição de 27 de novembro de 2026</p></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{boletim2711.map(n=><a key={n.slug} href={'/noticia/boletim-2711/'+n.slug} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"><figure className="relative overflow-hidden bg-slate-100"><img src={n.image} alt={n.title} className="block aspect-video w-full object-cover" loading="eager" decoding="async"/><figcaption className="absolute right-1 top-2 rounded bg-black/75 p-1 text-[9px] leading-none text-white [writing-mode:vertical-rl]">{n.credit}</figcaption></figure><div className="p-4"><p className="text-xs font-bold uppercase text-blue-800">{n.category} · {n.date}</p><h3 className="mt-2 text-xl font-black leading-tight text-slate-950 group-hover:underline">{n.title}</h3><p className="mt-2 text-sm leading-6 text-slate-700">{n.paragraphs[0]}</p><p className="mt-3 text-sm font-bold text-blue-800">LER REPORTAGEM COMPLETA →</p></div></a>)}</div></section>
-
-        
-
-        {/* Edição de 25/11/2026; fotos documentais de arquivo identificadas */}
-        <section aria-label="Destaques de 25 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-6">
-          <div className="mb-5 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-extrabold text-slate-950">BRASÍLIA E BRASIL</h2></div>
-          <div className="grid gap-5 md:grid-cols-2">
-            <a href="/noticia/celina-gdf-saude-credito-inas-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
-              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Brasilia_DF_Brasil_-_C%C3%A2mara_legislativa_-_panoramio.jpg" alt="Edifício da CLDF em fotografia documental de arquivo" referrerPolicy="no-referrer" />
-              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">DISTRITO FEDERAL · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Proposta de Celina Leão para reforçar GDF Saúde recebe aval da CLDF</h3><p className="mt-3 text-slate-700">Crédito suplementar de R$ 125,6 milhões ao Inas foi aprovado na terça-feira (24) e aguarda sanção. Foto documental de arquivo da CLDF (2013): Josue Marinho, CC BY 3.0.</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
-            </a>
-            <a href="/noticia/lula-ajuste-fiscal-orcamento-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
-              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Imagens_de_Bras%C3%ADlia_-_Pal%C3%A1cio_do_Congresso_Nacional_%2854578742790%29.jpg" alt="Congresso Nacional em fotografia documental de arquivo" referrerPolicy="no-referrer" />
-              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Após sanção de Lula, governo libera R$ 3,43 bilhões do orçamento</h3><p className="mt-3 text-slate-700">Relatório divulgado na terça-feira (24) reduz a contenção de despesas, mas amplia a projeção de déficit primário.</p><p className="mt-2 text-xs text-slate-500">Foto documental de arquivo (09/06/2025): Leonardo Sá/Agência Senado · Wikimedia Commons (CC BY 2.0).</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
-            </a>
-          </div>
-        </section>
-        <section aria-label="Agendas públicas" className="mx-auto max-w-[1400px] px-4 pb-4"><div className="grid max-w-[856px] grid-cols-1 items-start gap-3 sm:grid-cols-2"><div id="agenda-governadora">
+<section className="mx-auto grid max-w-[1400px] items-start gap-5 px-4 py-5 lg:grid-cols-[minmax(0,1fr)_220px]" aria-label="Notícias de hoje e charges"><div className="min-w-0"><h1 className="mb-4 border-b-2 border-amber-500 pb-3 text-3xl font-black text-slate-950">NOTÍCIAS DE HOJE</h1><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{atuais.slice(0,30).map((p:any)=><a key={p.slug || p.id} href={'/noticia/'+encodeURIComponent(p.slug)} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-lg"><figure className="relative bg-slate-100"><img src={p.featured_image} alt={String(p.title?.rendered || p.title || '').replace(/<[^>]*>/g,'')} className="block aspect-video w-full object-contain" loading="lazy"/>{p.image_credit && <figcaption className="absolute right-1 top-2 bg-black/75 p-1 text-[9px] text-white [writing-mode:vertical-rl]">{p.image_credit}</figcaption>}</figure><div className="p-4"><p className="text-xs font-bold uppercase text-blue-800">{p.category || 'Notícias'}</p><h2 className="mt-2 text-xl font-black leading-tight text-slate-950">{String(p.title?.rendered || p.title || '').replace(/<[^>]*>/g,'')}</h2><p className="mt-2 text-sm text-slate-700">{String(p.excerpt?.rendered || p.excerpt || '').replace(/<[^>]*>/g,'').slice(0,180)}</p></div></a>)}</div>{atuais.length===0 && <p className="text-slate-600">Acompanhe as próximas notícias desta edição.</p>}</div><aside id="charges" className="rounded-xl border border-slate-200 bg-white p-3"><a href="/charges" className="mb-3 block border-b border-slate-200 pb-2 text-lg font-black text-slate-950">CHARGES →</a><div className="grid grid-cols-2 gap-3 lg:grid-cols-1"><a href="/charges#charge-trabuco-2026-11-27" aria-label="Assistir à charge de Trabuco" className="block"><img src="https://imagens.ebc.com.br/kYEDeQTsKiXWzt7Cp77Xtia4J6I%3D/1170x700/smart/https%3A//agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/2026/11/26/55658423199-64cb95626f-k.jpg?itok=dru95R4x" alt="Luiz Carlos Trabuco" className="aspect-video w-full rounded object-contain bg-slate-100"/><span className="sr-only">Trabuco</span></a><a href="/charges#charge-caixa-brb-2026-11-27" aria-label="Assistir à charge Caixa e BRB" className="relative block"><video src="https://static.metricool.com/planner/202611/6885599-file-16205665926275444574.mp4#t=0.5" preload="metadata" muted playsInline className="pointer-events-none aspect-video w-full rounded bg-slate-100 object-contain"/><span aria-hidden="true" className="absolute inset-0 grid place-items-center text-2xl text-white drop-shadow">▶</span><span className="sr-only">Caixa e BRB</span></a></div><a href="/charges" className="mt-3 block text-xs font-bold text-blue-800">Ver todas as charges</a></aside></section>
+<section aria-label="Agendas públicas" className="mx-auto max-w-[1400px] px-4 pb-4"><div className="grid max-w-[856px] grid-cols-1 items-start gap-3 sm:grid-cols-2"><div id="agenda-governadora">
           <details className="group w-full max-w-[420px] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
             <summary className="flex cursor-pointer list-none items-center gap-3 p-4 text-slate-900 hover:bg-slate-50 focus-visible:outline focus-visible:outline-blue-700 [&::-webkit-details-marker]:hidden">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-900 text-white" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17h2"/></svg></span>
@@ -126,38 +105,6 @@ export default async function Home() {
           </a>
         </section>
         <section aria-label="Entrevista com Henrique Bertolazzi" className="mx-auto max-w-[1400px] px-4 py-5"><article className="grid overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl md:grid-cols-2"><a href="https://www.youtube.com/watch?v=rJ9fTOX_9b0" target="_blank" rel="noopener noreferrer" className="group relative block min-h-[260px] bg-black" aria-label="Assistir à entrevista com Henrique Bertolazzi no YouTube"><img src="https://i.ytimg.com/vi/rJ9fTOX_9b0/hqdefault.jpg" alt="Entrevista com Henrique Bertolazzi — TV Voz de Brasília" className="h-full min-h-[260px] w-full object-contain" loading="lazy" /><span className="absolute inset-0 flex items-center justify-center bg-black/10"><span className="rounded-full bg-red-600 px-6 py-4 text-xl font-black text-white shadow-lg transition-transform group-hover:scale-105">▶ Assistir à entrevista</span></span></a><div className="p-8"><p className="font-bold text-amber-300">ENTREVISTA ESPECIAL · ACERVO TV VOZ</p><h2 className="mt-3 text-3xl font-black">Henrique Bertolazzi | Bontempo Móveis</h2><p className="mt-4">Entrevista concedida a Paulo Fayad, publicada em 31 de março de 2024 no canal TV Voz de Brasília.</p><a className="mt-5 inline-block rounded bg-amber-300 px-5 py-3 font-bold text-slate-950" href="https://www.youtube.com/watch?v=rJ9fTOX_9b0">Assistir no YouTube</a><a className="mt-4 block text-amber-200 underline" href="https://www.bontempo.com.br/">Conheça a Bontempo</a></div></article></section>
-        <section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
-          <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
-            <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
-            <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">Júlio César e Rôney Nemer: os compromissos dos eleitos com o Distrito Federal</h1>
-            <p className="mt-3 text-base text-blue-100">Duas reportagens acompanham a agenda de 2027 na Câmara dos Deputados e na Câmara Legislativa do DF.</p>
-          </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <a href="/noticia/julio-cesar-reeleito-esporte-protecao-mulheres-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
-              <img src="https://www.camara.leg.br/internet/deputado/bandep/204372.jpg" alt="Fotografia oficial do deputado Júlio César Ribeiro" className="h-60 w-full object-contain bg-slate-100" />
-              <div className="p-5"><span className="text-xs font-bold text-amber-700">POLÍTICA · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Júlio César reforça esporte, juventude e proteção às mulheres como prioridades</h2><p className="mt-2 text-slate-700">Reeleito para o terceiro mandato, deputado federal projeta ações sociais e esportivas para 2027.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
-            </a>
-            <a href="/noticia/roney-nemer-retorno-cldf-mandato-participativo-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
-              <img src="https://images.metroimg.com/2022/04/12154107/roney-2.jpg" alt="Rôney Nemer, fotografia de arquivo" className="h-60 w-full object-contain bg-slate-100" />
-              <div className="p-5"><span className="text-xs font-bold text-amber-700">DISTRITO FEDERAL · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Rôney Nemer prepara retorno à CLDF e defende mandato participativo</h2><p className="mt-2 text-slate-700">Deputado eleito coloca saúde, transporte e desenvolvimento urbano entre suas prioridades.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
-            </a>
-          </div>
-        </section>
-        <section className="mx-auto max-w-[1400px] px-4 pt-5 pb-4" aria-label="Manchete: Shakira confirma quatro shows no Brasil">
-          <a href="/shakira-brasil-2027" className="group grid overflow-hidden rounded-2xl border-2 border-amber-400 bg-slate-950 text-white shadow-xl transition-shadow hover:shadow-2xl md:grid-cols-[43%_57%]">
-            <div className="relative min-h-[320px] overflow-hidden">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/SHARIKA_MEDELLIN_13_04_2025_%28122%29.jpg" alt="Shakira em apresentação real da turnê Las Mujeres Ya No Lloran em 2025" className="h-full w-full object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105" loading="eager" />
-              <span className="absolute bottom-2 left-3 rounded bg-black/70 px-3 py-1 text-xs text-white">Foto real de arquivo: J.ébey / Wikimedia Commons (CC0)</span>
-            </div>
-            <div className="flex flex-col justify-center px-6 py-8 md:px-10">
-              <span className="text-sm font-black uppercase tracking-widest text-amber-300">Destaque cultural · 22/11/2026 · Cultura e Turismo</span>
-              <h2 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Shakira volta ao Brasil: quatro shows entre o Réveillon e janeiro</h2>
-              <p className="mt-4 text-base leading-relaxed text-blue-100 md:text-lg">Balneário Camboriú (31/12), Cariacica (03/01), Salvador (06/01) e Fortaleza (09/01). Ingressos começam a ser vendidos em 26 de novembro.</p>
-              <span className="mt-6 inline-flex w-fit rounded-lg bg-amber-300 px-6 py-3 font-black text-slate-950">CONFIRA LOCAIS, DATAS E INGRESSOS →</span>
-            </div>
-          </a>
-        </section>
-        <Capa21Nov2026 />
         <ClubePermutasConvite />
         <section className="mx-auto max-w-[1400px] px-4 pt-4" aria-label="Conheça a XELVYA AI">
           <a href="/xelvya" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-violet-200 bg-gradient-to-r from-indigo-950 to-violet-800 p-5 text-white shadow-md hover:shadow-lg">
@@ -165,8 +112,7 @@ export default async function Home() {
             <span className="rounded-lg bg-white px-5 py-3 font-bold text-indigo-950">Conhecer a XELVYA</span>
           </a>
         </section>
-        <BrasiliaHighlights />
-        <Cop31Highlights />
+        <details className="mx-auto max-w-[1400px] px-4 py-4"><summary className="cursor-pointer font-bold">Destaques anteriores</summary><BrasiliaHighlights /><Cop31Highlights /></details>
 
 
         <section className="mx-auto max-w-[1400px] px-4 pt-7" aria-label="Arquivo de notícias verificadas de 18 de novembro de 2026">
@@ -220,7 +166,7 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4">{atuais.length > 0 ? <LatestNews posts={atuais} /> : <div className="rounded-xl border border-slate-200 bg-slate-50 p-5"><h2 className="text-xl font-bold text-slate-900">Arquivo jornalístico preservado</h2><p className="text-slate-600">As reportagens de datas anteriores continuam disponíveis nas editorias e no acervo. Ainda não há outras matérias recentes confirmadas nesta faixa. Consulte o arquivo jornalístico abaixo.</p></div>}</div></div>
+        <div className="bg-white pt-8"><div className="max-w-[1400px] mx-auto px-4">{atuais.length > 0 ? null : <div className="rounded-xl border border-slate-200 bg-slate-50 p-5"><h2 className="text-xl font-bold text-slate-900">Arquivo jornalístico preservado</h2><p className="text-slate-600">As reportagens de datas anteriores continuam disponíveis nas editorias e no acervo. Ainda não há outras matérias recentes confirmadas nesta faixa. Consulte o arquivo jornalístico abaixo.</p></div>}</div></div>
         <div className="mt-4"><PremiumBanner variant={0} /></div>
         <div className="mt-6"><SponsorBanner sponsor="visao" /></div>
         <ViralStrip />
@@ -235,11 +181,63 @@ export default async function Home() {
           <SponsorBanner sponsor="lunardi" />
         </div>
 
+<details className="mx-auto max-w-[1400px] px-4 py-4"><summary className="cursor-pointer text-lg font-bold text-slate-900">Edições anteriores — 27 e 25 de novembro</summary><section id="boletim-gdf-brasil-2711" className="mx-auto max-w-[1400px] px-4 py-6" aria-label="Notícias GDF e Governo Federal"><div className="mb-5 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-black text-slate-950">BRASÍLIA E BRASIL</h2><p className="text-sm text-slate-600">Edição de 27 de novembro de 2026</p></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{boletim2711.map(n=><a key={n.slug} href={'/noticia/boletim-2711/'+n.slug} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"><figure className="relative overflow-hidden bg-slate-100"><img src={n.image} alt={n.title} className="block aspect-video w-full object-cover" loading="eager" decoding="async"/><figcaption className="absolute right-1 top-2 rounded bg-black/75 p-1 text-[9px] leading-none text-white [writing-mode:vertical-rl]">{n.credit}</figcaption></figure><div className="p-4"><p className="text-xs font-bold uppercase text-blue-800">{n.category} · {n.date}</p><h3 className="mt-2 text-xl font-black leading-tight text-slate-950 group-hover:underline">{n.title}</h3><p className="mt-2 text-sm leading-6 text-slate-700">{n.paragraphs[0]}</p><p className="mt-3 text-sm font-bold text-blue-800">LER REPORTAGEM COMPLETA →</p></div></a>)}</div></section>
+
+        
+
+        {/* Edição de 25/11/2026; fotos documentais de arquivo identificadas */}
+        <section aria-label="Destaques de 25 de novembro" className="mx-auto max-w-[1400px] px-4 pt-5 pb-6">
+          <div className="mb-5 border-b-2 border-amber-500 pb-3"><h2 className="text-2xl font-extrabold text-slate-950">BRASÍLIA E BRASIL</h2></div>
+          <div className="grid gap-5 md:grid-cols-2">
+            <a href="/noticia/celina-gdf-saude-credito-inas-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
+              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Brasilia_DF_Brasil_-_C%C3%A2mara_legislativa_-_panoramio.jpg" alt="Edifício da CLDF em fotografia documental de arquivo" referrerPolicy="no-referrer" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">DISTRITO FEDERAL · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Proposta de Celina Leão para reforçar GDF Saúde recebe aval da CLDF</h3><p className="mt-3 text-slate-700">Crédito suplementar de R$ 125,6 milhões ao Inas foi aprovado na terça-feira (24) e aguarda sanção. Foto documental de arquivo da CLDF (2013): Josue Marinho, CC BY 3.0.</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
+            </a>
+            <a href="/noticia/lula-ajuste-fiscal-orcamento-25-novembro-2026" className="group block overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-200 transition-shadow hover:shadow-2xl">
+              <img className="h-64 w-full object-contain bg-slate-100" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Imagens_de_Bras%C3%ADlia_-_Pal%C3%A1cio_do_Congresso_Nacional_%2854578742790%29.jpg" alt="Congresso Nacional em fotografia documental de arquivo" referrerPolicy="no-referrer" />
+              <div className="p-5"><p className="text-xs font-black tracking-widest text-red-700">POLÍTICA · 25/11/2026</p><h3 className="mt-2 text-2xl font-black text-slate-950">Após sanção de Lula, governo libera R$ 3,43 bilhões do orçamento</h3><p className="mt-3 text-slate-700">Relatório divulgado na terça-feira (24) reduz a contenção de despesas, mas amplia a projeção de déficit primário.</p><p className="mt-2 text-xs text-slate-500">Foto documental de arquivo (09/06/2025): Leonardo Sá/Agência Senado · Wikimedia Commons (CC BY 2.0).</p><span className="mt-4 inline-block font-bold text-blue-800 underline">Ler reportagem completa na Voz de Brasília →</span></div>
+            </a>
+          </div>
+        </section>
+        </details>
+<details className="mx-auto max-w-[1400px] px-4 py-4"><summary className="cursor-pointer text-lg font-bold text-slate-900">Edições anteriores — 23 e 22 de novembro</summary><section aria-label="Edição de segunda-feira, 23 de novembro de 2026" className="mx-auto max-w-[1400px] px-4 pt-5 pb-4">
+          <div className="rounded-2xl border-2 border-amber-400 bg-gradient-to-r from-slate-950 to-blue-950 px-6 py-7 text-white shadow-xl">
+            <p className="text-sm font-black tracking-wider text-amber-300">TV VOZ DE BRASÍLIA · BRASÍLIA · SEGUNDA-FEIRA, 23/11/2026</p>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight md:text-4xl">Júlio César e Rôney Nemer: os compromissos dos eleitos com o Distrito Federal</h1>
+            <p className="mt-3 text-base text-blue-100">Duas reportagens acompanham a agenda de 2027 na Câmara dos Deputados e na Câmara Legislativa do DF.</p>
+          </div>
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
+            <a href="/noticia/julio-cesar-reeleito-esporte-protecao-mulheres-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
+              <img src="https://www.camara.leg.br/internet/deputado/bandep/204372.jpg" alt="Fotografia oficial do deputado Júlio César Ribeiro" className="h-60 w-full object-contain bg-slate-100" />
+              <div className="p-5"><span className="text-xs font-bold text-amber-700">POLÍTICA · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Júlio César reforça esporte, juventude e proteção às mulheres como prioridades</h2><p className="mt-2 text-slate-700">Reeleito para o terceiro mandato, deputado federal projeta ações sociais e esportivas para 2027.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
+            </a>
+            <a href="/noticia/roney-nemer-retorno-cldf-mandato-participativo-2027" className="block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md hover:shadow-xl">
+              <img src="https://images.metroimg.com/2022/04/12154107/roney-2.jpg" alt="Rôney Nemer, fotografia de arquivo" className="h-60 w-full object-contain bg-slate-100" />
+              <div className="p-5"><span className="text-xs font-bold text-amber-700">DISTRITO FEDERAL · 23/11/2026</span><h2 className="mt-2 text-xl font-extrabold leading-snug text-slate-900">Rôney Nemer prepara retorno à CLDF e defende mandato participativo</h2><p className="mt-2 text-slate-700">Deputado eleito coloca saúde, transporte e desenvolvimento urbano entre suas prioridades.</p><strong className="mt-3 block text-blue-800">LER REPORTAGEM COMPLETA →</strong></div>
+            </a>
+          </div>
+        </section>
+        <section className="mx-auto max-w-[1400px] px-4 pt-5 pb-4" aria-label="Manchete: Shakira confirma quatro shows no Brasil">
+          <a href="/shakira-brasil-2027" className="group grid overflow-hidden rounded-2xl border-2 border-amber-400 bg-slate-950 text-white shadow-xl transition-shadow hover:shadow-2xl md:grid-cols-[43%_57%]">
+            <div className="relative min-h-[320px] overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/SHARIKA_MEDELLIN_13_04_2025_%28122%29.jpg" alt="Shakira em apresentação real da turnê Las Mujeres Ya No Lloran em 2025" className="h-full w-full object-cover object-[center_35%] transition-transform duration-300 group-hover:scale-105" loading="eager" />
+              <span className="absolute bottom-2 left-3 rounded bg-black/70 px-3 py-1 text-xs text-white">Foto real de arquivo: J.ébey / Wikimedia Commons (CC0)</span>
+            </div>
+            <div className="flex flex-col justify-center px-6 py-8 md:px-10">
+              <span className="text-sm font-black uppercase tracking-widest text-amber-300">Destaque cultural · 22/11/2026 · Cultura e Turismo</span>
+              <h2 className="mt-3 text-3xl font-black leading-tight md:text-5xl">Shakira volta ao Brasil: quatro shows entre o Réveillon e janeiro</h2>
+              <p className="mt-4 text-base leading-relaxed text-blue-100 md:text-lg">Balneário Camboriú (31/12), Cariacica (03/01), Salvador (06/01) e Fortaleza (09/01). Ingressos começam a ser vendidos em 26 de novembro.</p>
+              <span className="mt-6 inline-flex w-fit rounded-lg bg-amber-300 px-6 py-3 font-black text-slate-950">CONFIRA LOCAIS, DATAS E INGRESSOS →</span>
+            </div>
+          </a>
+        </section>
+        <Capa21Nov2026 />
+        </details>
         <section className="mx-auto max-w-[1400px] px-4 py-8" aria-label="Reportagens completas do arquivo">
           <h2 className="mb-2 text-2xl font-bold text-slate-900">Reportagens e análises do acervo</h2>
           <p className="mb-6 text-slate-600">Conteúdo jornalístico publicado pela TV Voz de Brasília. Consulte a data original de cada reportagem.</p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {posts.filter((p: any) => String(p?.content?.rendered || p?.content || '').replace(/<[^>]*>/g, '').trim().length >= 500 && p?.slug && p?.featured_image).slice(0, 12).map((p: any) => (
+            {recentes.filter((p: any) => !atuais.includes(p) && String(p?.content?.rendered || p?.content || '').replace(/<[^>]*>/g, '').trim().length >= 500 && p?.slug && p?.featured_image).slice(0, 12).map((p: any) => (
               <article key={p.slug} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                 <a href={`/noticia/${encodeURIComponent(p.slug)}`} className="block">
                   <img src={p.featured_image} alt="" loading="lazy" className="h-44 w-full object-cover" />
