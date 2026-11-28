@@ -21,6 +21,7 @@ export default function Header({ dataEdicao }: { dataEdicao?: string } = {}) {
     { label: 'Início', href: '/' },
     { label: 'Entrevistas', href: '/entrevistas' },
     { label: 'Vídeos Virais', href: '/videos' },
+    { label: 'Charges', href: '/charges' },
     { label: 'Política', href: '/categoria/politica' },
     { label: 'Distrito Federal', href: '/categoria/distrito-federal' },
     { label: 'Turismo', href: '/categoria/turismo' },
