@@ -24,7 +24,7 @@ export default function GdfCampaignBanner({ placement = 'sitewide' }: { placemen
   }, []);
   if (!active) return null;
   const theme = themes[index];
-  const img = <img key={theme.id} src={theme.src} width={728} height={90} alt={theme.alt} className="block h-auto w-full" loading={placement === 'middle' ? 'lazy' : 'eager'} onLoad={() => {
+  const img = <img key={theme.id} src={theme.src} width={728} height={90} alt={theme.alt} className="block h-auto w-full" style={{ filter: 'brightness(1.12)' }} loading={placement === 'middle' ? 'lazy' : 'eager'} onLoad={() => {
     if (typeof (window as any).gtag === 'function') (window as any).gtag('event','gdf_pi_145080_impression',{campaign_id:'145080',placement,creative:theme.id,non_interaction:true});
   }} />;
   return (
