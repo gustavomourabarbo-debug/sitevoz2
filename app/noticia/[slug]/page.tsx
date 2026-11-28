@@ -119,7 +119,7 @@ const titulo = String(post.title?.rendered || post.title || '').replace(/<[^>]+>
       />
       <Header />
 
-      <main className="pt-24 pb-12">
+      <main className="pt-4 pb-12 md:pt-8">
         <div className="max-w-[1400px] mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* CONTEÚDO PRINCIPAL */}
@@ -129,11 +129,11 @@ const titulo = String(post.title?.rendered || post.title || '').replace(/<[^>]+>
                   <img
                     src={imagem}
                     alt={titulo}
-                    className="w-full h-96 object-cover object-[50%_22%]"
+                    className="block w-full h-auto max-h-[520px] object-contain bg-slate-50"
                   />
                 )}
 
-                <div className="p-8 md:p-12">
+                <div className="p-5 md:p-12">
                   <div className="mb-4">
                     <Link
                       href={'/categoria/' + categoriaSlug}
